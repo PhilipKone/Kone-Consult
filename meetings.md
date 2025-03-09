@@ -4,19 +4,23 @@
 
 ## Theme:  
 **Design a Website from Scratch for Research Consultancy**
-
+Creating an intuitive and user-friendly platform to support students and researchers in their academic endeavors. Planning to expand the scope of research projects to industry and business.
 
 ## Services Offered:
 - **Proposal Writing**:  
-  Crafting high-quality research proposals tailored to academic standards.
+  Crafting high-quality research proposals tailored to academic standards, including grant applications and thesis proposals.
 - **Student Project Execution**:  
-  Comprehensive support for research projects including data analysis, report writing, and mentorship.
+  Comprehensive support for research projects including data analysis using MATLAB, SPSS, R, Power BI, and Python, report writing, and mentorship.
 
 ## Target Audience:
-- **Undergraduate Students**:  
-  Providing guidance and execution support for final-year projects and research papers.
+  - **Undergraduate Students**:  
+  Providing guidance and execution support for final-year projects and research papers across various disciplines.
 - **Master’s Students**:  
-  Advanced research services including data analysis and proposal development.
+  Advanced research services including data analysis, proposal development, and thesis writing.
+- **PhD Students and Researchers**:  
+  Specialized support for dissertation writing, publication assistance, and advanced data analysis.
+  - **Businesses & Industries**:  
+  Add details.
 
 ## Call for Investors:
 - **Co-founder Opportunity**:  
