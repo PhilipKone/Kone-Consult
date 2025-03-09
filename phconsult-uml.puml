@@ -1,0 +1,36 @@
+@startuml
+
+title PHconsult UML Diagram
+
+class User {
+  +String name
+  +String email
+  +String password
+  +login()
+  +register()
+}
+
+class Service {
+  +String name
+  +String description
+  +double price
+  +orderService()
+}
+
+class Review {
+  +String content
+  +int rating
+  +submitReview()
+}
+
+class Admin {
+  +manageUsers()
+  +manageServices()
+}
+
+User "1" -- "0..*" Service : orders >
+User "1" -- "0..*" Review : submits >
+Admin "1" -- "0..*" User : manages >
+Admin "1" -- "0..*" Service : manages >
+
+@enduml
