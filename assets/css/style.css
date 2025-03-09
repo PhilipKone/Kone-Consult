@@ -1,16 +1,12 @@
 /* Basic styling for the website */
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
   background-color: #f4f4f4;
 }
 
 header {
   background-color: #3a86ff;
   color: white;
-  padding: 20px;
-  text-align: center;
 }
 
 header nav ul {
@@ -27,11 +23,18 @@ header nav ul li {
 header nav ul li a {
   color: white;
   text-decoration: none;
-  transition: color 0.3s ease; /* Smooth transition effect */
+  transition: color 0.3s ease;
 }
 
 header nav ul li a:hover {
-  color: #007BFF; /* Change to the desired hover color, e.g., blue */
+  color: #007BFF;
+}
+
+.hero {
+  background: url('assets/images/hero-bg.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 100px 0;
 }
 
 section {
@@ -46,6 +49,12 @@ footer {
   padding: 10px;
   background-color: #3a86ff;
   color: white;
+}
+
+footer .social-icons a {
+  color: white;
+  margin: 0 10px;
+  font-size: 1.5em;
 }
 
 img {
