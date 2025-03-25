@@ -231,6 +231,11 @@ body {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   overflow-y: auto; /* Add scrolling if content overflows */
+  transition: width 0.3s ease; /* Smooth transition for collapsing */
+}
+
+.side-panel.collapsed {
+  width: 60px; /* Collapsed width */
 }
 
 .side-panel h1 {
@@ -238,6 +243,11 @@ body {
   margin-bottom: 20px;
   color: var(--header-text-color);
   text-align: center; /* Center the title */
+  transition: opacity 0.3s ease; /* Smooth transition for text visibility */
+}
+
+.side-panel.collapsed h1 {
+  opacity: 0; /* Hide the title when collapsed */
 }
 
 .side-panel ul {
@@ -266,8 +276,50 @@ body {
   color: #ffffff;
 }
 
+.side-panel.collapsed ul li a {
+  text-align: center; /* Center icons when collapsed */
+  padding: 10px 0;
+}
+
+.side-panel ul li a span {
+  display: inline-block;
+  margin-left: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.side-panel.collapsed ul li a span {
+  opacity: 0; /* Hide text when collapsed */
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: -15px;
+  background-color: #007BFF;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.1);
+}
+
 /* Adjust main content to account for the side panel */
 .main-content {
   margin-left: 270px; /* Leave space for the side panel */
   padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.side-panel.collapsed ~ .main-content {
+  margin-left: 70px; /* Adjust content when side panel is collapsed */
 }

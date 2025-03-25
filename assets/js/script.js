@@ -44,4 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
     applyDarkMode();
     closeDropdown(); // Close the dropdown
   });
+
+  // Toggle side panel
+  const sidePanel = document.querySelector('.side-panel');
+  const toggleBtn = document.createElement('button');
+  toggleBtn.classList.add('toggle-btn');
+  toggleBtn.innerHTML = '&#9776;'; // Hamburger icon
+  sidePanel.appendChild(toggleBtn);
+
+  toggleBtn.addEventListener('click', () => {
+    sidePanel.classList.toggle('collapsed');
+  });
 });
