@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
+  const body = document.body;
 
   // Load the saved theme from localStorage
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
-    applyDarkMode();
+    body.classList.add('dark-mode');
   } else {
-    applyLightMode();
+    body.classList.remove('dark-mode');
   }
 
   // Initialize Bootstrap dropdown
@@ -23,24 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const applyLightMode = () => {
-    root.style.setProperty('--background-color', '#f4f4f4');
-    root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--header-bg-color', '#3a86ff');
-    root.style.setProperty('--header-text-color', '#ffffff');
-    root.style.setProperty('--section-bg-color', '#ffffff');
-    root.style.setProperty('--footer-bg-color', '#3a86ff');
-    root.style.setProperty('--footer-text-color', '#ffffff');
+    body.classList.remove('dark-mode');
     localStorage.setItem('theme', 'light'); // Save theme preference
   };
 
   const applyDarkMode = () => {
-    root.style.setProperty('--background-color', '#121212');
-    root.style.setProperty('--text-color', '#ffffff');
-    root.style.setProperty('--header-bg-color', '#1f1f1f');
-    root.style.setProperty('--header-text-color', '#ffffff');
-    root.style.setProperty('--section-bg-color', '#1e1e1e');
-    root.style.setProperty('--footer-bg-color', '#1f1f1f');
-    root.style.setProperty('--footer-text-color', '#ffffff');
+    body.classList.add('dark-mode');
     localStorage.setItem('theme', 'dark'); // Save theme preference
   };
 
