@@ -94,3 +94,13 @@ body.dark-mode {
   transform: scale(1.2); /* Scale up the icon */
   color: #007BFF; /* Change color on hover */
 }
+
+/* Hover effect for About Us icon */
+.about-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.about-icon:hover {
+  transform: scale(1.2); /* Scale up the icon */
+  color: #007BFF; /* Change color on hover */
+}
