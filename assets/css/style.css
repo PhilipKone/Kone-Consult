@@ -1,12 +1,24 @@
+/* Theme variables */
+:root {
+  --background-color: #f4f4f4;
+  --text-color: #000000;
+  --header-bg-color: #3a86ff;
+  --header-text-color: #ffffff;
+  --section-bg-color: #ffffff;
+  --footer-bg-color: #3a86ff;
+  --footer-text-color: #ffffff;
+}
+
 /* Basic styling for the website */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 header {
-  background-color: #3a86ff;
-  color: white;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
 }
 
 header nav ul {
@@ -40,15 +52,15 @@ header nav ul li a:hover {
 section {
   margin: 20px;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: var(--section-bg-color);
   border-radius: 5px;
 }
 
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #3a86ff;
-  color: white;
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
 }
 
 footer .social-icons a {
@@ -60,4 +72,15 @@ footer .social-icons a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --header-bg-color: #1f1f1f;
+  --header-text-color: #ffffff;
+  --section-bg-color: #1e1e1e;
+  --footer-bg-color: #1f1f1f;
+  --footer-text-color: #ffffff;
 }
