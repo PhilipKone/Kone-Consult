@@ -21,8 +21,15 @@
           <li class="nav-item"><a class="nav-link text-light" href="login.html">Login</a></li>
         </ul>
       </nav>
-      <button id="theme-toggle" class="btn btn-secondary">Toggle Theme</button>
-      <button id="dark-mode-toggle">Toggle Dark Mode</button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Switch Theme
+        </button>
+        <div class="dropdown-menu" aria-labelledby="themeDropdown">
+          <a class="dropdown-item" href="#" id="light-mode">Light Mode</a>
+          <a class="dropdown-item" href="#" id="dark-mode">Dark Mode</a>
+        </div>
+      </div>
     </div>
   </header>
 
