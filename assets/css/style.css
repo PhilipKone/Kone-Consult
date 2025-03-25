@@ -224,6 +224,70 @@ body {
   .about-icon {
     font-size: 3rem; /* Adjust icon size for smaller screens */
   }
+
+  .side-panel {
+    width: 200px; /* Reduce side panel width */
+  }
+
+  .side-panel.collapsed {
+    width: 50px; /* Further reduce width when collapsed */
+  }
+
+  .main-content {
+    margin-left: 210px; /* Adjust content margin */
+  }
+
+  .side-panel.collapsed ~ .main-content {
+    margin-left: 60px; /* Adjust content margin when collapsed */
+  }
+
+  .side-panel h1 {
+    font-size: 1.2rem; /* Reduce title size */
+  }
+
+  .side-panel ul li a {
+    font-size: 0.9rem; /* Reduce font size for links */
+    padding: 8px 10px; /* Adjust padding */
+  }
+
+  .hero {
+    padding: 30px 0; /* Reduce padding for hero section */
+    text-align: center; /* Center-align text */
+  }
+
+  .hero .dynamic-text {
+    font-size: 1.8rem; /* Adjust font size */
+  }
+
+  .hero .lead {
+    font-size: 1rem; /* Adjust lead text size */
+  }
+
+  section {
+    margin: 10px; /* Reduce section margin */
+    padding: 15px; /* Adjust section padding */
+  }
+
+  footer {
+    padding: 15px; /* Adjust footer padding */
+  }
+
+  .services-icon {
+    font-size: 2rem; /* Adjust icon size */
+  }
+
+  .about-icon {
+    font-size: 2.5rem; /* Adjust icon size */
+  }
+
+  .btn {
+    font-size: 0.9rem; /* Adjust button font size */
+    padding: 8px 12px; /* Adjust button padding */
+  }
+
+  blockquote {
+    font-size: 0.9rem; /* Adjust testimonial font size */
+  }
 }
 
 /* Responsive adjustments for smaller screens */
@@ -270,6 +334,65 @@ body {
 
   blockquote {
     font-size: 0.9rem; /* Adjust testimonial font size */
+  }
+
+  .side-panel {
+    position: absolute; /* Make side panel overlay the content */
+    z-index: 1000; /* Ensure it appears above other elements */
+    height: auto; /* Allow side panel to adjust height */
+  }
+
+  .side-panel.collapsed {
+    display: none; /* Hide side panel when collapsed */
+  }
+
+  .toggle-btn {
+    position: fixed; /* Fix toggle button position */
+    top: 10px;
+    left: 10px;
+    z-index: 1100; /* Ensure it appears above the side panel */
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove margin for main content */
+  }
+
+  .hero {
+    padding: 20px 0; /* Further reduce padding for hero section */
+  }
+
+  .hero .dynamic-text {
+    font-size: 1.5rem; /* Further adjust font size */
+  }
+
+  .hero .lead {
+    font-size: 0.9rem; /* Further adjust lead text size */
+  }
+
+  section {
+    margin: 5px; /* Further reduce section margin */
+    padding: 10px; /* Further adjust section padding */
+  }
+
+  footer {
+    padding: 10px; /* Further adjust footer padding */
+  }
+
+  .services-icon {
+    font-size: 1.8rem; /* Further adjust icon size */
+  }
+
+  .about-icon {
+    font-size: 2rem; /* Further adjust icon size */
+  }
+
+  .btn {
+    font-size: 0.8rem; /* Further adjust button font size */
+    padding: 6px 10px; /* Further adjust button padding */
+  }
+
+  blockquote {
+    font-size: 0.8rem; /* Further adjust testimonial font size */
   }
 }
 
