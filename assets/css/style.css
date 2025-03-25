@@ -49,6 +49,25 @@ header nav ul li a:hover {
   padding: 100px 0;
 }
 
+/* Hero Section Dynamic Text */
+.hero .dynamic-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  animation: fadeInOut 6s infinite;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Keyframes for fading animation */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 section {
   margin: 20px;
   padding: 20px;
@@ -103,4 +122,37 @@ body.dark-mode {
 .about-icon:hover {
   transform: scale(1.2); /* Scale up the icon */
   color: #007BFF; /* Change color on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  header nav ul li {
+    display: block; /* Stack navigation items vertically */
+    margin: 10px 0;
+  }
+
+  .hero {
+    padding: 50px 0; /* Reduce padding for smaller screens */
+  }
+
+  .hero .dynamic-text {
+    font-size: 1.8rem; /* Adjust font size for smaller screens */
+  }
+
+  section {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  footer {
+    padding: 20px;
+  }
+
+  .services-icon {
+    font-size: 2.5rem; /* Adjust icon size for smaller screens */
+  }
+
+  .about-icon {
+    font-size: 3rem; /* Adjust icon size for smaller screens */
+  }
 }
