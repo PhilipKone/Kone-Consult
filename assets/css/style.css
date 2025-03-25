@@ -14,11 +14,13 @@ body {
   font-family: Arial, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 header {
   background-color: var(--header-bg-color);
   color: var(--header-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 header nav ul {
@@ -73,6 +75,7 @@ section {
   padding: 20px;
   background-color: var(--section-bg-color);
   border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 footer {
@@ -80,6 +83,7 @@ footer {
   padding: 10px;
   background-color: var(--footer-bg-color);
   color: var(--footer-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 footer .social-icons a {
@@ -101,6 +105,17 @@ body.dark-mode {
   --header-text-color: #ffffff;
   --section-bg-color: #1e1e1e;
   --footer-bg-color: #1f1f1f;
+  --footer-text-color: #ffffff;
+}
+
+/* Ensure text color is explicitly defined for light mode */
+body {
+  --background-color: #f4f4f4;
+  --text-color: #000000;
+  --header-bg-color: #3a86ff;
+  --header-text-color: #ffffff;
+  --section-bg-color: #ffffff;
+  --footer-bg-color: #3a86ff;
   --footer-text-color: #ffffff;
 }
 
@@ -202,4 +217,48 @@ body.dark-mode {
   blockquote {
     font-size: 0.9rem; /* Adjust testimonial font size */
   }
+}
+
+/* Side panel navigation */
+.side-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.side-panel h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--header-text-color);
+}
+
+.side-panel ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.side-panel ul li {
+  margin: 15px 0;
+}
+
+.side-panel ul li a {
+  color: var(--header-text-color);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.side-panel ul li a:hover {
+  color: #007BFF;
+}
+
+.main-content {
+  margin-left: 270px; /* Adjust content to account for the side panel */
+  padding: 20px;
 }

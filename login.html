@@ -9,55 +9,51 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <header class="container-fluid bg-light py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="text-primary">PHconsult</h1>
-      <nav>
-        <ul class="nav">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link active" href="login.html">Login</a></li>
-        </ul>
-      </nav>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Switch Theme
-        </button>
-        <div class="dropdown-menu" aria-labelledby="themeDropdown">
-          <a class="dropdown-item" href="#" id="light-mode">Light Mode</a>
-          <a class="dropdown-item" href="#" id="dark-mode">Dark Mode</a>
+  <div class="side-panel">
+    <h1>PHconsult</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html" class="active">Login</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <header class="container-fluid bg-light py-3">
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="text-primary">PHconsult</h1>
+        <!-- Removed dropdown for switching themes -->
+      </div>
+    </header>
+
+    <section class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h2 class="text-center">Login</h2>
+          <form action="login_process.php" method="post">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+          <p class="text-center mt-3">Don't have an account? <a href="register.html">Register here</a></p>
         </div>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <section class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h2 class="text-center">Login</h2>
-        <form action="login_process.php" method="post">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-        <p class="text-center mt-3">Don't have an account? <a href="register.html">Register here</a></p>
+    <footer class="bg-dark text-light py-4">
+      <div class="container text-center">
+        <p>&copy; 2024 PHconsult. All rights reserved.</p>
       </div>
-    </div>
-  </section>
-
-  <footer class="bg-dark text-light py-4">
-    <div class="container text-center">
-      <p>&copy; 2024 PHconsult. All rights reserved.</p>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/script.js"></script>
