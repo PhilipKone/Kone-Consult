@@ -84,3 +84,13 @@ body.dark-mode {
   --footer-bg-color: #1f1f1f;
   --footer-text-color: #ffffff;
 }
+
+/* Hover effect for service icons */
+.services-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.services-icon:hover {
+  transform: scale(1.2); /* Scale up the icon */
+  color: #007BFF; /* Change color on hover */
+}
