@@ -108,6 +108,60 @@ body.dark-mode {
   --footer-text-color: #ffffff;
 }
 
+/* Ensure text elements are explicitly styled for dark mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode a,
+body.dark-mode span,
+body.dark-mode label,
+body.dark-mode li {
+  color: var(--text-color); /* Use the defined text color */
+}
+
+body.dark-mode a:hover {
+  color: #007BFF; /* Ensure hover links are visible */
+}
+
+body.dark-mode .btn {
+  color: #ffffff; /* Ensure button text is visible */
+  background-color: #007BFF; /* Ensure button background is visible */
+  border-color: #007BFF;
+}
+
+body.dark-mode .btn:hover {
+  background-color: #0056b3; /* Darker hover effect for buttons */
+  border-color: #0056b3;
+}
+
+/* Ensure form elements are styled for dark mode */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #444444;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #aaaaaa; /* Placeholder text color */
+}
+
+/* Ensure table text is visible in dark mode */
+body.dark-mode table {
+  color: var(--text-color);
+}
+
+body.dark-mode table th,
+body.dark-mode table td {
+  border: 1px solid #444444; /* Table border color */
+}
+
 /* Ensure text color is explicitly defined for light mode */
 body {
   --background-color: #f4f4f4;
