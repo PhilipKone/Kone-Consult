@@ -1,16 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
 
-  // Ensure dropdown functionality works
+  // Initialize Bootstrap dropdown
   const dropdownToggle = document.querySelector('.dropdown-toggle');
   if (dropdownToggle) {
-    dropdownToggle.addEventListener('click', (event) => {
-      event.preventDefault();
-      const dropdownMenu = document.querySelector('.dropdown-menu');
-      if (dropdownMenu) {
-        dropdownMenu.classList.toggle('show');
-      }
-    });
+    const dropdown = new bootstrap.Dropdown(dropdownToggle); // Bootstrap's Dropdown API
   }
 
   document.getElementById('light-mode').addEventListener('click', (event) => {

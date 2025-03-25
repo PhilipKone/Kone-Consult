@@ -9,16 +9,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle flyer image hover effect
-    const flyerImage = document.querySelector('img');
-
-    if (flyerImage) {
-        flyerImage.addEventListener('mouseover', function() {
-            flyerImage.style.filter = 'brightness(0.8)';
-        });
-
-        flyerImage.addEventListener('mouseout', function() {
-            flyerImage.style.filter = 'brightness(1)';
-        });
-    }
+    // Removed flyer image hover effect logic
 });
