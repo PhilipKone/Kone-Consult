@@ -28,9 +28,26 @@ class Admin {
   +manageServices()
 }
 
+class UI {
+  +toggleDarkMode()
+  +toggleSidePanel()
+  +responsiveDesign()
+}
+
+class Payment {
+  +double amount
+  +String method
+  +processPayment()
+}
+
 User "1" -- "0..*" Service : orders >
 User "1" -- "0..*" Review : submits >
+User "1" -- "0..*" Payment : makes >
 Admin "1" -- "0..*" User : manages >
 Admin "1" -- "0..*" Service : manages >
+UI "1" -- "1" User : interacts >
+UI "1" -- "1" Admin : interacts >
+Service "1" -- "0..*" Payment : requires >
+Review "0..*" -- "1" Service : about >
 
 @enduml
