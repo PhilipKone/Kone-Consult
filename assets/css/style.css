@@ -222,16 +222,33 @@ header nav ul li a:hover {
   animation: fadeInOut 6s infinite;
   color: #ffffff;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  transform-origin: center;
+  transition: text-shadow 0.3s ease;
 }
 
 /* Keyframes for fading animation */
 @keyframes fadeInOut {
-  0%, 100% {
+  0% {
     opacity: 0;
+    transform: scale(0.95);
   }
-  50% {
+  20% {
     opacity: 1;
+    transform: scale(1);
   }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Add hover effect for the dynamic text */
+.hero .dynamic-text:hover {
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
 }
 
 section {
