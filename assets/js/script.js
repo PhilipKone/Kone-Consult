@@ -55,4 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleBtn.addEventListener('click', () => {
     sidePanel.classList.toggle('collapsed');
   });
+
+  // Mobile Menu Toggle
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('active');
+    });
+  }
 });
