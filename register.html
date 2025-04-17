@@ -27,37 +27,58 @@
     <header class="container-fluid bg-light py-3">
       <div class="container d-flex justify-content-between align-items-center">
         <h1 class="text-primary">PHconsult</h1>
-        <!-- Removed dropdown for switching themes -->
+        <button id="signOutBtn" class="btn btn-outline-danger d-none">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
       </div>
     </header>
 
-    <section class="container my-5">
+    <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <h2 class="text-center">Register</h2>
-          <form action="register_process.php" method="post">
+          <div class="card shadow">
+            <div class="card-body">
+              <h2 class="text-center mb-4">Register</h2>
+              <form id="registerForm">
             <div class="mb-3">
               <label for="name" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="name" name="name" required>
+                  <input type="text" class="form-control" id="name" required>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+                  <input type="email" class="form-control" id="email" required>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required>
+                  <input type="password" class="form-control" id="password" required>
             </div>
             <div class="mb-3">
-              <label for="confirm_password" class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" required>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+                <div class="text-center mt-3">
+                  <p class="text-muted">Or register with</p>
+                  <div class="d-flex justify-content-center gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="googleSignIn">
+                      <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="phoneSignIn">
+                      <i class="fas fa-phone"></i> Phone
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div class="text-center mt-3">
+                <p>Already have an account? <a href="login.html">Login here</a></p>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Register</button>
-          </form>
-          <p class="text-center mt-3">Already have an account? <a href="login.html">Login here</a></p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <footer class="footer">
       <div class="container">
@@ -126,5 +147,151 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/script.js"></script>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  
+  <!-- Firebase Config -->
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCoFJWEc8z1Z-kddKR8T-QggAFCdm4Y7wI",
+      authDomain: "daywise-ays8t.firebaseapp.com",
+      projectId: "daywise-ays8t",
+      storageBucket: "daywise-ays8t.firebasestorage.app",
+      messagingSenderId: "690549644365",
+      appId: "1:690549644365:web:d895858fbde5497b1c5004"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+  
+  <!-- Register Script -->
+  <script>
+    // Check authentication state
+    auth.onAuthStateChanged((user) => {
+      const signOutBtn = document.getElementById('signOutBtn');
+      if (user) {
+        // User is signed in
+        signOutBtn.classList.remove('d-none');
+      } else {
+        // User is signed out
+        signOutBtn.classList.add('d-none');
+      }
+    });
+
+    // Sign Out functionality
+    document.getElementById('signOutBtn').addEventListener('click', async () => {
+      try {
+        await auth.signOut();
+        console.log('User signed out successfully');
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Sign out error:', error);
+        alert(error.message);
+      }
+    });
+
+    // Google Sign-In Provider
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    
+    document.getElementById('googleSignIn').addEventListener('click', async () => {
+      try {
+        const result = await auth.signInWithPopup(googleProvider);
+        const user = result.user;
+        
+        // Store user data in Firestore
+        await db.collection('users').doc(user.uid).set({
+          name: user.displayName,
+          email: user.email,
+          createdAt: new Date(),
+          role: 'admin'
+        });
+        
+        console.log('Google Sign-In successful:', user);
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Google Sign-In error:', error);
+        alert(error.message);
+      }
+    });
+
+    // Phone Sign-In
+    document.getElementById('phoneSignIn').addEventListener('click', async () => {
+      const phoneNumber = prompt('Please enter your phone number with country code (e.g., +1234567890):');
+      if (!phoneNumber) return;
+
+      try {
+        const appVerifier = new firebase.auth.RecaptchaVerifier('phoneSignIn', {
+          size: 'invisible',
+          callback: (response) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber
+          }
+        });
+
+        const confirmationResult = await auth.signInWithPhoneNumber(phoneNumber, appVerifier);
+        const code = prompt('Please enter the verification code sent to your phone:');
+        if (!code) return;
+
+        const result = await confirmationResult.confirm(code);
+        const user = result.user;
+        
+        // Store user data in Firestore
+        await db.collection('users').doc(user.uid).set({
+          phoneNumber: user.phoneNumber,
+          createdAt: new Date(),
+          role: 'admin'
+        });
+        
+        console.log('Phone Sign-In successful:', user);
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Phone Sign-In error:', error);
+        alert(error.message);
+      }
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      try {
+        // Create user with email and password
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        
+        // Store additional user data in Firestore
+        await db.collection('users').doc(user.uid).set({
+          name: name,
+          email: email,
+          createdAt: new Date(),
+          role: 'admin'
+        });
+        
+        console.log('Registration successful:', user);
+        alert('Registration successful! Please login.');
+        window.location.href = 'login.html';
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert(error.message);
+      }
+    });
+  </script>
 </body>
 </html>
