@@ -1,126 +1,143 @@
 # PHconsult
 
-PHconsult is a research assistance web application designed to provide services to students, professionals, and researchers. The platform offers features like research topic selection, data analysis, report writing, and mentorship, helping users streamline the often challenging process of conducting and completing research.
+PHconsult is a modern web application that provides comprehensive research assistance to students, professionals, and organizations. The platform offers a suite of services including research topic selection, data analysis, report writing, mentorship, and assignment support—all accessible via an intuitive, responsive interface.
 
 ---
 
-## Key Features
-
-- **User Authentication**: Secure login and registration functionality.
-- **Service Listings**: Display of available services such as research guidance, data analysis, and mentorship.
-- **Responsive Design**: Fully responsive layout for seamless use on desktops, tablets, and mobile devices.
-- **Dark/Light Mode Toggle**: Users can switch between dark and light themes for better accessibility.
-- **Collapsible Side Panel**: A collapsible side navigation panel for better usability and space management.
-- **Online Service Ordering**: Users can order research services directly through the platform.
-- **Pricing Information**: Transparent pricing for each service.
-- **Reviews and Testimonials**: User feedback and testimonials for services provided.
-
----
-
-## Problem it Solves
-
-PHconsult addresses the challenges students and researchers face in structuring research projects, analyzing data, and writing detailed reports. The platform provides expert assistance and tools to make the research process smoother and more efficient.
+## Table of Contents
+- [Features](#features)
+- [Live Demo](#live-demo)
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [Contact](#contact)
+- [License](#license)
 
 ---
 
-## Installation Instructions
+## Features
+- **User Authentication:** Secure registration and login (Node.js, Express, MongoDB, JWT)
+- **Service Listings:** Data analysis, report writing, research consulting, topic selection, mentorship, assignment support
+- **Responsive UI:** Modern, mobile-friendly design (Bootstrap 5, custom CSS)
+- **Dark/Light Mode:** Theme toggle for accessibility
+- **Collapsible Side Panel:** Space-efficient navigation
+- **Online Service Requests:** Contact and order forms (with Firebase integration)
+- **Testimonials:** Real client feedback
+- **Admin Panel:** (WIP) For managing users and service requests
 
+---
+
+## Live Demo
+
+Check out the deployed app here: [https://philipkone.github.io/PHconsult/](https://philipkone.github.io/PHconsult/)
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js & npm (for backend/server features)
+- MongoDB Atlas account (for backend database)
+- (Optional) Firebase project (for contact form and messaging)
+
+### Installation
 1. Clone the repository:
    ```bash
    git clone https://github.com/PhilipKone/PHconsult.git
-   ```
-2. Navigate to the project directory:
-   ```bash
    cd PHconsult
    ```
-3. Open the `index.html` file in your browser to view the application.
+2. Install backend dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   - Create a `.env` file in the root directory with your MongoDB URI and JWT secret:
+     ```env
+     MONGODB_URI=your_mongodb_connection_string
+     JWT_SECRET=your_jwt_secret
+     ```
+   - (If using Firebase for contact form, configure your Firebase project in `contact.html`)
+4. Start the backend server:
+   ```bash
+   node app.js
+   ```
+5. Open `index.html` in your browser for the frontend.
 
 ---
 
 ## Technology Stack
 
 ### Frontend
+- HTML5, CSS3, JavaScript (Vanilla)
+- Bootstrap 5
+- Font Awesome
 
-- **HTML5**: Structuring web pages.
-- **CSS3**: Styling and responsiveness.
-- **JavaScript**: Interactivity and dynamic functionality.
-- **Bootstrap 5**: Responsive design and prebuilt components.
-- **Font Awesome**: Icons for better UI/UX.
+### Backend
+- Node.js, Express.js
+- MongoDB (Mongoose ODM)
+- JWT for authentication
+- bcryptjs for password hashing
+- body-parser for request parsing
 
-### Backend (Optional for full-stack)
-
-- **Node.js**: Backend logic and routing.
-- **Express.js**: API routes and server management.
-
-### Database (Optional)
-
-- **MongoDB** or **Firebase**: To store user data and service details.
-
-### Tools
-
-- **Git**: Version control.
-- **GitHub Pages**: Frontend deployment.
+### Messaging/Contact
+- Firebase Firestore (for contact form/message storage)
 
 ---
 
-## Recent Updates
-
-### 1. **Dark/Light Mode Toggle**
-   - Users can switch between dark and light themes.
-   - Theme preferences are saved using `localStorage`.
-
-### 2. **Collapsible Side Panel**
-   - A collapsible side navigation panel was added for better usability.
-   - The side panel is consistent across all pages.
-
-### 3. **Responsive Design**
-   - Improved responsiveness for mobile and tablet devices.
-   - Adjusted layouts, font sizes, and spacing for smaller screens.
-
-### 4. **Improved Accessibility**
-   - Explicit text colors for better visibility in dark mode.
-   - Hover effects and focus states for interactive elements.
+## Project Structure
+```
+PHconsult-1/
+├── app.js                 # Express backend entrypoint
+├── backend/               # Backend logic (auth, models)
+│   ├── authRoutes.js      # Auth API routes
+│   ├── login_process.js   # (Legacy/optional)
+│   ├── register_process.js# (Legacy/optional)
+│   └── models/
+│       └── User.js        # Mongoose User model
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── index.html             # Main landing page
+├── about.html             # About the platform
+├── services.html          # Service details
+├── contact.html           # Contact form (uses Firebase)
+├── login.html             # Login page
+├── register.html          # Registration page
+├── admin.html             # Admin dashboard (WIP)
+├── package.json           # Node dependencies
+└── README.md
+```
 
 ---
 
-## Contributing Guidelines
+## Usage
+- Visit `index.html` for the main site.
+- Register/Login for personalized features.
+- Use the contact form for service requests or questions (messages stored in Firebase).
+- Admin features are under development.
 
+---
+
+## Contributing
 We welcome contributions to improve PHconsult!
 
-### Steps to Contribute
-
-1. Fork the repository:
-   ```bash
-   git fork https://github.com/PhilipKone/PHconsult.git
-   ```
-2. Clone your forked repository:
-   ```bash
-   git clone https://github.com/your-username/PHconsult.git
-   ```
-3. Create a new branch for your feature or fix:
-   ```bash
-   git checkout -b feature-name
-   ```
-4. Make your changes and commit:
-   ```bash
-   git commit -m "Your commit message"
-   ```
-5. Push to the branch:
-   ```bash
-   git push origin feature-name
-   ```
-6. Submit a pull request: Once you've made your changes, create a pull request for review.
+### How to Contribute
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Push to your fork and open a Pull Request
 
 ---
 
-## Future Enhancements
-
-- **Service Ordering System**: Add a backend to handle service orders and payments.
-- **User Dashboard**: Provide users with a dashboard to track their orders and progress.
-- **Multilingual Support**: Add support for multiple languages to cater to a global audience.
+## Contact
+- **Email:** phconsultgh@gmail.com
+- **Phone:** +055 199 3820
+- **Location:** Accra, Ghana
+- [LinkedIn](https://www.linkedin.com/in/philip-kone)
 
 ---
 
 ## License
-
 This project is licensed under the MIT License. See the LICENSE file for details.
