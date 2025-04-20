@@ -35,11 +35,22 @@
     </header>
 
     <div class="container mt-5">
-      <div class="row mb-4">
-        <div class="col-12 text-end mb-3">
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiptModal">
-            <i class="fas fa-receipt"></i> Create Receipt
-          </button>
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="true">Messages</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">Donations</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="adminTabsContent">
+        <div class="tab-pane fade show active" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+          <div class="row mb-4">
+            <div class="col-12 text-end mb-3">
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiptModal">
+                <i class="fas fa-receipt"></i> Create Receipt
+              </button>
         </div>
       
         <div class="col-md-3">
@@ -95,6 +106,69 @@
                 <!-- Messages will be loaded here -->
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
+          <div class="card shadow mt-4">
+            <div class="card-body">
+              <h2 class="card-title mb-4">Donations</h2>
+              <div class="table-responsive">
+                <table id="donationsTable" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Donor Name</th>
+                      <th>Donor Email</th>
+                      <th>Amount</th>
+                      <th>Currency</th>
+                      <th>Transaction ID</th>
+                      <th>Status</th>
+                      <th>Receipt</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Donations will be loaded here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donation Receipt Modal -->
+    <div class="modal fade" id="donationReceiptModal" tabindex="-1" aria-labelledby="donationReceiptModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="donationReceiptModalLabel">Donation Receipt</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="donationReceiptContent" class="p-4 bg-white border rounded shadow-sm" style="max-width:600px; margin:auto;">
+              <div class="text-center mb-3">
+                <img src="assets/images/Logo.png" alt="PHconsult Logo" style="max-width:120px;">
+                <h4 class="mt-2">PHconsult</h4>
+                <p class="mb-1">Professional Research Assistance</p>
+                <small>Accra, Ghana | phconsultgh@gmail.com | 055 199 3820</small>
+              </div>
+              <hr>
+              <div class="mb-2"><strong>Donor Name:</strong> <span id="donationDonorName"></span></div>
+              <div class="mb-2"><strong>Donor Email:</strong> <span id="donationDonorEmail"></span></div>
+              <div class="mb-2"><strong>Amount:</strong> <span id="donationAmount"></span> <span id="donationCurrency"></span></div>
+              <div class="mb-2"><strong>Date:</strong> <span id="donationDate"></span></div>
+              <div class="mb-2"><strong>Transaction ID:</strong> <span id="donationTxnId"></span></div>
+              <div class="mb-2"><strong>Status:</strong> <span id="donationStatus"></span></div>
+              <hr>
+              <div class="text-center text-success fw-bold">Thank you for your generous donation!</div>
+            </div>
+            <div class="text-center mt-3">
+              <button class="btn btn-outline-secondary me-2" id="printDonationReceiptBtn"><i class="fas fa-print"></i> Print</button>
+              <button class="btn btn-outline-primary" id="downloadDonationReceiptBtn"><i class="fas fa-download"></i> Download PDF</button>
+            </div>
           </div>
         </div>
       </div>
@@ -243,6 +317,8 @@
   
   <!-- Admin Dashboard Script -->
   <script src="assets/js/admin-receipt.js"></script>
+  <!-- Admin Donations Script -->
+  <script src="assets/js/admin-donations.js"></script>
   <script>
     let currentMessageId = null;
     const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
