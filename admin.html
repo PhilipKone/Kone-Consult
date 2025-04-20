@@ -36,6 +36,12 @@
 
     <div class="container mt-5">
       <div class="row mb-4">
+        <div class="col-12 text-end mb-3">
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiptModal">
+            <i class="fas fa-receipt"></i> Create Receipt
+          </button>
+        </div>
+      
         <div class="col-md-3">
           <div class="card bg-primary text-white">
             <div class="card-body">
@@ -94,6 +100,76 @@
       </div>
     </div>
 
+    <!-- Receipt Modal -->
+    <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="receiptModalLabel">Create Receipt</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="receiptForm">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="clientName" class="form-label">Client Name</label>
+                  <input type="text" class="form-control" id="clientName" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="service" class="form-label">Service Provided</label>
+                  <input type="text" class="form-control" id="service" required>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label for="amount" class="form-label">Amount (GHS)</label>
+                  <input type="number" class="form-control" id="amount" required min="0">
+                </div>
+                <div class="col-md-4">
+                  <label for="paymentMethod" class="form-label">Payment Method</label>
+                  <select class="form-control" id="paymentMethod" required>
+                    <option value="Cash">Cash</option>
+                    <option value="Mobile Money">Mobile Money</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="receiptDate" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="receiptDate" required>
+                </div>
+              </div>
+              <div class="text-end">
+                <button type="submit" class="btn btn-primary">Generate Receipt</button>
+              </div>
+            </form>
+            <hr>
+            <div id="receiptPreview" style="display:none;">
+              <div id="receiptContent" class="p-4 bg-white border rounded shadow-sm" style="max-width:600px; margin:auto;">
+                <div class="text-center mb-3">
+                  <img src="assets/images/Logo.png" alt="PHconsult Logo" style="max-width:120px;">
+                  <h4 class="mt-2">PHconsult</h4>
+                  <p class="mb-1">Professional Research Assistance</p>
+                  <small>Accra, Ghana | phconsultgh@gmail.com | 055 199 3820</small>
+                </div>
+                <hr>
+                <div class="mb-2"><strong>Date:</strong> <span id="previewDate"></span></div>
+                <div class="mb-2"><strong>Receipt No.:</strong> <span id="previewReceiptNo"></span></div>
+                <div class="mb-2"><strong>Client Name:</strong> <span id="previewClientName"></span></div>
+                <div class="mb-2"><strong>Service:</strong> <span id="previewService"></span></div>
+                <div class="mb-2"><strong>Amount:</strong> GHS <span id="previewAmount"></span></div>
+                <div class="mb-2"><strong>Payment Method:</strong> <span id="previewPaymentMethod"></span></div>
+                <hr>
+                <div class="text-center text-success fw-bold">Thank you for choosing PHconsult!</div>
+              </div>
+              <div class="text-center mt-3">
+                <button class="btn btn-outline-secondary me-2" id="printReceiptBtn"><i class="fas fa-print"></i> Print</button>
+                <button class="btn btn-outline-primary" id="downloadReceiptBtn"><i class="fas fa-download"></i> Download PDF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Message Details Modal -->
     <div class="modal fade" id="messageModal" tabindex="-1">
       <div class="modal-dialog modal-lg">
@@ -161,9 +237,12 @@
     }
     const auth = firebase.auth();
     const db = firebase.firestore();
+    window.auth = auth;
+    window.db = db;
   </script>
   
   <!-- Admin Dashboard Script -->
+  <script src="assets/js/admin-receipt.js"></script>
   <script>
     let currentMessageId = null;
     const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
