@@ -126,13 +126,70 @@
                       <th>Transaction ID</th>
                       <th>Status</th>
                       <th>Receipt</th>
+                      <th>Thank You Letter</th>
                     </tr>
                   </thead>
                   <tbody>
                     <!-- Donations will be loaded here -->
+                    <!-- Thank You Letter buttons will be dynamically inserted by JS -->
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thank You Letter Modal -->
+    <div class="modal fade" id="thankYouLetterModal" tabindex="-1" aria-labelledby="thankYouLetterModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="thankYouLetterModalLabel">Thank You Letter</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="thankYouLetterContent" class="p-4 bg-white border rounded shadow-sm" style="max-width:600px; margin:auto; position:relative;">
+              <img src="assets/images/BBA Logo.png" alt="BBA Logo" style="position:absolute; top:0; right:0; max-width:110px; max-height:80px; margin:8px 8px 0 0;">
+              <div class="mb-2"><span id="tylDate"></span></div>
+              <div class="mb-2">
+                Attention: <span id="tylAttention"></span><br>
+                <span id="tylOrg"></span>
+              </div>
+              <div class="mb-2">Dear <span id="tylDear"></span>,</div>
+              <div class="mb-2">
+                Thank you for your generous donation of <strong><span id="tylAmount"></span> <span id="tylCurrency"></span></strong> to the Black Biomechanists Association on <span id="tylDonationDate"></span>.<br><br>
+                Your support helps us empower Black biomechanists at all experience levels. Thanks to contributions like yours, we continue to deliver impactful programming, including industry panels, mentoring, writing groups, and educational workshops at national biomechanics meetings.<br><br>
+                We are grateful for your partnership and look forward to further collaboration.
+              </div>
+              <div class="mt-4">
+                Sincerely,<br><br>
+                <div style="display: flex; align-items: flex-end; justify-content: flex-start; gap: 40px;">
+                  <div style="text-align: center;">
+                    <img src="assets/images/Kayla sig.jpg" alt="Kayla Seymore Signature" style="max-width:120px; max-height:50px; display:block; margin:auto;">
+                    <strong>Kayla Seymore</strong><br>
+                    President, Black Biomechanists Association
+                  </div>
+                  <div style="text-align: center;">
+                    <img src="assets/images/Matt sig.jpg" alt="Matthew B. A. McCullough Signature" style="max-width:120px; max-height:50px; display:block; margin:auto;">
+                    <strong>Matthew B. A. McCullough, Ph.D.</strong><br>
+                    Treasurer and Fundraising Chair, Black Biomechanists Association
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4" style="font-size:0.96em; color:#444;">
+                <hr>
+                <p class="mb-0">
+                  Your donation of <strong><span id="tylLegalAmount"></span></strong> was received on <strong><span id="tylLegalDate"></span></strong>.<br>
+                  As the Black Biomechanists Association is a non-profit organization under section 501(c)3 of the federal tax code (EIN 86-3156801), and as you received no goods or services in exchange for this contribution, your donation may be tax deductible to the fullest extent of the law.<br>
+                  You may wish to seek independent legal and tax advice regarding the deductibility of your gift. Please retain this letter for your tax records.
+                </p>
+              </div>
+            </div>
+            <div class="text-center mt-3">
+              <button class="btn btn-outline-secondary me-2" id="printThankYouLetterBtn"><i class="fas fa-print"></i> Print</button>
+              <button class="btn btn-outline-primary" id="downloadThankYouLetterBtn"><i class="fas fa-download"></i> Download PDF</button>
             </div>
           </div>
         </div>
@@ -150,10 +207,10 @@
           <div class="modal-body">
             <div id="donationReceiptContent" class="p-4 bg-white border rounded shadow-sm" style="max-width:600px; margin:auto;">
               <div class="text-center mb-3">
-                <img src="assets/images/Logo.png" alt="PHconsult Logo" style="max-width:120px;">
-                <h4 class="mt-2">PHconsult</h4>
-                <p class="mb-1">Professional Research Assistance</p>
-                <small>Accra, Ghana | phconsultgh@gmail.com | 055 199 3820</small>
+                <img src="assets/images/BBA Logo.png" alt="BBA Logo" style="max-width:120px;">
+                <h4 class="mt-2">Black Biomechanists Association</h4>
+                <p class="mb-1">Empowering Black biomechanists</p>
+                <small>www.blackbiomechanists.org | EIN 86-3156801</small>
               </div>
               <hr>
               <div class="mb-2"><strong>Donor Name:</strong> <span id="donationDonorName"></span></div>
@@ -164,7 +221,8 @@
               <div class="mb-2"><strong>Status:</strong> <span id="donationStatus"></span></div>
               <hr>
               <div class="text-center text-success fw-bold">Thank you for your generous donation!</div>
-            </div>
+
+              <!-- Thank You Letter Removed: Now handled in a separate modal -->
             <div class="text-center mt-3">
               <button class="btn btn-outline-secondary me-2" id="printDonationReceiptBtn"><i class="fas fa-print"></i> Print</button>
               <button class="btn btn-outline-primary" id="downloadDonationReceiptBtn"><i class="fas fa-download"></i> Download PDF</button>
@@ -188,6 +246,10 @@
                 <div class="col-md-6">
                   <label for="clientName" class="form-label">Client Name</label>
                   <input type="text" class="form-control" id="clientName" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="organisation" class="form-label">Organisation</label>
+                  <input type="text" class="form-control" id="organisation">
                 </div>
                 <div class="col-md-6">
                   <label for="service" class="form-label">Service Provided</label>
