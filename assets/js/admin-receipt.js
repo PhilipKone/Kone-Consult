@@ -2,6 +2,40 @@
 // Requires Firebase SDK to be loaded in admin.html
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Handle Generate Receipt button in Receipts tab
+  $(document).on('click', '.generate-receipt', function() {
+    const receiptModal = document.getElementById('receiptModal');
+    const receiptForm = document.getElementById('receiptForm');
+    const receiptPreview = document.getElementById('receiptPreview');
+    if (!receiptModal || !receiptForm || !receiptPreview) {
+      alert('Receipt modal elements missing. Please contact admin.');
+      return;
+    }
+    receiptPreview.style.display = 'none';
+    receiptForm.style.display = 'block';
+    receiptForm.reset();
+    var modal = new bootstrap.Modal(receiptModal);
+    modal.show();
+  });
+
+  // Handle Generate Receipt button in Receipts tab (vanilla JS for reliability)
+  document.querySelectorAll('.generate-receipt').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const receiptModal = document.getElementById('receiptModal');
+      const receiptForm = document.getElementById('receiptForm');
+      const receiptPreview = document.getElementById('receiptPreview');
+      if (!receiptModal || !receiptForm || !receiptPreview) {
+        alert('Receipt modal elements missing. Please contact admin.');
+        return;
+      }
+      receiptPreview.style.display = 'none';
+      receiptForm.style.display = 'block';
+      receiptForm.reset();
+      var modal = new bootstrap.Modal(receiptModal);
+      modal.show();
+    });
+  });
+
   // Elements
   const receiptForm = document.getElementById('receiptForm');
   const receiptPreview = document.getElementById('receiptPreview');
@@ -90,4 +124,74 @@ document.addEventListener('DOMContentLoaded', function () {
       receiptForm.reset();
     });
   }
+
+  // Load and display receipts in DataTable (like donations)
+  async function loadReceipts() {
+    try {
+      const snapshot = await db.collection('receipts').orderBy('timestamp', 'desc').get();
+      const receipts = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          date: data.date || 'N/A',
+          clientName: data.clientName || 'N/A',
+          service: data.service || 'N/A',
+          amount: data.amount !== undefined ? data.amount : 'N/A',
+          paymentMethod: data.paymentMethod || 'N/A',
+          receiptNo: data.receiptNo || doc.id,
+          doc_id: doc.id,
+          actions: `<button class='btn btn-sm btn-primary generate-receipt-row' data-id='${doc.id}'>Generate Receipt</button>`
+        };
+      });
+      console.log('Receipts loaded from Firestore:', receipts); // DEBUG LOG
+      if (!$.fn.DataTable.isDataTable('#receiptsTable')) {
+        $('#receiptsTable').DataTable({
+          data: receipts,
+          columns: [
+            { data: 'date' },
+            { data: 'clientName' },
+            { data: 'service' },
+            { data: 'amount' },
+            { data: 'paymentMethod' },
+            { data: 'receiptNo' },
+            { data: 'actions', orderable: false, searchable: false }
+          ]
+        });
+      } else {
+        const receiptsTable = $('#receiptsTable').DataTable();
+        receiptsTable.clear().rows.add(receipts).draw();
+      }
+    } catch (err) {
+      alert('Error loading receipts: ' + err.message);
+    }
+  }
+
+  // Handle Generate Receipt button click for each row
+  $(document).on('click', '.generate-receipt-row', async function() {
+    const docId = $(this).data('id');
+    try {
+      const doc = await db.collection('receipts').doc(docId).get();
+      if (!doc.exists) {
+        alert('Receipt not found');
+        return;
+      }
+      const data = doc.data();
+      // Populate modal fields
+      document.getElementById('clientName').value = data.clientName || '';
+      document.getElementById('organisation').value = data.organisation || '';
+      document.getElementById('service').value = data.service || '';
+      document.getElementById('amount').value = data.amount || '';
+      document.getElementById('paymentMethod').value = data.paymentMethod || '';
+      document.getElementById('receiptDate').value = data.date || '';
+      // Show modal
+      const receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+      document.getElementById('receiptPreview').style.display = 'none';
+      document.getElementById('receiptForm').style.display = 'block';
+      receiptModal.show();
+    } catch (err) {
+      alert('Error loading receipt details: ' + err.message);
+    }
+  });
+
+  // Call loadReceipts on page load
+  loadReceipts();
 });

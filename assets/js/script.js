@@ -33,17 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('theme', 'dark'); // Save theme preference
   };
 
-  document.getElementById('light-mode').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    applyLightMode();
-    closeDropdown(); // Close the dropdown
-  });
+  const lightModeBtn = document.getElementById('light-mode');
+  if (lightModeBtn) {
+    lightModeBtn.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default link behavior
+      applyLightMode();
+      closeDropdown(); // Close the dropdown
+    });
+  }
 
-  document.getElementById('dark-mode').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    applyDarkMode();
-    closeDropdown(); // Close the dropdown
-  });
+  const darkModeBtn = document.getElementById('dark-mode');
+  if (darkModeBtn) {
+    darkModeBtn.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default link behavior
+      applyDarkMode();
+      closeDropdown(); // Close the dropdown
+    });
+  }
 
   // Toggle side panel
   const sidePanel = document.querySelector('.side-panel');

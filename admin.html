@@ -43,15 +43,14 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">Donations</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="receipt-tab" data-bs-toggle="tab" data-bs-target="#receipt" type="button" role="tab" aria-controls="receipt" aria-selected="false">Receipt</button>
+        </li>
       </ul>
       <div class="tab-content" id="adminTabsContent">
         <div class="tab-pane fade show active" id="messages" role="tabpanel" aria-labelledby="messages-tab">
           <div class="row mb-4">
-            <div class="col-12 text-end mb-3">
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiptModal">
-                <i class="fas fa-receipt"></i> Create Receipt
-              </button>
-        </div>
+            <!-- Message statistics and content remain here, but no Create Receipt button -->
       
         <div class="col-md-3">
           <div class="card bg-primary text-white">
@@ -132,6 +131,32 @@
                   <tbody>
                     <!-- Donations will be loaded here -->
                     <!-- Thank You Letter buttons will be dynamically inserted by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="receipt" role="tabpanel" aria-labelledby="receipt-tab">
+          <div class="card shadow mt-4">
+            <div class="card-body">
+              <button class="btn btn-primary mb-3 generate-receipt">Create Receipt</button>
+              <p>Generate and manage client receipts here.</p>
+              <div class="table-responsive">
+                <table id="receiptsTable" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Client Name</th>
+                      <th>Service</th>
+                      <th>Amount</th>
+                      <th>Payment Method</th>
+                      <th>Receipt No.</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Receipts will be loaded here -->
                   </tbody>
                 </table>
               </div>
@@ -230,7 +255,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> <!-- End Donations Tab -->
+
+
 
     <!-- Receipt Modal -->
     <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
@@ -480,24 +507,25 @@
       document.getElementById('respondedMessages').textContent = messages.filter(m => m.status === 'responded').length;
     }
 
-    // View message details
-    $(document).on('click', '.view-message', function() {
-      const messageId = $(this).data('id');
-      currentMessageId = messageId;
-      
-      db.collection('messages').doc(messageId).get().then(doc => {
-        const data = doc.data();
-        document.getElementById('modalName').textContent = data.name;
-        document.getElementById('modalEmail').textContent = data.email;
-        document.getElementById('modalPhone').textContent = data.phone || 'N/A';
-        document.getElementById('modalDate').textContent = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleString() : 'N/A';
-        document.getElementById('modalSubject').textContent = data.subject;
-        document.getElementById('modalStatus').textContent = data.status || 'new';
-        document.getElementById('modalMessage').textContent = data.message;
-        document.getElementById('response').value = '';
-        
-        messageModal.show();
-      });
+    // View message details (vanilla JS for reliability)
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.view-message')) {
+        const btn = e.target.closest('.view-message');
+        const messageId = btn.getAttribute('data-id');
+        currentMessageId = messageId;
+        db.collection('messages').doc(messageId).get().then(doc => {
+          const data = doc.data();
+          document.getElementById('modalName').textContent = data.name;
+          document.getElementById('modalEmail').textContent = data.email;
+          document.getElementById('modalPhone').textContent = data.phone || 'N/A';
+          document.getElementById('modalDate').textContent = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleString() : 'N/A';
+          document.getElementById('modalSubject').textContent = data.subject;
+          document.getElementById('modalStatus').textContent = data.status || 'new';
+          document.getElementById('modalMessage').textContent = data.message;
+          document.getElementById('response').value = '';
+          messageModal.show();
+        });
+      }
     });
 
     // Mark message as read
@@ -567,4 +595,4 @@
     });
   </script>
 </body>
-</html> 
+</html>
