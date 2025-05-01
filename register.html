@@ -35,10 +35,13 @@
 
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card shadow">
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="card border-0 shadow register-card p-4 w-100 hover-shadow">
             <div class="card-body">
-              <h2 class="text-center mb-4">Register</h2>
+              <div class="text-center mb-3">
+                <span class="register-icon text-success"><i class="fas fa-user-plus fa-3x"></i></span>
+              </div>
+              <h2 class="text-center mb-4 fw-bold">Register</h2>
               <form id="registerForm">
             <div class="mb-3">
               <label for="name" class="form-label">Full Name</label>
@@ -77,6 +80,21 @@
             </div>
           </div>
         </div>
+        <style>
+          .hover-shadow:hover {
+            box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
+            transform: translateY(-4px) scale(1.02);
+            transition: box-shadow 0.2s, transform 0.2s;
+          }
+          .register-card .register-icon {
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+          }
+          .register-card:hover .register-icon {
+            color: #ffbe3c !important;
+            transform: scale(1.12) rotate(-4deg);
+          }
+        </style>
       </div>
     </div>
 

@@ -35,10 +35,13 @@
 
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card shadow">
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="card border-0 shadow login-card p-4 w-100 hover-shadow">
             <div class="card-body">
-              <h2 class="text-center mb-4">Login</h2>
+              <div class="text-center mb-3">
+                <span class="login-icon text-primary"><i class="fas fa-sign-in-alt fa-3x"></i></span>
+              </div>
+              <h2 class="text-center mb-4 fw-bold">Login</h2>
               <form id="loginForm">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email address</label>
@@ -72,6 +75,21 @@
             </div>
           </div>
         </div>
+        <style>
+          .hover-shadow:hover {
+            box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
+            transform: translateY(-4px) scale(1.02);
+            transition: box-shadow 0.2s, transform 0.2s;
+          }
+          .login-card .login-icon {
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+          }
+          .login-card:hover .login-icon {
+            color: #ffbe3c !important;
+            transform: scale(1.12) rotate(-4deg);
+          }
+        </style>
       </div>
     </div>
 

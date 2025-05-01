@@ -32,46 +32,82 @@
     </header>
 
     <section class="container my-5">
-      <div class="text-center">
-        <h2>Our Services</h2>
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Our Services</h2>
         <p class="lead">Offering tailored research solutions to meet your needs</p>
         <a href="login.html?redirect=service-request" class="btn btn-lg btn-primary mt-3">Request Service</a>
       </div>
-      <div class="row my-4">
-        <div class="col-md-4 text-center">
-          <i class="fas fa-chart-line fa-3x text-primary mb-3 services-icon"></i>
-          <h4>Data Analysis</h4>
-          <p>We provide thorough analysis using state-of-the-art tools to ensure accuracy and insight in your research.</p>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-primary"><i class="fas fa-chart-line fa-3x"></i></div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Data Analysis</h4>
+              <p class="card-text">We provide thorough analysis using state-of-the-art tools to ensure accuracy and insight in your research.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 text-center">
-          <i class="fas fa-file-alt fa-3x text-primary mb-3 services-icon"></i>
-          <h4>Report Writing</h4>
-          <p>Get professional reports written to meet academic and professional standards, customized to your specifications.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-success"><i class="fas fa-file-alt fa-3x"></i></div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Report Writing</h4>
+              <p class="card-text">Get professional reports written to meet academic and professional standards, customized to your specifications.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 text-center">
-          <i class="fas fa-lightbulb fa-3x text-primary mb-3 services-icon"></i>
-          <h4>Research Consulting</h4>
-          <p>Our expert team offers consulting to guide your research process, from idea formulation to final output.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-warning"><i class="fas fa-lightbulb fa-3x"></i></div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Research Consulting</h4>
+              <p class="card-text">Our expert team offers consulting to guide your research process, from idea formulation to final output.</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row my-4">
-        <div class="col-md-4 text-center">
-          <i class="fas fa-search fa-3x text-primary mb-3 services-icon"></i>
-          <h4>Research Topic Selection</h4>
-          <p>We help you choose the right research topic that aligns with your interests and academic goals.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-info"><i class="fas fa-search fa-3x"></i></div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Research Topic Selection</h4>
+              <p class="card-text">We help you choose the right research topic that aligns with your interests and academic goals.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 text-center">
-          <i class="fas fa-hands-helping fa-3x text-primary mb-3 services-icon"></i>
-          <h4>Mentorship and Ongoing Support</h4>
-          <p>Receive continuous guidance and support throughout your research journey.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-secondary"><i class="fas fa-hands-helping fa-3x"></i></div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Mentorship and Ongoing Support</h4>
+              <p class="card-text">Receive continuous guidance and support throughout your research journey.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 text-center">
-          <i class="fas fa-book fa-3x text-primary mb-3 services-icon"></i>
-          <h4>Assignment Support</h4>
-          <p>Get assistance with your academic assignments to ensure high-quality submissions.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-danger"><i class="fas fa-book fa-3x"></i></div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Assignment Support</h4>
+              <p class="card-text">Get assistance with your academic assignments to ensure high-quality submissions.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <style>
+      .hover-shadow:hover {
+        box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
+        transform: translateY(-4px) scale(1.02);
+        transition: box-shadow 0.2s, transform 0.2s;
+      }
+      .service-card .icon {
+        transition: color 0.2s, transform 0.2s;
+      }
+      .service-card:hover .icon {
+        transform: scale(1.15) rotate(-4deg);
+        color: #ffbe3c !important;
+      }
+    </style>
 
     <footer class="footer">
       <div class="container">

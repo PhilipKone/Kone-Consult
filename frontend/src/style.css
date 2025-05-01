@@ -1,0 +1,18 @@
+/* Theme variables */
+:root {
+  --background-color: #f4f4f4;
+  --text-color: #000000;
+  --header-bg-color: #3a86ff;
+  --header-text-color: #ffffff;
+  --section-bg-color: #ffffff;
+  --footer-bg-color: #3a86ff;
+  --footer-text-color: #ffffff;
+  --card-bg-color: #ffffff;
+  --input-bg-color: #ffffff;
+  --input-text-color: #000000;
+  --border-color: #dee2e6;
+  --link-color: #007bff;
+  --link-hover-color: #0056b3;
+}
+
+/* ...rest of your CSS from assets/css/style.css... */

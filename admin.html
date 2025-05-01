@@ -49,42 +49,62 @@
       </ul>
       <div class="tab-content" id="adminTabsContent">
         <div class="tab-pane fade show active" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-          <div class="row mb-4">
-            <!-- Message statistics and content remain here, but no Create Receipt button -->
-      
-        <div class="col-md-3">
-          <div class="card bg-primary text-white">
-            <div class="card-body">
-              <h5 class="card-title">Total Messages</h5>
-              <h2 id="totalMessages">0</h2>
+          <div class="container my-4">
+            <div class="row g-3">
+              <div class="col-md-3 col-6">
+                <div class="card dashboard-card border-0 shadow h-100 hover-shadow bg-primary text-white">
+                  <div class="card-body text-center">
+                    <span class="dashboard-icon mb-2"><i class="fas fa-envelope fa-2x"></i></span>
+                    <h3 id="totalMessages" class="fw-bold mb-0">0</h3>
+                    <small>Total Messages</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="card dashboard-card border-0 shadow h-100 hover-shadow bg-success text-white">
+                  <div class="card-body text-center">
+                    <span class="dashboard-icon mb-2"><i class="fas fa-inbox fa-2x"></i></span>
+                    <h3 id="newMessages" class="fw-bold mb-0">0</h3>
+                    <small>New</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="card dashboard-card border-0 shadow h-100 hover-shadow bg-warning text-white">
+                  <div class="card-body text-center">
+                    <span class="dashboard-icon mb-2"><i class="fas fa-eye fa-2x"></i></span>
+                    <h3 id="readMessages" class="fw-bold mb-0">0</h3>
+                    <small>Read</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="card dashboard-card border-0 shadow h-100 hover-shadow bg-info text-white">
+                  <div class="card-body text-center">
+                    <span class="dashboard-icon mb-2"><i class="fas fa-reply fa-2x"></i></span>
+                    <h3 id="respondedMessages" class="fw-bold mb-0">0</h3>
+                    <small>Responded</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <style>
+              .hover-shadow:hover {
+                box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
+                transform: translateY(-4px) scale(1.02);
+                transition: box-shadow 0.2s, transform 0.2s;
+              }
+              .dashboard-card .dashboard-icon {
+                display: inline-block;
+                transition: transform 0.2s, color 0.2s;
+              }
+              .dashboard-card:hover .dashboard-icon {
+                transform: scale(1.15) rotate(-4deg);
+                color: #fffbe3 !important;
+              }
+            </style>
             </div>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-success text-white">
-            <div class="card-body">
-              <h5 class="card-title">New Messages</h5>
-              <h2 id="newMessages">0</h2>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-warning text-white">
-            <div class="card-body">
-              <h5 class="card-title">Read Messages</h5>
-              <h2 id="readMessages">0</h2>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-info text-white">
-            <div class="card-body">
-              <h5 class="card-title">Responded Messages</h5>
-              <h2 id="respondedMessages">0</h2>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="card shadow">
         <div class="card-body">
