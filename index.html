@@ -58,40 +58,80 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero bg-light text-center py-5" style="background-image: url('assets/images/hero-bg.jpg'); background-size: cover; background-position: center;">
-      <div class="container">
-        <h2 class="dynamic-text">Welcome to PHconsult</h2> <!-- Added dynamic text -->
-        <p class="lead text-white">Your expert partner in research assistance</p>
-        <a href="services.html" class="btn btn-primary btn-lg mt-3">Explore Our Services</a>
+    <section class="hero position-relative text-center d-flex align-items-center justify-content-center" style="min-height: 400px; background-image: url('assets/images/hero-bg.jpg'); background-size: cover; background-position: center;">
+      <div class="hero-overlay position-absolute w-100 h-100" style="background: rgba(34, 34, 68, 0.6); top: 0; left: 0;"></div>
+      <div class="container position-relative text-white py-5">
+        <h1 class="display-3 fw-bold mb-3">Welcome to PHconsult</h1>
+        <p class="lead mb-4">Your expert partner in research assistance, data analysis, and academic success.</p>
+        <a href="services.html" class="btn btn-lg btn-warning px-5 shadow">Explore Our Services <i class="fas fa-arrow-right ms-2"></i></a>
       </div>
     </section>
 
     <!-- Services Section -->
     <section class="container my-5">
-      <div class="text-center">
-        <h2>Our Services</h2>
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Our Services</h2>
         <p class="lead">We provide comprehensive research support</p>
       </div>
-      <div class="row my-4">
-        <div class="col-md-4 col-sm-6 col-12 text-center">
-          <i class="fas fa-search fa-3x text-primary mb-3"></i> <!-- Replaced placeholder with Font Awesome icon -->
-          <h4>Research Topic Selection</h4>
-          <p>We help you choose the right research topic that aligns with your interests and academic goals.</p>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-primary">
+              <i class="fas fa-chart-bar fa-3x"></i>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Data Analysis</h4>
+              <p class="card-text">Expert statistical analysis and interpretation for your research projects, using the latest tools and techniques.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-12 text-center">
-          <i class="fas fa-chart-line fa-3x text-primary mb-3"></i> <!-- Replaced placeholder with Font Awesome icon -->
-          <h4>Data Analysis</h4>
-          <p>We provide thorough analysis using state-of-the-art tools to ensure accuracy and insight in your research.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-success">
+              <i class="fas fa-search fa-3x"></i>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Research Consulting</h4>
+              <p class="card-text">Personalized research guidance, topic selection, and mentorship from experienced consultants.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-12 text-center">
-          <i class="fas fa-file-alt fa-3x text-primary mb-3"></i> <!-- Replaced placeholder with Font Awesome icon -->
-          <h4>Report Writing</h4>
-          <p>Get professional reports written to meet academic and professional standards, customized to your specifications.</p>
+        <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
+          <div class="card service-card border-0 shadow h-100 text-center p-4 hover-shadow">
+            <div class="icon mb-3 text-warning">
+              <i class="fas fa-file-alt fa-3x"></i>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title mb-2">Report Writing</h4>
+              <p class="card-text">Get professional reports written to meet academic and professional standards, customized to your specifications.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <style>
+      .hero .container {
+        z-index: 2;
+      }
+      .hero-overlay {
+        z-index: 1;
+      }
+      .hover-shadow:hover {
+        box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
+        transform: translateY(-4px) scale(1.02);
+        transition: box-shadow 0.2s, transform 0.2s;
+      }
+      .service-card .icon {
+        transition: color 0.2s, transform 0.2s;
+      }
+      .service-card:hover .icon {
+        transform: scale(1.15) rotate(-4deg);
+        color: #ffbe3c !important;
+      }
+    </style>
 
-    <!-- Testimonials Section -->
+    <!--
+    Testimonials Section (temporarily commented out)
     <section class="bg-light py-5">
       <div class="container text-center">
         <h2>What Our Clients Say</h2>
@@ -117,6 +157,7 @@
         </div>
       </div>
     </section>
+    -->
 
     <!-- Footer -->
     <footer class="footer">
