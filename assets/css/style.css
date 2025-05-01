@@ -426,6 +426,104 @@ body {
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 576px) {
+  /* Touch target sizing for links, icons, and buttons */
+  .side-panel ul li a, .mobile-menu a, button, .toggle-btn {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 1.1rem;
+    padding: 12px 14px;
+  }
+  /* Larger tap area for icons */
+  .side-panel ul li a i, .mobile-menu a i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  /* Font and readability */
+  body, .main-content, .side-panel, .mobile-menu {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  /* Responsive images */
+  img, .side-panel-logo img, .side-panel-profile img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Section and card spacing */
+  section, .about-card, .service-card, .card {
+    margin: 10px 0;
+    padding: 12px 6px;
+  }
+  /* Stack columns vertically */
+  .row, .row.g-4 {
+    flex-direction: column !important;
+  }
+  /* Sticky nav toggle */
+  .toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    width: 44px;
+    height: 44px;
+  }
+  /* Back to top button */
+  #backToTopBtn {
+    display: block;
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: #3a86ff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1200;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  #backToTopBtn:hover {
+    opacity: 1;
+    background: #0056b3;
+  }
+  /* Hide decorative images/icons if needed */
+  .hero .icon, .about-card .icon, .service-card .icon {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra mobile tweaks */
+  .side-panel, .main-content, .mobile-menu {
+    font-size: 15px;
+  }
+  .side-panel h1, .profile-name {
+    font-size: 1rem;
+  }
+  .side-panel-profile img {
+    width: 36px;
+    height: 36px;
+  }
+  .toggle-btn {
+    width: 40px;
+    height: 40px;
+    top: 6px;
+    left: 6px;
+  }
+  #backToTopBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    bottom: 14px;
+    right: 10px;
+  }
+}
+
   header nav ul li {
     display: block; /* Stack navigation items vertically */
     margin: 5px 0;
@@ -664,6 +762,104 @@ body {
 }
 
 @media (max-width: 576px) {
+  /* Touch target sizing for links, icons, and buttons */
+  .side-panel ul li a, .mobile-menu a, button, .toggle-btn {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 1.1rem;
+    padding: 12px 14px;
+  }
+  /* Larger tap area for icons */
+  .side-panel ul li a i, .mobile-menu a i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  /* Font and readability */
+  body, .main-content, .side-panel, .mobile-menu {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  /* Responsive images */
+  img, .side-panel-logo img, .side-panel-profile img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Section and card spacing */
+  section, .about-card, .service-card, .card {
+    margin: 10px 0;
+    padding: 12px 6px;
+  }
+  /* Stack columns vertically */
+  .row, .row.g-4 {
+    flex-direction: column !important;
+  }
+  /* Sticky nav toggle */
+  .toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    width: 44px;
+    height: 44px;
+  }
+  /* Back to top button */
+  #backToTopBtn {
+    display: block;
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: #3a86ff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1200;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  #backToTopBtn:hover {
+    opacity: 1;
+    background: #0056b3;
+  }
+  /* Hide decorative images/icons if needed */
+  .hero .icon, .about-card .icon, .service-card .icon {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra mobile tweaks */
+  .side-panel, .main-content, .mobile-menu {
+    font-size: 15px;
+  }
+  .side-panel h1, .profile-name {
+    font-size: 1rem;
+  }
+  .side-panel-profile img {
+    width: 36px;
+    height: 36px;
+  }
+  .toggle-btn {
+    width: 40px;
+    height: 40px;
+    top: 6px;
+    left: 6px;
+  }
+  #backToTopBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    bottom: 14px;
+    right: 10px;
+  }
+}
+
   .side-panel {
     width: 60px;
   }
@@ -942,6 +1138,104 @@ body.dark-mode .footer-contact i {
 
 /* Ensure proper spacing on mobile */
 @media (max-width: 576px) {
+  /* Touch target sizing for links, icons, and buttons */
+  .side-panel ul li a, .mobile-menu a, button, .toggle-btn {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 1.1rem;
+    padding: 12px 14px;
+  }
+  /* Larger tap area for icons */
+  .side-panel ul li a i, .mobile-menu a i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  /* Font and readability */
+  body, .main-content, .side-panel, .mobile-menu {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  /* Responsive images */
+  img, .side-panel-logo img, .side-panel-profile img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Section and card spacing */
+  section, .about-card, .service-card, .card {
+    margin: 10px 0;
+    padding: 12px 6px;
+  }
+  /* Stack columns vertically */
+  .row, .row.g-4 {
+    flex-direction: column !important;
+  }
+  /* Sticky nav toggle */
+  .toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    width: 44px;
+    height: 44px;
+  }
+  /* Back to top button */
+  #backToTopBtn {
+    display: block;
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: #3a86ff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1200;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  #backToTopBtn:hover {
+    opacity: 1;
+    background: #0056b3;
+  }
+  /* Hide decorative images/icons if needed */
+  .hero .icon, .about-card .icon, .service-card .icon {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra mobile tweaks */
+  .side-panel, .main-content, .mobile-menu {
+    font-size: 15px;
+  }
+  .side-panel h1, .profile-name {
+    font-size: 1rem;
+  }
+  .side-panel-profile img {
+    width: 36px;
+    height: 36px;
+  }
+  .toggle-btn {
+    width: 40px;
+    height: 40px;
+    top: 6px;
+    left: 6px;
+  }
+  #backToTopBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    bottom: 14px;
+    right: 10px;
+  }
+}
+
   .container {
     padding-left: 15px;
     padding-right: 15px;
