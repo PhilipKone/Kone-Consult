@@ -12,16 +12,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Ensure Font Awesome is included -->
 </head>
 <body>
-  <div class="side-panel">
-    <h1>PHconsult</h1>
-    <ul>
-      <li><a href="index.html"><i class="fas fa-home"></i> <span>Home</span></a></li>
-      <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> <span>About Us</span></a></li>
-      <li><a href="services.html"><i class="fas fa-concierge-bell"></i> <span>Services</span></a></li>
-      <li><a href="contact.html"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
-      <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a></li>
-    </ul>
+  <div class="side-panel" aria-label="Main navigation" role="navigation">
+  <!-- Company Logo -->
+  <div class="side-panel-logo" style="text-align:right; padding:0 20px 10px 0;">
+    <img src="assets/images/BBA Logo.png" alt="PHconsult Logo" style="width:50px; height:auto; border-radius:10px;" />
   </div>
+  <!-- User Profile -->
+  <div class="side-panel-profile" style="padding: 10px 0 20px 0; text-align:center;">
+    <img src="assets/images/Logo.png" alt="User Avatar" style="width:48px; height:48px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+    <div class="profile-name" style="margin-top: 8px; font-weight: 600; font-size: 1rem; color: #fff;">Welcome, User</div>
+  </div>
+  <ul style="padding-top:0;" aria-label="Sidebar menu">
+    <li><a href="index.html" aria-label="Home" data-bs-toggle="tooltip" data-bs-placement="right" title="Home"><i class="fas fa-home"></i> <span>Home</span></a></li>
+    <li><a href="about.html" class="active" aria-label="About Us" data-bs-toggle="tooltip" data-bs-placement="right" title="About Us"><i class="fas fa-info-circle"></i> <span>About Us</span></a></li>
+    <li><a href="services.html" aria-label="Services" data-bs-toggle="tooltip" data-bs-placement="right" title="Services"><i class="fas fa-concierge-bell"></i> <span>Services</span></a></li>
+    <li style="position:relative;">
+      <a href="contact.html" aria-label="Contact" data-bs-toggle="tooltip" data-bs-placement="right" title="Contact">
+        <i class="fas fa-envelope"></i> <span>Contact</span>
+        <span class="badge bg-danger" style="position:absolute; right:10px; top:8px; font-size:0.7rem;">1</span>
+      </a>
+    </li>
+    <li><a href="login.html" aria-label="Login" data-bs-toggle="tooltip" data-bs-placement="right" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a></li>
+  </ul>
+</div>
 
   <div class="main-content">
     <header class="container-fluid bg-light py-3">
@@ -32,97 +45,81 @@
     </header>
 
     <section class="container my-5">
-      <div class="text-center">
-        <h2>About PHconsult</h2>
-        <p class="lead">Your trusted partner in professional research assistance</p>
-      </div>
-      <div class="row my-4">
-        <div class="col-md-6">
-          <p>PHconsult was founded with the goal of supporting students and professionals by offering comprehensive research assistance. We specialize in data analysis, report writing, and more.</p>
-          <ul>
-            <li>Personalized support</li>
-            <li>Data-driven insights</li>
-            <li>Professional documentation</li>
-          </ul>
-        </div>
-        <div class="col-md-6 text-center">
-          <i class="fas fa-users fa-5x text-primary mb-3 about-icon"></i> <!-- Added about-icon class -->
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow p-4 mb-4 about-card text-center">
+            <div class="icon mb-3 text-primary">
+              <i class="fas fa-users fa-4x"></i>
+            </div>
+            <h2 class="fw-bold">About PHconsult</h2>
+            <p class="lead">Your trusted partner in professional research assistance</p>
+            <p>PHconsult was founded with the goal of supporting students and professionals by offering comprehensive research assistance. We specialize in data analysis, report writing, and more.</p>
+            <ul class="list-unstyled d-flex flex-wrap justify-content-center gap-3 mb-0">
+              <li class="px-3"><i class="fas fa-check-circle text-success me-2"></i> Personalized support</li>
+              <li class="px-3"><i class="fas fa-check-circle text-success me-2"></i> Data-driven insights</li>
+              <li class="px-3"><i class="fas fa-check-circle text-success me-2"></i> Professional documentation</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
+    <style>
+      .about-card:hover {
+        box-shadow: 0 8px 32px rgba(34,34,68,0.13)!important;
+        transform: translateY(-2px) scale(1.01);
+        transition: box-shadow 0.2s, transform 0.2s;
+      }
+      .about-card .icon {
+        transition: color 0.2s, transform 0.2s;
+      }
+      .about-card:hover .icon {
+        transform: scale(1.12) rotate(-3deg);
+        color: #ffbe3c !important;
+      }
+    </style>
 
     <section class="container my-5">
       <div class="row">
         <div class="col-12 text-center mb-4">
-          <h2>Our Team</h2>
+          <h2 class="fw-bold">Our Team</h2>
           <p class="lead">Meet the expert behind PHconsult</p>
         </div>
-        <div class="col-md-8 mx-auto">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-md-4 text-center">
-                  <i class="fas fa-user-tie fa-5x text-primary mb-3 about-icon"></i>
-                </div>
-                <div class="col-md-8">
-                  <h3 class="card-title">Philip Hotor</h3>
-                  <h5 class="text-muted">Founder & Lead Researcher</h5>
-                  <p class="card-text">
-                    A passionate Data Science & AI Researcher with expertise in computational modeling, simulation, and data analysis. 
-                    With 2+ years of experience in research and development, Philip specializes in:
-                  </p>
-                  <ul class="list-unstyled">
-                    <li><i class="fas fa-check text-primary"></i> Computational modeling and simulation</li>
-                    <li><i class="fas fa-check text-primary"></i> Data analysis and algorithm development</li>
-                    <li><i class="fas fa-check text-primary"></i> Biomedical engineering and research</li>
-                    <li><i class="fas fa-check text-primary"></i> STEM education and instruction</li>
-                  </ul>
-                  <div class="mt-3">
-                    <a href="https://www.linkedin.com/in/philip-kone" target="_blank" class="btn btn-outline-primary me-2">
-                      <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="mailto:philipkone45@gmail.com" class="btn btn-outline-primary me-2">
-                      <i class="fas fa-envelope"></i> Contact
-                    </a>
-                    <a href="cv.html" class="btn btn-outline-primary">
-                      <i class="fas fa-file-alt"></i> CV
-                    </a>
-                  </div>
-                </div>
-              </div>
+        <div class="col-lg-6 mx-auto">
+          <div class="card border-0 shadow team-card text-center p-4">
+            <img src="assets/images/team-member.jpg" alt="Philip Hotor" class="rounded-circle mb-3 mx-auto" style="width:120px;height:120px;object-fit:cover;box-shadow:0 2px 8px rgba(34,34,68,0.13);">
+            <h3 class="card-title mb-1">Philip Hotor</h3>
+            <h5 class="text-muted mb-2">Founder & Lead Researcher</h5>
+            <p class="card-text mb-3">A passionate Data Science & AI Researcher with expertise in computational modeling, simulation, and data analysis. With 2+ years of experience in research and development, Philip specializes in:</p>
+            <ul class="list-unstyled mb-3">
+              <li><i class="fas fa-check text-primary"></i> Computational modeling and simulation</li>
+              <li><i class="fas fa-check text-primary"></i> Data analysis and algorithm development</li>
+              <li><i class="fas fa-check text-primary"></i> Biomedical engineering and research</li>
+              <li><i class="fas fa-check text-primary"></i> STEM education and instruction</li>
+            </ul>
+            <div class="d-flex justify-content-center gap-2 mt-2">
+              <a href="https://www.linkedin.com/in/philip-kone" target="_blank" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i> LinkedIn</a>
+              <a href="contact.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-envelope"></i> Contact</a>
+              <a href="cv.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-file-alt"></i> CV</a>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <style>
+      .team-card:hover {
+        box-shadow: 0 8px 32px rgba(34,34,68,0.13)!important;
+        transform: translateY(-2px) scale(1.01);
+        transition: box-shadow 0.2s, transform 0.2s;
+      }
+      .team-card img {
+        transition: transform 0.2s;
+      }
+      .team-card:hover img {
+        transform: scale(1.07) rotate(-2deg);
+      }
+    </style>
 
-    <section class="container my-5">
-      <div class="row">
-        <div class="col-12 text-center mb-4">
-          <h2>Our Team</h2>
-          <p class="lead">Meet the expert behind PHconsult</p>
-        </div>
-        <div class="col-md-8 mx-auto">
-          <div class="team-member">
-            <img src="assets/images/team-member.jpg" alt="Team Member" class="img-fluid rounded-circle mb-3">
-            <h4>Dr. Prince Henry</h4>
-            <p class="text-muted">Founder & Lead Consultant</p>
-            <p>With extensive experience in research and data analysis, Dr. Henry leads our team in delivering exceptional results for our clients.</p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/prince-henry-0a0a0a0a/" class="btn btn-outline-primary btn-sm" target="_blank">
-                <i class="fab fa-linkedin"></i> LinkedIn
-              </a>
-              <a href="contact.html" class="btn btn-outline-primary btn-sm">
-                <i class="fas fa-envelope"></i> Contact
-              </a>
-              <a href="assets/docs/CV.pdf" class="btn btn-outline-primary btn-sm" target="_blank">
-                <i class="fas fa-file-alt"></i> CV
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <footer class="footer">
       <div class="container">
