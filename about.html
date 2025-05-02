@@ -73,7 +73,10 @@
         </div>
         <div class="col-lg-6 mx-auto">
           <div class="card border-0 shadow team-card text-center p-4">
-            <img src="assets/images/team-member.jpg" alt="Philip Hotor" class="rounded-circle mb-3 mx-auto" style="width:120px;height:120px;object-fit:cover;box-shadow:0 2px 8px rgba(34,34,68,0.13);">
+            <div class="icon mb-3 text-primary">
+              <i class="fas fa-user fa-4x"></i>
+            </div>
+            
             <h3 class="card-title mb-1">Philip Hotor</h3>
             <h5 class="text-muted mb-2">Founder & Lead Researcher</h5>
             <p class="card-text mb-3">A passionate Data Science & AI Researcher with expertise in computational modeling, simulation, and data analysis. With 2+ years of experience in research and development, Philip specializes in:</p>
@@ -103,6 +106,13 @@
       }
       .team-card:hover img {
         transform: scale(1.07) rotate(-2deg);
+      }
+      .team-card .icon {
+        transition: color 0.2s, transform 0.2s;
+      }
+      .team-card:hover .icon {
+        transform: scale(1.12) rotate(-3deg);
+        color: #ffbe3c !important;
       }
     </style>
 
