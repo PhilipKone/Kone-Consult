@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://philipkone.github.io/PHconsult/sitemap.xml
