@@ -1,38 +1,19 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+// firebase/firebase-config.js
+// Firebase initialization for CDN (compat) usage. No import/export. Uses global firebase object.
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCoFJWEc8z1Z-kddKR8T-QggAFCdm4Y7wI",
+  authDomain: "daywise-ays8t.firebaseapp.com",
+  projectId: "daywise-ays8t",
+  storageBucket: "daywise-ays8t.appspot.com",
+  messagingSenderId: "690549644365",
+  appId: "1:690549644365:web:d895858fbde5497b1c5004",
+  measurementId: "G-W1KGH910YG"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-export { auth, db };
-
-// Export functions for use in other files
-function loginUser(email, password) {
-  return auth.signInWithEmailAndPassword(email, password);
+// Initialize Firebase only if not already initialized
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
 }
-
-function registerUser(email, password) {
-  return auth.createUserWithEmailAndPassword(email, password);
-}
-
-function resetPassword(email) {
-  return auth.sendPasswordResetEmail(email);
-}
-
-function logoutUser() {
-  return auth.signOut();
-} 
+// No export statements; everything is attached to the global firebase object
