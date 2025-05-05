@@ -48,12 +48,24 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'PHC-' + Date.now().toString().slice(-7);
   }
 
+  // Helper to update preview fields from form
+  function updateReceiptPreviewFromForm() {
+    document.getElementById('previewDate').textContent = document.getElementById('receiptDate').value;
+    document.getElementById('previewReceiptNo').textContent = generateReceiptNumber();
+    document.getElementById('previewClientName').textContent = document.getElementById('clientName').value.trim();
+    document.getElementById('previewOrganisation').textContent = document.getElementById('organisation').value.trim();
+    document.getElementById('previewService').textContent = document.getElementById('service').value.trim();
+    document.getElementById('previewAmount').textContent = document.getElementById('amount').value.trim();
+    document.getElementById('previewPaymentMethod').textContent = document.getElementById('paymentMethod').value;
+  }
+
   // Handle form submission
   if (receiptForm) {
     receiptForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       // Get form values
       const clientName = document.getElementById('clientName').value.trim();
+      const organisation = document.getElementById('organisation').value.trim();
       const service = document.getElementById('service').value.trim();
       const amount = document.getElementById('amount').value.trim();
       const paymentMethod = document.getElementById('paymentMethod').value;
@@ -69,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         await window.db.collection('receipts').add({
           clientName,
+          organisation,
           service,
           amount: parseFloat(amount),
           paymentMethod,
@@ -77,15 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
           adminUser,
           timestamp: new Date()
         });
-        // Show preview
-        document.getElementById('previewDate').textContent = date;
-        document.getElementById('previewReceiptNo').textContent = receiptNo;
-        document.getElementById('previewClientName').textContent = clientName;
-        document.getElementById('previewService').textContent = service;
-        document.getElementById('previewAmount').textContent = amount;
-        document.getElementById('previewPaymentMethod').textContent = paymentMethod;
+        // Update preview fields with latest form values
+        updateReceiptPreviewFromForm();
         receiptPreview.style.display = 'block';
         receiptForm.style.display = 'none';
+        // Reload receipts table to show the new receipt
+        loadReceipts();
       } catch (error) {
         alert('Error saving receipt: ' + error.message);
       }
@@ -110,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Download PDF (simple HTML to PDF using browser print dialog)
   if (downloadBtn) {
     downloadBtn.addEventListener('click', function () {
-      // Use browser print dialog for PDF (users can select 'Save as PDF')
+      updateReceiptPreviewFromForm();
       printBtn.click();
     });
   }
