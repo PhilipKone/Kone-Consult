@@ -2,31 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=820, initial-scale=1.0">
-    <title>PHConsult Facebook Cover Flyer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHConsult Flyers</title>
     <link rel="stylesheet" href="flyer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .flyer-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 32px 0;
+        }
+        .flyer-col {
+            flex: 0 1 820px;
+            min-width: 320px;
+        }
+        @media (max-width: 900px) {
+            .flyer-row {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .flyer-col {
+                width: 100vw;
+                min-width: unset;
+            }
+        }
+        /* LinkedIn Banner Styles (inline for single file) */
+        .linkedin-banner-container {
+            width: 820px;
+            height: 205px;
+            position: relative;
+            background: linear-gradient(120deg, #0077b5 60%, #00c6ff 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,119,181,0.18);
+            padding: 0 40px;
+            z-index: 1;
+        }
+        .linkedin-bg-shape {
+            position: absolute;
+            right: -120px;
+            top: -60px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle at 60% 40%, #ffffff33 0%, #0077b500 80%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .linkedin-logo {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            margin-right: 48px;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,119,181,0.10);
+            padding: 10px;
+            z-index: 2;
+        }
+        .linkedin-content {
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .linkedin-title {
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 1px;
+            text-shadow: 1px 2px 8px #0077b533;
+        }
+        .linkedin-tagline {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #e0f0ff;
+            max-width: 480px;
+            line-height: 1.5;
+        }
+        .linkedin-services {
+            display: block;
+            margin-top: 6px;
+            font-size: 1rem;
+            color: #fffbe7;
+            font-weight: 500;
+        }
+        .linkedin-services span {
+            margin-right: 18px;
+        }
+        .linkedin-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: 0.98rem;
+            color: #e0f0ff;
+            margin-top: 2px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .linkedin-contact i {
+            color: #ffbe3c;
+            margin-right: 6px;
+        }
+        @media (max-width: 900px) {
+            .linkedin-banner-container {
+                width: 100vw;
+                height: 140px;
+                padding: 0 10px;
+            }
+            .linkedin-logo {
+                width: 70px;
+                height: 70px;
+                margin-right: 20px;
+            }
+            .linkedin-title {
+                font-size: 1.1rem;
+            }
+            .linkedin-tagline, .linkedin-services {
+                font-size: 0.8rem;
+                max-width: 220px;
+            }
+            .linkedin-contact {
+                font-size: 0.8rem;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="flyer-container flyer-banner animated-banner">
-        <div class="flyer-bg-shape"></div>
-        <img src="../assets/images/Logo.png" alt="PHconsult Logo" class="flyer-logo">
-        <div class="flyer-content">
-            <h1 class="flyer-title">Your Partner in Research Excellence</h1>
-            <p class="flyer-subtitle">Comprehensive support for students, professionals, and organizations.<br>
-                <span class="flyer-services">
-                    <i class="fas fa-chart-line"></i> Data Analysis &nbsp;|&nbsp;
-                    <i class="fas fa-file-alt"></i> Report Writing &nbsp;|&nbsp;
-                    <i class="fas fa-user-graduate"></i> Research Consulting &nbsp;|&nbsp;
-                    <i class="fas fa-search"></i> Topic Selection &nbsp;|&nbsp;
-                    <i class="fas fa-book"></i> Assignment Support
-                </span>
-            </p>
-            <a href="mailto:phconsultgh@gmail.com" class="flyer-btn">Start Your Project Today</a>
-            <div class="flyer-contact">
-                <span><i class="fas fa-envelope"></i> phconsultgh@gmail.com</span>
-                <span><i class="fas fa-phone"></i> 055 199 3820</span>
-                <span><i class="fas fa-map-marker-alt"></i> Accra, Ghana</span>
+    <div class="flyer-row">
+        <div class="flyer-col">
+            <h2 style="text-align:center;margin-bottom:12px;">Facebook Cover Flyer</h2>
+            <div class="flyer-container flyer-banner animated-banner">
+                <div class="flyer-bg-shape"></div>
+                <img src="../assets/images/Logo.png" alt="PHconsult Logo" class="flyer-logo">
+                <div class="flyer-content">
+                    <h1 class="flyer-title">Your Partner in Research Excellence</h1>
+                    <p class="flyer-subtitle">Comprehensive support for students, professionals, and organizations.<br>
+                        <span class="flyer-services">
+                            <i class="fas fa-chart-line"></i> Data Analysis &nbsp;|&nbsp;
+                            <i class="fas fa-file-alt"></i> Report Writing &nbsp;|&nbsp;
+                            <i class="fas fa-user-graduate"></i> Research Consulting &nbsp;|&nbsp;
+                            <i class="fas fa-search"></i> Topic Selection &nbsp;|&nbsp;
+                            <i class="fas fa-book"></i> Assignment Support
+                        </span>
+                    </p>
+                    <a href="mailto:phconsultgh@gmail.com" class="flyer-btn">Start Your Project Today</a>
+                    <div class="flyer-contact">
+                        <span><i class="fas fa-envelope"></i> phconsultgh@gmail.com</span>
+                        <span><i class="fas fa-phone"></i> 055 199 3820</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Accra, Ghana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flyer-col">
+            <h2 style="text-align:center;margin-bottom:12px;">LinkedIn Cover Banner</h2>
+            <div class="linkedin-banner-container">
+                <div class="linkedin-bg-shape"></div>
+                <img src="../assets/images/Logo.png" alt="PHconsult Logo" class="linkedin-logo">
+                <div class="linkedin-content">
+                    <h1 class="linkedin-title">PHconsult</h1>
+                    <p class="linkedin-tagline">Empowering Research, Data, and Academic Success</p>
+                    <div class="linkedin-services">
+                        <span><i class="fas fa-chart-line"></i> Data Analysis</span>
+                        <span><i class="fas fa-file-alt"></i> Report Writing</span>
+                        <span><i class="fas fa-user-graduate"></i> Consulting</span>
+                        <span><i class="fas fa-search"></i> Topic Selection</span>
+                        <span><i class="fas fa-book"></i> Assignment Support</span>
+                    </div>
+                    <div class="linkedin-contact">
+                        <span><i class="fas fa-envelope"></i> phconsultgh@gmail.com</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Accra, Ghana</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
