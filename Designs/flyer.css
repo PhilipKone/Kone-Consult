@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+.flyer-container {
+    width: 820px;
+    height: 312px;
+    position: relative;
+    background: linear-gradient(120deg, #3a86ff 60%, #00c6ff 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(58,134,255,0.18);
+    padding: 0 40px;
+    z-index: 1;
+}
+.flyer-bg-shape {
+    position: absolute;
+    right: -120px;
+    top: -60px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at 60% 40%, #ffffff33 0%, #3a86ff00 80%);
+    z-index: 0;
+    pointer-events: none;
+}
+.flyer-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-right: 48px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(58,134,255,0.10);
+    padding: 10px;
+    z-index: 2;
+}
+.flyer-content {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.flyer-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-shadow: 1px 2px 8px #0052cc33;
+}
+.flyer-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e0f0ff;
+    max-width: 480px;
+    line-height: 1.5;
+}
+.flyer-services {
+    display: block;
+    margin-top: 6px;
+    font-size: 1rem;
+    color: #fffbe7;
+    font-weight: 500;
+}
+.flyer-btn {
+    display: inline-block;
+    padding: 13px 32px;
+    background: #ffbe3c;
+    color: #1a237e;
+    border-radius: 28px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.08rem;
+    box-shadow: 0 2px 12px rgba(58,134,255,0.10);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+}
+.flyer-btn:hover {
+    background: #3a86ff;
+    color: #fff;
+    transform: scale(1.06);
+    box-shadow: 0 4px 24px 4px rgba(0,191,174,0.18);
+}
+.flyer-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 0.98rem;
+    color: #e0f0ff;
+    margin-top: 2px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.flyer-contact i {
+    color: #ffbe3c;
+    margin-right: 6px;
+}
+@media (max-width: 900px) {
+    .flyer-container {
+        width: 100vw;
+        height: 220px;
+        padding: 0 10px;
+    }
+    .flyer-logo {
+        width: 70px;
+        height: 70px;
+        margin-right: 20px;
+    }
+    .flyer-title {
+        font-size: 1.1rem;
+    }
+    .flyer-subtitle, .flyer-services {
+        font-size: 0.8rem;
+        max-width: 220px;
+    }
+    .flyer-btn {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+    .flyer-contact {
+        font-size: 0.8rem;
+        gap: 10px;
+    }
+}
