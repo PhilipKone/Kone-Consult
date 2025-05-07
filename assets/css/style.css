@@ -327,6 +327,37 @@ body {
   color: #007BFF; /* Change color on hover */
 }
 
+/* Portfolio Project Card Hover Animation */
+.card.h-100.shadow-sm {
+  transition: box-shadow 0.25s cubic-bezier(.4,2,.6,1), transform 0.25s cubic-bezier(.4,2,.6,1);
+}
+.card.h-100.shadow-sm:hover {
+  box-shadow: 0 12px 40px rgba(58,134,255,0.18), 0 2px 12px rgba(0,0,0,0.10);
+  transform: translateY(-6px) scale(1.025);
+  z-index: 2;
+}
+.card.h-100.shadow-sm .card-img-top {
+  transition: transform 0.25s cubic-bezier(.4,2,.6,1), filter 0.25s cubic-bezier(.4,2,.6,1);
+}
+.card.h-100.shadow-sm:hover .card-img-top {
+  transform: scale(1.04) rotate(-2deg);
+  filter: brightness(1.08) drop-shadow(0 2px 12px #3a86ff33);
+}
+.card.h-100.shadow-sm .card-title {
+  transition: color 0.2s cubic-bezier(.4,2,.6,1);
+}
+.card.h-100.shadow-sm:hover .card-title {
+  color: #3a86ff;
+}
+.card.h-100.shadow-sm .btn {
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.card.h-100.shadow-sm:hover .btn {
+  background: #3a86ff;
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   header nav ul li {
