@@ -215,6 +215,23 @@
     </style>
 </head>
 <body>
+    <header class="bg-primary text-white py-3">
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="text-light">PHconsult</h1>
+        <button class="navbar-toggler d-md-none" type="button" id="mobileMenuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="dropdown d-none d-md-block">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Switch Theme
+          </button>
+          <div class="dropdown-menu" aria-labelledby="themeDropdown">
+            <a class="dropdown-item" href="#" id="light-mode">Light Mode</a>
+            <a class="dropdown-item" href="#" id="dark-mode">Dark Mode</a>
+          </div>
+        </div>
+      </div>
+    </header>
     <div class="flyer-row">
         <div class="flyer-col">
             <h2 style="text-align:center;margin-bottom:12px;">Facebook Cover Flyer</h2>
@@ -376,5 +393,6 @@
         </div>
     </div>
     <script src="Designs/flyer.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
