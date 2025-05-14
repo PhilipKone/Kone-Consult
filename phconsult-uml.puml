@@ -6,48 +6,111 @@ class User {
   +String name
   +String email
   +String password
+  +String role
   +login()
   +register()
+  +updateProfile()
 }
 
 class Service {
   +String name
   +String description
   +double price
+  +String category
+  +String[] features
   +orderService()
+  +getDetails()
 }
 
 class Review {
   +String content
   +int rating
+  +Date timestamp
   +submitReview()
+  +editReview()
 }
 
 class Admin {
   +manageUsers()
   +manageServices()
+  +viewAnalytics()
+  +manageContent()
 }
 
 class UI {
   +toggleDarkMode()
   +toggleSidePanel()
   +responsiveDesign()
+  +handleNotifications()
 }
 
 class Payment {
   +double amount
   +String method
+  +String status
+  +Date timestamp
   +processPayment()
+  +refund()
+}
+
+class Portfolio {
+  +String title
+  +String description
+  +String[] skills
+  +String[] projects
+  +updatePortfolio()
+}
+
+class CV {
+  +String education
+  +String[] experience
+  +String[] certifications
+  +updateCV()
+}
+
+class Contact {
+  +String name
+  +String email
+  +String message
+  +String status
+  +submitContact()
+  +trackStatus()
+}
+
+class Donation {
+  +double amount
+  +String currency
+  +String purpose
+  +processDonation()
+  +generateReceipt()
+}
+
+class FirebaseService {
+  +authenticate()
+  +storeData()
+  +retrieveData()
+  +updateData()
 }
 
 User "1" -- "0..*" Service : orders >
 User "1" -- "0..*" Review : submits >
 User "1" -- "0..*" Payment : makes >
+User "1" -- "1" Portfolio : has >
+User "1" -- "1" CV : has >
+User "1" -- "0..*" Contact : submits >
+User "1" -- "0..*" Donation : makes >
+
 Admin "1" -- "0..*" User : manages >
 Admin "1" -- "0..*" Service : manages >
+Admin "1" -- "0..*" Contact : handles >
+
 UI "1" -- "1" User : interacts >
 UI "1" -- "1" Admin : interacts >
+UI "1" -- "1" FirebaseService : uses >
+
 Service "1" -- "0..*" Payment : requires >
 Review "0..*" -- "1" Service : about >
+Contact "1" -- "1" FirebaseService : stored in >
+Donation "1" -- "1" Payment : processes >
 
 @enduml

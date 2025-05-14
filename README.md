@@ -1,5 +1,7 @@
 # PHconsult
 
+<img src="assets/images/Logo.png" alt="PHconsult Logo" width="200" align="center">
+
 PHconsult is a modern web application that provides comprehensive research assistance to students, professionals, and organizations. The platform offers a suite of services including research topic selection, data analysis, report writing, mentorship, and assignment support—all accessible via an intuitive, responsive interface.
 
 ---
