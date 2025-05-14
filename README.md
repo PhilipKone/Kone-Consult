@@ -7,6 +7,7 @@ PHconsult is a modern web application that provides comprehensive research assis
 ---
 
 ## Table of Contents
+
 - [Features](#features)
 - [Live Demo](#live-demo)
 - [Technology Stack](#technology-stack)
@@ -19,6 +20,7 @@ PHconsult is a modern web application that provides comprehensive research assis
 ---
 
 ## Features
+
 - **User Authentication:** Secure registration and login (Node.js, Express, MongoDB, JWT)
 - **Service Listings:** Data analysis, report writing, research consulting, topic selection, mentorship, assignment support
 - **Responsive UI:** Modern, mobile-friendly design (Bootstrap 5, custom CSS)
@@ -39,11 +41,13 @@ Check out the deployed app here: [https://philipkone.github.io/PHconsult/](https
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js & npm (for backend/server features)
 - MongoDB Atlas account (for backend database)
 - (Optional) Firebase project (for contact form and messaging)
 
 ### Installation
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/PhilipKone/PHconsult.git
@@ -71,11 +75,13 @@ Check out the deployed app here: [https://philipkone.github.io/PHconsult/](https
 ## Technology Stack
 
 ### Frontend
+
 - HTML5, CSS3, JavaScript (Vanilla)
 - Bootstrap 5
 - Font Awesome
 
 ### Backend
+
 - Node.js, Express.js
 - MongoDB (Mongoose ODM)
 - JWT for authentication
@@ -83,11 +89,13 @@ Check out the deployed app here: [https://philipkone.github.io/PHconsult/](https
 - body-parser for request parsing
 
 ### Messaging/Contact
+
 - Firebase Firestore (for contact form/message storage)
 
 ---
 
 ## Project Structure
+
 ```
 PHconsult-1/
 ├── app.js                 # Express backend entrypoint
@@ -114,7 +122,99 @@ PHconsult-1/
 
 ---
 
+## System Architecture
+
+### UML Diagram
+
+![1747241385385](image/README/1747241385385.png)
+
+### Component Explanation
+
+#### Core User Components
+
+- **User**: Central entity representing system users
+
+  - Manages user authentication and profile information
+  - Can order services, submit reviews, and make payments
+  - Has associated portfolio and CV
+- **Admin**: System administrator
+
+  - Manages users, services, and content
+  - Handles contact form submissions
+  - Views system analytics
+
+#### Service Management
+
+- **Service**: Represents offered services
+
+  - Contains service details (name, description, price)
+  - Categorized with specific features
+  - Can be ordered by users
+- **Review**: User feedback system
+
+  - Stores review content and ratings
+  - Associated with specific services
+  - Includes timestamp for tracking
+
+#### Financial Components
+
+- **Payment**: Handles financial transactions
+
+  - Processes service payments
+  - Manages payment status and methods
+  - Supports refund operations
+- **Donation**: Manages donation system
+
+  - Processes donation amounts
+  - Handles different currencies
+  - Generates donation receipts
+
+#### Professional Profile
+
+- **Portfolio**: Showcases professional work
+
+  - Lists skills and projects
+  - Can be updated by users
+  - Displays professional achievements
+- **CV**: Professional background
+
+  - Contains education history
+  - Lists work experience
+  - Shows certifications
+
+#### Communication
+
+- **Contact**: Contact form system
+  - Manages user inquiries
+  - Tracks message status
+  - Integrated with Firebase
+
+#### Infrastructure
+
+- **UI**: User interface management
+
+  - Handles dark/light mode
+  - Manages responsive design
+  - Controls side panel functionality
+- **FirebaseService**: Backend integration
+
+  - Handles authentication
+  - Manages data storage
+  - Provides real-time updates
+
+### Key Relationships
+
+- Users can order multiple services (1-to-many)
+- Services can have multiple reviews (1-to-many)
+- Each user has one portfolio and CV (1-to-1)
+- Admins manage multiple users and services (1-to-many)
+- All components interact through the UI layer
+- Firebase service provides backend support for data persistence
+
+---
+
 ## Usage
+
 - Visit `index.html` for the main site.
 - Register/Login for personalized features.
 - Use the contact form for service requests or questions (messages stored in Firebase).
@@ -123,9 +223,11 @@ PHconsult-1/
 ---
 
 ## Contributing
+
 We welcome contributions to improve PHconsult!
 
 ### How to Contribute
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/your-feature`)
 3. Commit your changes
@@ -134,6 +236,7 @@ We welcome contributions to improve PHconsult!
 ---
 
 ## Contact
+
 - **Email:** phconsultgh@gmail.com
 - **Phone:** +055 199 3820
 - **Location:** Accra, Ghana
@@ -142,4 +245,5 @@ We welcome contributions to improve PHconsult!
 ---
 
 ## License
+
 This project is licensed under the MIT License. See the LICENSE file for details.
