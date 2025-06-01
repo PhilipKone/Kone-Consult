@@ -18,6 +18,8 @@
 <meta name="twitter:description" content="Expert research support, data analysis, report writing, and consulting for academic and professional success.">
 <meta name="twitter:image" content="https://yourusername.github.io/assets/images/Logo.png">
 
+  <!-- Google Fonts: Inter for modern, clean look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/png" href="assets/images/Logo.png">
@@ -68,7 +70,7 @@
 
     <!-- Hero Section -->
     <section id="heroBg" class="hero position-relative text-center d-flex align-items-center justify-content-center" style="min-height: 400px;">
-      <div class="hero-overlay position-absolute w-100 h-100" style="background: rgba(34, 34, 68, 0.6); top: 0; left: 0;"></div>
+      <div class="hero-overlay position-absolute w-100 h-100" style="background: rgba(34, 34, 68, 0.4); backdrop-filter: blur(6px); top: 0; left: 0;"></div>
       <div class="container position-relative text-white py-5">
         <h1 class="display-3 fw-bold mb-3">Welcome to PHconsult</h1>
         <p class="lead mb-4">Your expert partner in research assistance, data analysis, and academic success.</p>
@@ -182,23 +184,93 @@
     </script>
 
     <style>
-      .hero .container {
-        z-index: 2;
+      body, .side-panel, .main-content, .footer, .footer-title, .footer-text, .footer-links, .footer-contact, .btn, .card, .display-3, .fw-bold, .lead, .navbar, .dropdown-menu, .dropdown-item {
+        font-family: 'Inter', Arial, sans-serif !important;
       }
+      .footer {
+        background: linear-gradient(90deg, #222244 0%, #2d2d6a 100%);
+        color: #fff;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        box-shadow: 0 -4px 32px rgba(34,34,68,0.10);
+        margin-top: 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        margin-top: 2rem;
+        padding-top: 1rem;
+      }
+      .social-icons .social-icon {
+        margin-right: 0.5rem;
+        transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
+        color: #fff;
+        font-size: 1.5rem;
+      }
+      .social-icons .social-icon:hover {
+        color: #ffbe3c;
+        transform: scale(1.2) translateY(-2px);
+        box-shadow: 0 2px 12px #ffbe3c44;
+      }
+      .footer-links a {
+        color: #fff;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: #ffbe3c;
+        text-decoration: underline;
+      }
+      .footer-contact a {
+        color: #ffbe3c;
+        text-decoration: none;
+      }
+      .footer-contact a:hover {
+        text-decoration: underline;
+      }
+      .footer-title {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .footer-text {
+        font-size: 1rem;
+        opacity: 0.95;
+      }
+      /* Back to Top Button */
+      #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        z-index: 9999;
+        background: #ffbe3c;
+        color: #222244;
+        border: none;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        box-shadow: 0 4px 16px rgba(34,34,68,0.15);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+      }
+      #backToTopBtn:hover {
+        background: #222244;
+        color: #ffbe3c;
+        transform: scale(1.1);
+      }
+      /* Glassmorphism for hero overlay */
       .hero-overlay {
-        z-index: 1;
+        background: rgba(34, 34, 68, 0.4);
+        backdrop-filter: blur(6px);
       }
-      .hover-shadow:hover {
-        box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
-        transform: translateY(-4px) scale(1.02);
-        transition: box-shadow 0.2s, transform 0.2s;
+      /* Animate Impact Metrics counters */
+      .impact-animate {
+        animation: countUp 1.2s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      .service-card .icon {
-        transition: color 0.2s, transform 0.2s;
-      }
-      .service-card:hover .icon {
-        transform: scale(1.15) rotate(-4deg);
-        color: #ffbe3c !important;
+      @keyframes countUp {
+        0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
       }
     </style>
 
@@ -312,11 +384,49 @@
     </footer>
   </div>
 
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
   <!-- Link to the JavaScript file -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Updated Font Awesome version -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/script.js"></script> <!-- Include the centralized script -->
+  <script>
+    // Back to Top Button logic
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    };
+    backToTopBtn.onclick = function() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+    // Animate Impact Metrics counters
+    function animateCounter(id, end) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let start = 0;
+      const duration = 1200;
+      const startTime = performance.now();
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        el.textContent = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = end;
+        }
+      }
+      el.classList.add('impact-animate');
+      requestAnimationFrame(update);
+    }
+    // Example usage: animateCounter('metricProjects', 123);
+    // You can call this after fetching metrics from Firestore
+  </script>
 </body>
 </html>
