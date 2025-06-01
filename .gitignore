@@ -67,3 +67,14 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Archive directory (optional, if you want to stop tracking archived files)
+archive/
+
+# Windows system files
+Thumbs.db
+Desktop.ini
+
+# OneDrive sync files
+*.tmp
+*.lnk
