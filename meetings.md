@@ -15,7 +15,7 @@ Creating an intuitive and user-friendly platform to support students and researc
 ## Target Audience:
 - **Undergraduate Students**:  
   Providing guidance and execution support for final-year projects and research papers across various disciplines.
-- **Master’s Students**:  
+- **Master's Students**:  
   Advanced research services including data analysis, proposal development, and thesis writing.
 - **PhD Students and Researchers**:  
   Specialized support for dissertation writing, publication assistance, and advanced data analysis.
@@ -37,6 +37,8 @@ Creating an intuitive and user-friendly platform to support students and researc
     Offer online courses in research methods, data analysis, and academic writing.
   - **Developing & Selling Software**:  
     Build tools and software tailored to automate research processes and improve efficiency.
+  - **Mobile App Version**:  
+    Develop a mobile app version of the site to enhance accessibility and user experience on the go.
 
 ## Progress I have made so far:
 - **Flyer completed**:  
@@ -65,3 +67,4 @@ Creating an intuitive and user-friendly platform to support students and researc
 ### Future projections
   - Creating simple databases for shops in Ghana.
   - Incorporating AI systems into these platforms.
+  - Machine Translation refers to the process of automatically translating text from one language to another using artificial intelligence and deep learning techniques.

@@ -37,13 +37,6 @@
   </div>
 
   <div class="main-content">
-    <!-- PHconsult Flyer Banner -->
-    <div id="flyer-banner" class="alert alert-info flyer-banner text-center animated-banner" role="alert" style="margin-bottom:0; border-radius:0; background: linear-gradient(90deg, #3a86ff 0%, #00bfae 100%); color: #fff; font-size: 1.25rem; font-weight: 600; letter-spacing: 1px; box-shadow: 0 2px 8px rgba(58,134,255,0.1);">
-      <span class="flyer-message">🌟 Special Offer: Get 20% off your first research consultation with PHconsult! <a href="services.html" class="btn btn-light btn-sm ml-2">Learn More</a></span>
-      <button type="button" class="close ml-3" aria-label="Close" onclick="document.getElementById('flyer-banner').style.display='none';">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
     <header class="bg-primary text-white py-3">
       <div class="container d-flex justify-content-between align-items-center">
         <h1 class="text-light">PHconsult</h1>
@@ -131,11 +124,44 @@
       </div>
     </section>
 
-    <!-- Social Media Banners Section -->
+    <!-- Impact Metrics Section -->
     <div class="container my-5">
-      <h2 class="text-center mb-4">Our Social Media Banners</h2>
-      <iframe src="Designs/flyer.html" style="width:100%;min-height:500px;border:none;overflow:hidden;" title="PHconsult Social Media Banners"></iframe>
+      <h2 class="text-center mb-4">Our Impact</h2>
+      <div id="impactMetrics" class="row justify-content-center text-center">
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <span class="display-4 text-primary"><i class="fas fa-briefcase"></i></span>
+              <h3 id="metricProjects" class="fw-bold my-2">0</h3>
+              <p class="mb-0">Projects Completed</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <span class="display-4 text-success"><i class="fas fa-envelope"></i></span>
+              <h3 id="metricMessages" class="fw-bold my-2">0</h3>
+              <p class="mb-0">Messages Handled</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <span class="display-4 text-warning"><i class="fas fa-receipt"></i></span>
+              <h3 id="metricReceipts" class="fw-bold my-2">0</h3>
+              <p class="mb-0">Receipts Issued</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <!-- Firebase Scripts (required for dynamic metrics) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="firebase/firebase-config.js"></script>
+    <script src="assets/js/impact-metrics.js"></script>
 
     <style>
       .hero .container {
