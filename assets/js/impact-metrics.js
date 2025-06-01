@@ -13,19 +13,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const db = firebase.firestore();
 
   // Fetch published projects
-  db.collection('projects').where('status', '==', 'published').get().then(snapshot => {
+  window.PHconsultAPI.getPublishedProjects().then(snapshot => {
     console.log('Projects:', snapshot.size, snapshot.docs.map(doc => doc.data()));
     document.getElementById('metricProjects').textContent = snapshot.size;
   }).catch(err => console.error('Error fetching projects:', err));
 
   // Fetch total messages
-  db.collection('messages').get().then(snapshot => {
+  window.PHconsultAPI.getMessages().then(snapshot => {
     console.log('Messages:', snapshot.size, snapshot.docs.map(doc => doc.data()));
     document.getElementById('metricMessages').textContent = snapshot.size;
   }).catch(err => console.error('Error fetching messages:', err));
 
   // Fetch total receipts (donations)
-  db.collection('receipts').get().then(snapshot => {
+  window.PHconsultAPI.getReceipts().then(snapshot => {
     console.log('Receipts:', snapshot.size, snapshot.docs.map(doc => doc.data()));
     document.getElementById('metricReceipts').textContent = snapshot.size;
   }).catch(err => console.error('Error fetching receipts:', err));
