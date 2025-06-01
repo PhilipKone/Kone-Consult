@@ -81,24 +81,6 @@ body.dark-mode textarea::placeholder {
   color: #aaaaaa !important;
 }
 
-/* Flyer Banner Animation */
-.flyer-banner {
-  animation: flyerFadeIn 1s ease;
-  position: relative;
-  z-index: 1050;
-}
-.animated-banner {
-  animation: flyerPulse 2s infinite alternate;
-}
-@keyframes flyerFadeIn {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes flyerPulse {
-  from { box-shadow: 0 2px 8px rgba(58,134,255,0.1); }
-  to { box-shadow: 0 4px 24px 4px rgba(0,191,174,0.18); }
-}
-
 /* Card styles */
 body.dark-mode .card {
   background-color: var(--card-bg-color) !important;
