@@ -1,10 +1,28 @@
-<!-- PHconsult Modern Logo SVG -->
-<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="120" height="120" rx="24" fill="#222244"/>
-  <g>
-    <text x="50%" y="54%" text-anchor="middle" fill="#ffbe3c" font-family="Montserrat, Arial, sans-serif" font-size="48" font-weight="bold" dy=".3em">PH</text>
-    <polyline points="35,90 60,70 85,90" fill="none" stroke="#ffbe3c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="60" cy="70" r="4" fill="#ffbe3c"/>
+<!-- PHconsult State-of-the-Art Logo SVG -->
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phg1" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffbe3c"/>
+      <stop offset="1" stop-color="#222244"/>
+    </linearGradient>
+    <radialGradient id="phg2" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fffbe3c" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#222244" stop-opacity="0.9"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="180" height="180" rx="36" fill="url(#phg2)"/>
+  <g filter="url(#shadow)">
+    <!-- Stylized PH monogram with network nodes -->
+    <text x="50%" y="48%" text-anchor="middle" fill="url(#phg1)" font-family="Montserrat, Arial, sans-serif" font-size="72" font-weight="bold" dy=".3em" letter-spacing="-6">PH</text>
+    <!-- Network/tech motif -->
+    <circle cx="60" cy="110" r="7" fill="#ffbe3c"/>
+    <circle cx="120" cy="110" r="7" fill="#ffbe3c"/>
+    <circle cx="90" cy="70" r="7" fill="#ffbe3c"/>
+    <polyline points="60,110 90,70 120,110" fill="none" stroke="#ffbe3c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="90" cy="70" r="3" fill="#222244"/>
   </g>
-  <text x="50%" y="110" text-anchor="middle" fill="#fff" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="bold">consult</text>
+  <text x="50%" y="165" text-anchor="middle" fill="#fff" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="bold" letter-spacing="2">consult</text>
 </svg>
