@@ -1,0 +1,15 @@
+<!-- PHconsult Book Icon Extracted from Monogram Logo - Purple to Orange Gradient, Larger Book -->
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phc-accent" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a21caf"/>
+      <stop offset="1" stop-color="#f59e42"/>
+    </linearGradient>
+  </defs>
+  <!-- Larger centered open book icon only -->
+  <g>
+    <path d="M48 68 Q40 58 32 68 Q40 62 48 68 Q56 62 64 68 Q56 58 48 68" fill="#fff" stroke="#a21caf" stroke-width="1.6"/>
+    <line x1="48" y1="68" x2="48" y2="56" stroke="#f59e42" stroke-width="1.6"/>
+    <path d="M40 62 Q44 58 48 62 Q52 58 56 62" stroke="#a21caf" stroke-width="1.1" fill="none"/>
+  </g>
+</svg>

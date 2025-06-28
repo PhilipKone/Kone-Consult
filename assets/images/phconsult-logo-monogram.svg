@@ -1,0 +1,23 @@
+<!-- PHconsult Monogram Logo with Perfectly Centered Open Book Icon - Purple to Orange Gradient -->
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phc-accent" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a21caf"/>
+      <stop offset="1" stop-color="#f59e42"/>
+    </linearGradient>
+    <filter id="phc-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <g filter="url(#phc-shadow)">
+    <!-- Abstract P/H monogram: stylized, geometric, techy -->
+    <path d="M32 68V28h18a14 14 0 1 1 0 28H32z" fill="url(#phc-accent)"/>
+    <circle cx="62" cy="42" r="4.5" fill="#222244" stroke="#f59e42" stroke-width="2"/>
+    <!-- Perfectly centered open book icon -->
+    <g>
+      <path d="M48 60 Q44 56 40 60 Q44 58 48 60 Q52 58 56 60 Q52 56 48 60" fill="#fff" stroke="#a21caf" stroke-width="1.2"/>
+      <line x1="48" y1="60" x2="48" y2="54" stroke="#f59e42" stroke-width="1.2"/>
+      <path d="M44 58 Q46 56 48 58 Q50 56 52 58" stroke="#a21caf" stroke-width="0.8" fill="none"/>
+    </g>
+  </g>
+</svg>
