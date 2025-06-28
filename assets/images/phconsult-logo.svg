@@ -1,0 +1,10 @@
+<!-- PHconsult Modern Logo SVG -->
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="24" fill="#222244"/>
+  <g>
+    <text x="50%" y="54%" text-anchor="middle" fill="#ffbe3c" font-family="Montserrat, Arial, sans-serif" font-size="48" font-weight="bold" dy=".3em">PH</text>
+    <polyline points="35,90 60,70 85,90" fill="none" stroke="#ffbe3c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="60" cy="70" r="4" fill="#ffbe3c"/>
+  </g>
+  <text x="50%" y="110" text-anchor="middle" fill="#fff" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="bold">consult</text>
+</svg>
