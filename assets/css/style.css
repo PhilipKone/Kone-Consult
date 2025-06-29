@@ -924,52 +924,26 @@ body.dark-mode .footer-contact i {
   background-color: #e9ecef;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .side-panel {
-    display: none;
-  }
-  
-  .main-content {
-    margin-left: 0;
-    width: 100%;
-  }
-  
-  .hero {
-    padding: 3rem 1rem;
-  }
-  
-  .footer .col-md-6 {
-    text-align: center !important;
-    margin-bottom: 1rem;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-  }
-  
-  .footer .row > div {
-    margin-bottom: 2rem;
-  }
+/* Code block and inline code styles for both light and dark mode */
+pre, code {
+  background: #f8f9fa;
+  color: #212529;
 }
 
-/* Ensure proper spacing on mobile */
-@media (max-width: 576px) {
-  .container {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  
-  h1 {
-    font-size: 1.8rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
-  
-  .btn-lg {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-  }
+body.dark-mode pre, body.dark-mode code {
+  background: #23272b !important;
+  color: #f8f9fa !important;
+  border-radius: 6px;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1em;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+}
+
+code {
+  font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+  font-size: 0.97em;
 }

@@ -1,0 +1,17 @@
+<!-- PHconsult Logo - Spectacle Icon (Glasses) with Extra Thick Code Tags and Vision-Shaded Lenses -->
+<svg width="80" height="32" viewBox="0 0 80 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Extra thick left code symbol (less-than, subscript, spaced) -->
+  <polyline points="6,20 3,24 6,28" fill="none" stroke="#a21caf" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left lens (vision shade: light blue) -->
+  <ellipse cx="26" cy="16" rx="10" ry="10" fill="#b3e5fc" stroke="#a21caf" stroke-width="2.5"/>
+  <!-- Right lens (vision shade: light green) -->
+  <ellipse cx="54" cy="16" rx="10" ry="10" fill="#c8e6c9" stroke="#a21caf" stroke-width="2.5"/>
+  <!-- Bridge -->
+  <path d="M36 16 Q40 12 44 16" stroke="#a21caf" stroke-width="2.5" fill="none"/>
+  <!-- Left temple (short, stylized) -->
+  <line x1="16" y1="16" x2="10" y2="10" stroke="#a21caf" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right temple (short, stylized) -->
+  <line x1="64" y1="16" x2="70" y2="10" stroke="#a21caf" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Extra thick right code symbol (flipped, subscript, spaced) -->
+  <polyline points="74,20 77,24 74,28" fill="none" stroke="#a21caf" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
