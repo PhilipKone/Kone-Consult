@@ -50,8 +50,8 @@ Check out the deployed app here: [https://philipkone.github.io/Kone-Consult/](ht
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/PhilipKone/PHconsult.git
-   cd PHconsult
+   git clone https://github.com/PhilipKone/Kone-Consult.git
+   cd Kone-Consult
    ```
 2. Install backend dependencies:
    ```bash
@@ -224,7 +224,7 @@ PHconsult-1/
 
 ## Contributing
 
-We welcome contributions to improve PHconsult!
+We welcome contributions to improve Kone Consult!
 
 ### How to Contribute
 
