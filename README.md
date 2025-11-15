@@ -1,8 +1,8 @@
-# PHconsult
+# Kone Consult
 
-<img src="assets/images/Logo.png" alt="PHconsult Logo" width="200" align="center">
+<img src="assets/images/Logo.png" alt="Kone Consult Logo" width="200" align="center">
 
-PHconsult is a modern web application that provides comprehensive research assistance to students, professionals, and organizations. The platform offers a suite of services including research topic selection, data analysis, report writing, mentorship, and assignment support—all accessible via an intuitive, responsive interface.
+Kone Consult is a modern web application that provides comprehensive research assistance to students, professionals, and organizations. The platform offers a suite of services including research topic selection, data analysis, report writing, mentorship, and assignment support—all accessible via an intuitive, responsive interface. Part of the Kone Code Academy ecosystem.
 
 ---
 
@@ -34,7 +34,7 @@ PHconsult is a modern web application that provides comprehensive research assis
 
 ## Live Demo
 
-Check out the deployed app here: [https://philipkone.github.io/PHconsult/](https://philipkone.github.io/PHconsult/)
+Check out the deployed app here: [https://philipkone.github.io/Kone-Consult/](https://philipkone.github.io/Kone-Consult/)
 
 ---
 
