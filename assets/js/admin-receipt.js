@@ -1,9 +1,9 @@
-// Admin Receipt System for PHconsult
+// Admin Receipt System for Kone Consult
 // Requires Firebase SDK to be loaded in admin.html
 
 document.addEventListener('DOMContentLoaded', function () {
   // Handle Generate Receipt button in Receipts tab
-  $(document).on('click', '.generate-receipt', function() {
+  $(document).on('click', '.generate-receipt', function () {
     const receiptModal = document.getElementById('receiptModal');
     const receiptForm = document.getElementById('receiptForm');
     const receiptPreview = document.getElementById('receiptPreview');
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Handle Generate Receipt button in Receipts tab (vanilla JS for reliability)
-  document.querySelectorAll('.generate-receipt').forEach(function(btn) {
-    btn.addEventListener('click', function() {
+  document.querySelectorAll('.generate-receipt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
       const receiptModal = document.getElementById('receiptModal');
       const receiptForm = document.getElementById('receiptForm');
       const receiptPreview = document.getElementById('receiptPreview');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Helper: Generate random receipt number
   function generateReceiptNumber() {
-    return 'PHC-' + Date.now().toString().slice(-7);
+    return 'KC-' + Date.now().toString().slice(-7);
   }
 
   // Helper to update preview fields from form
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Handle Generate Receipt button click for each row
-  $(document).on('click', '.generate-receipt-row', async function() {
+  $(document).on('click', '.generate-receipt-row', async function () {
     const docId = $(this).data('id');
     try {
       const doc = await db.collection('receipts').doc(docId).get();

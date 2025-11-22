@@ -1,4 +1,4 @@
-// Admin Donations System for PHconsult
+// Admin Donations System for Kone Consult
 // Requires Firebase SDK to be loaded in admin.html
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Handle Generate Receipt button click
-  $(document).on('click', '.generate-donation-receipt', async function() {
+  $(document).on('click', '.generate-donation-receipt', async function () {
     const docId = $(this).data('id');
     try {
       const doc = await db.collection('donation_receipts').doc(docId).get();
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Handle Generate Thank You Letter button click
-  $(document).on('click', '.generate-thank-you-letter', async function() {
+  $(document).on('click', '.generate-thank-you-letter', async function () {
     const docId = $(this).data('id');
     try {
       const doc = await db.collection('donation_receipts').doc(docId).get();

@@ -1,5 +1,5 @@
 // assets/js/api.js
-// Centralized Firestore API logic for PHconsult
+// Centralized Firestore API logic for Kone Consult
 
 // Ensure Firebase is loaded before using these functions
 function getPublishedProjects() {
@@ -15,7 +15,7 @@ function getReceipts() {
 }
 
 // Export for use in other scripts
-window.PHconsultAPI = {
+window.KoneConsultAPI = {
   getPublishedProjects,
   getMessages,
   getReceipts

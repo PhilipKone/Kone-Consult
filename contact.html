@@ -1,139 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact PHconsult - Research, Data Analysis & Consulting Support</title>
-  <meta name="description" content="Contact PHconsult for expert research, data analysis, report writing, and consulting support. Get in touch with our team for academic and professional assistance.">
-  <meta name="keywords" content="contact PHconsult, research support, data analysis, consulting, academic help, Ghana, Africa">
+  <title>Contact Kone Consult - Research, Data Analysis & Consulting Support</title>
+  <meta name="description"
+    content="Contact Kone Consult for expert research, data analysis, report writing, and consulting support. Get in touch with our team for academic and professional assistance.">
+  <meta name="keywords"
+    content="contact Kone Consult, research support, data analysis, consulting, academic help, Ghana, Africa">
   <!-- Open Graph -->
-  <meta property="og:title" content="Contact PHconsult - Research, Data Analysis & Consulting Support">
-  <meta property="og:description" content="Contact PHconsult for expert research, data analysis, report writing, and consulting support. Get in touch with our team for academic and professional assistance.">
-  <meta property="og:image" content="https://philipkone.github.io/PHconsult/assets/images/Logo.png">
-  <meta property="og:url" content="https://philipkone.github.io/PHconsult/contact.html">
+  <meta property="og:title" content="Contact Kone Consult - Research, Data Analysis & Consulting Support">
+  <meta property="og:description"
+    content="Contact Kone Consult for expert research, data analysis, report writing, and consulting support. Get in touch with our team for academic and professional assistance.">
+  <meta property="og:image" content="https://philipkone.github.io/Kone-Consult/assets/images/Logo.png">
+  <meta property="og:url" content="https://philipkone.github.io/Kone-Consult/contact.html">
   <meta property="og:type" content="website">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Contact PHconsult - Research, Data Analysis & Consulting Support">
-  <meta name="twitter:description" content="Contact PHconsult for expert research, data analysis, report writing, and consulting support. Get in touch with our team for academic and professional assistance.">
-  <meta name="twitter:image" content="https://philipkone.github.io/PHconsult/assets/images/Logo.png">
+  <meta name="twitter:title" content="Contact Kone Consult - Research, Data Analysis & Consulting Support">
+  <meta name="twitter:description"
+    content="Contact Kone Consult for expert research, data analysis, report writing, and consulting support. Get in touch with our team for academic and professional assistance.">
+  <meta name="twitter:image" content="https://philipkone.github.io/Kone-Consult/assets/images/Logo.png">
 
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/png" href="assets/images/Logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
-  <div class="side-panel">
-    <h1>PHconsult</h1>
-    <ul>
-      <li><a href="index.html"><i class="fas fa-home"></i> <span>Home</span></a></li>
-      <li><a href="about.html"><i class="fas fa-info-circle"></i> <span>About Us</span></a></li>
-      <li><a href="services.html"><i class="fas fa-concierge-bell"></i> <span>Services</span></a></li>
-      <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
-      <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a></li>
-    </ul>
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1 class="text-primary">Kone Consult</h1>
+    <button id="signOutBtn" class="btn btn-outline-danger d-none">
+      <i class="fas fa-sign-out-alt"></i> Sign Out
+    </button>
   </div>
+  </header>
 
-  <div class="main-content">
-    <header class="container-fluid bg-light py-3">
-      <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="text-primary">PHconsult</h1>
-        <button id="signOutBtn" class="btn btn-outline-danger d-none">
-          <i class="fas fa-sign-out-alt"></i> Sign Out
-        </button>
-      </div>
-    </header>
-
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-lg-6 mb-4 d-flex align-items-stretch">
-          <div class="card border-0 shadow contact-card p-4 w-100 hover-shadow">
-            <div class="card-body">
-              <h2 class="text-center mb-4 fw-bold">Contact Us</h2>
-              <form id="contactForm">
-                <div class="mb-3">
-                  <label for="name" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="name" required>
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="email" required>
-                </div>
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Phone Number</label>
-                  <input type="tel" class="form-control" id="phone">
-                </div>
-                <div class="mb-3">
-                  <label for="subject" class="form-label">Subject</label>
-                  <select class="form-select" id="subject" required>
-                    <option value="">Select a subject</option>
-                    <option value="General Inquiry">General Inquiry</option>
-                    <option value="Data Analysis">Data Analysis</option>
-                    <option value="Report Writing">Report Writing</option>
-                    <option value="Research Consulting">Research Consulting</option>
-                    <option value="Topic Selection">Topic Selection</option>
-                    <option value="Mentorship">Mentorship</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="message" class="form-label">Message</label>
-                  <textarea class="form-control" id="message" rows="5" required></textarea>
-                </div>
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">Send Message</button>
-                </div>
-              </form>
-            </div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6 mb-4 d-flex align-items-stretch">
+        <div class="card border-0 shadow contact-card p-4 w-100 hover-shadow">
+          <div class="card-body">
+            <h2 class="text-center mb-4 fw-bold">Contact Us</h2>
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone">
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <select class="form-select" id="subject" required>
+                  <option value="">Select a subject</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Data Analysis">Data Analysis</option>
+                  <option value="Report Writing">Report Writing</option>
+                  <option value="Research Consulting">Research Consulting</option>
+                  <option value="Topic Selection">Topic Selection</option>
+                  <option value="Mentorship">Mentorship</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="col-lg-6 mb-4 d-flex align-items-stretch">
-          <div class="card border-0 shadow contact-card p-4 w-100 hover-shadow">
-            <div class="card-body">
-              <h2 class="text-center mb-4 fw-bold">Contact Information</h2>
-              <div class="contact-info">
-                <div class="d-flex align-items-center mb-3">
-                  <i class="fas fa-envelope fa-2x text-primary me-3"></i>
-                  <div>
-                    <h5>Email</h5>
-                    <p class="mb-0"><a href="mailto:phconsultgh@gmail.com">phconsultgh@gmail.com</a></p>
-                  </div>
+      </div>
+      <div class="col-lg-6 mb-4 d-flex align-items-stretch">
+        <div class="card border-0 shadow contact-card p-4 w-100 hover-shadow">
+          <div class="card-body">
+            <h2 class="text-center mb-4 fw-bold">Contact Information</h2>
+            <div class="contact-info">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-envelope fa-2x text-primary me-3"></i>
+                <div>
+                  <h5>Email</h5>
+                  <p class="mb-0"><a href="mailto:phconsultgh@gmail.com">phconsultgh@gmail.com</a></p>
                 </div>
-                <div class="d-flex align-items-center mb-3">
-                  <i class="fas fa-phone fa-2x text-success me-3"></i>
-                  <div>
-                    <h5>Phone</h5>
-                    <p class="mb-0"><a href="tel:+0551993820">055 199 3820</a></p>
-                  </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-phone fa-2x text-success me-3"></i>
+                <div>
+                  <h5>Phone</h5>
+                  <p class="mb-0"><a href="tel:+0551993820">055 199 3820</a></p>
                 </div>
-                <div class="d-flex align-items-center mb-3">
-                  <i class="fas fa-map-marker-alt fa-2x text-danger me-3"></i>
-                  <div>
-                    <h5>Location</h5>
-                    <p class="mb-0">Accra, Ghana</p>
-                  </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-map-marker-alt fa-2x text-danger me-3"></i>
+                <div>
+                  <h5>Location</h5>
+                  <p class="mb-0">Accra, Ghana</p>
                 </div>
-                <div class="d-flex align-items-center mb-3">
-                  <i class="fas fa-clock fa-2x text-warning me-3"></i>
-                  <div>
-                    <h5>Working Hours</h5>
-                    <p class="mb-0">Monday - Friday: 9:00 AM - 5:00 PM</p>
-                  </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-clock fa-2x text-warning me-3"></i>
+                <div>
+                  <h5>Working Hours</h5>
+                  <p class="mb-0">Monday - Friday: 9:00 AM - 5:00 PM</p>
                 </div>
-                <div class="d-flex align-items-center mb-3">
-                  <i class="fab fa-whatsapp fa-2x text-success me-3"></i>
-                  <div>
-                    <h5>WhatsApp</h5>
-                    <p class="mb-0"><a href="https://wa.me/233551993820" target="_blank">+233 55 199 3820</a></p>
-                  </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-whatsapp fa-2x text-success me-3"></i>
+                <div>
+                  <h5>WhatsApp</h5>
+                  <p class="mb-0"><a href="https://wa.me/233551993820" target="_blank">+233 55 199 3820</a></p>
                 </div>
-                <div class="d-flex align-items-center mb-3">
-                  <i class="fab fa-linkedin fa-2x text-primary me-3"></i>
-                  <div>
-                    <h5>LinkedIn</h5>
-                    <p class="mb-0"><a href="https://www.linkedin.com/company/phconsult-gh/?viewAsMember=true" target="_blank">philip-kone</a></p>
-                  </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-linkedin fa-2x text-primary me-3"></i>
+                <div>
+                  <h5>LinkedIn</h5>
+                  <p class="mb-0"><a href="https://www.linkedin.com/company/phconsult-gh/?viewAsMember=true"
+                      target="_blank">philip-kone</a></p>
                 </div>
               </div>
             </div>
@@ -141,84 +131,91 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <style>
-      .hover-shadow:hover {
-        box-shadow: 0 8px 32px rgba(34,34,68,0.15)!important;
-        transform: translateY(-4px) scale(1.02);
-        transition: box-shadow 0.2s, transform 0.2s;
-      }
-      .contact-card .card-body > .text-center {
-        transition: color 0.2s, transform 0.2s;
-      }
-      .contact-card:hover .card-body > .text-center {
-        color: #ffbe3c !important;
-        transform: scale(1.04) rotate(-2deg);
-      }
-    </style>
+  <style>
+    .hover-shadow:hover {
+      box-shadow: 0 8px 32px rgba(34, 34, 68, 0.15) !important;
+      transform: translateY(-4px) scale(1.02);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
 
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <!-- Company Info -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <h5 class="footer-title">PHconsult</h5>
-            <p class="footer-text">Your trusted partner in professional research assistance. We specialize in data analysis, report writing, and comprehensive research support.</p>
-            <div class="social-icons">
-              <a href="https://web.facebook.com/profile.php?id=61576238121782" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://www.linkedin.com/company/phconsult-gh/?viewAsMember=true" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-              <a href="https://www.instagram.com/phconsultgh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
+    .contact-card .card-body>.text-center {
+      transition: color 0.2s, transform 0.2s;
+    }
 
-          <!-- Quick Links -->
-          <div class="col-lg-2 col-md-6 mb-4">
-            <h5 class="footer-title">Quick Links</h5>
-            <ul class="footer-links">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="login.html">Login</a></li>
-            </ul>
-          </div>
+    .contact-card:hover .card-body>.text-center {
+      color: #ffbe3c !important;
+      transform: scale(1.04) rotate(-2deg);
+    }
+  </style>
 
-          <!-- Services -->
-          <div class="col-lg-3 col-md-6 mb-4">
-            <h5 class="footer-title">Our Services</h5>
-            <ul class="footer-links">
-              <li><a href="services.html#data-analysis">Data Analysis</a></li>
-              <li><a href="services.html#report-writing">Report Writing</a></li>
-              <li><a href="services.html#research-consulting">Research Consulting</a></li>
-              <li><a href="services.html#topic-selection">Topic Selection</a></li>
-              <li><a href="services.html#mentorship">Mentorship</a></li>
-            </ul>
-          </div>
-
-          <!-- Contact Info -->
-          <div class="col-lg-3 col-md-6 mb-4">
-            <h5 class="footer-title">Contact Us</h5>
-            <ul class="footer-contact">
-              <li><i class="fas fa-envelope"></i> <a href="mailto:phconsultgh@gmail.com">phconsultgh@gmail.com</a></li>
-              <li><i class="fas fa-phone"></i> <a href="tel:+0551993820">055 199 3820</a></li>
-              <li><i class="fas fa-map-marker-alt"></i> Accra, Ghana</li>
-            </ul>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <!-- Company Info -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h5 class="footer-title">Kone Consult</h5>
+          <p class="footer-text">Your trusted partner in professional research assistance. We specialize in data
+            analysis, report writing, and comprehensive research support.</p>
+          <div class="social-icons">
+            <a href="https://web.facebook.com/profile.php?id=61576238121782" target="_blank" class="social-icon"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/phconsult-gh/?viewAsMember=true" target="_blank"
+              class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/phconsultgh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
 
-        <!-- Copyright -->
-        <div class="footer-bottom">
-          <div class="row">
-            <div class="col-md-6">
-              <p class="mb-0">&copy; 2024 PHconsult. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-              <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> by PHconsult</p>
-            </div>
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5 class="footer-title">Our Services</h5>
+          <ul class="footer-links">
+            <li><a href="services.html#data-analysis">Data Analysis</a></li>
+            <li><a href="services.html#report-writing">Report Writing</a></li>
+            <li><a href="services.html#research-consulting">Research Consulting</a></li>
+            <li><a href="services.html#topic-selection">Topic Selection</a></li>
+            <li><a href="services.html#mentorship">Mentorship</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5 class="footer-title">Contact Us</h5>
+          <ul class="footer-contact">
+            <li><i class="fas fa-envelope"></i> <a href="mailto:phconsultgh@gmail.com">phconsultgh@gmail.com</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+0551993820">055 199 3820</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> Accra, Ghana</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2024 Kone Consult. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> by Kone Consult</p>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -228,7 +225,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-  
+
   <!-- Firebase Config -->
   <script>
     // Your web app's Firebase configuration
@@ -248,7 +245,7 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
   </script>
-  
+
   <!-- Contact Form Script -->
   <script>
     // Check authentication state
@@ -280,17 +277,17 @@
     // Contact Form Submission
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const submitButton = document.querySelector('#contactForm button[type="submit"]');
       submitButton.disabled = true;
       submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
-      
+
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('message').value;
-      
+
       try {
         // Add message to Firestore with proper error handling
         const messageRef = await db.collection('messages').add({
@@ -304,7 +301,7 @@
           read: false,
           responded: false
         });
-        
+
         // Show success message with better UI
         const successAlert = document.createElement('div');
         successAlert.className = 'alert alert-success alert-dismissible fade show mt-3';
@@ -313,22 +310,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         `;
         document.getElementById('contactForm').appendChild(successAlert);
-        
+
         // Reset form
         document.getElementById('contactForm').reset();
-        
+
         // Re-enable submit button
         submitButton.disabled = false;
         submitButton.innerHTML = 'Send Message';
-        
+
         // Remove success message after 5 seconds
         setTimeout(() => {
           successAlert.remove();
         }, 5000);
-        
+
       } catch (error) {
         console.error('Error sending message:', error);
-        
+
         // Show error message with better UI
         const errorAlert = document.createElement('div');
         errorAlert.className = 'alert alert-danger alert-dismissible fade show mt-3';
@@ -337,11 +334,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         `;
         document.getElementById('contactForm').appendChild(errorAlert);
-        
+
         // Re-enable submit button
         submitButton.disabled = false;
         submitButton.innerHTML = 'Send Message';
-        
+
         // Remove error message after 5 seconds
         setTimeout(() => {
           errorAlert.remove();
@@ -349,5 +346,6 @@
       }
     });
   </script>
-</body>
+  </body>
+
 </html>

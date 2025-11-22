@@ -1,5 +1,5 @@
-// Example Jest test for PHconsult API
-const { getPublishedProjects, getMessages, getReceipts } = window.PHconsultAPI;
+// Example Jest test for Kone Consult API
+const { getPublishedProjects, getMessages, getReceipts } = window.KoneConsultAPI;
 
 test('getPublishedProjects returns a promise', () => {
   expect(typeof getPublishedProjects().then).toBe('function');

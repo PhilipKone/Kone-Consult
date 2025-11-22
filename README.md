@@ -49,25 +49,33 @@ Check out the deployed app here: [https://philipkone.github.io/Kone-Consult/](ht
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/PhilipKone/Kone-Consult.git
    cd Kone-Consult
    ```
+
 2. Install backend dependencies:
+
    ```bash
    npm install
    ```
+
 3. Set up environment variables:
    - Create a `.env` file in the root directory with your MongoDB URI and JWT secret:
+
      ```env
      MONGODB_URI=your_mongodb_connection_string
      JWT_SECRET=your_jwt_secret
      ```
+
    - (If using Firebase for contact form, configure your Firebase project in `contact.html`)
 4. Start the backend server:
+
    ```bash
    node app.js
    ```
+
 5. Open `index.html` in your browser for the frontend.
 
 ---
@@ -97,7 +105,7 @@ Check out the deployed app here: [https://philipkone.github.io/Kone-Consult/](ht
 ## Project Structure
 
 ```
-PHconsult-1/
+Kone-Consult/
 ├── app.js                 # Express backend entrypoint
 ├── backend/               # Backend logic (auth, models)
 │   ├── authRoutes.js      # Auth API routes
@@ -237,7 +245,7 @@ We welcome contributions to improve Kone Consult!
 
 ## Contact
 
-- **Email:** phconsultgh@gmail.com
+- **Email:** <phconsultgh@gmail.com>
 - **Phone:** +055 199 3820
 - **Location:** Accra, Ghana
 - [LinkedIn](https://www.linkedin.com/in/philip-kone)

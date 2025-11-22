@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
             --text-color: #333;
             --light-bg: #f8f9fa;
             --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
@@ -82,7 +83,7 @@
 
         .section:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .section h2 {
@@ -171,7 +172,7 @@
             .experience-item {
                 flex-direction: column;
             }
-            
+
             .experience-date {
                 text-align: left;
                 margin-top: 0.5rem;
@@ -202,6 +203,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>Philip Hotor</h1>
@@ -407,27 +409,27 @@
 
         function renderSkills() {
             const skillsDiv = document.getElementById('technical-skills');
-            
+
             const programmingDiv = document.createElement('div');
             programmingDiv.innerHTML = `
                 <h3>Programming & Tools</h3>
                 <div class="skills-container">
-                    ${cvData.technicalSkills.programming.map(skill => 
-                        `<span class="skill-tag">${skill}</span>`
-                    ).join('')}
+                    ${cvData.technicalSkills.programming.map(skill =>
+                `<span class="skill-tag">${skill}</span>`
+            ).join('')}
                 </div>
             `;
-            
+
             const researchDiv = document.createElement('div');
             researchDiv.innerHTML = `
                 <h3>Research Skills</h3>
                 <div class="skills-container">
-                    ${cvData.technicalSkills.research.map(skill => 
-                        `<span class="skill-tag">${skill}</span>`
-                    ).join('')}
+                    ${cvData.technicalSkills.research.map(skill =>
+                `<span class="skill-tag">${skill}</span>`
+            ).join('')}
                 </div>
             `;
-            
+
             skillsDiv.appendChild(programmingDiv);
             skillsDiv.appendChild(researchDiv);
         }
@@ -455,9 +457,9 @@
             const certDiv = document.getElementById('certifications');
             certDiv.innerHTML = `
                 <div class="skills-container">
-                    ${cvData.certifications.map(cert => 
-                        `<span class="skill-tag">${cert}</span>`
-                    ).join('')}
+                    ${cvData.certifications.map(cert =>
+                `<span class="skill-tag">${cert}</span>`
+            ).join('')}
                 </div>
             `;
         }
@@ -466,9 +468,9 @@
             const langDiv = document.getElementById('languages');
             langDiv.innerHTML = `
                 <div class="skills-container">
-                    ${cvData.languages.map(lang => 
-                        `<span class="skill-tag">${lang}</span>`
-                    ).join('')}
+                    ${cvData.languages.map(lang =>
+                `<span class="skill-tag">${lang}</span>`
+            ).join('')}
                 </div>
             `;
         }
@@ -496,4 +498,5 @@
         });
     </script>
 </body>
-</html> 
+
+</html>

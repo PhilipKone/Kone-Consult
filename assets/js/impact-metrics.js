@@ -13,19 +13,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const db = firebase.firestore();
 
   // Fetch published projects
-  window.PHconsultAPI.getPublishedProjects().then(snapshot => {
+  window.KoneConsultAPI.getPublishedProjects().then(snapshot => {
     console.log('Projects:', snapshot.size, snapshot.docs.map(doc => doc.data()));
     document.getElementById('metricProjects').textContent = snapshot.size;
   }).catch(err => console.error('Error fetching projects:', err));
 
   // Fetch total messages
-  window.PHconsultAPI.getMessages().then(snapshot => {
+  window.KoneConsultAPI.getMessages().then(snapshot => {
     console.log('Messages:', snapshot.size, snapshot.docs.map(doc => doc.data()));
     document.getElementById('metricMessages').textContent = snapshot.size;
   }).catch(err => console.error('Error fetching messages:', err));
 
   // Fetch total receipts (donations)
-  window.PHconsultAPI.getReceipts().then(snapshot => {
+  window.KoneConsultAPI.getReceipts().then(snapshot => {
     console.log('Receipts:', snapshot.size, snapshot.docs.map(doc => doc.data()));
     document.getElementById('metricReceipts').textContent = snapshot.size;
   }).catch(err => console.error('Error fetching receipts:', err));
