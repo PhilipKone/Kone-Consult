@@ -11,7 +11,7 @@ const Divisions = () => {
       description: 'Academic research, data analysis, and thesis mentorship.',
       features: ['Topic Selection', 'Data Analysis', 'Thesis Writing'],
       status: 'Active',
-      link: 'https://PhilipKone.github.io/Kone-Code-Academy'
+      link: 'https://PhilipKone.github.io/Kone-Code-Academy/consult'
     },
     {
       id: 'coding',
