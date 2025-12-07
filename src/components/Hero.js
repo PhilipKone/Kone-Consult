@@ -8,10 +8,10 @@ const Hero = () => {
         <section className="hero" id="home">
             <div className="hero-container">
                 <div className="hero-content">
-                    <div className="badge">Research Division</div>
+                    <div className="badge">Kone Consult v2.0</div>
                     <h1 className="hero-title">
                         Research. Analysis.<br />
-                        <span className="text-gradient">Consulting.</span>
+                        <span className="text-gradient">Innovation.</span>
                     </h1>
                     <p className="hero-subtitle">
                         Your expert partner in research assistance, data analysis, and academic success. Powered by Kone Code Academy.
