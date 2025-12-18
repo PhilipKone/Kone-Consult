@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Kone-Consult/static/css/main.63626d96.css",
-    "main.js": "/Kone-Consult/static/js/main.1699464f.js",
+    "main.js": "/Kone-Consult/static/js/main.78f9551c.js",
     "static/js/453.f64ec559.chunk.js": "/Kone-Consult/static/js/453.f64ec559.chunk.js",
     "index.html": "/Kone-Consult/index.html",
     "main.63626d96.css.map": "/Kone-Consult/static/css/main.63626d96.css.map",
-    "main.1699464f.js.map": "/Kone-Consult/static/js/main.1699464f.js.map",
+    "main.78f9551c.js.map": "/Kone-Consult/static/js/main.78f9551c.js.map",
     "453.f64ec559.chunk.js.map": "/Kone-Consult/static/js/453.f64ec559.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.63626d96.css",
-    "static/js/main.1699464f.js"
+    "static/js/main.78f9551c.js"
   ]
 }
