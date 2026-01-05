@@ -2,7 +2,7 @@
 
 <img src="assets/images/Logo.png" alt="Kone Consult Logo" width="200" align="center">
 
-Kone Consult is a modern web application that provides comprehensive research assistance to students, professionals, and organizations. The platform offers a suite of services including research topic selection, data analysis, report writing, mentorship, and assignment support—all accessible via an intuitive, responsive interface. Part of the Kone Code Academy ecosystem.
+Kone Consult is a modern web application that provides comprehensive research assistance to students, professionals, and organizations. The platform offers a suite of services including research topic selection, data analysis, report writing, mentorship, and assignment support—all accessible via an intuitive, responsive interface. Part of the Kone Academy ecosystem.
 
 ---
 
