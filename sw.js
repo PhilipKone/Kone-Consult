@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const CACHE_NAME = 'kone-consult-cache-v2';
+const CACHE_NAME = 'kone-consult-cache-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -21,6 +21,7 @@ self.addEventListener('activate', event => {
           if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName);
           }
+          return null;
         })
       );
     }).then(() => self.clients.claim())
