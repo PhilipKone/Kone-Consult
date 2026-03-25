@@ -12,5 +12,25 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#2563eb",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "shortcuts": [
+    {
+      "name": "Services",
+      "url": "/#/services",
+      "description": "View our research and consulting services",
+      "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Training Hub",
+      "url": "/#/training",
+      "description": "Access Academy courses and training",
+      "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Admin Dashboard",
+      "url": "/#/admin",
+      "description": "Manage website content and users",
+      "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ]
 }
