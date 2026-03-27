@@ -1,17 +1,16 @@
 {
   "files": {
     "main.css": "./static/css/main.0f3e3cf2.css",
-    "main.js": "./static/js/main.483b89a2.js",
+    "main.js": "./static/js/main.c77f8653.js",
     "static/js/453.d140f495.chunk.js": "./static/js/453.d140f495.chunk.js",
     "static/media/prereview-snapshot.png": "./static/media/prereview-snapshot.4d3164d6ddcb23dab4ce.png",
     "index.html": "./index.html",
-    "static/media/phconsult-logo.svg": "./static/media/phconsult-logo.255ae6fac7a8cf7f77f0867ee2d31994.svg",
     "main.0f3e3cf2.css.map": "./static/css/main.0f3e3cf2.css.map",
-    "main.483b89a2.js.map": "./static/js/main.483b89a2.js.map",
+    "main.c77f8653.js.map": "./static/js/main.c77f8653.js.map",
     "453.d140f495.chunk.js.map": "./static/js/453.d140f495.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0f3e3cf2.css",
-    "static/js/main.483b89a2.js"
+    "static/js/main.c77f8653.js"
   ]
 }
