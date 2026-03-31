@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const CACHE_NAME = 'kone-consult-cache-v3';
+const CACHE_NAME = 'kone-consult-cache-v4';
 const urlsToCache = [
   './',
   './index.html',
