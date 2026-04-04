@@ -199,7 +199,7 @@ The gap between digital models and physical reality is closing. At KA Lab, we us
 Finite Element Analysis allows us to isolate microscopic failure points in complex materials...
 
 ### Real-time Feedback
-By integrating IoT sensors into our prototypes, we have a continuous feedback loop that updates our simulation parameters automatically.`,imageUrl:`https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80`,readTime:12,author:{name:`Dr. Sarah Chen`,role:`Lead Research Scientist`},status:`published`,createdAt:{seconds:1712025e3},isPillar:!0},{id:`pillar-3`,title:`The Quants of Consulting: How Data Engineering Redefines Strategy`,slug:`quants-of-consulting-data-strategy`,category:`Consult`,excerpt:`Forget traditional slide decks. At KA, we build live data environments that allow stakeholders to simulate business outcomes in real-time.`,content:`# The Quants of Consulting
+By integrating IoT sensors into our prototypes, we have a continuous feedback loop that updates our simulation parameters automatically.`,imageUrl:`https://raw.githubusercontent.com/PhilipKone/Kone-Code-Academy/main/Kone-Consult/public/assets/blog/structural_integrity.png`,readTime:12,author:{name:`Dr. Sarah Chen`,role:`Lead Research Scientist`},status:`published`,createdAt:{seconds:1712025e3},isPillar:!0},{id:`pillar-3`,title:`The Quants of Consulting: How Data Engineering Redefines Strategy`,slug:`quants-of-consulting-data-strategy`,category:`Consult`,excerpt:`Forget traditional slide decks. At KA, we build live data environments that allow stakeholders to simulate business outcomes in real-time.`,content:`# The Quants of Consulting
 
 Strategy in 2026 is no longer about static five-year plans. It is about **Dynamic Resilience**...
 
