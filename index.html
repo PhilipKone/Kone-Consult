@@ -21,6 +21,24 @@
 
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
+    <script type="text/javascript">
+      // (c) 2016-2021 rafgraph
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct path and query string, and then
+      // replaces the current history item with the new URL.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
     <title>Kone Consult</title>
     <script>
       if ('serviceWorker' in navigator) {
@@ -36,7 +54,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/index-BJ-V7kii.js"></script>
+    <script type="module" crossorigin src="/assets/index-Do1gMQLa.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-Be7cUUy0.css">
   </head>
   <body>
