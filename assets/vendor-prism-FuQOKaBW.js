@@ -1,4 +1,4 @@
-import{c as W}from"./vendor-router-CGEM0-Ho.js";var q={exports:{}},X;function ee(){return X||(X=1,(function(G){var Y=typeof window<"u"?window:typeof WorkerGlobalScope<"u"&&self instanceof WorkerGlobalScope?self:{};/**
+import{c as W}from"./vendor-router-BTbgLAna.js";var q={exports:{}},X;function ee(){return X||(X=1,(function(G){var Y=typeof window<"u"?window:typeof WorkerGlobalScope<"u"&&self instanceof WorkerGlobalScope?self:{};/**
  * Prism: Lightweight, robust, elegant syntax highlighting
  *
  * @license MIT <https://opensource.org/licenses/MIT>
