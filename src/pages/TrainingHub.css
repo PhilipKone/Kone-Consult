@@ -1,0 +1,68 @@
+/* Training Hub CSS */
+
+.page-background-glow {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at 50% 30%, rgba(88, 166, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.training-hub-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Glass Pill Filters */
+.filter-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.filter-pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filter-pill.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(88, 166, 255, 0.4);
+}
+
+/* Ensure Training Cards look uniform */
+.training-card {
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Specific pill colors for icons on cards */
+.badge-pill {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+}
+
+/* Ensure horizontal scroll container doesn't get clipped by padding */
+.horizontal-scroll-container {
+    padding-top: 2rem;
+}

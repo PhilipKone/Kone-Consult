@@ -1,0 +1,103 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function for Admin access
+    function isAdmin() {
+      return request.auth != null && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+        request.auth.token.email in ['phconsultgh@gmail.com', 'philipkone45@gmail.com']
+      );
+    }
+
+    // Messages collection rules
+    match /messages/{messageId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Projects collection rules
+    match /projects/{projectId} {
+      allow read: if isAdmin() || (resource.data.status == "published");
+      allow write: if isAdmin();
+    }
+
+    // Receipts collection rules
+    match /receipts/{receiptId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Users collection rules - Fixed: Admin can now see all users in dashboard
+    match /users/{userId} {
+      allow read, create, update: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+      allow list: if isAdmin();
+    }
+
+    // Donations collection rules
+    match /donation_receipts/{docId} {
+      allow read: if true;
+      allow write: if false; 
+    }
+
+    // Documentation collection rules
+    match /documentation_modules/{moduleId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Services collection rules
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Training Courses collection rules
+    match /training_courses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // About Entries collection rules
+    match /about_entries/{entryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Activity Logs Rules - Allows tracking while keeping data private to Admin
+    match /activity_logs/{logId} {
+      allow create: if true;
+      allow read, list: if isAdmin();
+    }
+
+    // Kone Code IDE Templates (Read by anyone, Written by Admin)
+    match /kone_code_templates/{templateId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Kone Code IDE Public Projects (Public Sandbox)
+    match /kone_code_projects/{projectId} {
+      allow read, write: if true;
+    }
+
+    // Blogs collection rules
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Newsletter Subscribers rules
+    match /subscribers/{subscriberId} {
+      allow create: if true;
+      allow read, write: if isAdmin();
+    }
+
+    // Secure Messages rules (Encrypted Internal Inbox)
+    match /secure_messages/{messageId} {
+      allow read: if true; // Accessed via high-entropy ID in secure links
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}
