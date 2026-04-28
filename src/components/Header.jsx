@@ -250,14 +250,14 @@ const Header = () => {
                                             <Link to="/training?track=python" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Data Science</Link>
                                             <Link to="/training?track=js" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>App Dev</Link>
                                             <Link to="/training?track=r-matlab" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Game Dev</Link>
-                                            <Link to="/training?track=cpp" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Coding for Kids</Link>
+                                            <a href="https://kids.koneacademy.io/coding" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Coding for Kids</a>
 
                                             <div className="mega-menu-sublabel text-white small fw-bold mt-3 mb-1">School of AI</div>
                                             <Link to="/training?track=ai-foundation" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI Foundation</Link>
                                             <Link to="/training?track=hardware" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Hardware & Compute</Link>
                                             <Link to="/training?track=prompt-eng" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Prompt Engineering & GenAI</Link>
                                             <Link to="/training?track=gen-ai" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Agents</Link>
-                                            <Link to="/training?track=ai-kids" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI for Kids</Link>
+                                            <a href="https://kids.koneacademy.io/ai" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI for Kids</a>
                                         </div>
 
                                         <div className="mega-menu-column">
@@ -265,7 +265,7 @@ const Header = () => {
                                             <p className="mega-menu-subtitle small text-accent-primary mb-2">with Kone Lab</p>
                                             <Link to="/training?lab=3d-design" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>3D Design & Animation</Link>
                                             <Link to="/training?lab=simulation" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics</Link>
-                                            <Link to="/training?lab=3d-printing" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics for Kids</Link>
+                                            <a href="https://kids.koneacademy.io/robotics" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics for Kids</a>
 
                                         </div>
                                     </div>

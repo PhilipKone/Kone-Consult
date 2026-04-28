@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
 import InteractiveGrid from './components/InteractiveGrid';
+import InstallBanner from './components/InstallBanner';
 import './index.css';
 
 // Route-level code splitting — each page is only loaded when navigated to
@@ -78,6 +79,7 @@ const App: React.FC = () => {
                   </Suspense>
                 </main>
                 <FooterWrapper />
+                <InstallBanner />
               </div>
             </Router>
           )}
