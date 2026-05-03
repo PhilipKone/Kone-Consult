@@ -44,6 +44,20 @@ export const pillarBlogs = [
     },
     {
         id: "pillar-4",
+        title: "Arduino 101: Decoding the Anatomy of a Microcontroller",
+        slug: "arduino-101-anatomy",
+        category: "Lab",
+        excerpt: "The first step in your hardware journey. Learn how to read an Arduino board like a pro and understand the hidden power of the ATmega328P.",
+        content: `# Arduino 101: Decoding the Anatomy of a Microcontroller\n\n### The Start of a Journey\nWelcome to the frontier of hardware engineering. If you’ve ever wanted to make something move, light up, or sense the world, you’ve come to the right place. But before we write a single line of code, we need to understand the tool in your hand: the **Arduino Uno**.\n\n---\n\n## 🧠 1. Microcontroller vs. Computer\nYour laptop is a **General Purpose Computer**—it can browse the web, edit video, and run games. An Arduino is a **Microcontroller**—it is designed to do *one thing* at a time, very reliably, and at very low power.\n\nThink of your PC as a giant factory and the Arduino as a specialized robot on the assembly line.\n\n---\n\n## 🛠️ 2. The Board Anatomy\n\n### 🔌 The Powerhouse (ATMega328P)\nThat big black chip in the middle? That’s the brain. It has 32KB of flash memory (smaller than a single selfie image!), but that is plenty of space for complex industrial logic.\n\n### 🔢 The Pins: Your Interface with Reality\n*   **Digital Pins (0-13)**: These are like light switches. They are either **ON (5V)** or **OFF (0V)**. Pins with a tilde (~) are special—they use **PWM** to simulate intermediate voltages (like a dimmer switch).\n*   **Analog Pins (A0-A5)**: These are like thermometers. They can "sense" a range of values, allowing you to read data from light sensors, potentiometers, or moisture probes.\n\n### ⚡ Power & Communication\n*   **USB Port**: This is the gateway. It powers the board and acts as a bridge for your code to travel from the IDE to the chip.\n*   **Barrel Jack**: Want to run your project away from the computer? Plug in a 9V battery or a power adapter here.\n\n---\n\n## 💡 3. The 'Blink' Ritual\nIn software, we write "Hello World." In hardware, we **Blink**. \n\nBy connecting an LED to **Pin 13**, we write our first physical instruction. We tell the microcontroller to send 5V to that pin, wait a second, and then turn it off. It sounds simple, but it is the foundation of every automated system in the world.\n\n---\n\n## 🚀 4. What's Next?\nNow that you know the anatomy, the next step is the **Logic**. In our next entry, we’ll dive into the Arduino IDE and write our first "Physical Sketch."\n\n---\n\n**Kone Academy Lab: Empowering the next generation of hardware innovators.**`,
+        imageUrl: "https://consult.koneacademy.io/assets/blog/arduino_anatomy.png",
+        readTime: 6,
+        author: { name: "Philip Kone", role: "Head of Engineering" },
+        status: "published",
+        createdAt: { seconds: 1712200000 },
+        isPillar: true
+    },
+    {
+        id: "pillar-5",
         title: "The Myth of the 'Recovered' Sketch: Reverse Engineering Arduino Binaries in 2026",
         slug: "arduino-reverse-engineering-myth",
         category: "Lab",
