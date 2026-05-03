@@ -41,5 +41,19 @@ export const pillarBlogs = [
         status: "published",
         createdAt: { seconds: 1711938600 },
         isPillar: true
+    },
+    {
+        id: "pillar-4",
+        title: "The Myth of the 'Recovered' Sketch: Reverse Engineering Arduino Binaries in 2026",
+        slug: "arduino-reverse-engineering-myth",
+        category: "Lab",
+        excerpt: "Is it possible to extract source code from an Arduino? We dive into the world of AVR binaries, decompilers, and why your code is safer than you think.",
+        content: `# The Myth of the "Recovered" Sketch: Reverse Engineering Arduino Binaries in 2026\n\n### The Scenario: The Lost Source Code\nIt happens to the best of us. A prototype has been running perfectly for months, but the original \`.ino\` sketch is nowhere to be found. A client asks: *"Can we just pull the code off the chip?"*\n\nAt KA Lab, we deal with hardware forensics frequently. The answer is a classic engineering paradox: **It is technically possible, but practically impossible.**\n\n---\n\n## ⚡ 1. The One-Way Street: Compilation\nTo understand why extraction is hard, you have to understand what happens when you click "Upload." The Arduino IDE doesn't send your C++ code to the board. It sends a **Binary File (.hex)**.\n\n*   **Source Code**: Human-readable, commented, named variables (\`int sensorValue\`).\n*   **Binary**: Machine-readable zeros and ones that tell the ATmega328P exactly which electrical gates to open and close.\n\nOnce that conversion happens, the "labels" (your variable names and logic structure) are stripped away forever.\n\n---\n\n## 🔍 2. Extraction vs. Reconstruction\n\n### 📥 Step A: Extraction (The Easy Part)\nUsing a tool like \`avrdude\`, you can indeed suck the binary data off an Arduino. This produces a raw hex file. If you want to "clone" the device, this is enough—you can flash that hex onto a new board and it will behave exactly the same.\n\n### 📤 Step B: Reconstruction (The Hard Part)\nTrying to turn that hex file back into C++ is like trying to turn a baked cake back into flour and eggs. You can use a **Decompiler** (like Ghidra), but you won't get your sketch back. You will get **Assembly Code**.\n\n---\n\n## 🧱 3. The De-compilation Wall\nWhy can't modern AI or decompilers just fix this? \n\n1.  **Register Obscurity**: Instead of \`digitalWrite(13, HIGH)\`, you see \`sbi 0x05, 5\`. Without a hardware map, a decompiler doesn't know what that address means.\n2.  **Variable Stripping**: Every variable becomes \`var_0x001\`, \`var_0x002\`, etc. Following the logic of a complex PID controller or a communication protocol becomes a nightmare.\n3.  **Library Abstraction**: Libraries like \`<Wire.h>\` or \`<Servo.h>\` are inlined. Their code mixes with yours, creating a massive "blob" of logic where you can't tell where the driver ends and your application starts.\n\n---\n\n## 🛡️ 4. Security: The Lock Bits\nFor commercial projects, developers often set **Lock Bits**. This is a hardware-level "Do Not Disturb" sign. If these bits are set, the chip will refuse to be read. Any attempt to bypass this usually requires erasing the entire chip, effectively destroying the code you were trying to save.\n\n---\n\n## 🧪 5. The KA Lab Recommendation\nIn 99% of cases, if the source code is lost, **Clean-Room Reconstruction** is faster and more reliable than reverse engineering. \n\nBy observing the inputs and outputs of the device, our engineers can rewrite the logic from scratch. This results in code that is clean, maintainable, and documented—unlike the "ghost code" produced by a decompiler.\n\n---\n\n**Kone Academy Lab: Bridging the gap between physical hardware and digital clarity.**`,
+        imageUrl: "https://consult.koneacademy.io/assets/blog/arduino_forensics.png",
+        readTime: 8,
+        author: { name: "Philip Kone", role: "Head of Engineering" },
+        status: "published",
+        createdAt: { seconds: 1712284200 },
+        isPillar: true
     }
 ];
