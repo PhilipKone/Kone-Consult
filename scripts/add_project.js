@@ -18,8 +18,8 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 const projectData = {
-    title: "Enhancing Bottom-Up Human Pose Estimation with Multi-Scale Training",
-    description: "This project advances the state-of-the-art in human pose estimation by integrating multi-scale training with the HRNet architecture. It focuses on bottom-up approaches, which detect all body keypoints in an image and group them into skeletons for each person—ideal for crowded or multi-person scenes. The workflow includes advanced data preparation, multi-scale data augmentation, curriculum learning, and specialized loss functions. The system is evaluated on standard benchmarks (COCO, CrowdPose, MPII) and demonstrates improved accuracy, robustness to occlusion and scale, and computational efficiency. Applications include sports analytics, surveillance, healthcare, and animation.",
+    title: "Advanced Human Pose Estimation & Multi-Scale Data Architecture",
+    description: "We developed a custom multi-scale training framework to improve accuracy in crowded scenes. Utilizing bottom-up detection methodologies and HRNet-inspired architectures, we optimized the system for robustness against occlusion. This demonstrates our capability in high-precision Computer Vision research and model evaluation for complex environmental datasets.",
     tools: "Python, PyTorch, COCO, Computer Vision",
     status: "published",
     createdAt: serverTimestamp(),

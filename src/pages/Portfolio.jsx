@@ -139,8 +139,8 @@ const Portfolio = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                 >
-                    <h3 className="text-secondary">No projects initialized.</h3>
-                    <p className="text-secondary small">Check back soon for updates!</p>
+                    <h3 className="text-secondary">Innovation in Progress</h3>
+                    <p className="text-secondary small">Our latest research breakthroughs and engineering logs are currently being finalized for public release. Check back soon for our newest impact stories.</p>
                 </motion.div>
             )}
         </div>
