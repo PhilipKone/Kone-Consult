@@ -58,6 +58,20 @@ export const pillarBlogs = [
     },
     {
         id: "pillar-5",
+        title: "Logic & Flow: Writing Your First Arduino Sketch",
+        slug: "arduino-logic-flow",
+        category: "Lab",
+        excerpt: "From void setup() to void loop(). Master the fundamental structure of Arduino programming and bring your hardware to life.",
+        content: `# Logic & Flow: Writing Your First Arduino Sketch\n\n### Beyond the Hardware\nIn our last lesson, we decoded the physical board. Now, it’s time to breathe life into it. In the world of Arduino, we don’t write "programs"—we write **Sketches**.\n\n---\n\n## 🖥️ 1. The Environment: Arduino IDE\nTo talk to the board, you need the **Arduino Integrated Development Environment (IDE)**. It’s a simple text editor with a powerful "Compile" button that translates your human thoughts into machine-readable instructions.\n\n---\n\n## 🔄 2. The Golden Rule: Setup vs. Loop\nEvery single Arduino sketch follows a rigid two-part structure. If you forget one, the code won't run.\n\n### 🏁 \`void setup()\`\nThis runs **only once** when the board first gets power. This is where you set the "rules" for your project. \n*   *Example*: "Pin 13 is an Output."\n\n### 🔄 \`void loop()\`\nThis runs **forever**. Once the code reaches the bottom, it immediately jumps back to the top. This is the "beating heart" of your project.\n*   *Example*: "Turn on the light, wait, turn off the light, wait."\n\n---\n\n## ✍️ 3. Talking to the Pins\nTo control the hardware, we use three primary commands:\n\n1.  **\`pinMode(pin, mode)\`**: Tells the board if a pin is an **INPUT** (listening) or an **OUTPUT** (speaking).\n2.  **\`digitalWrite(pin, state)\`**: Sets a pin to **HIGH** (5V) or **LOW** (0V).\n3.  **\`delay(ms)\`**: Pauses the brain for a specific number of milliseconds. \n\n---\n\n## 🧪 4. The Logic Challenge\nLook at the classic Blink code:\n\n\`\`\`cpp\nvoid setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(13, HIGH);\n  delay(1000);\n  digitalWrite(13, LOW);\n  delay(1000);\n}\n\`\`\`\n\n**The Challenge**: Can you make the LED blink like a heartbeat? Try changing the delays to 100ms for the "on" state and 500ms for the "off" state. This simple change is your first step into **Timing & Control**.\n\n---\n\n**Kone Academy Lab: Master the flow, control the world.**`,
+        imageUrl: "https://consult.koneacademy.io/assets/blog/arduino_logic.png",
+        readTime: 7,
+        author: { name: "Philip Kone", role: "Head of Engineering" },
+        status: "published",
+        createdAt: { seconds: 1712242200 },
+        isPillar: true
+    },
+    {
+        id: "pillar-6",
         title: "The Myth of the 'Recovered' Sketch: Reverse Engineering Arduino Binaries in 2026",
         slug: "arduino-reverse-engineering-myth",
         category: "Lab",
