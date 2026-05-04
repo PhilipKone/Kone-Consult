@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase/config';
 import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, addDoc, serverTimestamp, where, getDocs } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUsers, FaChartLine, FaProjectDiagram, FaBriefcase, FaGraduationCap, FaPlus, FaThLarge, FaList, FaBook, FaHistory, FaInfoCircle, FaRegEnvelope } from 'react-icons/fa';
+import { FaUsers, FaChartLine, FaProjectDiagram, FaBriefcase, FaGraduationCap, FaPlus, FaThLarge, FaList, FaBook, FaHistory, FaInfoCircle, FaRegEnvelope, FaCode, FaWallet, FaMoneyBillWave, FaDownload } from 'react-icons/fa';
 import { FiBookOpen } from 'react-icons/fi';
 import './AdminDashboard.css';
+import KonePayFinancials from '../components/admin/KonePayFinancials';
 // import Sidebar from '../components/admin/Sidebar';
 import MessageList from '../components/admin/MessageList';
 import MessageView from '../components/admin/MessageView';
@@ -316,6 +317,10 @@ const AdminDashboard = () => {
     const [showBlogModal, setShowBlogModal] = useState(false);
     const [editingBlog, setEditingBlog] = useState(null);
 
+    // Kone Pay (Financials) State
+    const [payments, setPayments] = useState([]);
+    const [totalRevenue, setTotalRevenue] = useState(0);
+
     useEffect(() => {
         if (!currentUser) {
             navigate('/login');
@@ -416,25 +421,34 @@ const AdminDashboard = () => {
         const unsubscribeBlogs = onSnapshot(
             collection(db, 'blogs'), 
             (snapshot) => {
-                const fetchedBlogs = snapshot.docs.map(doc => {
-                    const data = doc.data();
-                    // Ensure the unique Firestore ID is used even if data has an 'id' field
-                    return { ...data, id: doc.id };
-                });
-                
-                // Sort by createdAt descending in memory to avoid Firestore index requirements
-                setBlogs(fetchedBlogs.sort((a, b) => {
-                    const timeA = a.createdAt?.seconds || 0;
-                    const timeB = b.createdAt?.seconds || 0;
-                    return timeB - timeA;
-                }));
-            },
-            (error) => {
-                console.log("Blogs collection empty or error", error);
+                const fetchedBlogs = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+                setBlogs(fetchedBlogs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
             }
         );
 
+        // Subscribe to Payments (Kone Pay)
+        const unsubscribePayments = onSnapshot(
+            query(collection(db, 'payments'), orderBy('createdAt', 'desc')),
+            (snapshot) => {
+                const fetchedPayments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setPayments(fetchedPayments);
+                const total = fetchedPayments
+                    .filter(p => p.status === 'success')
+                    .reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
+                setTotalRevenue(total);
+            },
+            (error) => {
+                console.log("Payments collection might not exist yet", error);
+            }
+        );
+
+        // Safety timeout for loading state
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 5000);
+
         return () => {
+            clearTimeout(timer);
             unsubscribeMessages();
             unsubscribeProjects();
             unsubscribeServices();
@@ -444,6 +458,7 @@ const AdminDashboard = () => {
             unsubscribeTemplates();
             unsubscribeProjectsIDE();
             unsubscribeBlogs();
+            unsubscribePayments();
         };
     }, [currentUser, navigate]);
 
@@ -1023,8 +1038,8 @@ const AdminDashboard = () => {
                     </div>
                 </div>
 
-                {/* Navigation Tabs - Hidden if not Kone Consult */}
-                {activeSite === 'Kone Consult' && (
+                {/* Navigation Tabs - Enabled for all sites */}
+                {(activeSite === 'Kone Consult' || activeSite === 'Kone Lab' || activeSite === 'Kone Code' || activeSite === 'Kone Academy') && (
                     <div className="nav-tabs-glass hide-scrollbar overflow-auto mb-4">
                             <button
                                 onClick={() => setActiveTab('messages')}
@@ -1089,17 +1104,32 @@ const AdminDashboard = () => {
                             >
                                 <FaUsers className="me-2" /> Subscribers
                             </button>
+                            {activeSite === 'Kone Code' && (
+                                <button
+                                    onClick={() => setActiveTab('templates')}
+                                    className={`tab-btn-premium ${activeTab === 'templates' ? 'active' : ''}`}
+                                >
+                                    <FaCode className="me-2" /> IDE Templates
+                                </button>
+                            )}
                             <button
                                 onClick={() => setActiveTab('activity')}
                                 className={`tab-btn-premium ${activeTab === 'activity' ? 'active' : ''}`}
                             >
                                 <FaHistory className="me-2" /> Activity
                             </button>
+                            <button
+                                onClick={() => setActiveTab('financials')}
+                                className={`tab-btn-premium ${activeTab === 'financials' ? 'active' : ''}`}
+                                style={activeTab === 'financials' ? { background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)', boxShadow: '0 4px 20px rgba(255, 215, 0, 0.4)' } : {}}
+                            >
+                                <FaWallet className="me-2" /> Kone Pay
+                            </button>
                         </div>
                 )}
 
-                {/* Main Content Area */}
-                {activeSite === 'Kone Consult' ? (
+                {/* Main Content Area - Enabled for all sites */}
+                {(activeSite === 'Kone Consult' || activeSite === 'Kone Lab' || activeSite === 'Kone Code' || activeSite === 'Kone Academy') ? (
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTab}
@@ -1128,7 +1158,19 @@ const AdminDashboard = () => {
                         )}
 
                         {activeTab === 'analytics' && (
-                            <AnalyticsDashboard />
+                            <AnalyticsDashboard 
+                                messages={messages}
+                                projects={projects.filter(p => p.division === (activeSite === 'Kone Lab' ? 'Kone Lab' : activeSite === 'Kone Code' ? 'Kone Code' : activeSite === 'Kone Academy' ? 'Kone Academy' : 'Kone Consult'))}
+                                blogs={blogs.filter(b => (b.category || '').toLowerCase() === (activeSite === 'Kone Lab' ? 'lab' : activeSite === 'Kone Code' ? 'code' : activeSite === 'Kone Academy' ? 'academy' : 'consult'))}
+                            />
+                        )}
+
+                        {activeTab === 'financials' && (
+                            <KonePayFinancials 
+                                payments={payments}
+                                totalRevenue={totalRevenue}
+                                activeSite={activeSite}
+                            />
                         )}
 
                         {activeTab === 'projects' && (
@@ -1193,10 +1235,11 @@ const AdminDashboard = () => {
                                 {/* Filtered Projects Logic */}
                                 {(() => {
                                     const filteredProjects = projects.filter(p => {
+                                        const matchesSite = p.division === (activeSite === 'Kone Lab' ? 'Kone Lab' : activeSite === 'Kone Code' ? 'Kone Code' : activeSite === 'Kone Academy' ? 'Kone Academy' : 'Kone Consult');
                                         const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                                             p.description.toLowerCase().includes(searchQuery.toLowerCase());
                                         const matchesStatus = statusFilter === 'All' || p.status === statusFilter;
-                                        return matchesSearch && matchesStatus;
+                                        return matchesSite && matchesSearch && matchesStatus;
                                     });
 
                                     if (viewMode === 'list') {
@@ -1247,7 +1290,7 @@ const AdminDashboard = () => {
                                     </div>
                                 </div>
                                 <ServiceList
-                                    services={services}
+                                    services={services.filter(s => s.division === (activeSite === 'Kone Lab' ? 'Kone Lab' : activeSite === 'Kone Code' ? 'Kone Code' : activeSite === 'Kone Academy' ? 'Kone Academy' : 'Kone Consult'))}
                                     onDelete={deleteService}
                                     onEdit={handleEditService}
                                 />
@@ -1282,7 +1325,7 @@ const AdminDashboard = () => {
                                     </div>
                                 </div>
                                 <TrainingList
-                                    courses={trainingCourses}
+                                    courses={trainingCourses.filter(c => c.division === (activeSite === 'Kone Lab' ? 'Kone Lab' : activeSite === 'Kone Code' ? 'Kone Code' : activeSite === 'Kone Academy' ? 'Kone Academy' : 'Kone Consult'))}
                                     onDelete={deleteTraining}
                                     onEdit={handleEditTraining}
                                     onSeed={handleSeedCourses}
@@ -1304,14 +1347,15 @@ const AdminDashboard = () => {
                                         <FaPlus /> New Module
                                     </button>
                                 </div>
-                                <DocumentationList
-                                    docs={docs}
-                                    onDelete={(id) => handleDeleteDoc(id)}
-                                    onEdit={(doc) => {
-                                        setEditingDoc(doc);
-                                        setShowDocsModal(true);
-                                    }}
-                                    onView={(doc) => window.open(`/docs?section=${doc.id}`, '_blank')}
+                                <DocumentationList 
+                                    docs={docs.filter(d => {
+                                        const cat = (d.category || '').toLowerCase();
+                                        const target = (activeSite === 'Kone Lab' ? 'lab' : activeSite === 'Kone Code' ? 'code' : activeSite === 'Kone Academy' ? 'academy' : 'consult');
+                                        return cat === target;
+                                    })}
+                                    onDelete={handleDeleteDoc} 
+                                    onEdit={handleEditDoc} 
+                                    onView={(doc) => window.open(`/docs?section=${doc.id}&category=${activeSite === 'Kone Lab' ? 'lab' : activeSite === 'Kone Code' ? 'code' : activeSite === 'Kone Academy' ? 'academy' : 'consult'}`, '_blank')}
                                 />
                             </div>
                         )}
@@ -1346,13 +1390,90 @@ const AdminDashboard = () => {
                         )}
 
                         {activeTab === 'blogs' && (
-                            <BlogManagementList 
-                                blogs={blogs} 
-                                onDelete={deleteBlog} 
-                                onAdd={() => { setEditingBlog(null); setShowBlogModal(true); }} 
-                                onEdit={handleEditBlog} 
-                                onToggleStatus={handleToggleBlogStatus}
-                                onSeed={handleSeedBlogs}
+                            <div className="row g-4">
+                                <div className="col-lg-8">
+                                    <BlogManagementList 
+                                        blogs={blogs.filter(b => b.category === (activeSite === 'Kone Lab' ? 'Lab' : activeSite === 'Kone Code' ? 'Code' : activeSite === 'Kone Academy' ? 'Academy' : 'Consult'))} 
+                                        onDelete={deleteBlog} 
+                                        onAdd={() => { setEditingBlog(null); setShowBlogModal(true); }} 
+                                        onEdit={handleEditBlog} 
+                                        onToggleStatus={handleToggleBlogStatus}
+                                        onSeed={handleSeedBlogs}
+                                    />
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="sidebar-glass-panel">
+                                        <div className="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom border-white border-opacity-10">
+                                            <div className={`glass-icon ${activeSite === 'Kone Code' ? 'bg-success' : activeSite === 'Kone Academy' ? 'bg-secondary' : 'bg-info'} text-white`} style={{ width: '40px', height: '40px' }}>
+                                                <FaThLarge size={18} />
+                                            </div>
+                                            <div>
+                                                <h6 className="text-white mb-0 fw-bold">
+                                                    {activeSite === 'Kone Lab' ? 'Lab Insights' : activeSite === 'Kone Code' ? 'Code Insights' : activeSite === 'Kone Academy' ? 'Academy Hub' : 'Consult Analytics'}
+                                                </h6>
+                                                <small className="text-secondary">Editorial Performance</small>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label className="label-premium">Content Distribution</label>
+                                            <div className="d-flex flex-column gap-2">
+                                                <div className="d-flex justify-content-between small">
+                                                    <span className="text-secondary">Total Articles</span>
+                                                    <span className="text-white fw-bold">{blogs.filter(b => b.category === (activeSite === 'Kone Lab' ? 'Lab' : activeSite === 'Kone Code' ? 'Code' : activeSite === 'Kone Academy' ? 'Academy' : 'Consult')).length}</span>
+                                                </div>
+                                                <div className="d-flex justify-content-between small">
+                                                    <span className="text-secondary">Published</span>
+                                                    <span className="text-success fw-bold">{blogs.filter(b => b.category === (activeSite === 'Kone Lab' ? 'Lab' : activeSite === 'Kone Code' ? 'Code' : activeSite === 'Kone Academy' ? 'Academy' : 'Consult') && b.status === 'published').length}</span>
+                                                </div>
+                                                <div className="d-flex justify-content-between small">
+                                                    <span className="text-warning">Drafts</span>
+                                                    <span className="text-warning fw-bold">{blogs.filter(b => b.category === (activeSite === 'Kone Lab' ? 'Lab' : activeSite === 'Kone Code' ? 'Code' : activeSite === 'Kone Academy' ? 'Academy' : 'Consult') && b.status === 'draft').length}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className={`p-3 rounded ${activeSite === 'Kone Code' ? 'bg-success' : activeSite === 'Kone Academy' ? 'bg-secondary' : 'bg-info'} bg-opacity-10 border ${activeSite === 'Kone Code' ? 'border-success' : activeSite === 'Kone Academy' ? 'border-secondary' : 'border-info'} border-opacity-20 mb-4`}>
+                                            <p className={`${activeSite === 'Kone Code' ? 'text-success' : activeSite === 'Kone Academy' ? 'text-secondary' : 'text-info'} smaller mb-0 fst-italic`}>
+                                                {activeSite === 'Kone Lab' 
+                                                    ? "Lab content focuses on engineering precision and hardware innovations."
+                                                    : activeSite === 'Kone Code'
+                                                    ? "Code content explores agentic architectures and software scalability."
+                                                    : activeSite === 'Kone Academy'
+                                                    ? "Academy content manages the global hub and institutional vision."
+                                                    : "Consult content drives research authority and strategic leadership."}
+                                            </p>
+                                        </div>
+
+                                        <button 
+                                            onClick={() => { setEditingBlog(null); setShowBlogModal(true); }}
+                                            className={`btn ${activeSite === 'Kone Code' ? 'btn-outline-success' : activeSite === 'Kone Academy' ? 'btn-outline-secondary' : 'btn-outline-info'} w-100 py-2 rounded-pill small fw-bold d-flex align-items-center justify-content-center gap-2`}
+                                        >
+                                            <FaPlus size={14} /> Quick Create
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'templates' && activeSite === 'Kone Code' && (
+                            <KoneCodeTemplatesList
+                                templates={ideTemplates}
+                                onDelete={handleDeleteTemplate}
+                                onEdit={(template) => {
+                                    setEditingTemplate(template);
+                                    setTemplateForm({
+                                        title: template.title,
+                                        language: template.language,
+                                        code: template.code
+                                    });
+                                    setShowTemplateModal(true);
+                                }}
+                                onAdd={() => {
+                                    setEditingTemplate(null);
+                                    setTemplateForm({ title: '', language: 'html', code: '' });
+                                    setShowTemplateModal(true);
+                                }}
                             />
                         )}
 
@@ -1463,8 +1584,8 @@ const AdminDashboard = () => {
                         </div>
                         <h4 className="text-white fw-bold mb-2">{activeSite} Modules</h4>
                         <p className="text-secondary text-center small" style={{ maxWidth: '400px' }}>
-                            The dashboard modules for {activeSite} have not been configured yet.
-                            Switch back to Kone Consult to manage its active modules.
+                            The dashboard modules for {activeSite} are being migrated to the unified management view. 
+                            Switch back to <strong>Kone Consult</strong> or <strong>Kone Code</strong> for established workflows.
                         </p>
                     </div>
                 )}
@@ -1843,6 +1964,7 @@ const AdminDashboard = () => {
             {showBlogModal && (
                 <BlogForm 
                     blog={blogs.find(b => b.id === editingBlog)}
+                    defaultCategory={activeSite === 'Kone Lab' ? 'Lab' : activeSite === 'Kone Code' ? 'Code' : activeSite === 'Kone Academy' ? 'Academy' : 'Consult'}
                     onSave={handleBlogSubmit}
                     onCancel={() => { setShowBlogModal(false); setEditingBlog(null); }}
                 />

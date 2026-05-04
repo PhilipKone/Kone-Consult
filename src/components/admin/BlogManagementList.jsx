@@ -71,7 +71,12 @@ const BlogManagementList = ({ blogs, onDelete, onAdd, onEdit, onToggleStatus, on
                             <div className="flex-grow-1 min-w-0">
                                 <div className="d-flex align-items-center gap-2 mb-1">
                                     <h6 className="text-white mb-0 fw-bold text-truncate">{blog.title}</h6>
-                                    <span className={`badge ${blog.category === 'Code' ? 'bg-success' : blog.category === 'Consult' ? 'bg-primary' : 'bg-warning text-dark'} bg-opacity-10 border border-current opacity-75`} style={{ fontSize: '0.6rem' }}>
+                                    <span className={`badge ${
+                                        blog.category === 'Code' ? 'bg-success' : 
+                                        blog.category === 'Consult' ? 'bg-primary' : 
+                                        blog.category === 'Lab' ? 'bg-info' : 
+                                        'bg-warning text-dark'
+                                    } bg-opacity-10 border border-current opacity-75`} style={{ fontSize: '0.6rem' }}>
                                         {blog.category}
                                     </span>
                                 </div>

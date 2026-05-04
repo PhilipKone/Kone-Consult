@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { FiSave, FiX, FiImage, FiClock, FiTag, FiBookOpen, FiUser, FiZap, FiGlobe, FiActivity } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const BlogForm = ({ blog, onSave, onCancel }) => {
+const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
     const [formData, setFormData] = useState({
         title: '',
         slug: '',
         excerpt: '',
         content: '',
-        category: 'Code',
+        category: defaultCategory || 'Code',
         tags: '',
         imageUrl: '',
         seed: '',
@@ -164,6 +164,7 @@ const BlogForm = ({ blog, onSave, onCancel }) => {
                                             <option value="Consult">Kone Consult (Research)</option>
                                             <option value="Code">Kone Code (Coding)</option>
                                             <option value="Lab">Kone Lab (Engineering)</option>
+                                            <option value="Academy">Kone Academy (Global)</option>
                                         </select>
                                     </div>
 

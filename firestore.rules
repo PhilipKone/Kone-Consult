@@ -99,5 +99,13 @@ service cloud.firestore {
       allow read: if true; // Accessed via high-entropy ID in secure links
       allow create, update, delete: if isAdmin();
     }
+
+    // Kone Pay (Financial Transactions)
+    match /payments/{paymentId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+      // Allow creation for public checkouts (for future Paystack webhooks)
+      allow create: if true; 
+    }
   }
 }
