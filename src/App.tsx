@@ -24,6 +24,7 @@ const UserProfile      = lazy(() => import('./pages/UserProfile'));
 const Blog             = lazy(() => import('./pages/Blog'));
 const BlogPost         = lazy(() => import('./pages/BlogPost'));
 const SecureMessageView = lazy(() => import('./pages/SecureMessageView'));
+const KonePay           = lazy(() => import('./pages/KonePay'));
 
 // Minimal inline fallback — avoids a full-page flash while chunks load
 const PageLoader: React.FC = () => (
@@ -75,6 +76,7 @@ const App: React.FC = () => {
                       <Route path="/blog"               element={<Blog />} />
                       <Route path="/blog/:slug"         element={<BlogPost />} />
                       <Route path="/secure/:messageId"  element={<SecureMessageView />} />
+                      <Route path="/pay"               element={<KonePay />} />
                     </Routes>
                   </Suspense>
                 </main>

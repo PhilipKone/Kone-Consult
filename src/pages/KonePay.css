@@ -1,0 +1,370 @@
+/* ── Kone Pay Page ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+.konepay-page {
+  min-height: 100vh;
+  background: #080a0e;
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Glow */
+.konepay-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.konepay-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.06), transparent 70%);
+  filter: blur(60px);
+  transition: background 0.5s ease;
+}
+
+/* Header */
+.konepay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 10;
+}
+
+.konepay-back {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.konepay-back:hover { color: #e2e8f0; }
+
+.konepay-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFD700;
+}
+.konepay-logo {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 215, 0, 0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.konepay-secure {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Main Content */
+.konepay-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.konepay-card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.konepay-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  margin: 0 0 0.5rem 0;
+}
+.konepay-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0 0 2rem 0;
+}
+
+/* Division Tabs */
+.division-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.division-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.division-tab:hover { border-color: rgba(255, 255, 255, 0.2); color: #e2e8f0; }
+.division-tab.active { font-weight: 700; }
+
+/* Service List */
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: transparent;
+  color: #cbd5e1;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.service-item:hover { border-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.03); }
+.service-item.selected { font-weight: 600; }
+.service-label { font-size: 0.9rem; }
+.service-price { font-size: 0.85rem; font-weight: 700; }
+
+/* Custom Amount */
+.custom-amount-wrap { margin-bottom: 1.5rem; }
+.custom-amount-wrap label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.5rem; font-weight: 600; letter-spacing: 0.5px; }
+.amount-input-wrap { display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); }
+.currency-prefix { padding: 0 1rem; font-size: 1.1rem; color: #94a3b8; font-weight: 700; border-right: 1px solid rgba(255,255,255,0.1); }
+.amount-input { flex: 1; background: transparent; border: none; outline: none; color: #f1f5f9; font-size: 1.3rem; font-weight: 700; padding: 0.75rem 1rem; }
+.amount-input::placeholder { color: rgba(255,255,255,0.2); }
+
+/* Summary Bar */
+.summary-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border: 1px solid;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.02);
+}
+.summary-label { font-size: 0.75rem; color: #64748b; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.2rem; }
+.summary-amount { font-size: 1.5rem; font-weight: 800; }
+
+/* Back Button */
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: #e2e8f0; }
+
+/* Form */
+.konepay-form { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.8rem; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px; }
+.form-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: #f1f5f9;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+.form-input:focus { border-color: rgba(255,255,255,0.3); }
+.form-input.error { border-color: #ef4444; }
+.field-error { font-size: 0.75rem; color: #ef4444; margin: 0; }
+
+/* Payment Methods */
+.payment-methods { margin-bottom: 1.5rem; }
+.methods-label { font-size: 0.75rem; color: #64748b; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.75rem; }
+.methods-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.method-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn-pay-next {
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn-pay-next:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-pay-next:not(:disabled):hover { opacity: 0.9; transform: translateY(-1px); }
+
+.btn-pay-final {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 14px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: opacity 0.2s, transform 0.1s;
+  margin-bottom: 1rem;
+}
+.btn-pay-final:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-pay-final:not(:disabled):hover { opacity: 0.9; transform: translateY(-1px); }
+.spin-icon { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #475569;
+  text-align: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Success State */
+.konepay-success { text-align: center; }
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+.receipt-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.875rem;
+}
+.receipt-row:last-child { border-bottom: none; }
+.receipt-row span:first-child { color: #64748b; }
+.receipt-row span:last-child { color: #e2e8f0; font-weight: 600; }
+.mono { font-family: monospace; font-size: 0.75rem; }
+
+.success-note { font-size: 0.85rem; color: #64748b; margin-bottom: 2rem; }
+.success-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+.btn-home {
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.btn-home:hover { border-color: rgba(255,255,255,0.3); color: #e2e8f0; }
+
+.btn-pay-another {
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #FFD700;
+  background: transparent;
+  color: #FFD700;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-pay-another:hover { background: rgba(255, 215, 0, 0.1); }
+
+/* Footer */
+.konepay-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: #334155;
+  position: relative;
+  z-index: 1;
+}
+.konepay-footer a { color: #4ade80; text-decoration: none; }
+
+/* Animations */
+.animate-fade-in { animation: fadeUp 0.4s ease both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .konepay-card { padding: 1.5rem; border-radius: 16px; }
+  .konepay-header { padding: 1rem; }
+  .konepay-secure { display: none; }
+  .konepay-title { font-size: 1.4rem; }
+  .summary-bar { flex-direction: column; gap: 1rem; text-align: center; }
+  .btn-pay-next { width: 100%; }
+}
