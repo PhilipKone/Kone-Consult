@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
 import './KonePay.css';
 
 const PAYSTACK_PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_placeholder';
+const IS_TEST_MODE = PAYSTACK_PUBLIC_KEY.startsWith('pk_test_');
 
 const SERVICES = {
   'Kone Consult': [
@@ -154,6 +155,14 @@ export default function KonePay() {
       </Helmet>
 
       <div className="konepay-page">
+        {/* Test Mode Banner — auto-hides when live key is used */}
+        {IS_TEST_MODE && (
+          <div className="test-mode-banner">
+            <span className="test-mode-icon">⚠️</span>
+            <strong>TEST MODE</strong> — No real payments are being processed. For internal testing only.
+          </div>
+        )}
+
         {/* Background */}
         <div className="konepay-bg">
           <div className="konepay-glow" style={{ background: colors.glow.replace('0.15', '0.08') }} />
