@@ -107,5 +107,24 @@ service cloud.firestore {
       // Allow creation for public checkouts (for future Paystack webhooks)
       allow create: if true; 
     }
+
+    // Client Errors logging (Write-only for public, Read/List for Admin)
+    match /client_errors/{errorId} {
+      allow create: if true;
+      allow read, list, update, delete: if isAdmin();
+    }
+
+    // --- KONE KIDS GAMIFICATION ---
+    // Badge definitions (Read by everyone, Write by Admin)
+    match /badges/{badgeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Mission definitions (Read by everyone, Write by Admin)
+    match /missions/{missionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
   }
 }

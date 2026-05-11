@@ -209,7 +209,18 @@ const Blog = () => {
                                                     {blog.category}
                                                 </span>
                                             )}
-                                            <img src={blog.imageUrl || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80'} alt={blog.title} />
+                                            <img 
+                                                src={blog.imageUrl || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=640'} 
+                                                alt={blog.title}
+                                                loading="lazy"
+                                                decoding="async"
+                                                width="640"
+                                                height="220"
+                                                onError={(e) => {
+                                                    e.currentTarget.onerror = null;
+                                                    e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=640&h=220';
+                                                }}
+                                            />
                                         </div>
                                         <div className="blog-card-content">
                                             <div className="d-flex align-items-center gap-2 mb-3 text-secondary" style={{ fontSize: '0.75rem' }}>

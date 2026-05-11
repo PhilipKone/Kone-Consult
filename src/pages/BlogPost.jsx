@@ -207,7 +207,18 @@ const BlogPost = () => {
                 transition={{ duration: 1, delay: 0.2 }}
             >
                 <div className="post-featured-image position-relative border border-dark border-opacity-10 shadow-2xl">
-                    <img src={post.imageUrl || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80'} alt={post.title} />
+                    <img 
+                        src={post.imageUrl || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'} 
+                        alt={post.title}
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="500"
+                        onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200&h=500';
+                        }}
+                    />
                 </div>
             </motion.div>
 
