@@ -10,6 +10,7 @@ import './Blog.css';
 import { pillarBlogs } from '../data/pillar_blogs';
 import SEO from '../components/SEO';
 import DOMPurify from 'dompurify';
+import { resolveAssetPath } from '../utils/assets';
 
 const BlogPost = () => {
     const { slug } = useParams();
@@ -127,7 +128,7 @@ const BlogPost = () => {
         "@type": "BlogPosting",
         "headline": post.title,
         "description": post.excerpt,
-        "image": post.imageUrl,
+        "image": resolveAssetPath(post.imageUrl),
         "author": {
             "@type": "Person",
             "name": post.author?.name || "KA Staff"
@@ -148,7 +149,7 @@ const BlogPost = () => {
             <SEO 
                 title={post.title}
                 description={post.excerpt}
-                image={post.imageUrl}
+                image={resolveAssetPath(post.imageUrl)}
                 url={window.location.href}
                 type="article"
             />
@@ -208,7 +209,7 @@ const BlogPost = () => {
             >
                 <div className="post-featured-image position-relative border border-dark border-opacity-10 shadow-2xl">
                     <img 
-                        src={post.imageUrl || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'} 
+                        src={resolveAssetPath(post.imageUrl) || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'} 
                         alt={post.title}
                         loading="lazy"
                         decoding="async"

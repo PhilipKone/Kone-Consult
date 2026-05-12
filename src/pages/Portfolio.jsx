@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import TagModal from '../components/TagModal';
 import { globalCache } from '../utils/cache';
+import { resolveAssetPath } from '../utils/assets';
 
 const Portfolio = () => {
     const [projects, setProjects] = useState(globalCache.portfolio || []);
@@ -90,7 +91,7 @@ const Portfolio = () => {
                             <div className="glass-card p-0 h-100 d-flex flex-column hover-y transition-all">
                                 {project.imageUrl && (
                                     <div className="project-image w-100" style={{ height: '200px', flexShrink: 0, overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                                        <img src={project.imageUrl} alt={project.title} className="w-100 h-100 object-fit-cover" />
+                                        <img src={resolveAssetPath(project.imageUrl)} alt={project.title} className="w-100 h-100 object-fit-cover" />
                                     </div>
                                 )}
 

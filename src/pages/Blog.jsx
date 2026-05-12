@@ -7,6 +7,7 @@ import { FiArrowRight, FiSearch, FiClock } from 'react-icons/fi';
 import './Blog.css';
 import { pillarBlogs } from '../data/pillar_blogs';
 import { globalCache } from '../utils/cache';
+import { resolveAssetPath } from '../utils/assets';
 
 const Blog = () => {
     const [blogs, setBlogs] = useState(globalCache.blogs || []);
@@ -210,7 +211,7 @@ const Blog = () => {
                                                 </span>
                                             )}
                                             <img 
-                                                src={blog.imageUrl || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=640'} 
+                                                src={resolveAssetPath(blog.imageUrl) || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=640'} 
                                                 alt={blog.title}
                                                 loading="lazy"
                                                 decoding="async"
