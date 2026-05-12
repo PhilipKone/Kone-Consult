@@ -1,12 +1,12 @@
-import React from 'react';
 import { FaGithub } from 'react-icons/fa';
+import { resolveAssetPath } from '../utils/assets';
 
 const ProjectCard = ({ title, description, tools, githubUrl, imageUrl }) => {
     return (
         <div className="card glass-panel h-100 project-card overflow-hidden">
             {imageUrl && (
                 <div className="card-img-top" style={{ height: '200px', overflow: 'hidden' }}>
-                    <img src={imageUrl} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={resolveAssetPath(imageUrl)} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
             )}
             <div className="card-body p-4">

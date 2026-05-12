@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPlus, FaEdit, FaTrash, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { resolveAssetPath } from '../../utils/assets';
 
 const BlogManagementList = ({ blogs, onDelete, onAdd, onEdit, onToggleStatus, onSeed }) => {
     const containerVariants = {
@@ -59,7 +60,7 @@ const BlogManagementList = ({ blogs, onDelete, onAdd, onEdit, onToggleStatus, on
                             {/* Preview Thumbnail */}
                             <div className="flex-shrink-0" style={{ width: '60px', height: '60px' }}>
                                 {blog.imageUrl ? (
-                                    <img src={blog.imageUrl} alt={blog.title} className="w-100 h-100 rounded object-fit-cover border border-dark border-opacity-25 shadow-sm" />
+                                    <img src={resolveAssetPath(blog.imageUrl)} alt={blog.title} className="w-100 h-100 rounded object-fit-cover border border-dark border-opacity-25 shadow-sm" />
                                 ) : (
                                     <div className="w-100 h-100 rounded bg-dark bg-opacity-25 d-flex align-items-center justify-content-center border border-dark border-opacity-25 text-secondary">
                                         <span className="small opacity-25">KA</span>

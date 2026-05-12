@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiSave, FiX, FiImage, FiClock, FiTag, FiBookOpen, FiUser, FiZap, FiGlobe, FiActivity } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import { resolveAssetPath } from '../../utils/assets';
 
 const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
     const [formData, setFormData] = useState({
@@ -65,8 +66,8 @@ const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
         const normalizedData = { ...formData };
         // Use full URLs (links) to ensure stability online
         if (normalizedData.imageUrl && !normalizedData.imageUrl.includes('://')) {
-            // Support local paths as fallback but prioritize root structure
-            normalizedData.imageUrl = `/${normalizedData.imageUrl.replace(/^(public\/|src\/assets\/blog\/|src\/assets\/)/, '').replace(/^\//, '')}`;
+            // Support local paths as fallback but normalize to clean relative path
+            normalizedData.imageUrl = normalizedData.imageUrl.replace(/^(public\/|src\/assets\/blog\/|src\/assets\/)/, '').replace(/^\//, '');
         }
         
         onSave(normalizedData);
@@ -197,7 +198,7 @@ const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
                                         {formData.imageUrl && (
                                             <div className="mt-3 image-preview-premium" style={{ height: '140px' }}>
                                                 <img 
-                                                    src={formData.imageUrl.includes('://') ? formData.imageUrl : `/${formData.imageUrl.replace(/^(public\/|src\/assets\/blog\/|src\/assets\/)/, '').replace(/^\//, '')}`} 
+                                                    src={resolveAssetPath(formData.imageUrl)} 
                                                     alt="Preview" 
                                                     onError={(e) => { e.target.src = 'https://via.placeholder.com/400x200?text=Image+Not+Found'; }}
                                                 />
