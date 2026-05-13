@@ -1,0 +1,1 @@
+const a=e=>{if(!e)return"";const r="https://consult.koneacademy.io";let t=e;if(e.startsWith(r)&&(t=e.substring(r.length)),t.startsWith("http://")||t.startsWith("https://")||t.startsWith("data:"))return t;let s=t.startsWith("/")?t.substring(1):t;return s.startsWith("assets/blog/")&&s.endsWith(".png")&&(s=s.replace(/\.png$/,".webp")),"/"+s};export{a as r};
