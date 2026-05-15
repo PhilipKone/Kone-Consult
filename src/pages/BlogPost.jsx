@@ -43,9 +43,24 @@ const BlogPost = () => {
                         setNotFound(true);
                     }
                 } else {
-                    const postData = { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() };
-                    setPost(postData);
-                    document.title = `${postData.title} | KA Insights`;
+                    const firestoreData = { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() };
+                    
+                    // Merge with pillar data if it exists to get the respective image
+                    const pillar = pillarBlogs.find(b => b.slug === slug);
+                    if (pillar) {
+                        setPost({
+                            ...pillar,
+                            ...firestoreData,
+                            // Priority to pillar image if firestore is missing it or uses fallback
+                            imageUrl: (firestoreData.imageUrl && !firestoreData.imageUrl.includes('unsplash')) 
+                                ? firestoreData.imageUrl 
+                                : pillar.imageUrl
+                        });
+                        document.title = `${firestoreData.title || pillar.title} | KA Insights`;
+                    } else {
+                        setPost(firestoreData);
+                        document.title = `${firestoreData.title} | KA Insights`;
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching post: ", error);
@@ -176,6 +191,12 @@ const BlogPost = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7 }}
                 >
+                    {post.series && (
+                        <div className="series-label mb-2">
+                            <span className="series-name">{post.series}</span>
+                            <span className="series-episode">{post.episode}</span>
+                        </div>
+                    )}
                     <span className={`badge mb-3 px-3 py-2 category-${post.category ? post.category.toLowerCase() : 'unsorted'}`}>
                         {post.category || 'Insights'}
                     </span>

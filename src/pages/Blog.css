@@ -65,6 +65,59 @@
 .category-consult { background: rgba(0, 163, 255, 0.2); color: #00a3ff; border: 1px solid rgba(0, 163, 255, 0.3); }
 .category-lab { background: rgba(255, 170, 0, 0.2); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
 
+.blog-series-badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(188, 0, 255, 0.2);
+    color: #bc00ff;
+    border: 1px solid rgba(188, 0, 255, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(188, 0, 255, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: badge-pulse 3s infinite ease-in-out;
+}
+
+@keyframes badge-pulse {
+    0% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 0.9; transform: scale(1); }
+}
+
+.series-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.series-name {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #bc00ff;
+}
+
+.series-episode {
+    background: rgba(188, 0, 255, 0.1);
+    color: #bc00ff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border: 1px solid rgba(188, 0, 255, 0.2);
+}
+
 .blog-card-content {
     padding: 1.75rem;
     display: flex;

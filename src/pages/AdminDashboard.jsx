@@ -966,27 +966,41 @@ const AdminDashboard = () => {
     // Documentation Actions
     const handleSaveDoc = async (docData) => {
         try {
+            // Strip out Firestore metadata before sending update
+            const { docId, createdAt, updatedAt, ...cleanData } = docData;
+            const finalData = {
+                ...cleanData,
+                updatedAt: serverTimestamp()
+            };
+
             if (editingDoc) {
-                await updateDoc(doc(db, 'documentation_modules', editingDoc.docId), docData);
-                alert('Documentation updated!');
+                await updateDoc(doc(db, 'documentation_modules', editingDoc.docId), finalData);
+                alert('Documentation updated successfully!');
             } else {
                 await addDoc(collection(db, 'documentation_modules'), {
-                    ...docData,
+                    ...finalData,
                     createdAt: serverTimestamp()
                 });
-                alert('Documentation created!');
+                alert('Documentation created successfully!');
             }
             setShowDocsModal(false);
             setEditingDoc(null);
         } catch (error) {
             console.error("Error saving documentation:", error);
-            alert(`Failed to save documentation: ${error.message}`);
+            alert(`Failed to save: ${error.message}`);
         }
     };
 
+    const handleEditDoc = (doc) => {
+        // Force a clean state before opening
+        setEditingDoc(null);
+        setTimeout(() => {
+            setEditingDoc(doc);
+            setShowDocsModal(true);
+        }, 10);
+    };
+
     const handleDeleteDoc = async (id) => {
-        console.log("handleDeleteDoc called with ID:", id);
-        // alert(`Debug: Attempting to delete doc ID: ${id}`); // Temporary debug
         if (window.confirm('Are you sure you want to delete this documentation module?')) {
             try {
                 await deleteDoc(doc(db, 'documentation_modules', id));

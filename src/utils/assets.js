@@ -7,16 +7,28 @@
 export const resolveAssetPath = (path) => {
     if (!path) return '';
     
-    // If it's already a full URL, return it
-    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
-        return path;
+    // If it's a full URL, check if it's our own domain first
+    const prodDomain = 'https://consult.koneacademy.io';
+    let processedPath = path;
+    if (path.startsWith(prodDomain)) {
+        processedPath = path.substring(prodDomain.length);
+    }
+
+    // If it's still a full URL from another domain, return it
+    if (processedPath.startsWith('http://') || processedPath.startsWith('https://') || processedPath.startsWith('data:')) {
+        return processedPath;
     }
     
     // Get the base URL from Vite (defaults to / in dev, or whatever is set in vite.config.ts)
     const base = import.meta.env.BASE_URL || '/';
     
     // Clean the path (remove leading slash if present)
-    const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+    let cleanPath = processedPath.startsWith('/') ? processedPath.substring(1) : processedPath;
+
+    // Extension normalization: prefer .webp for blog assets
+    if (cleanPath.startsWith('assets/blog/') && cleanPath.endsWith('.png')) {
+        cleanPath = cleanPath.replace(/\.png$/, '.webp');
+    }
     
     // If base is './', we handle it specially for relative path safety
     if (base === './') {

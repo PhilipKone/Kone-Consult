@@ -40,7 +40,21 @@ const Blog = () => {
                 }));
 
                 // Merge with fallback pillar articles from The Agency
-                const mergedBlogs = [...blogsData];
+                // If a Firestore blog has the same slug as a pillar, we merge them 
+                // but keep the pillar's unique imageUrl if the Firestore version is missing it.
+                const mergedBlogs = blogsData.map(blog => {
+                    const pillar = pillarBlogs.find(p => p.slug === blog.slug);
+                    if (pillar) {
+                        return {
+                            ...pillar, // Start with pillar data
+                            ...blog,   // Override with Firestore data
+                            // Ensure we don't lose the image if Firestore has a placeholder or empty string
+                            imageUrl: (blog.imageUrl && !blog.imageUrl.includes('unsplash')) ? blog.imageUrl : pillar.imageUrl
+                        };
+                    }
+                    return blog;
+                });
+
                 pillarBlogs.forEach(pillar => {
                     if (!mergedBlogs.some(b => b.slug === pillar.slug)) {
                         mergedBlogs.push(pillar);
@@ -208,6 +222,11 @@ const Blog = () => {
                                             {blog.category && (
                                                 <span className={`blog-category-badge category-${blog.category.toLowerCase()}`}>
                                                     {blog.category}
+                                                </span>
+                                            )}
+                                            {blog.series && (
+                                                <span className="blog-series-badge">
+                                                    {blog.series} {blog.episode || ''}
                                                 </span>
                                             )}
                                             <img 
