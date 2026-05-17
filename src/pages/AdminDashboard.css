@@ -124,7 +124,7 @@
 
 /* Messages Layout */
 .messages-layout {
-    min-height: 650px;
+    min-height: 400px;
     background: rgba(22, 27, 34, 0.6);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
@@ -135,10 +135,21 @@
 }
 
 .message-list-col {
-    height: 650px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--border-color);
+}
+
+@media (max-width: 992px) {
+    .messages-layout {
+        min-height: auto;
+    }
+    .message-list-col {
+        height: 350px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
 }
 
 /* Modern Form Controls */
@@ -191,6 +202,12 @@
     position: relative;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
                 0 0 30px rgba(88, 166, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .modal-content-custom {
+        padding: 1.5rem 1rem;
+    }
 }
 
 /* Premium Card (Mini) for Table Stats */

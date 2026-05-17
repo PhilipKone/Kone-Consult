@@ -1153,7 +1153,7 @@ const AdminDashboard = () => {
                             transition={{ duration: 0.2 }}
                         >
                         {activeTab === 'messages' && (
-                            <div className="row g-0 border rounded border-dark overflow-hidden messages-layout">
+                            <div className="row g-0 border rounded border-dark overflow-hidden messages-layout flex-column flex-lg-row">
                                 <MessageList
                                     messages={messages}
                                     selectedMessage={selectedMessage}

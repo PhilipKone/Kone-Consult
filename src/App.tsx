@@ -1,6 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { NotificationProvider } from './context/NotificationContext';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -52,6 +53,7 @@ const App: React.FC = () => {
   return (
     <HelmetProvider>
       <AuthProvider>
+        <NotificationProvider>
         <React.Fragment>
           <LoadingScreen onFinished={() => setIsInitializing(false)} />
           {!isInitializing && (
@@ -86,6 +88,7 @@ const App: React.FC = () => {
             </Router>
           )}
         </React.Fragment>
+        </NotificationProvider>
       </AuthProvider>
     </HelmetProvider>
   );
