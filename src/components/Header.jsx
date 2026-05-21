@@ -18,7 +18,7 @@ const Header = () => {
     const navigate = useNavigate();
     const { currentUser } = useAuth();
     const ADMIN_EMAIL = 'phconsultgh@gmail.com';
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const isLocal = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && !navigator.userAgent.includes('ReactSnap');
     const hubUrl = isLocal ? 'http://localhost:5173/' : 'https://www.koneacademy.io/';
 
     useEffect(() => {
