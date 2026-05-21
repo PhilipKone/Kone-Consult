@@ -68,7 +68,7 @@
     "serialize-javascript": "^7.0.3"
   },
   "reactSnap": {
-    "source": "build",
-    "puppeteerExecutablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    "source": "build"
   }
 }
+
