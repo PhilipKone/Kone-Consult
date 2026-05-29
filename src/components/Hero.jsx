@@ -45,6 +45,31 @@ const Hero = () => {
                 </div>
             </div>
 
+            {/* Trust Section */}
+            <div className="hero-trust-section glass-panel">
+                <div className="trust-title">Trusted by Scholars & Researchers From</div>
+                <div className="trust-logos-grid">
+                    <div className="trust-logo-card">
+                        <div className="logo-img-wrapper">
+                            <img src="/logos/ug_logo.jpg" alt="University of Ghana Logo" className="trust-logo-img" width="120" height="80" />
+                        </div>
+                        <div className="trust-logo-text">
+                            <span className="inst-name">University of Ghana</span>
+                            <span className="inst-sub">Accra, Ghana</span>
+                        </div>
+                    </div>
+                    <div className="trust-logo-card">
+                        <div className="logo-img-wrapper">
+                            <img src="/logos/uhas_logo.png" alt="University of Health & Allied Sciences Logo" className="trust-logo-img" width="120" height="80" />
+                        </div>
+                        <div className="trust-logo-text">
+                            <span className="inst-name">University of Health & Allied Sciences</span>
+                            <span className="inst-sub">Ho, Ghana</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 
             <div className="hero-featured-section glass-panel" id="journal-club">
                 <div className="featured-header">
                     <h2>Featured on</h2>
@@ -59,6 +84,8 @@ const Hero = () => {
                             src={prereviewSnapshot}
                             alt="Kone Consult Journal Club on PREreview"
                             className="prereview-image"
+                            width="600"
+                            height="350"
                         />
                     </div>
                     <a href="https://prereview.org/clubs/kone-consult" target="_blank" rel="noopener noreferrer" className="btn-secondary">
