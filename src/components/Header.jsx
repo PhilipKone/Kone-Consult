@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUserCircle, FaPalette } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { Logo } from './Logo';
@@ -67,6 +67,7 @@ const Header = () => {
     const [isProgramsOpen, setIsProgramsOpen] = useState(false);
     const [isCollaborationsOpen, setIsCollaborationsOpen] = useState(false);
     const [isAccountOpen, setIsAccountOpen] = useState(false);
+    const [isThemeOpen, setIsThemeOpen] = useState(false);
     const location = useLocation();
 
     const updateFavicon = (themeKey) => {
@@ -123,12 +124,13 @@ const Header = () => {
     useEffect(() => {
         setIsMenuOpen(false);
         setIsAccountOpen(false);
+        setIsThemeOpen(false);
     }, [location]);
 
     return (
         <header className={`header ${scrolled ? 'scrolled' : ''}`}>
             <AnimatePresence>
-                {(isResourcesOpen || isProgramsOpen || isCollaborationsOpen || isAccountOpen) && (
+                {(isResourcesOpen || isProgramsOpen || isCollaborationsOpen || isAccountOpen || isThemeOpen) && (
                     <motion.div
                         className="nav-backdrop"
                         initial={{ opacity: 0 }}
@@ -140,6 +142,7 @@ const Header = () => {
                             setIsProgramsOpen(false);
                             setIsCollaborationsOpen(false);
                             setIsAccountOpen(false);
+                            setIsThemeOpen(false);
                         }}
                     />
                 )}
@@ -164,21 +167,6 @@ const Header = () => {
                         <Logo size={32} color={logoColor} className="logo-symbol" />
                         <span className="logo-text">Kone Consult</span>
                     </Link>
-                    
-                    <div className="logo-color-switcher">
-                        {['blue', 'green', 'orange', 'purple', 'black'].map((color) => (
-                            <button
-                                key={color}
-                                className={`color-dot ${color} ${logoColor === color ? 'active' : ''}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleColorChange(color);
-                                }}
-                                title={`Switch logo color to ${color}`}
-                                aria-label={`Switch logo color to ${color}`}
-                            />
-                        ))}
-                    </div>
                 </div>
                 <div 
                     className="mobile-menu-toggle" 
@@ -454,23 +442,88 @@ const Header = () => {
                                     <Link to="/admin" className="btn-primary w-100 text-center justify-content-center">Admin Dashboard</Link>
                                 )}
                                 <Link to="/client-portal" className="btn-secondary w-100 text-center justify-content-center">Client Portal</Link>
-                                <Link to="/profile" className="btn-tertiary w-100 text-center justify-content-center" style={{ border: '1px solid #58a6ff', color: '#58a6ff' }}>My Profile</Link>
+                                <Link to="/profile" className="btn-tertiary w-100 text-center justify-content-center">My Profile</Link>
                             </div>
                         )}
                         {!currentUser && (
                             <Link to="/login" className="btn-secondary w-100 text-center justify-content-center">Login</Link>
                         )}
                         <a href={hubUrl} className="btn-primary w-100 text-center justify-content-center mt-2">Back to Hub</a>
+
+                        {/* Mobile Theme Customizer */}
+                        <div className="mobile-theme-customizer mt-4">
+                            <div className="mobile-theme-label"><FaPalette size={14} /> Customize Theme</div>
+                            <div className="mobile-theme-dots">
+                                {['blue', 'green', 'orange', 'purple', 'black'].map((color) => (
+                                    <button
+                                        key={color}
+                                        className={`color-dot ${color} ${logoColor === color ? 'active' : ''}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleColorChange(color);
+                                        }}
+                                        title={`Switch logo color to ${color}`}
+                                        aria-label={`Switch logo color to ${color}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </motion.div>
                 </motion.nav>
 
                 <div className="header-actions desktop-only">
+                    {/* Theme Customizer Dropdown */}
+                    <div className="nav-dropdown" style={{ zIndex: 1001 }}>
+                        <button 
+                            className={`btn-theme-toggle ${isThemeOpen ? 'active' : ''}`}
+                            onClick={() => {
+                                setIsThemeOpen(!isThemeOpen);
+                                setIsAccountOpen(false);
+                            }}
+                            title="Customize theme color"
+                            aria-label="Customize theme color"
+                        >
+                            <FaPalette size={16} />
+                        </button>
+                        <AnimatePresence>
+                            {isThemeOpen && (
+                                <motion.div
+                                    className="dropdown-menu theme-menu"
+                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    transition={{ duration: 0.2 }}
+                                    style={{ right: 0, left: 'auto', top: '120%', minWidth: '160px', zIndex: 1002, padding: '0.75rem' }}
+                                >
+                                    <div className="theme-menu-title">Select Accent</div>
+                                    <div className="theme-options-grid">
+                                        {['blue', 'green', 'orange', 'purple', 'black'].map((color) => (
+                                            <button
+                                                key={color}
+                                                className={`theme-option-dot ${color} ${logoColor === color ? 'active' : ''}`}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    handleColorChange(color);
+                                                }}
+                                                title={`Switch theme to ${NEON_THEMES[color].name}`}
+                                            >
+                                                <span className="dot-label">{NEON_THEMES[color].name}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
                     {currentUser ? (
                         <div className="nav-dropdown" style={{ zIndex: 1001 }}>
                             <div 
-                                className={`btn-tertiary d-flex align-items-center gap-2 ${isAccountOpen ? 'active' : ''}`}
-                                style={{ border: '1px solid rgba(88,166,255,0.3)', color: '#58a6ff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem', cursor: 'pointer', background: isAccountOpen ? 'rgba(88,166,255,0.1)' : 'transparent' }}
-                                onClick={() => setIsAccountOpen(!isAccountOpen)}
+                                className={`btn-tertiary ${isAccountOpen ? 'active' : ''}`}
+                                onClick={() => {
+                                    setIsAccountOpen(!isAccountOpen);
+                                    setIsThemeOpen(false);
+                                }}
                             >
                                 <FaUserCircle size={18} /> My Account
                             </div>

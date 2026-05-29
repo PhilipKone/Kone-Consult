@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 80px;
+    padding-top: 100px;
     overflow: hidden;
 }
 
@@ -25,9 +25,9 @@
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: rgba(88, 166, 255, 0.15);
-    color: var(--accent-primary);
-    border: 1px solid rgba(88, 166, 255, 0.3);
+    background: rgba(88, 166, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(88, 166, 255, 0.25);
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
@@ -88,15 +88,15 @@
     border-radius: 50%;
 }
 
-.red {
+.terminal-header .red {
     background: #ff5f56;
 }
 
-.yellow {
+.terminal-header .yellow {
     background: #ffbd2e;
 }
 
-.green {
+.terminal-header .green {
     background: #27c93f;
 }
 
@@ -184,6 +184,13 @@
     z-index: 2;
 }
 
+.hero-content {
+  position: relative;
+  z-index: 2;
+  /* Removed top margin to close the gap */
+  margin-top: 0;
+}
+
 .featured-header h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -221,4 +228,136 @@
     height: auto;
     display: block;
     border-radius: 12px;
+}
+
+/* Trust Section styling */
+.hero-trust-section {
+    max-width: 1000px;
+    width: 90%;
+    margin: 2rem auto 4rem auto;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(22, 27, 34, 0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 24px;
+    z-index: 2;
+    position: relative;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.trust-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+}
+
+.trust-logos-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.trust-logo-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 1rem 1.75rem;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    min-width: 320px;
+    flex: 1 1 320px;
+    max-width: 420px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.trust-logo-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    background: rgba(88, 166, 255, 0.03);
+    box-shadow: var(--shadow-glow);
+}
+
+.logo-img-wrapper {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 8px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.trust-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    filter: grayscale(100%) brightness(0.9) contrast(1.1) opacity(0.65);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trust-logo-card:hover .logo-img-wrapper {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-primary);
+}
+
+.trust-logo-card:hover .trust-logo-img {
+    filter: grayscale(0%) brightness(1) contrast(1) opacity(1);
+    transform: scale(1.08);
+}
+
+.trust-logo-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.inst-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+}
+
+.inst-sub {
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    opacity: 1;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .hero-trust-section {
+        padding: 2rem 1.5rem;
+        margin: 1rem auto 3rem auto;
+    }
+    
+    .trust-logos-grid {
+        gap: 1.25rem;
+    }
+    
+    .trust-logo-card {
+        min-width: 100%;
+        padding: 0.85rem 1.25rem;
+    }
 }
