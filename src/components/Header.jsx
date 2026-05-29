@@ -212,7 +212,7 @@ const Header = () => {
                         }
                     }}
                 >
-                    <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
+                    <motion.div className="d-lg-none" variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
                         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
                     </motion.div>
 
@@ -542,14 +542,18 @@ const Header = () => {
                                         )}
                                         <Link to="/client-portal" className="dropdown-item fw-bold text-success" onClick={() => setIsAccountOpen(false)}>Client Portal</Link>
                                         <Link to="/profile" className="dropdown-item" onClick={() => setIsAccountOpen(false)}>Profile Settings</Link>
+                                        <div className="dropdown-divider" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', margin: '0.5rem 0' }}></div>
+                                        <a href={hubUrl} className="dropdown-item fw-bold text-info" onClick={() => setIsAccountOpen(false)}>Back to Hub</a>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
                         </div>
                     ) : (
-                        <Link to="/login" className="btn-secondary">Login</Link>
+                        <>
+                            <Link to="/login" className="btn-secondary">Login</Link>
+                            <a href={hubUrl} className="btn-primary">Back to Hub</a>
+                        </>
                     )}
-                    <a href={hubUrl} className="btn-primary">Back to Hub</a>
                 </div>
             </div>
         </header>
