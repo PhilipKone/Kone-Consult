@@ -1,12 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { Logo } from './Logo';
 import './Header.css';
 
+export const NEON_THEMES = {
+    blue: {
+        name: 'Neon Blue',
+        primary: '#58a6ff',
+        secondary: '#bc8cff',
+        glow: 'rgba(88, 166, 255, 0.3)',
+        textAccent: '#58a6ff'
+    },
+    green: {
+        name: 'Matrix Green',
+        primary: '#3fb950',
+        secondary: '#00ffcc',
+        glow: 'rgba(63, 185, 80, 0.3)',
+        textAccent: '#3fb950'
+    },
+    orange: {
+        name: 'Lava Orange',
+        primary: '#f59e0b',
+        secondary: '#ef4444',
+        glow: 'rgba(245, 158, 11, 0.3)',
+        textAccent: '#f59e0b'
+    },
+    purple: {
+        name: 'Galactic Purple',
+        primary: '#9333ea',
+        secondary: '#c084fc',
+        glow: 'rgba(147, 51, 234, 0.3)',
+        textAccent: '#9333ea'
+    },
+    black: {
+        name: 'Obsidian Black',
+        primary: '#6b7280',
+        secondary: '#374151',
+        glow: 'rgba(107, 114, 128, 0.3)',
+        textAccent: '#9ca3af'
+    }
+};
+
+export const applyTheme = (themeName) => {
+    const theme = NEON_THEMES[themeName];
+    if (!theme) return;
+    
+    const root = document.documentElement;
+    root.style.setProperty('--accent-primary', theme.primary);
+    root.style.setProperty('--accent-secondary', theme.secondary);
+    root.style.setProperty('--shadow-glow', `0 0 15px ${theme.glow}`);
+    root.style.setProperty('--text-accent', theme.textAccent);
+};
+
 const Header = () => {
+    const [logoColor, setLogoColor] = useState(() => {
+        return localStorage.getItem('kone-consult-logo-color') || 'blue';
+    });
     const [scrolled, setScrolled] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +66,31 @@ const Header = () => {
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
     const [isProgramsOpen, setIsProgramsOpen] = useState(false);
     const [isCollaborationsOpen, setIsCollaborationsOpen] = useState(false);
+    const [isAccountOpen, setIsAccountOpen] = useState(false);
     const location = useLocation();
+
+    const updateFavicon = (themeKey) => {
+        const iconPath = `/logos/c_shape_circle_${themeKey}.svg`;
+        const iconLink = document.querySelector('link[rel="icon"]');
+        const appleIconLink = document.querySelector('link[rel="apple-touch-icon"]');
+        if (iconLink) iconLink.href = iconPath;
+        if (appleIconLink) appleIconLink.href = iconPath;
+    };
+
+    const handleColorChange = (color) => {
+        setLogoColor(color);
+        localStorage.setItem('kone-consult-logo-color', color);
+        applyTheme(color);
+        updateFavicon(color);
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: color }));
+    };
+
+    // Load theme and favicon preference on mount
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('kone-consult-logo-color') || 'blue';
+        applyTheme(savedTheme);
+        updateFavicon(savedTheme);
+    }, []);
     const navigate = useNavigate();
     const { currentUser } = useAuth();
     const ADMIN_EMAIL = 'phconsultgh@gmail.com';
@@ -46,12 +122,13 @@ const Header = () => {
 
     useEffect(() => {
         setIsMenuOpen(false);
+        setIsAccountOpen(false);
     }, [location]);
 
     return (
         <header className={`header ${scrolled ? 'scrolled' : ''}`}>
             <AnimatePresence>
-                {(isResourcesOpen || isProgramsOpen || isCollaborationsOpen) && (
+                {(isResourcesOpen || isProgramsOpen || isCollaborationsOpen || isAccountOpen) && (
                     <motion.div
                         className="nav-backdrop"
                         initial={{ opacity: 0 }}
@@ -62,6 +139,7 @@ const Header = () => {
                             setIsResourcesOpen(false);
                             setIsProgramsOpen(false);
                             setIsCollaborationsOpen(false);
+                            setIsAccountOpen(false);
                         }}
                     />
                 )}
@@ -81,11 +159,40 @@ const Header = () => {
                 }}
             />
             <div className="header-container">
-                <Link to="/" className="logo">
-                    <Logo size={32} className="logo-symbol" />
-                    <span className="logo-text">Kone Consult</span>
-                </Link>
-                <div className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <div className="logo-container">
+                    <Link to="/" className="logo">
+                        <Logo size={32} color={logoColor} className="logo-symbol" />
+                        <span className="logo-text">Kone Consult</span>
+                    </Link>
+                    
+                    <div className="logo-color-switcher">
+                        {['blue', 'green', 'orange', 'purple', 'black'].map((color) => (
+                            <button
+                                key={color}
+                                className={`color-dot ${color} ${logoColor === color ? 'active' : ''}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleColorChange(color);
+                                }}
+                                title={`Switch logo color to ${color}`}
+                                aria-label={`Switch logo color to ${color}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div 
+                    className="mobile-menu-toggle" 
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    role="button"
+                    aria-label="Toggle mobile navigation menu"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setIsMenuOpen(!isMenuOpen);
+                        }
+                    }}
+                >
                     {isMenuOpen ? <FaTimes /> : <FaBars />}
                 </div>
 
@@ -280,7 +387,7 @@ const Header = () => {
                         variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}
                     >
                         <div
-                            className={`nav-link dropdown-trigger ${(location.pathname === '/docs' || location.pathname === '/portfolio' || location.pathname.startsWith('/resources')) ? 'active' : ''}`}
+                            className={`nav-link dropdown-trigger ${(location.pathname === '/docs' || location.pathname === '/portfolio' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname.startsWith('/resources')) ? 'active' : ''}`}
                             onClick={() => {
                                 setIsResourcesOpen(!isResourcesOpen);
                                 setIsProgramsOpen(false);
@@ -321,23 +428,32 @@ const Header = () => {
                                     >
                                         Blog
                                     </Link>
+                                    <Link
+                                        to="/about"
+                                        className={`dropdown-item ${location.pathname === '/about' ? 'active' : ''}`}
+                                        onClick={() => setIsResourcesOpen(false)}
+                                    >
+                                        About Us
+                                    </Link>
+                                    <Link
+                                        to="/contact"
+                                        className={`dropdown-item ${location.pathname === '/contact' ? 'active' : ''}`}
+                                        onClick={() => setIsResourcesOpen(false)}
+                                    >
+                                        Contact Us
+                                    </Link>
                                 </motion.div>
                             )}
                         </AnimatePresence>
                     </motion.div>
 
-                    <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
-                        <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}>About</Link>
-                    </motion.div>
-                    <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
-                        <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
-                    </motion.div>
                     <motion.div className="mobile-actions" variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
                         {currentUser && (
                             <div className="d-flex flex-column gap-2 w-100 mb-2">
                                 {currentUser.email === ADMIN_EMAIL && (
                                     <Link to="/admin" className="btn-primary w-100 text-center justify-content-center">Admin Dashboard</Link>
                                 )}
+                                <Link to="/client-portal" className="btn-secondary w-100 text-center justify-content-center">Client Portal</Link>
                                 <Link to="/profile" className="btn-tertiary w-100 text-center justify-content-center" style={{ border: '1px solid #58a6ff', color: '#58a6ff' }}>My Profile</Link>
                             </div>
                         )}
@@ -350,11 +466,32 @@ const Header = () => {
 
                 <div className="header-actions desktop-only">
                     {currentUser ? (
-                        <div className="d-flex align-items-center gap-2">
-                            {currentUser.email === ADMIN_EMAIL && (
-                                <Link to="/admin" className="btn-primary">Dashboard</Link>
-                            )}
-                            <Link to="/profile" className="btn-tertiary" style={{ border: '1px solid #58a6ff', color: '#58a6ff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem' }}>My Profile</Link>
+                        <div className="nav-dropdown" style={{ zIndex: 1001 }}>
+                            <div 
+                                className={`btn-tertiary d-flex align-items-center gap-2 ${isAccountOpen ? 'active' : ''}`}
+                                style={{ border: '1px solid rgba(88,166,255,0.3)', color: '#58a6ff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem', cursor: 'pointer', background: isAccountOpen ? 'rgba(88,166,255,0.1)' : 'transparent' }}
+                                onClick={() => setIsAccountOpen(!isAccountOpen)}
+                            >
+                                <FaUserCircle size={18} /> My Account
+                            </div>
+                            <AnimatePresence>
+                                {isAccountOpen && (
+                                    <motion.div
+                                        className="dropdown-menu"
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        transition={{ duration: 0.2 }}
+                                        style={{ right: 0, left: 'auto', top: '120%', minWidth: '200px', zIndex: 1002 }}
+                                    >
+                                        {currentUser.email === ADMIN_EMAIL && (
+                                            <Link to="/admin" className="dropdown-item fw-bold text-primary" onClick={() => setIsAccountOpen(false)}>Admin Dashboard</Link>
+                                        )}
+                                        <Link to="/client-portal" className="dropdown-item fw-bold text-success" onClick={() => setIsAccountOpen(false)}>Client Portal</Link>
+                                        <Link to="/profile" className="dropdown-item" onClick={() => setIsAccountOpen(false)}>Profile Settings</Link>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     ) : (
                         <Link to="/login" className="btn-secondary">Login</Link>
