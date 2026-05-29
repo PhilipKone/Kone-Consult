@@ -17,6 +17,15 @@ service cloud.firestore {
       allow update, delete: if isAdmin();
     }
 
+    // Live Chats rules
+    match /chats/{chatId} {
+      allow read, write: if true;
+      
+      match /messages/{messageId} {
+        allow read, write: if true;
+      }
+    }
+
     // Projects collection rules
     match /projects/{projectId} {
       allow read: if isAdmin() || (resource.data.status == "published");
@@ -123,6 +132,34 @@ service cloud.firestore {
 
     // Mission definitions (Read by everyone, Write by Admin)
     match /missions/{missionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Classroom sections (Teachers can manage, Students can check existence)
+    match /sections/{sectionCode} {
+      allow read, get: if true;
+      allow create: if request.auth != null && request.resource.data.teacherId == request.auth.uid;
+      allow update, delete: if isAdmin() || (request.auth != null && resource.data.teacherId == request.auth.uid);
+
+      match /students/{studentId} {
+        allow read, get, update: if true;
+        allow create, delete: if isAdmin() || (
+          request.auth != null && 
+          get(/databases/$(database)/documents/sections/$(sectionCode)).data.teacherId == request.auth.uid
+        );
+      }
+    }
+
+    // --- KONE FARMS & AGRITECH ---
+    // Public can sign up (create), but only Admins can read, update, or manage them
+    match /farm_distributors/{distributorId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Public can read real-time agritech telemetry, but only Admins can override/write values
+    match /farm_telemetry/{documentId} {
       allow read: if true;
       allow write: if isAdmin();
     }

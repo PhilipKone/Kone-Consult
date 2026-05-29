@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase/config';
 import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, addDoc, serverTimestamp, where, getDocs } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUsers, FaChartLine, FaProjectDiagram, FaBriefcase, FaGraduationCap, FaPlus, FaThLarge, FaList, FaBook, FaHistory, FaInfoCircle, FaRegEnvelope, FaCode, FaWallet, FaMoneyBillWave, FaDownload } from 'react-icons/fa';
+import { FaUsers, FaChartLine, FaProjectDiagram, FaBriefcase, FaGraduationCap, FaPlus, FaThLarge, FaList, FaBook, FaHistory, FaInfoCircle, FaRegEnvelope, FaCode, FaWallet, FaMoneyBillWave, FaDownload, FaGamepad, FaSeedling } from 'react-icons/fa';
 import { FiBookOpen } from 'react-icons/fi';
 import './AdminDashboard.css';
 import KonePayFinancials from '../components/admin/KonePayFinancials';
 // import Sidebar from '../components/admin/Sidebar';
 import MessageList from '../components/admin/MessageList';
 import MessageView from '../components/admin/MessageView';
+import LiveChatManager from '../components/admin/LiveChatManager';
 import ProjectGrid from '../components/admin/ProjectGrid';
 import ProjectList from '../components/admin/ProjectList';
 import DocumentationList from '../components/admin/DocumentationList';
@@ -26,6 +27,8 @@ import AnalyticsDashboard from '../components/admin/AnalyticsDashboard';
 import BlogManagementList from '../components/admin/BlogManagementList';
 import BlogForm from '../components/admin/BlogForm';
 import SubscriberList from '../components/admin/SubscriberList';
+import GamificationManager from '../components/admin/GamificationManager';
+import KoneFarmsManager from '../components/admin/KoneFarmsManager';
 import { pillarBlogs } from '../data/pillar_blogs';
 // Initial Data Seed
 const initialServices = [
@@ -1065,6 +1068,12 @@ const AdminDashboard = () => {
                                 )}
                             </button>
                             <button
+                                onClick={() => setActiveTab('live-chat')}
+                                className={`tab-btn-premium ${activeTab === 'live-chat' ? 'active' : ''}`}
+                            >
+                                <FaRegEnvelope className="me-2" /> Live Chat
+                            </button>
+                            <button
                                 onClick={() => setActiveTab('users')}
                                 className={`tab-btn-premium ${activeTab === 'users' ? 'active' : ''}`}
                             >
@@ -1118,6 +1127,18 @@ const AdminDashboard = () => {
                             >
                                 <FaUsers className="me-2" /> Subscribers
                             </button>
+                            <button
+                                onClick={() => setActiveTab('gamification')}
+                                className={`tab-btn-premium ${activeTab === 'gamification' ? 'active' : ''}`}
+                            >
+                                <FaGamepad className="me-2" /> Kone Kids
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('farms')}
+                                className={`tab-btn-premium ${activeTab === 'farms' ? 'active' : ''}`}
+                            >
+                                <FaSeedling className="me-2" /> Kone Farms
+                            </button>
                             {activeSite === 'Kone Code' && (
                                 <button
                                     onClick={() => setActiveTab('templates')}
@@ -1165,6 +1186,10 @@ const AdminDashboard = () => {
                                     onDelete={deleteMessage}
                                 />
                             </div>
+                        )}
+
+                        {activeTab === 'live-chat' && (
+                            <LiveChatManager />
                         )}
 
                         {activeTab === 'users' && (
@@ -1500,6 +1525,14 @@ const AdminDashboard = () => {
                             />
                         )}
 
+                        {activeTab === 'gamification' && (
+                            <GamificationManager />
+                        )}
+
+                        {activeTab === 'farms' && (
+                            <KoneFarmsManager />
+                        )}
+
                         {activeTab === 'activity' && (
                             <UserActivityList />
                         )}
@@ -1592,7 +1625,7 @@ const AdminDashboard = () => {
                         )}
                     </div>
                 ) : (
-                    <div className="d-flex flex-column align-items-center justify-content-center py-5 mt-4 border rounded border-dark bg-dark bg-opacity-25" style={{ minHeight: '400px' }}>
+                    <div className="d-flex flex-column align-items-center justify-content-center py-4 py-md-5 mt-4 border rounded border-dark bg-dark bg-opacity-25" style={{ minHeight: '400px' }}>
                         <div className="rounded-circle d-flex align-items-center justify-content-center bg-secondary bg-opacity-10 mb-4 border border-secondary border-opacity-25" style={{ width: '80px', height: '80px' }}>
                             <FaThLarge size={32} className="text-secondary opacity-50" />
                         </div>
