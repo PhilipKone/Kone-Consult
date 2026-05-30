@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes, FaUserCircle, FaPalette } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUserCircle, FaPalette, FaHome } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { Logo } from './Logo';
@@ -212,8 +212,11 @@ const Header = () => {
                         }
                     }}
                 >
-                    <motion.div className="d-lg-none" variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
-                        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
+                    <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
+                        <Link to="/" className={`nav-link home-nav-link ${location.pathname === '/' ? 'active' : ''}`} title="Home">
+                            <FaHome className="nav-home-icon" />
+                            <span className="nav-home-text">Home</span>
+                        </Link>
                     </motion.div>
 
 
