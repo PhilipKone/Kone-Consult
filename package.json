@@ -64,6 +64,7 @@
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^4.3.4",
+        "debug": "^4.4.0",
         "gh-pages": "^6.3.0",
         "react-snap": "^1.23.0",
         "typescript": "^5.7.3",
