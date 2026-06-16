@@ -64,7 +64,7 @@ const SecureMessageView = () => {
     }
 
     return (
-        <div className="min-vh-100 bg-darker py-5 px-3">
+        <div className="min-vh-100 bg-darker py-4 py-md-5 px-3">
             <div className="container" style={{ maxWidth: '600px' }}>
                 <div className="mb-5 text-center">
                     <motion.div 
@@ -85,7 +85,7 @@ const SecureMessageView = () => {
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
-                            className="glass-panel p-5 rounded-4 border-white border-opacity-5 shadow-2xl"
+                            className="glass-panel p-4 p-md-5 rounded-4 border-white border-opacity-5 shadow-2xl"
                         >
                             <div className="text-center mb-5">
                                 <FaLock className="text-secondary mb-3 opacity-50" size={24} />
@@ -152,7 +152,7 @@ const SecureMessageView = () => {
                                 </div>
                             </div>
                             
-                            <div className="p-5 bg-black bg-opacity-20">
+                            <div className="p-4 p-md-5 bg-black bg-opacity-20">
                                 <div className="message-body-text text-light opacity-90 lh-lg whitespace-pre-wrap">
                                     {decryptedContent}
                                 </div>

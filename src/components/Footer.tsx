@@ -6,12 +6,25 @@ import { FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaDiscord, FaFacebook,
 import { FaXTwitter } from 'react-icons/fa6';
 
 const Footer: React.FC = () => {
+    const [logoColor, setLogoColor] = React.useState<string>(() => {
+        return localStorage.getItem('kone-consult-logo-color') || 'blue';
+    });
+
+    React.useEffect(() => {
+        const handleThemeChange = (e: Event) => {
+            const customEvent = e as CustomEvent<string>;
+            setLogoColor(customEvent.detail || 'blue');
+        };
+        window.addEventListener('themeChanged', handleThemeChange);
+        return () => window.removeEventListener('themeChanged', handleThemeChange);
+    }, []);
+
     return (
         <footer className="footer">
             <div className="footer-container">
                 <div className="footer-brand">
                     <Link to="/" className="logo" style={{ textDecoration: 'none' }}>
-                        <Logo size={40} className="logo-symbol" />
+                        <Logo size={40} color={logoColor} className="logo-symbol" />
                         <span className="logo-text">Kone Consult</span>
                     </Link>
                     <p className="footer-tagline">Research. Data Analysis. Consulting.</p>
@@ -29,20 +42,20 @@ const Footer: React.FC = () => {
 
                 <div className="footer-links">
                     <div className="link-group">
-                        <h4>Services</h4>
+                        <h3>Services</h3>
                         <Link to="/services">Data Analysis</Link>
                         <Link to="/services">Report Writing</Link>
                         <Link to="/services">Consulting</Link>
                     </div>
                     <div className="link-group">
-                        <h4>Company</h4>
+                        <h3>Company</h3>
                         <Link to="/about">About Us</Link>
                         <Link to="/portfolio">Portfolio</Link>
                         <Link to="/contact">Contact</Link>
                         <Link to="/login">Login</Link>
                     </div>
                     <div className="link-group">
-                        <h4>Contact</h4>
+                        <h3>Contact</h3>
                         <a href="mailto:phconsultgh@gmail.com"><FaEnvelope /> phconsultgh@gmail.com</a>
                         <a href="tel:+233551993820"><FaPhone /> +233 55 199 3820</a>
                         <span><FaMapMarkerAlt /> Accra, Ghana</span>

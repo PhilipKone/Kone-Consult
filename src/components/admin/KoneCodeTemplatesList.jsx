@@ -4,7 +4,7 @@ import { FaEdit, FaTrash, FaCode } from 'react-icons/fa';
 const KoneCodeTemplatesList = ({ templates, onEdit, onDelete }) => {
     if (!templates || templates.length === 0) {
         return (
-            <div className="text-center py-5 border rounded border-dark bg-dark bg-opacity-25">
+            <div className="text-center py-4 py-md-5 border rounded border-dark bg-dark bg-opacity-25">
                 <p className="text-secondary mb-0">No IDE templates found.</p>
                 <small className="text-muted">Click 'New Template' to create a starter snippet for your users.</small>
             </div>

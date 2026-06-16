@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FiSave, FiX, FiImage, FiClock, FiTag, FiBookOpen, FiUser, FiZap, FiGlobe, FiActivity } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { resolveAssetPath } from '../../utils/assets';
 
 const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
@@ -57,6 +59,10 @@ const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
             const slug = value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
             setFormData(prev => ({ ...prev, slug }));
         }
+    };
+
+    const handleContentChange = (content) => {
+        setFormData(prev => ({ ...prev, content }));
     };
 
     const handleSubmit = (e) => {
@@ -132,20 +138,17 @@ const BlogForm = ({ blog, onSave, onCancel, defaultCategory }) => {
 
                                 <div className="mb-4">
                                     <div className="d-flex justify-content-between align-items-center mb-3">
-                                        <label className="label-premium m-0">ARTICLE CONTENT (MARKDOWN/HTML)</label>
+                                        <label className="label-premium m-0">ARTICLE CONTENT (RICH TEXT)</label>
                                         <div className="d-flex gap-2">
                                             <span className="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20 rounded-pill px-3 py-1 small">Editor Active</span>
-                                            <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-20 rounded-pill px-3 py-1 small">HTML Enabled</span>
                                         </div>
                                     </div>
-                                    <textarea
-                                        name="content"
-                                        className="textarea-premium font-monospace"
-                                        value={formData.content}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="# Start writing your masterpiece..."
-                                    ></textarea>
+                                    <ReactQuill 
+                                        theme="snow" 
+                                        value={formData.content} 
+                                        onChange={handleContentChange} 
+                                        style={{ minHeight: '300px', backgroundColor: '#fff', color: '#000', borderRadius: '4px' }}
+                                    />
                                 </div>
                             </div>
 

@@ -68,6 +68,11 @@ const Documentation: React.FC = () => {
 
     // Fetch Data
     useEffect(() => {
+        if (navigator.userAgent.includes('ReactSnap')) {
+            setLoading(false);
+            return;
+        }
+
         const unsubscribeDocs = onSnapshot(
             query(collection(db, 'documentation_modules'), orderBy('order', 'asc')),
             (snapshot) => {
@@ -481,7 +486,7 @@ const Documentation: React.FC = () => {
                                         <DocFooter />
                                     </div>
                         ) : (
-                            <div className="py-5 text-center text-secondary opacity-50">
+                            <div className="py-4 py-md-5 text-center text-secondary opacity-50">
                                 <FaBook size={48} className="mb-3 opacity-25" />
                                 <h3>No Modules Yet</h3>
                                 <p>Documentation for this section is currently being written.</p>
@@ -495,22 +500,37 @@ const Documentation: React.FC = () => {
     );
 };
 
-const DocFooter: React.FC = () => (
-    <footer className="mt-5 pt-5 border-top border-secondary border-opacity-10">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 pb-4">
-            <div className="d-flex align-items-center gap-2">
-                <Logo size={24} />
-                <span className="fw-bold text-white small">Kone Consult</span>
+const DocFooter: React.FC = () => {
+    const [logoColor, setLogoColor] = useState<string>(() => {
+        return localStorage.getItem('kone-consult-logo-color') || 'blue';
+    });
+
+    useEffect(() => {
+        const handleThemeChange = (e: Event) => {
+            const customEvent = e as CustomEvent<string>;
+            setLogoColor(customEvent.detail || 'blue');
+        };
+        window.addEventListener('themeChanged', handleThemeChange);
+        return () => window.removeEventListener('themeChanged', handleThemeChange);
+    }, []);
+
+    return (
+        <footer className="mt-5 pt-5 border-top border-secondary border-opacity-10">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 pb-4">
+                <div className="d-flex align-items-center gap-2">
+                    <Logo size={24} color={logoColor} />
+                    <span className="fw-bold text-white small">Kone Consult</span>
+                </div>
+                <div className="d-flex gap-4">
+                    <Link to="/" className="text-secondary text-decoration-none small hover-text-primary">Home</Link>
+                    <Link to="/services" className="text-secondary text-decoration-none small hover-text-primary">Services</Link>
+                    <Link to="/contact" className="text-secondary text-decoration-none small hover-text-primary">Contact</Link>
+                    <Link to="/portfolio" className="text-secondary text-decoration-none small hover-text-primary">Portfolio</Link>
+                </div>
+                <p className="text-secondary small mb-0">&copy; 2025 Kone Academy</p>
             </div>
-            <div className="d-flex gap-4">
-                <Link to="/" className="text-secondary text-decoration-none small hover-text-primary">Home</Link>
-                <Link to="/services" className="text-secondary text-decoration-none small hover-text-primary">Services</Link>
-                <Link to="/contact" className="text-secondary text-decoration-none small hover-text-primary">Contact</Link>
-                <Link to="/portfolio" className="text-secondary text-decoration-none small hover-text-primary">Portfolio</Link>
-            </div>
-            <p className="text-secondary small mb-0">&copy; 2025 Kone Academy</p>
-        </div>
-    </footer>
-);
+        </footer>
+    );
+};
 
 export default Documentation;

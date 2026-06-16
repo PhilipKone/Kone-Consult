@@ -118,7 +118,7 @@ const BlogManagementList = ({ blogs, onDelete, onAdd, onEdit, onToggleStatus, on
             </motion.div>
 
             {blogs.length === 0 && (
-                <div className="text-center py-5 opacity-40">
+                <div className="text-center py-4 py-md-5 opacity-40">
                     <p className="small">The archive is empty. Start by creating a new article.</p>
                 </div>
             )}

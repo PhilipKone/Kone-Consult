@@ -6,7 +6,7 @@ const KoneCodeProjectsList = ({ projects, onDelete }) => {
 
     if (!projects || projects.length === 0) {
         return (
-            <div className="text-center py-5 border rounded border-dark bg-dark bg-opacity-25 mt-4">
+            <div className="text-center py-4 py-md-5 border rounded border-dark bg-dark bg-opacity-25 mt-4">
                 <p className="text-secondary mb-0">No public projects saved yet.</p>
                 <small className="text-muted">When users save code in the IDE, it will appear here.</small>
             </div>

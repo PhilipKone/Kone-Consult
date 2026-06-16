@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChartBar, FaFileAlt, FaChalkboardTeacher, FaLightbulb, FaUserTie, FaEllipsisH } from 'react-icons/fa';
 import TagModal from '../components/TagModal';
+import SEO from '../components/SEO';
 import { db } from '../firebase/config';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { globalCache } from '../utils/cache';
@@ -79,6 +80,12 @@ const Services = () => {
 
     useEffect(() => {
         document.title = categoryFilter ? `${categoryFilter.replace(/-/g, ' ')} | Kone Consult Services` : "Services | Kone Consult Research Solutions";
+        
+        if (navigator.userAgent.includes('ReactSnap')) {
+            setLoading(false);
+            return;
+        }
+
         const unsubscribe = onSnapshot(
             query(collection(db, 'services'), orderBy('createdAt', 'asc')),
             (snapshot) => {
@@ -119,6 +126,10 @@ const Services = () => {
 
     return (
         <div className="page-container position-relative">
+            <SEO 
+                title="Services" 
+                description="Explore our range of research, consulting, and data analysis services tailored to meet your academic and professional needs." 
+            />
             <div className="page-background-glow" />
 
             <AnimatePresence>
@@ -130,7 +141,8 @@ const Services = () => {
             <motion.div
                 className="text-center section-title"
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
             >
                 <div className="badge mb-3">OUR EXPERTISE</div>
@@ -152,13 +164,13 @@ const Services = () => {
             </motion.div>
 
             {loading ? (
-                <div className="d-flex justify-content-center align-items-center py-5">
+                <div className="d-flex justify-content-center align-items-center py-4 py-md-5">
                     <div className="spinner-border text-primary" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 </div>
             ) : filteredServices.length === 0 ? (
-                <div className="text-center py-5">
+                <div className="text-center py-4 py-md-5">
                     <p className="text-secondary">No services found for "{categoryFilter}".</p>
                     <button className="btn btn-outline-primary mt-2" onClick={() => setSearchParams({})}>Show All Services</button>
                 </div>
@@ -167,7 +179,8 @@ const Services = () => {
                     className="horizontal-scroll-container pb-5"
                     variants={containerVariants}
                     initial="hidden"
-                    animate="visible"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
                 >
                     {filteredServices.map((service) => (
                         <motion.div key={service.id} className="scroll-item" variants={itemVariants}>

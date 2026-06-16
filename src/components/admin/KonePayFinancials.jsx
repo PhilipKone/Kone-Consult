@@ -197,7 +197,7 @@ const KonePayFinancials = ({ payments, totalRevenue, activeSite }) => {
                                 <tbody>
                                     {payments.length === 0 ? (
                                         <tr>
-                                            <td colSpan="6" className="text-center py-5 text-secondary">
+                                            <td colSpan="6" className="text-center py-4 py-md-5 text-secondary">
                                                 <FaHistory size={30} className="mb-3 opacity-20" /><br/>
                                                 No transactions found in this division.
                                             </td>

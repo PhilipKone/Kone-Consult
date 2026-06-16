@@ -259,7 +259,7 @@ const SubscriberList = ({ subscribers, users, onSync, syncing }) => {
                                     ))
                                 ) : (
                                     <tr>
-                                        <td colSpan="5" className="text-center py-5 text-secondary">
+                                        <td colSpan="5" className="text-center py-4 py-md-5 text-secondary">
                                             No subscribers found matching your search.
                                         </td>
                                     </tr>
@@ -348,7 +348,7 @@ const SubscriberList = ({ subscribers, users, onSync, syncing }) => {
                                     </button>
                                     <button 
                                         type="submit" 
-                                        className="btn btn-primary rounded-pill px-5 py-2 d-flex align-items-center gap-2 shadow-lg"
+                                        className="btn btn-primary rounded-pill px-3 px-md-5 py-2 d-flex align-items-center gap-2 shadow-lg"
                                         disabled={sendingBroadcast || !broadcastForm.subject || !broadcastForm.message}
                                     >
                                         {sendingBroadcast ? (

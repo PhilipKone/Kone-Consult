@@ -97,7 +97,7 @@ const ProjectList = ({ projects, onDelete, onAdd, onEdit }) => {
             </motion.div>
 
             {projects.length === 0 && (
-                <div className="text-center py-5 opacity-40">
+                <div className="text-center py-4 py-md-5 opacity-40">
                     <p className="small">No projects found in this repository.</p>
                 </div>
             )}

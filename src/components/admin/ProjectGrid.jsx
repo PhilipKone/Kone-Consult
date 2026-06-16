@@ -134,7 +134,7 @@ const ProjectGrid = ({ projects, onDelete, onAdd, onEdit }) => {
             </motion.div>
 
             {projects.length === 0 && (
-                <div className="text-center py-5">
+                <div className="text-center py-4 py-md-5">
                     <div className="glass-icon mx-auto mb-3" style={{ width: '80px', height: '80px' }}>
                         <FaFolder className="text-secondary opacity-25" size={32} />
                     </div>

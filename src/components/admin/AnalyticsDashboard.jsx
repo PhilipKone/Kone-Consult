@@ -12,16 +12,17 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const AnalyticsDashboard = () => {
     const [logs, setLogs] = useState([]);
+    const [payments, setPayments] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const q = query(
+        const qLogs = query(
             collection(db, 'activity_logs'),
             orderBy('timestamp', 'desc'),
             limit(500)
         );
 
-        const unsubscribe = onSnapshot(q, (snapshot) => {
+        const unsubscribeLogs = onSnapshot(qLogs, (snapshot) => {
             const fetchedLogs = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data(),
@@ -31,7 +32,25 @@ const AnalyticsDashboard = () => {
             setLoading(false);
         });
 
-        return () => unsubscribe();
+        const qPayments = query(
+            collection(db, 'payments'),
+            orderBy('createdAt', 'desc'),
+            limit(500)
+        );
+
+        const unsubscribePayments = onSnapshot(qPayments, (snapshot) => {
+            const fetchedPayments = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+                createdAt: doc.data().createdAt?.toDate() || new Date()
+            }));
+            setPayments(fetchedPayments);
+        });
+
+        return () => {
+            unsubscribeLogs();
+            unsubscribePayments();
+        };
     }, []);
 
     // 1. Process Platform Distribution (Pie Chart)
@@ -43,6 +62,34 @@ const AnalyticsDashboard = () => {
         });
         return Object.entries(counts).map(([name, value]) => ({ name, value }));
     }, [logs]);
+
+    // 2. Process Revenue Trends
+    const revenueData = useMemo(() => {
+        const dateRevenue = {};
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            dateRevenue[dateStr] = 0;
+        }
+
+        payments.forEach(payment => {
+            if (payment.createdAt) {
+                const dateStr = payment.createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                if (dateRevenue.hasOwnProperty(dateStr) && (payment.status === 'success' || payment.status === 'completed')) {
+                    dateRevenue[dateStr] += (payment.amount || 0);
+                }
+            }
+        });
+
+        return Object.entries(dateRevenue).map(([date, revenue]) => ({ date, revenue }));
+    }, [payments]);
+
+    const totalRevenue = useMemo(() => {
+        return payments
+            .filter(p => p.status === 'success' || p.status === 'completed')
+            .reduce((sum, p) => sum + (p.amount || 0), 0);
+    }, [payments]);
 
     // 2. Process Activity Trends (Area Chart - Last 7 Days)
     const trendData = useMemo(() => {
@@ -91,7 +138,7 @@ const AnalyticsDashboard = () => {
             <div className="analytics-container animate-fade-in">
                 <div className="row g-3 mb-4">
                     {[1, 2, 3].map(i => (
-                        <div key={i} className="col-12 col-md-4">
+                    <div className="col-12 col-md-3">
                             <Skeleton type="stat-card" />
                         </div>
                     ))}
@@ -103,8 +150,11 @@ const AnalyticsDashboard = () => {
                     <div className="col-12 col-lg-4">
                         <Skeleton type="chart-box" height="300px" />
                     </div>
-                    <div className="col-12">
-                        <Skeleton type="chart-box" height="200px" />
+                    <div className="col-12 col-lg-6">
+                        <Skeleton type="chart-box" height="300px" />
+                    </div>
+                    <div className="col-12 col-lg-6">
+                        <Skeleton type="chart-box" height="300px" />
                     </div>
                 </div>
             </div>
@@ -115,7 +165,21 @@ const AnalyticsDashboard = () => {
         <div className="analytics-container animate-fade-in">
             {/* Metric Cards */}
             <div className="row g-3 mb-4">
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-3">
+                    <div className="metric-card-glass">
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                <p className="text-secondary small mb-1">Total Revenue</p>
+                                <h3 className="text-white mb-0">${totalRevenue.toLocaleString()}</h3>
+                            </div>
+                            <div className="metric-icon green"><FaChartLine /></div>
+                        </div>
+                        <div className="mt-2 small text-success">
+                            <FaArrowUp /> Verified Payments
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 col-md-3">
                     <div className="metric-card-glass">
                         <div className="d-flex justify-content-between">
                             <div>
@@ -129,7 +193,7 @@ const AnalyticsDashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-3">
                     <div className="metric-card-glass">
                         <div className="d-flex justify-content-between">
                             <div>
@@ -141,7 +205,7 @@ const AnalyticsDashboard = () => {
                         <p className="mt-2 small text-secondary mb-0">Including {metrics.guests} guests</p>
                     </div>
                 </div>
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-3">
                     <div className="metric-card-glass">
                         <div className="d-flex justify-content-between">
                             <div>
@@ -215,8 +279,38 @@ const AnalyticsDashboard = () => {
                     </div>
                 </div>
 
+                {/* Revenue Trend Chart */}
+                <div className="col-12 col-lg-12">
+                    <div className="chart-card-glass">
+                        <h6 className="text-white mb-4 d-flex align-items-center gap-2">
+                            <FaChartLine className="text-success" /> Revenue Trends (Last 7 Days)
+                        </h6>
+                        <div className="chart-container" style={{ width: '100%', height: 300 }}>
+                            <ResponsiveContainer>
+                                <AreaChart data={revenueData}>
+                                    <defs>
+                                        <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#00C49F" stopOpacity={0.3}/>
+                                            <stop offset="95%" stopColor="#00C49F" stopOpacity={0}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#2d2d2d" vertical={false} />
+                                    <XAxis dataKey="date" stroke="#666" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis stroke="#666" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} />
+                                    <RechartsTooltip 
+                                        contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: '8px' }}
+                                        itemStyle={{ color: '#00C49F' }}
+                                        formatter={(value) => [`$${value}`, 'Revenue']}
+                                    />
+                                    <Area type="monotone" dataKey="revenue" stroke="#00C49F" fillOpacity={1} fill="url(#colorRevenue)" strokeWidth={3} />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Top Actions Bar Chart */}
-                <div className="col-12">
+                <div className="col-12 col-lg-6">
                     <div className="chart-card-glass">
                         <h6 className="text-white mb-4 d-flex align-items-center gap-2">
                             <FaCogs className="text-warning" /> Most Frequent Interactions

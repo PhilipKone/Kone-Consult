@@ -4,6 +4,9 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { FaWallet, FaCheckCircle, FaArrowLeft, FaShieldAlt, FaLock, FaMobileAlt, FaCreditCard, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import './KonePay.css';
 
 const PAYSTACK_PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_placeholder';
@@ -52,7 +55,7 @@ const loadPaystack = () => {
   return new Promise((resolve) => {
     if (window.PaystackPop) { resolve(window.PaystackPop); return; }
     const script = document.createElement('script');
-    script.src = 'https://js.paystack.co/v2/inline.js';
+    script.src = 'https://js.paystack.co/v1/inline.js';
     script.onload = () => resolve(window.PaystackPop);
     document.head.appendChild(script);
   });
@@ -146,6 +149,35 @@ export default function KonePay() {
       alert('Payment system failed to load. Please try again.');
     }
   }, [form, amount, division, selectedService]);
+
+  const downloadReceipt = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(22);
+    doc.setTextColor(40, 40, 40);
+    doc.text('Kone Pay Receipt', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Transaction Ref: ${transactionRef}`, 20, 40);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 50);
+    doc.text(`Customer Name: ${form.name}`, 20, 60);
+    doc.text(`Email: ${form.email}`, 20, 70);
+
+    doc.autoTable({
+      startY: 85,
+      head: [['Description', 'Amount (GHS)']],
+      body: [
+        [`${division} - ${selectedService.label}`, amount.toLocaleString()]
+      ],
+      theme: 'grid',
+      headStyles: { fillColor: [88, 166, 255] }
+    });
+
+    doc.setFontSize(10);
+    doc.text('Thank you for choosing Kone Academy Ecosystem!', 105, doc.lastAutoTable.finalY + 20, { align: 'center' });
+
+    doc.save(`KonePay_Receipt_${transactionRef}.pdf`);
+  };
 
   return (
     <>
@@ -371,13 +403,16 @@ export default function KonePay() {
                   <span>Ref</span><span className="mono">{transactionRef}</span>
                 </div>
               </div>
-              <p className="success-note">A confirmation will be sent to <strong>{form.email}</strong>. Our team will contact you within 24 hours.</p>
-              <div className="success-actions">
-                <Link to="/" className="btn-home">← Back to Home</Link>
-                <button className="btn-pay-another" onClick={() => { setStep(1); setForm({ name: '', email: '', phone: '' }); }}>
-                  Make Another Payment
-                </button>
-              </div>
+                <p className="success-note">A confirmation will be sent to <strong>{form.email}</strong>. Our team will contact you within 24 hours.</p>
+                <div className="success-actions" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1.5rem' }}>
+                  <button className="btn-secondary" style={{ width: '100%' }} onClick={downloadReceipt}>Download PDF Receipt</button>
+                  <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
+                    <Link to="/" className="btn-home" style={{ flex: 1, textAlign: 'center' }}>← Back to Home</Link>
+                    <button className="btn-pay-another" style={{ flex: 1 }} onClick={() => { setStep(1); setForm({ name: '', email: '', phone: '' }); }}>
+                      Make Another Payment
+                    </button>
+                  </div>
+                </div>
             </div>
           )}
         </main>

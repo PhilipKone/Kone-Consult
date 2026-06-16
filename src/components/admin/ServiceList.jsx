@@ -13,7 +13,7 @@ const iconMap = {
 const ServiceList = ({ services, onEdit, onDelete }) => {
     if (services.length === 0) {
         return (
-            <div className="text-center p-5 border border-dark rounded bg-dark">
+            <div className="text-center p-4 p-md-5 border border-dark rounded bg-dark">
                 <p className="text-secondary mb-0">No services found. Click "New Service" to add one.</p>
             </div>
         );

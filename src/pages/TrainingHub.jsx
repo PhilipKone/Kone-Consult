@@ -105,6 +105,10 @@ const TrainingHub = () => {
     }, [location]);
 
     useEffect(() => {
+        if (navigator.userAgent.includes('ReactSnap')) {
+            return;
+        }
+
         const unsubscribe = onSnapshot(
             query(collection(db, 'training_courses'), orderBy('createdAt', 'asc')),
             (snapshot) => {

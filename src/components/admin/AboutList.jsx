@@ -4,7 +4,7 @@ import { FaEdit, FaTrash, FaUserTie } from 'react-icons/fa';
 const AboutList = ({ entries, onEdit, onDelete }) => {
     if (!entries || entries.length === 0) {
         return (
-            <div className="text-center py-5 border rounded border-dark bg-dark bg-opacity-25">
+            <div className="text-center py-4 py-md-5 border rounded border-dark bg-dark bg-opacity-25">
                 <p className="text-secondary mb-0">No custom About entries found.</p>
                 <small className="text-muted">Click 'New Entry' to add one.</small>
             </div>

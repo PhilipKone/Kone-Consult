@@ -21,7 +21,7 @@ const iconMap = {
 const TrainingList = ({ courses, onEdit, onDelete, onSeed }) => {
     if (courses.length === 0) {
         return (
-            <div className="text-center p-5 border border-dark rounded bg-dark">
+            <div className="text-center p-4 p-md-5 border border-dark rounded bg-dark">
                 <p className="text-secondary mb-3">No dynamic courses found. Click "New Course" to add one.</p>
                 {onSeed && (
                     <button

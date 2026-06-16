@@ -64,7 +64,7 @@ const Login = () => {
                     animate="visible"
                     style={{ minWidth: '300px', maxWidth: '450px', width: '90vw' }}
                 >
-                    <div className="glass-card p-5">
+                    <div className="glass-card p-4 p-md-5">
                         <div className="text-center mb-5">
                             <div className="mb-4 d-inline-block rounded-circle p-3 bg-black bg-opacity-50">
                                 <FaSignInAlt className="text-secondary" size={24} />

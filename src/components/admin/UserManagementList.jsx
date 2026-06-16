@@ -62,7 +62,7 @@ const UserManagementList = () => {
     );
 
     if (loading) {
-        return <div className="text-center py-5"><span className="spinner-border text-primary"></span></div>;
+        return <div className="text-center py-4 py-md-5"><span className="spinner-border text-primary"></span></div>;
     }
 
     return (

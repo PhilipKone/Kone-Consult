@@ -6,8 +6,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
-import InteractiveGrid from './components/InteractiveGrid';
 import InstallBanner from './components/InstallBanner';
+import ChatWidget from './components/ChatWidget';
+import InteractiveGrid from './components/InteractiveGrid';
 import './index.css';
 
 // Route-level code splitting — each page is only loaded when navigated to
@@ -26,6 +27,7 @@ const Blog             = lazy(() => import('./pages/Blog'));
 const BlogPost         = lazy(() => import('./pages/BlogPost'));
 const SecureMessageView = lazy(() => import('./pages/SecureMessageView'));
 const KonePay           = lazy(() => import('./pages/KonePay'));
+const ClientPortal      = lazy(() => import('./pages/ClientPortal'));
 
 // Minimal inline fallback — avoids a full-page flash while chunks load
 const PageLoader: React.FC = () => (
@@ -79,10 +81,12 @@ const App: React.FC = () => {
                       <Route path="/blog/:slug"         element={<BlogPost />} />
                       <Route path="/secure/:messageId"  element={<SecureMessageView />} />
                       <Route path="/pay"               element={<KonePay />} />
+                      <Route path="/client-portal"      element={<ClientPortal />} />
                     </Routes>
                   </Suspense>
                 </main>
                 <FooterWrapper />
+                {window.navigator.userAgent !== 'ReactSnap' && <ChatWidget />}
                 <InstallBanner />
               </div>
             </Router>

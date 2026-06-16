@@ -28,6 +28,11 @@ const Blog = () => {
         }
 
         const fetchBlogs = async () => {
+            if (navigator.userAgent.includes('ReactSnap')) {
+                setBlogs(pillarBlogs);
+                setLoading(false);
+                return;
+            }
             try {
                 const q = query(
                     collection(db, "blogs"), 
@@ -123,7 +128,7 @@ const Blog = () => {
             <div className="page-background-glow" />
             
             {/* Header / Intro */}
-            <header className="container text-center py-5 position-relative z-1">
+            <header className="container text-center py-4 py-md-5 position-relative z-1">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}

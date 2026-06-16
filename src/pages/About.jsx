@@ -34,6 +34,12 @@ const About = () => {
 
     useEffect(() => {
         document.title = "About Us | The Team Behind Kone Consult Research";
+        
+        if (navigator.userAgent.includes('ReactSnap')) {
+            setLoading(false);
+            return;
+        }
+
         const unsubscribe = onSnapshot(
             query(collection(db, 'about_entries'), orderBy('createdAt', 'asc')),
             (snapshot) => {
@@ -72,7 +78,8 @@ const About = () => {
             <motion.div
                 className="text-center section-title d-flex flex-column align-items-center"
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
             >
                 <div className="badge mb-3">EST. 2024</div>
@@ -83,7 +90,7 @@ const About = () => {
             </motion.div>
 
             {loading ? (
-                <div className="d-flex justify-content-center align-items-center py-5">
+                <div className="d-flex justify-content-center align-items-center py-4 py-md-5">
                     <div className="spinner-border text-primary" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
@@ -93,7 +100,8 @@ const About = () => {
                     className="horizontal-scroll-container pb-5 align-items-center justify-content-start"
                     variants={containerVariants}
                     initial="hidden"
-                    animate="visible"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
                 >
                     {aboutData.map((entry) => (
                         <motion.div

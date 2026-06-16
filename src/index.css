@@ -93,10 +93,16 @@ pre {
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 6rem 2rem 4rem;
+  padding: 6rem 1rem 4rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding: 6rem 2rem 4rem;
+  }
 }
 
 .mx-auto { margin-left: auto !important; margin-right: auto !important; }
@@ -181,12 +187,13 @@ pre {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  background-size: 100%;
   -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Fix for Chrome rendering */
-  transform: translateZ(0);
   display: inline-block;
 }
 

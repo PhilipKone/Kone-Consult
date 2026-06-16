@@ -30,7 +30,7 @@ const VisionAI = () => {
                 transition={{ delay: 0.2 }}
             >
                 <div className="col-lg-10">
-                    <div className="glass-panel p-5 text-center position-relative overflow-hidden">
+                    <div className="glass-panel p-4 p-md-5 text-center position-relative overflow-hidden">
                         <div className="mt-4">
                             <div className="icon mb-4 text-accent-primary mx-auto" style={{ fontSize: '3rem' }}>
                                 <FaEye className="blink-animation" />
@@ -142,7 +142,7 @@ const VisionAI = () => {
                 viewport={{ once: true }}
             >
                 <div className="col-lg-8 text-center">
-                    <div className="glass-panel p-5">
+                    <div className="glass-panel p-4 p-md-5">
                         <div className="icon mb-3 text-accent-success mx-auto" style={{ fontSize: '2.5rem' }}>
                             <FaRocket />
                         </div>

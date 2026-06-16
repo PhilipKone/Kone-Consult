@@ -26,6 +26,17 @@ const BlogPost = () => {
 
     useEffect(() => {
         const fetchPost = async () => {
+            if (navigator.userAgent.includes('ReactSnap')) {
+                const pillar = pillarBlogs.find(b => b.slug === slug);
+                if (pillar) {
+                    setPost(pillar);
+                    document.title = `${pillar.title} | KA Insights`;
+                } else {
+                    setNotFound(true);
+                }
+                setLoading(false);
+                return;
+            }
             try {
                 const q = query(
                     collection(db, "blogs"), 
@@ -133,7 +144,7 @@ const BlogPost = () => {
             <div className="page-container text-center pt-10">
                 <h1 className="text-white display-4">Article Not Found</h1>
                 <p className="text-secondary pb-4">It seems this insight hasn't been published or moved elsewhere.</p>
-                <Link to="/blog" className="btn btn-primary rounded-pill px-5">Back to Blog</Link>
+                <Link to="/blog" className="btn btn-primary rounded-pill px-3 px-md-5">Back to Blog</Link>
             </div>
         );
     }
@@ -245,7 +256,7 @@ const BlogPost = () => {
             </motion.div>
 
             {/* Article Content */}
-            <article className="container py-5 position-relative z-1 mb-10">
+            <article className="container py-4 py-md-5 position-relative z-1 mb-10">
                 <div className="row">
                     <div className="col-lg-8 mx-auto">
                         <div 

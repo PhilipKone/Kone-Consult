@@ -74,7 +74,7 @@ const Portfolio = () => {
             </motion.div>
 
             {loading ? (
-                <div className="text-center py-5">
+                <div className="text-center py-4 py-md-5">
                     <div className="spinner-border text-accent-primary" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
@@ -86,57 +86,64 @@ const Portfolio = () => {
                     initial="hidden"
                     animate="visible"
                 >
-                    {projects.map((project) => (
-                        <motion.div className="scroll-item" key={project.id} variants={itemVariants}>
-                            <div className="glass-card p-0 h-100 d-flex flex-column hover-y transition-all">
-                                {project.imageUrl && (
-                                    <div className="project-image w-100" style={{ height: '200px', flexShrink: 0, overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                                        <img src={resolveAssetPath(project.imageUrl)} alt={project.title} className="w-100 h-100 object-fit-cover" />
-                                    </div>
-                                )}
+                    {projects.map((project) => {
+                        const imgUrl = project.imageUrl || project.image;
+                        const toolsText = project.tools || project.tags;
+                        const github = project.githubUrl || project.github;
+                        const liveLink = project.liveUrl || project.link;
 
-                                <div className="p-4 d-flex flex-column flex-grow-1">
-                                    <h3 className="h5 text-white fw-bold mb-3">{project.title}</h3>
-                                    <p className="text-secondary small mb-4 flex-grow-1">{project.description}</p>
+                        return (
+                            <motion.div className="scroll-item" key={project.id} variants={itemVariants}>
+                                <div className="glass-card p-0 h-100 d-flex flex-column hover-y transition-all">
+                                    {imgUrl && (
+                                        <div className="project-image w-100" style={{ height: '200px', flexShrink: 0, overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                                            <img src={resolveAssetPath(imgUrl)} alt={project.title} className="w-100 h-100 object-fit-cover" />
+                                        </div>
+                                    )}
 
-                                    <div className="mb-4">
-                                        <div className="tags-container justify-content-start">
-                                            {project.tools && project.tools.split(',').map((tool, i) => (
-                                                <motion.button
-                                                    key={i}
-                                                    className="glass-tag cursor-pointer border-0"
-                                                    onClick={() => setSelectedTag(tool.trim())}
-                                                    whileHover={{ scale: 1.05, backgroundColor: "rgba(88, 166, 255, 0.15)" }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                >
-                                                    {tool.trim()}
-                                                </motion.button>
-                                            ))}
+                                    <div className="p-4 d-flex flex-column flex-grow-1">
+                                        <h3 className="h5 text-white fw-bold mb-3">{project.title}</h3>
+                                        <p className="text-secondary small mb-4 flex-grow-1">{project.description}</p>
+
+                                        <div className="mb-4">
+                                            <div className="tags-container justify-content-start">
+                                                {toolsText && toolsText.split(',').map((tool, i) => (
+                                                    <motion.button
+                                                        key={i}
+                                                        className="glass-tag cursor-pointer border-0"
+                                                        onClick={() => setSelectedTag(tool.trim())}
+                                                        whileHover={{ scale: 1.05, backgroundColor: "rgba(88, 166, 255, 0.15)" }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                    >
+                                                        {tool.trim()}
+                                                    </motion.button>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="d-flex gap-3 mt-auto">
+                                            {github && (
+                                                <a href={github} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-secondary d-flex align-items-center gap-2">
+                                                    <FaGithub /> Code
+                                                </a>
+                                            )}
+                                            {liveLink && (
+                                                <a href={liveLink} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-primary d-flex align-items-center gap-2">
+                                                    <FaExternalLinkAlt /> Live Demo
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
-
-                                    <div className="d-flex gap-3 mt-auto">
-                                        {project.githubUrl && (
-                                            <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-secondary d-flex align-items-center gap-2">
-                                                <FaGithub /> Code
-                                            </a>
-                                        )}
-                                        {project.liveUrl && (
-                                            <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-primary d-flex align-items-center gap-2">
-                                                <FaExternalLinkAlt /> Live Demo
-                                            </a>
-                                        )}
-                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </motion.div>
             )}
 
             {projects.length === 0 && !loading && (
                 <motion.div
-                    className="glass-panel text-center p-5"
+                    className="glass-panel text-center p-4 p-md-5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                 >

@@ -4,7 +4,7 @@ import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 const DocumentationList = ({ docs, onDelete, onEdit, onView }) => {
     if (!docs || docs.length === 0) {
         return (
-            <div className="text-center py-5 text-secondary">
+            <div className="text-center py-4 py-md-5 text-secondary">
                 <p>No documentation modules found.</p>
             </div>
         );

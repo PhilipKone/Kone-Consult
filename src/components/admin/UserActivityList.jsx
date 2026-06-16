@@ -44,7 +44,7 @@ const UserActivityList = () => {
 
     if (loading) {
         return (
-            <div className="text-center py-5">
+            <div className="text-center py-4 py-md-5">
                 <div className="spinner-border text-primary" role="status">
                     <span className="visually-hidden">Loading activities...</span>
                 </div>
@@ -61,7 +61,7 @@ const UserActivityList = () => {
 
             <div className="activity-list">
                 {activities.length === 0 ? (
-                    <div className="glass-card p-5 text-center text-secondary">
+                    <div className="glass-card p-4 p-md-5 text-center text-secondary">
                         No activity logs found.
                     </div>
                 ) : (
