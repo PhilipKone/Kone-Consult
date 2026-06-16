@@ -78,6 +78,7 @@
     },
     "reactSnap": {
         "source": "build",
+        "concurrency": 1,
         "puppeteerArgs": [
             "--no-sandbox",
             "--disable-setuid-sandbox"
