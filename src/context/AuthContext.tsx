@@ -105,12 +105,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setCurrentUser(user);
+        if (!auth || typeof auth.onAuthStateChanged !== 'function') {
+            console.warn('AuthContext: Firebase Auth is not initialized or is mock. Bypassing auth listener.');
             setLoading(false);
-        });
+            return;
+        }
 
-        return unsubscribe;
+        try {
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                setCurrentUser(user);
+                setLoading(false);
+            }, (error) => {
+                console.error('AuthContext: onAuthStateChanged error', error);
+                setLoading(false);
+            });
+
+            return unsubscribe;
+        } catch (err) {
+            console.error('AuthContext: Failed to subscribe to auth state changes', err);
+            setLoading(false);
+        }
     }, []);
 
     useEffect(() => {
