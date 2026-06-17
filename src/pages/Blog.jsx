@@ -28,7 +28,11 @@ const Blog = () => {
         }
 
         const fetchBlogs = async () => {
-            if (navigator.userAgent.includes('ReactSnap')) {
+            if (
+                navigator.userAgent.includes('ReactSnap') || 
+                !import.meta.env.VITE_FIREBASE_API_KEY || 
+                import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+            ) {
                 setBlogs(pillarBlogs);
                 setLoading(false);
                 return;

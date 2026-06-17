@@ -15,6 +15,44 @@ const Portfolio = () => {
     useEffect(() => {
         document.title = "Portfolio | Kone Consult Impact & Success Stories";
         const fetchProjects = async () => {
+            if (
+                navigator.userAgent.includes('ReactSnap') || 
+                !import.meta.env.VITE_FIREBASE_API_KEY || 
+                import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+            ) {
+                const mockProjects = [
+                    {
+                        id: "mock-1",
+                        title: "Dynamic Portfolio Optimization Engine",
+                        description: "An automated quantitative engine for asset allocation and risk assessment, utilizing advanced statistical models and predictive intelligence.",
+                        tools: "Python, React, FastAPI, TensorFlow",
+                        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+                        githubUrl: "https://github.com/PhilipKone",
+                        liveUrl: "https://consult.koneacademy.io"
+                    },
+                    {
+                        id: "mock-2",
+                        title: "Distributed Telemetry Dashboard",
+                        description: "Real-time sensor data ingestion and visualization suite for agricultural IoT, telemetry processing, and resource management.",
+                        tools: "Go, TypeScript, InfluxDB, WebSockets",
+                        imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+                        githubUrl: "https://github.com/PhilipKone",
+                        liveUrl: "https://consult.koneacademy.io"
+                    },
+                    {
+                        id: "mock-3",
+                        title: "Secure Client Communications Portal",
+                        description: "An end-to-end encrypted messaging and document storage vault designed for secure consultancy-client collaboration.",
+                        tools: "React, Firebase, WebCrypto API, Node.js",
+                        imageUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80",
+                        githubUrl: "https://github.com/PhilipKone",
+                        liveUrl: "https://consult.koneacademy.io"
+                    }
+                ];
+                setProjects(mockProjects);
+                setLoading(false);
+                return;
+            }
             try {
                 const q = query(collection(db, "projects"), where("status", "==", "published"));
                 const querySnapshot = await getDocs(q);
@@ -22,7 +60,6 @@ const Portfolio = () => {
                     id: doc.id,
                     ...doc.data()
                 }));
-                // Sort by createdAt desc if available
                 // Sort by createdAt desc if available
                 projectsData.sort((a, b) => b.createdAt - a.createdAt);
                 globalCache.portfolio = projectsData;

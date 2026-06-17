@@ -79,10 +79,19 @@
     "reactSnap": {
         "source": "build",
         "concurrency": 1,
+        "crawl": false,
+        "skipResourceTypes": [
+            "image",
+            "media"
+        ],
         "puppeteerArgs": [
             "--no-sandbox",
-            "--disable-setuid-sandbox"
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--single-process"
         ],
+        "delay": 200,
         "include": [
             "/",
             "/contact",
@@ -91,10 +100,7 @@
             "/portfolio",
             "/login",
             "/register",
-            "/blog",
-            "/blog/quants-of-consulting-data-strategy",
-            "/blog/structural-integrity-at-scale",
-            "/blog/arduino-sensors-actuators"
+            "/blog"
         ]
     }
 }

@@ -26,7 +26,11 @@ const BlogPost = () => {
 
     useEffect(() => {
         const fetchPost = async () => {
-            if (navigator.userAgent.includes('ReactSnap')) {
+            if (
+                navigator.userAgent.includes('ReactSnap') || 
+                !import.meta.env.VITE_FIREBASE_API_KEY || 
+                import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+            ) {
                 const pillar = pillarBlogs.find(b => b.slug === slug);
                 if (pillar) {
                     setPost(pillar);

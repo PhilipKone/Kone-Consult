@@ -46,10 +46,19 @@ const PageLoader: React.FC = () => (
 );
 
 const App: React.FC = () => {
-  const [isInitializing, setIsInitializing] = useState<boolean>(true);
+  const [showLoader, setShowLoader] = useState<boolean>(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'dark');
+
+    // Only show loader for real users on their first visit of the session
+    if (typeof window !== 'undefined' && window.navigator.userAgent !== 'ReactSnap') {
+      const hasLoadedBefore = sessionStorage.getItem('kone_consult_loaded');
+      if (!hasLoadedBefore) {
+        setShowLoader(true);
+        sessionStorage.setItem('kone_consult_loaded', 'true');
+      }
+    }
   }, []);
 
   return (
@@ -57,40 +66,40 @@ const App: React.FC = () => {
       <AuthProvider>
         <NotificationProvider>
         <React.Fragment>
-          <LoadingScreen onFinished={() => setIsInitializing(false)} />
-          {!isInitializing && (
-            <Router>
-              <div className="App animate-fade-in">
-                <InteractiveGrid />
-                <Header />
-                <main>
-                  <Suspense fallback={<PageLoader />}>
-                    <Routes>
-                      <Route path="/"                   element={<Home />} />
-                      <Route path="/services"           element={<Services />} />
-                      <Route path="/portfolio"          element={<Portfolio />} />
-                      <Route path="/about"              element={<About />} />
-                      <Route path="/contact"            element={<Contact />} />
-                      <Route path="/login"              element={<Login />} />
-                      <Route path="/register"           element={<Register />} />
-                      <Route path="/docs"               element={<Documentation />} />
-                      <Route path="/training"           element={<TrainingHub />} />
-                      <Route path="/admin"              element={<AdminDashboard />} />
-                      <Route path="/profile"            element={<UserProfile />} />
-                      <Route path="/blog"               element={<Blog />} />
-                      <Route path="/blog/:slug"         element={<BlogPost />} />
-                      <Route path="/secure/:messageId"  element={<SecureMessageView />} />
-                      <Route path="/pay"               element={<KonePay />} />
-                      <Route path="/client-portal"      element={<ClientPortal />} />
-                    </Routes>
-                  </Suspense>
-                </main>
-                <FooterWrapper />
-                {window.navigator.userAgent !== 'ReactSnap' && <ChatWidget />}
-                <InstallBanner />
-              </div>
-            </Router>
+          {showLoader && (
+            <LoadingScreen onFinished={() => setShowLoader(false)} />
           )}
+          <Router>
+            <div className="App animate-fade-in">
+              <InteractiveGrid />
+              <Header />
+              <main>
+                <Suspense fallback={<PageLoader />}>
+                  <Routes>
+                    <Route path="/"                   element={<Home />} />
+                    <Route path="/services"           element={<Services />} />
+                    <Route path="/portfolio"          element={<Portfolio />} />
+                    <Route path="/about"              element={<About />} />
+                    <Route path="/contact"            element={<Contact />} />
+                    <Route path="/login"              element={<Login />} />
+                    <Route path="/register"           element={<Register />} />
+                    <Route path="/docs"               element={<Documentation />} />
+                    <Route path="/training"           element={<TrainingHub />} />
+                    <Route path="/admin"              element={<AdminDashboard />} />
+                    <Route path="/profile"            element={<UserProfile />} />
+                    <Route path="/blog"               element={<Blog />} />
+                    <Route path="/blog/:slug"         element={<BlogPost />} />
+                    <Route path="/secure/:messageId"  element={<SecureMessageView />} />
+                    <Route path="/pay"               element={<KonePay />} />
+                    <Route path="/client-portal"      element={<ClientPortal />} />
+                  </Routes>
+                </Suspense>
+              </main>
+              <FooterWrapper />
+              {window.navigator.userAgent !== 'ReactSnap' && <ChatWidget />}
+              <InstallBanner />
+            </div>
+          </Router>
         </React.Fragment>
         </NotificationProvider>
       </AuthProvider>
