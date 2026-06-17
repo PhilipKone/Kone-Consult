@@ -105,6 +105,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     useEffect(() => {
+        if (
+            typeof window !== 'undefined' && (
+                window.navigator.userAgent === 'ReactSnap' || 
+                !import.meta.env.VITE_FIREBASE_API_KEY || 
+                import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+            )
+        ) {
+            console.warn('AuthContext: Crawling or offline simulation. Bypassing auth listener.');
+            setLoading(false);
+            return;
+        }
+
         if (!auth || typeof auth.onAuthStateChanged !== 'function') {
             console.warn('AuthContext: Firebase Auth is not initialized or is mock. Bypassing auth listener.');
             setLoading(false);

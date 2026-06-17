@@ -12,6 +12,7 @@ import { collection, query, orderBy, onSnapshot, DocumentData } from 'firebase/f
 import { globalCache } from '../utils/cache';
 import '../index.css';
 import Prism from 'prismjs';
+import DOMPurify from 'dompurify';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
@@ -68,7 +69,11 @@ const Documentation: React.FC = () => {
 
     // Fetch Data
     useEffect(() => {
-        if (navigator.userAgent.includes('ReactSnap')) {
+        if (
+            navigator.userAgent.includes('ReactSnap') ||
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) {
             setLoading(false);
             return;
         }
@@ -460,7 +465,7 @@ const Documentation: React.FC = () => {
                                                 )}
                                             </div>
                                         )}
-                                        <div className="doc-rich-content" dangerouslySetInnerHTML={{ __html: activeDoc.content }} />
+                                        <div className="doc-rich-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(activeDoc.content) }} />
 
                                         <div className="doc-footer-nav">
                                             {prevDoc ? (

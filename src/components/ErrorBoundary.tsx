@@ -27,6 +27,16 @@ class ErrorBoundary extends Component<Props, State> {
   public async componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error caught by ErrorBoundary:', error, errorInfo);
     
+    // Skip logging to Firestore if crawled by ReactSnap or if Firebase API key is missing/dummy
+    if (
+      navigator.userAgent.includes('ReactSnap') ||
+      !import.meta.env.VITE_FIREBASE_API_KEY ||
+      import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+    ) {
+      console.log('Bypassing Firestore error logging in crawler/dummy environment.');
+      return;
+    }
+
     // Log the error to Firestore
     try {
       await addDoc(collection(db, 'client_errors'), {

@@ -252,8 +252,10 @@ const BlogPost = () => {
                         width="1000"
                         height="500"
                         onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200&h=500';
+                            if (!e.currentTarget.dataset.fallbackTriggered) {
+                                e.currentTarget.dataset.fallbackTriggered = 'true';
+                                e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200&h=500';
+                            }
                         }}
                     />
                 </div>

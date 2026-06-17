@@ -80,6 +80,7 @@
         "source": "build",
         "concurrency": 1,
         "crawl": false,
+        "skipThirdPartyRequests": true,
         "skipResourceTypes": [
             "image",
             "media"
