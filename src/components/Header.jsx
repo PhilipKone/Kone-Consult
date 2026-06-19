@@ -378,7 +378,7 @@ const Header = () => {
                         variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}
                     >
                         <div
-                            className={`nav-link dropdown-trigger ${(location.pathname === '/docs' || location.pathname === '/portfolio' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname.startsWith('/resources')) ? 'active' : ''}`}
+                            className={`nav-link dropdown-trigger ${(location.pathname === '/docs' || location.pathname === '/protocols' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname.startsWith('/resources')) ? 'active' : ''}`}
                             onClick={() => {
                                 setIsResourcesOpen(!isResourcesOpen);
                                 setIsProgramsOpen(false);
@@ -406,11 +406,11 @@ const Header = () => {
                                         Docs
                                     </Link>
                                     <Link
-                                        to="/portfolio"
-                                        className={`dropdown-item ${location.pathname === '/portfolio' ? 'active' : ''}`}
+                                        to="/protocols"
+                                        className={`dropdown-item ${location.pathname === '/protocols' ? 'active' : ''}`}
                                         onClick={() => setIsResourcesOpen(false)}
                                     >
-                                        Portfolio
+                                        Protocols
                                     </Link>
                                     <Link
                                         to="/blog"

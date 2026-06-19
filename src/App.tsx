@@ -14,7 +14,7 @@ import './index.css';
 // Route-level code splitting — each page is only loaded when navigated to
 const Home             = lazy(() => import('./pages/Home'));
 const Services         = lazy(() => import('./pages/Services'));
-const Portfolio        = lazy(() => import('./pages/Portfolio'));
+const Protocols        = lazy(() => import('./pages/Protocols'));
 const About            = lazy(() => import('./pages/About'));
 const Contact          = lazy(() => import('./pages/Contact'));
 const Login            = lazy(() => import('./pages/Login'));
@@ -78,7 +78,7 @@ const App: React.FC = () => {
                   <Routes>
                     <Route path="/"                   element={<Home />} />
                     <Route path="/services"           element={<Services />} />
-                    <Route path="/portfolio"          element={<Portfolio />} />
+                    <Route path="/protocols"          element={<Protocols />} />
                     <Route path="/about"              element={<About />} />
                     <Route path="/contact"            element={<Contact />} />
                     <Route path="/login"              element={<Login />} />

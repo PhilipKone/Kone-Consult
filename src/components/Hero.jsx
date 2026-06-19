@@ -10,14 +10,13 @@ const Hero = () => {
             <section className="hero" id="home">
                 <div className="hero-container">
                     <div className="hero-content">
-                        <div className="badge">Kone Consult v2.1</div>
+                        <div className="badge">ACADEMIC • BUSINESS • SOFTWARE</div>
                         <h1 className="hero-title">
                             Research. Analysis.<br />
                             <span className="text-gradient">Innovation.</span>
                         </h1>
                         <p className="hero-subtitle">
-                            Your expert partner in research assistance, data analysis, academic success, and business intelligence. <br />
-                            <span className="text-white">Research the future the right way.</span>
+                            Your expert partner in multi-disciplinary research. We deliver specialized insights, statistical analysis, and compliance protocols across the academic, corporate, and software landscapes.
                         </p>
                         <div className="hero-actions">
                             <Link to="/services" className="btn-primary big">Explore Services</Link>

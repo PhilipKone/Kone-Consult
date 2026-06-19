@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                     <div className="link-group">
                         <h3>Company</h3>
                         <Link to="/about">About Us</Link>
-                        <Link to="/portfolio">Portfolio</Link>
+                        <Link to="/protocols">Protocols</Link>
                         <Link to="/contact">Contact</Link>
                         <Link to="/login">Login</Link>
                     </div>

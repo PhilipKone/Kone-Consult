@@ -240,13 +240,14 @@ const AdminDashboard = () => {
     const [projectForm, setProjectForm] = useState({
         title: '',
         description: '',
-        category: 'App Development', // Default category
+        category: 'Academic & Clinical', // Default category
         image: '', // URL
         link: '', // Live URL
         github: '',
         tags: '', // Comma separated
         status: 'Todo', // Todo, In Progress, Done
-        priority: 'Medium' // Low, Medium, High
+        priority: 'Medium', // Low, Medium, High
+        division: '' // Dynamic based on active site
     });
 
     // Services Form State
@@ -631,7 +632,8 @@ const AdminDashboard = () => {
             github: project.github,
             tags: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags,
             status: project.status || 'Todo',
-            priority: project.priority || 'Medium'
+            priority: project.priority || 'Medium',
+            division: project.division || (activeSite === 'Kone Lab' ? 'Kone Lab' : activeSite === 'Kone Code' ? 'Kone Code' : activeSite === 'Kone Academy' ? 'Kone Academy' : 'Kone Consult')
         });
         setShowProjectModal(true);
     };
@@ -1264,7 +1266,7 @@ const AdminDashboard = () => {
                                                 <FaList />
                                             </button>
                                         </div>
-                                        <button onClick={() => { setEditingProject(null); setProjectForm({ title: '', description: '', category: 'App Development', image: '', link: '', github: '', tags: '', status: 'Todo', priority: 'Medium' }); setShowProjectModal(true); }} className="btn btn-primary btn-sm d-flex align-items-center gap-2">
+                                        <button onClick={() => { setEditingProject(null); setProjectForm({ title: '', description: '', category: 'Academic & Clinical', image: '', link: '', github: '', tags: '', status: 'Todo', priority: 'Medium', division: activeSite === 'Kone Lab' ? 'Kone Lab' : activeSite === 'Kone Code' ? 'Kone Code' : activeSite === 'Kone Academy' ? 'Kone Academy' : 'Kone Consult' }); setShowProjectModal(true); }} className="btn btn-primary btn-sm d-flex align-items-center gap-2">
                                             <FaPlus /> New
                                         </button>
                                     </div>
@@ -1659,6 +1661,9 @@ const AdminDashboard = () => {
                             <form onSubmit={handleProjectSubmit} className="d-flex flex-column gap-3">
                                 <input className="form-control-dark" placeholder="Title" value={projectForm.title} onChange={(e) => setProjectForm({ ...projectForm, title: e.target.value })} required />
                                 <select className="form-select-dark" value={projectForm.category} onChange={(e) => setProjectForm({ ...projectForm, category: e.target.value })}>
+                                    <option>Academic & Clinical</option>
+                                    <option>Business & Operations</option>
+                                    <option>Software & Systems</option>
                                     <option>App Development</option>
                                     <option>Web Development</option>
                                     <option>AI & Machine Learning</option>

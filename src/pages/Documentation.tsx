@@ -530,7 +530,7 @@ const DocFooter: React.FC = () => {
                     <Link to="/" className="text-secondary text-decoration-none small hover-text-primary">Home</Link>
                     <Link to="/services" className="text-secondary text-decoration-none small hover-text-primary">Services</Link>
                     <Link to="/contact" className="text-secondary text-decoration-none small hover-text-primary">Contact</Link>
-                    <Link to="/portfolio" className="text-secondary text-decoration-none small hover-text-primary">Portfolio</Link>
+                    <Link to="/protocols" className="text-secondary text-decoration-none small hover-text-primary">Protocols</Link>
                 </div>
                 <p className="text-secondary small mb-0">&copy; 2025 Kone Academy</p>
             </div>
