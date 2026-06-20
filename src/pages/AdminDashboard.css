@@ -9,13 +9,13 @@
 .dashboard-container {
     max-width: 1400px;
     padding: 0 2rem;
-    padding-top: 100px;
+    padding-top: 20px;
     padding-bottom: 50px;
 }
 
 @media (max-width: 768px) {
     .dashboard-container {
-        padding-top: 80px;
+        padding-top: 10px;
         padding-left: 15px;
         padding-right: 15px;
     }

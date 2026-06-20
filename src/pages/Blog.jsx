@@ -128,7 +128,7 @@ const Blog = () => {
     };
 
     return (
-        <div className="page-container position-relative overflow-hidden" style={{ paddingTop: '100px' }}>
+        <div className="page-container position-relative overflow-hidden">
             <div className="page-background-glow" />
             
             {/* Header / Intro */}
