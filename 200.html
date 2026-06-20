@@ -49,13 +49,20 @@
   </script>
   <title>Kone Consult</title>
   <script>
-    if ('serviceWorker' in navigator && !navigator.userAgent.includes('ReactSnap')) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(registration => {
-          console.log('SW registered: ', registration);
-        }).catch(registrationError => {
-          console.log('SW registration failed: ', registrationError);
-        });
+    // Force clear old service worker cache storage on new deployments
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) {
+          caches.delete(name);
+        }
+      });
+    }
+    // Unregister duplicate service workers to let VitePWA handle updates cleanly
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
       });
     }
   </script>
@@ -138,16 +145,16 @@
       ]
     }
   </script>
-  <script type="module" crossorigin src="/assets/index-BDtO6tWj.js"></script>
+  <script type="module" crossorigin src="/assets/index-Ij-zDXif.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/vendor-router-DKd95J2c.js">
   <link rel="modulepreload" crossorigin href="/assets/vendor-framer-CyIXMN06.js">
-  <link rel="modulepreload" crossorigin href="/assets/vendor-firebase-BoYRuFVq.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-firebase-BQguBmwp.js">
   <link rel="stylesheet" crossorigin href="/assets/index-BST3HU0r.css">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+  <div id="root"></div>
 </body>
 
 </html>
