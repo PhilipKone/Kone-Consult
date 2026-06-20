@@ -49,19 +49,36 @@
   </script>
   <title>Kone Consult</title>
   <script>
-    // Force clear old service worker cache storage on new deployments
-    if ('caches' in window) {
-      caches.keys().then(function(names) {
-        for (let name of names) {
-          caches.delete(name);
-        }
-      });
+    // Force a one-time clean reload to bypass aggressive PWA caching on new deployments
+    const DEPLOY_VERSION = '2.2.0'; 
+    if (localStorage.getItem('kone_consult_version') !== DEPLOY_VERSION) {
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (let name of names) {
+            caches.delete(name);
+          }
+        });
+      }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+      localStorage.setItem('kone_consult_version', DEPLOY_VERSION);
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 100);
     }
-    // Unregister duplicate service workers to let VitePWA handle updates cleanly
+
+    // Automatically reload page when a new service worker takes control (for future updates)
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
         }
       });
     }
