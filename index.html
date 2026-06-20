@@ -49,13 +49,20 @@
   </script>
   <title>Kone Consult</title>
   <script>
-    if ('serviceWorker' in navigator && !navigator.userAgent.includes('ReactSnap')) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(registration => {
-          console.log('SW registered: ', registration);
-        }).catch(registrationError => {
-          console.log('SW registration failed: ', registrationError);
-        });
+    // Force clear old service worker cache storage on new deployments
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) {
+          caches.delete(name);
+        }
+      });
+    }
+    // Unregister duplicate service workers to let VitePWA handle updates cleanly
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
       });
     }
   </script>
