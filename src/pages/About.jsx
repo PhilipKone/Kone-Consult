@@ -78,8 +78,7 @@ const About = () => {
             <motion.div
                 className="text-center section-title d-flex flex-column align-items-center"
                 initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
                 <div className="badge mb-3">EST. 2024</div>

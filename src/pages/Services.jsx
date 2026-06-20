@@ -141,8 +141,7 @@ const Services = () => {
             <motion.div
                 className="text-center section-title"
                 initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
                 <div className="badge mb-3">OUR EXPERTISE</div>

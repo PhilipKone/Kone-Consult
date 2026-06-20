@@ -1,10 +1,10 @@
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 :root {
@@ -93,7 +93,8 @@ pre {
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 1rem 4rem;
+  /* padding-top accounts for fixed header (~65px) + breathing room */
+  padding: 6rem 1rem 4rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -101,7 +102,7 @@ pre {
 
 @media (min-width: 768px) {
   .page-container {
-    padding: 4.5rem 2rem 4rem;
+    padding: 6.5rem 2rem 4rem;
   }
 }
 
