@@ -11,23 +11,22 @@ import ChatWidget from './components/ChatWidget';
 import InteractiveGrid from './components/InteractiveGrid';
 import './index.css';
 
-// Route-level code splitting — each page is only loaded when navigated to
-const Home             = lazy(() => import('./pages/Home'));
-const Services         = lazy(() => import('./pages/Services'));
-const Protocols        = lazy(() => import('./pages/Protocols'));
-const About            = lazy(() => import('./pages/About'));
-const Contact          = lazy(() => import('./pages/Contact'));
-const Login            = lazy(() => import('./pages/Login'));
-const Register         = lazy(() => import('./pages/Register'));
-const Documentation    = lazy(() => import('./pages/Documentation'));
-const AdminDashboard   = lazy(() => import('./pages/AdminDashboard'));
-const TrainingHub      = lazy(() => import('./pages/TrainingHub'));
-const UserProfile      = lazy(() => import('./pages/UserProfile'));
-const Blog             = lazy(() => import('./pages/Blog'));
-const BlogPost         = lazy(() => import('./pages/BlogPost'));
-const SecureMessageView = lazy(() => import('./pages/SecureMessageView'));
-const KonePay           = lazy(() => import('./pages/KonePay'));
-const ClientPortal      = lazy(() => import('./pages/ClientPortal'));
+import Home from './pages/Home';
+import Services from './pages/Services';
+import Protocols from './pages/Protocols';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Documentation from './pages/Documentation';
+import AdminDashboard from './pages/AdminDashboard';
+import TrainingHub from './pages/TrainingHub';
+import UserProfile from './pages/UserProfile';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import SecureMessageView from './pages/SecureMessageView';
+import KonePay from './pages/KonePay';
+import ClientPortal from './pages/ClientPortal';
 
 // Minimal inline fallback — avoids a full-page flash while chunks load
 const PageLoader: React.FC = () => (
