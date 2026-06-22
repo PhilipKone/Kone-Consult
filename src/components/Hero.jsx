@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import TypingAnimation from './TypingAnimation';
 import './Hero.css';
@@ -118,7 +118,7 @@ const HERO_DATA = {
                     </div>
                 </div>
             ),
-            link: "/services",
+            link: "/services?cat=business",
             linkText: "Explore Business Services",
             isExternal: false
         }
@@ -196,7 +196,7 @@ const HERO_DATA = {
                     </div>
                 </div>
             ),
-            link: "/protocols",
+            link: "/protocols?cat=software",
             linkText: "Explore Technical Protocols",
             isExternal: false
         }
@@ -204,8 +204,14 @@ const HERO_DATA = {
 };
 
 const Hero = () => {
-    const [activeTab, setActiveTab] = useState('academic');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const tabParam = searchParams.get('tab') || 'academic';
+    const activeTab = ['academic', 'business', 'software'].includes(tabParam) ? tabParam : 'academic';
     const currentData = HERO_DATA[activeTab];
+
+    const setActiveTab = (newTab) => {
+        setSearchParams({ tab: newTab });
+    };
 
     return (
         <React.Fragment>
@@ -244,7 +250,7 @@ const Hero = () => {
                                 {currentData.subtitle}
                             </p>
                             <div className="hero-actions">
-                                <Link to="/services" className="btn-primary big">Explore Services</Link>
+                                <Link to={`/services?cat=${activeTab}`} className="btn-primary big">Explore Services</Link>
                                 <Link to="/contact" className="btn-secondary big">Contact Us</Link>
                             </div>
                         </motion.div>

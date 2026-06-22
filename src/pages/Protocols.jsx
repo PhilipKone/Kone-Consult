@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -79,7 +80,19 @@ const Protocols = () => {
     const [loading, setLoading] = useState(!globalCache.protocols);
     const [selectedTag, setSelectedTag] = useState(null);
     const [selectedProtocol, setSelectedProtocol] = useState(null);
-    const [activeTab, setActiveTab] = useState('All');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const catParam = searchParams.get('cat') || searchParams.get('category');
+
+    const getInitialTab = () => {
+        if (!catParam) return 'All';
+        const normalized = catParam.toLowerCase();
+        if (normalized === 'academic') return 'Academic';
+        if (normalized === 'business') return 'Business';
+        if (normalized === 'software') return 'Software';
+        return 'All';
+    };
+
+    const [activeTab, setActiveTab] = useState(getInitialTab);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -366,7 +379,14 @@ const Protocols = () => {
                         ].map(tab => (
                             <button
                                 key={tab.key}
-                                onClick={() => setActiveTab(tab.key)}
+                                onClick={() => {
+                                    setActiveTab(tab.key);
+                                    if (tab.key === 'All') {
+                                        setSearchParams({});
+                                    } else {
+                                        setSearchParams({ cat: tab.key.toLowerCase() });
+                                    }
+                                }}
                                 className="border-0 px-3 py-2 text-white small fw-bold"
                                 style={{
                                     borderRadius: '8px',
