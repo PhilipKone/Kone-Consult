@@ -96,6 +96,18 @@ const Protocols = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
+        if (catParam) {
+            const normalized = catParam.toLowerCase();
+            if (normalized === 'academic') setActiveTab('Academic');
+            else if (normalized === 'business') setActiveTab('Business');
+            else if (normalized === 'software') setActiveTab('Software');
+            else setActiveTab('All');
+        } else {
+            setActiveTab('All');
+        }
+    }, [catParam]);
+
+    useEffect(() => {
         const fetchProtocols = async () => {
             if (
                 navigator.userAgent.includes('ReactSnap') || 
