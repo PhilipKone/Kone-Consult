@@ -15,6 +15,16 @@
         padding-top: 90px;
         padding-bottom: 4rem;
     }
+
+    .hero-title {
+        font-size: 2.25rem;
+        line-height: 1.15;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .hero-container {
@@ -122,8 +132,9 @@
 }
 
 .command-line {
-    display: flex;
+    display: block;
     margin-bottom: 1rem;
+    word-break: break-word;
 }
 
 .prompt {
@@ -356,8 +367,10 @@
 
 @media (max-width: 768px) {
     .hero-trust-section {
-        padding: 2rem 1.5rem;
-        margin: 1rem auto 3rem auto;
+        padding: 1.5rem 1rem;
+        margin: 1rem auto 2.5rem auto;
+        width: 100%;
+        border-radius: 16px;
     }
     
     .trust-logos-grid {
@@ -538,5 +551,19 @@
     .framework-stats-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    .hero-featured-section {
+        padding: 1.5rem !important;
+        margin-top: 3rem !important;
+    }
+
+    .featured-header h2 {
+        font-size: 1.75rem !important;
+    }
+
+    .featured-content p {
+        font-size: 0.95rem !important;
+        margin-bottom: 1.5rem !important;
     }
 }
