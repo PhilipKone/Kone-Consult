@@ -207,6 +207,7 @@ const Header = () => {
                     variants={{
                         open: { 
                             x: 0,
+                            display: "flex",
                             transition: { 
                                 type: "spring", 
                                 stiffness: 300, 
@@ -223,7 +224,10 @@ const Header = () => {
                                 damping: 40,
                                 staggerChildren: 0.05,
                                 staggerDirection: -1
-                            } 
+                            },
+                            transitionEnd: {
+                                display: "none"
+                            }
                         }
                     }}
                 >

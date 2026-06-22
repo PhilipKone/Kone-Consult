@@ -201,6 +201,10 @@
     /* spans across the grid */
     position: relative;
     z-index: 2;
+    max-width: 1000px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-content {
