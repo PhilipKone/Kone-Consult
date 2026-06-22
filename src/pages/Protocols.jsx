@@ -406,7 +406,9 @@ const Protocols = () => {
                                     color: activeTab === tab.key ? 'var(--accent-primary, #58a6ff)' : '#d1d5db',
                                     border: activeTab === tab.key ? '1px solid rgba(88, 166, 255, 0.2)' : '1px solid transparent',
                                     transition: 'all 0.2s ease',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
+                                    whiteSpace: 'nowrap',
+                                    flexShrink: 0
                                 }}
                             >
                                 {tab.label}

@@ -69,6 +69,39 @@ async function run() {
         await page.screenshot({ path: screenshotPathProto });
         console.log("Local Protocols page screenshot saved to:", screenshotPathProto);
 
+        // Test Case 3: Mobile Viewport Verification
+        console.log("\nSwitching to mobile viewport (375x667)...");
+        await page.setViewport({ width: 375, height: 667, isMobile: true, hasTouch: true });
+        
+        // Reload Protocols page
+        console.log("Reloading Protocols page on mobile...");
+        await page.reload({ waitUntil: 'domcontentloaded' });
+        await new Promise(r => setTimeout(r, 2000));
+
+        const mobileInfo = await page.evaluate(() => {
+            const tabsContainer = document.querySelector('.nav-tabs-premium');
+            const tabsStyle = window.getComputedStyle(tabsContainer);
+            const firstButton = tabsContainer ? tabsContainer.querySelector('button') : null;
+            const buttonStyle = firstButton ? window.getComputedStyle(firstButton) : null;
+
+            return {
+                containerJustify: tabsStyle ? tabsStyle.justifyContent : null,
+                containerOverflowX: tabsStyle ? tabsStyle.overflowX : null,
+                buttonWhiteSpace: buttonStyle ? buttonStyle.whiteSpace : null,
+                buttonFlexShrink: buttonStyle ? buttonStyle.flexShrink : null
+            };
+        });
+
+        console.log("--- MOBILE PROTOCOLS LAYOUT RESULTS ---");
+        console.log("Container Justify Content (Expected: flex-start):", mobileInfo.containerJustify);
+        console.log("Container Overflow-X (Expected: auto or scroll):", mobileInfo.containerOverflowX);
+        console.log("Button White-Space (Expected: nowrap):", mobileInfo.buttonWhiteSpace);
+        console.log("Button Flex-Shrink (Expected: 0):", mobileInfo.buttonFlexShrink);
+
+        const screenshotPathMobile = 'C:/Users/DELL/.gemini/antigravity/brain/9dd08c4c-9279-4905-8f27-4dbbdcc45af1/scratch/local_protocols_mobile.png';
+        await page.screenshot({ path: screenshotPathMobile });
+        console.log("Local Mobile Protocols screenshot saved to:", screenshotPathMobile);
+
     } catch (err) {
         console.error("Verification failed:", err);
     } finally {

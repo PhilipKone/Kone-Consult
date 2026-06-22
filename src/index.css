@@ -1310,4 +1310,14 @@ body {
     margin-bottom: 2rem;
   }
 }
+
+@media (max-width: 768px) {
+  .nav-tabs-premium {
+    justify-content: flex-start !important;
+    width: auto !important;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+    padding: 0.4rem !important;
+  }
+}
 
