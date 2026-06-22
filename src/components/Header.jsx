@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaUserCircle, FaPalette, FaHome } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -61,6 +61,8 @@ const Header = () => {
     });
     const [scrolled, setScrolled] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
+    const [headerVisible, setHeaderVisible] = useState(true);
+    const lastScrollY = useRef(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 991);
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
@@ -100,10 +102,23 @@ const Header = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            const currentScrollY = window.scrollY;
+            
+            // Set scrolled background state
+            setScrolled(currentScrollY > 50);
+            
+            // Smart Header show/hide logic
+            if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+                setHeaderVisible(false);
+            } else if (currentScrollY < lastScrollY.current || currentScrollY <= 120) {
+                setHeaderVisible(true);
+            }
+            lastScrollY.current = currentScrollY;
+
+            // Scroll progress bar
             const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
             setScrollProgress(scrolled);
         };
         window.addEventListener('scroll', handleScroll);
@@ -128,7 +143,7 @@ const Header = () => {
     }, [location]);
 
     return (
-        <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+        <header className={`header ${scrolled ? 'scrolled' : ''} ${headerVisible ? '' : 'header-hidden'}`}>
             <AnimatePresence>
                 {(isResourcesOpen || isProgramsOpen || isCollaborationsOpen || isAccountOpen || isThemeOpen) && (
                     <motion.div

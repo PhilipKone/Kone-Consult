@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './TypingAnimation.css';
 
-const TypingAnimation = () => {
-    const words = useMemo(() => ['Initializing research environment...', 'Loading data analysis modules...', 'Connecting to expert consultants...', 'Ready for input.'], []);
+const TypingAnimation = ({ words }) => {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [currentText, setCurrentText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const pauseTimerRef = useRef(null);
+
+    // Reset when words change on segment toggle
+    useEffect(() => {
+        setCurrentText('');
+        setCurrentWordIndex(0);
+        setIsDeleting(false);
+    }, [words]);
 
     useEffect(() => {
         const current = words[currentWordIndex];
