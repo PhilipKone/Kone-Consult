@@ -162,14 +162,17 @@ const BlogPost = () => {
         "image": resolveAssetPath(post.imageUrl),
         "author": {
             "@type": "Person",
-            "name": post.author?.name || "KA Staff"
+            "name": post.author?.name || "Philip Kone Hotor",
+            "sameAs": [
+                "https://www.linkedin.com/in/philip-kone-hotor/"
+            ]
         },
         "publisher": {
             "@type": "Organization",
             "name": "Kone Academy",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://kca.edu/logo.png" // Placeholder URL
+                "url": "https://www.koneacademy.io/logo-circle-blue.svg"
             }
         },
         "datePublished": new Date((post.createdAt?.seconds || 0) * 1000).toISOString()
