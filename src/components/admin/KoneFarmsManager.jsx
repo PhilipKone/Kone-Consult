@@ -20,6 +20,7 @@ import {
     FaSlidersH,
     FaSyncAlt
 } from 'react-icons/fa';
+import { sanitizeMailto } from '../../utils/sanitize';
 
 export default function KoneFarmsManager() {
     const [distributors, setDistributors] = useState([]);
@@ -338,7 +339,7 @@ export default function KoneFarmsManager() {
                                                             <span className="x-small text-secondary font-monospace">{dist.id}</span>
                                                         </td>
                                                         <td>
-                                                            <a href={`mailto:${dist.email}`} className="text-info text-decoration-none small">
+                                                            <a href={sanitizeMailto(dist.email) ? `mailto:${sanitizeMailto(dist.email)}` : '#'} className="text-info text-decoration-none small">
                                                                 {dist.email}
                                                             </a>
                                                         </td>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { sendBulkEmail } from '../../utils/emailService';
+import { sanitizeMailto } from '../../utils/sanitize';
 
 const SubscriberList = ({ subscribers, users, onSync, syncing }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -240,7 +241,7 @@ const SubscriberList = ({ subscribers, users, onSync, syncing }) => {
                                             <td className="pe-4 text-end">
                                                 <div className="d-flex justify-content-end gap-2">
                                                     <a 
-                                                        href={`mailto:${sub.email}`} 
+                                                        href={sanitizeMailto(sub.email) ? `mailto:${sanitizeMailto(sub.email)}` : '#'} 
                                                         className="btn btn-outline-primary btn-sm border-0 bg-transparent p-2 hover-bg-primary"
                                                         title="Open in Mail App"
                                                     >

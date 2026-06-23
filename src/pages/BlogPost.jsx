@@ -11,6 +11,7 @@ import { pillarBlogs } from '../data/pillar_blogs';
 import SEO from '../components/SEO';
 import DOMPurify from 'dompurify';
 import { resolveAssetPath } from '../utils/assets';
+import { sanitizeUrl } from '../utils/sanitize';
 
 const BlogPost = () => {
     const { slug } = useParams();
@@ -180,7 +181,7 @@ const BlogPost = () => {
                 title={post.title}
                 description={post.excerpt}
                 image={resolveAssetPath(post.imageUrl)}
-                url={window.location.href}
+                url={`https://consult.koneacademy.io/blog/${slug}`}
                 type="article"
             />
             <script type="application/ld+json">
@@ -245,7 +246,7 @@ const BlogPost = () => {
             >
                 <div className="post-featured-image position-relative border border-dark border-opacity-10 shadow-2xl">
                     <img 
-                        src={resolveAssetPath(post.imageUrl) || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'} 
+                        src={DOMPurify.sanitize(resolveAssetPath(post.imageUrl)) || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'} 
                         alt={post.title}
                         loading="lazy"
                         decoding="async"

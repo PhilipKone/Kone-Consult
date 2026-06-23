@@ -55,6 +55,18 @@ const Footer: React.FC = () => {
                         <Link to="/login">Login</Link>
                     </div>
                     <div className="link-group">
+                        <h3>Ecosystem</h3>
+                        <a href="https://www.koneacademy.io">Academy Home</a>
+                        <a href="https://code.koneacademy.io">Kone Code</a>
+                        <a href="https://lab.koneacademy.io">Kone Lab</a>
+                        <a href="https://ai.koneacademy.io">Kone AI</a>
+                        <a href="https://farms.koneacademy.io">Kone Farms</a>
+                        <a href="https://kids.koneacademy.io">Kone Kids</a>
+                        <a href="https://shop.koneacademy.io">Kone Shop</a>
+                        <a href="https://warp.koneacademy.io">Kone Warp</a>
+                        <a href="https://digital.koneacademy.io">Kone Digital</a>
+                    </div>
+                    <div className="link-group">
                         <h3>Contact</h3>
                         <a href="mailto:phconsultgh@gmail.com"><FaEnvelope /> phconsultgh@gmail.com</a>
                         <a href="tel:+233551993820"><FaPhone /> +233 55 199 3820</a>
