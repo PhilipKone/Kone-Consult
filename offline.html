@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connection Lost | Kone Consult</title>
+  <style>
+    :root {
+      --bg-color: #0d1117;
+      --accent-primary: #58a6ff;
+      --accent-secondary: #bc8cff;
+      --text-main: #ffffff;
+      --text-secondary: #8b949e;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background Glow Effects */
+    .glow-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .glow-orb {
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+    }
+
+    .glow-orb-1 {
+      top: -10%;
+      left: -10%;
+      background: var(--accent-primary);
+    }
+
+    .glow-orb-2 {
+      bottom: -10%;
+      right: -10%;
+      background: var(--accent-secondary);
+    }
+
+    /* Main Container */
+    .offline-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      width: 90%;
+      max-width: 480px;
+      text-align: center;
+      z-index: 2;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* SVG Disconnect Animation */
+    .icon-container {
+      margin-bottom: 2rem;
+      display: inline-flex;
+      position: relative;
+    }
+
+    .offline-icon {
+      stroke: var(--accent-primary);
+      filter: drop-shadow(0 0 8px rgba(88, 166, 255, 0.4));
+    }
+
+    .pulse-ring {
+      animation: pulse 2s infinite ease-in-out;
+      transform-origin: 100px 75px;
+    }
+
+    .pulse-ring-delayed {
+      animation: pulse 2s infinite ease-in-out;
+      animation-delay: 1s;
+      transform-origin: 100px 75px;
+    }
+
+    .disconnected-line {
+      stroke: #ef4444 !important;
+      stroke-dasharray: 8;
+      animation: dash 1.5s infinite linear;
+      filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+      }
+      100% {
+        transform: scale(0.85);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -16;
+      }
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    /* Interactive Elements */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-primary);
+      color: #0d1117;
+      box-shadow: 0 4px 12px rgba(88, 166, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(88, 166, 255, 0.35);
+      background: #79b8ff;
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border: 1px solid var(--glass-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+
+    /* Status Notification toast */
+    .status-toast {
+      position: absolute;
+      bottom: 2rem;
+      background: rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--accent-secondary);
+      display: none;
+      animation: toastIn 0.3s ease-out forwards;
+      z-index: 3;
+    }
+
+    @keyframes toastIn {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Features List */
+    .features-list {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: left;
+    }
+
+    .features-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--accent-secondary);
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-container">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+  </div>
+
+  <div class="offline-card">
+    <div class="icon-container">
+      <!-- High fidelity Satellite Connection Disconnect Icon -->
+      <svg class="offline-icon" width="120" height="120" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Satellite Dish -->
+        <path d="M50 140 C 50 100, 150 100, 150 140" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none" />
+        <path d="M70 140 C 70 120, 130 120, 130 140" stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none" />
+        <line x1="100" y1="140" x2="100" y2="170" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+        <line x1="70" y1="170" x2="130" y2="170" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+        
+        <!-- Receiver Node -->
+        <circle cx="100" cy="75" r="8" fill="currentColor" />
+        <line x1="100" y1="110" x2="100" y2="83" stroke="currentColor" stroke-width="4" />
+        
+        <!-- Pulsing Connection Signals -->
+        <path class="pulse-ring" d="M80 50 C 90 40, 110 40, 120 50" stroke="var(--accent-secondary)" stroke-width="4" stroke-linecap="round" fill="none" />
+        <path class="pulse-ring-delayed" d="M65 35 C 85 15, 115 15, 135 35" stroke="var(--accent-secondary)" stroke-width="4" stroke-linecap="round" fill="none" />
+        
+        <!-- Disconnected Cross Bolt -->
+        <line class="disconnected-line" x1="45" y1="45" x2="155" y2="155" stroke="red" stroke-width="8" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <h1>Connection Lost</h1>
+    <p>You are currently offline. Check your internet connection or browse previously cached sections of our portal.</p>
+
+    <div class="btn-container">
+      <button class="btn btn-primary" onclick="tryReconnect()">Try Reconnecting</button>
+      <a href="/" class="btn btn-secondary">Go to Homepage</a>
+      <a href="/protocols" class="btn btn-secondary">Explore Protocols</a>
+    </div>
+
+    <div class="features-list">
+      <div class="features-title">Offline Available</div>
+      <div class="feature-item"><span class="feature-dot"></span> Browse loaded technical protocols</div>
+      <div class="feature-item"><span class="feature-dot"></span> View pre-cached pages and assets</div>
+      <div class="feature-item"><span class="feature-dot"></span> Read offline documentation shell</div>
+    </div>
+  </div>
+
+  <div class="status-toast" id="toast">Checking local connection...</div>
+
+  <script>
+    // Retrieve theme preference from local storage to match current layout style
+    try {
+      const savedTheme = localStorage.getItem('kone-consult-logo-color') || 'blue';
+      const root = document.documentElement;
+      const themes = {
+        blue: { primary: '#58a6ff', secondary: '#bc8cff' },
+        green: { primary: '#3fb950', secondary: '#00ffcc' },
+        orange: { primary: '#f59e0b', secondary: '#ef4444' },
+        purple: { primary: '#9333ea', secondary: '#c084fc' },
+        black: { primary: '#6b7280', secondary: '#374151' }
+      };
+      
+      const active = themes[savedTheme];
+      if (active) {
+        root.style.setProperty('--accent-primary', active.primary);
+        root.style.setProperty('--accent-secondary', active.secondary);
+      }
+    } catch (e) {
+      console.warn("Could not load theme presets offline", e);
+    }
+
+    // Interactive reconnect action
+    function tryReconnect() {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      toast.textContent = 'Checking local connection...';
+      
+      if (navigator.onLine) {
+        toast.textContent = 'Connection found! Reconnecting...';
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 800);
+      } else {
+        setTimeout(() => {
+          toast.textContent = 'Still offline. Please check your Wi-Fi or cellular network.';
+          setTimeout(() => {
+            toast.style.display = 'none';
+          }, 3000);
+        }, 1200);
+      }
+    }
+
+    // Monitor online event to automatically reload once connection is restored
+    window.addEventListener('online', () => {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      toast.textContent = 'Connection restored! Reloading...';
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
