@@ -44,8 +44,8 @@ export const NEON_THEMES = {
     }
 };
 
-export const applyTheme = (themeName) => {
-    const theme = NEON_THEMES[themeName];
+export const applyTheme = (themeName: string) => {
+    const theme = (NEON_THEMES as Record<string, any>)[themeName];
     if (!theme) return;
     
     const root = document.documentElement;
@@ -55,8 +55,8 @@ export const applyTheme = (themeName) => {
     root.style.setProperty('--text-accent', theme.textAccent);
 };
 
-const Header = () => {
-    const [logoColor, setLogoColor] = useState(() => {
+const Header: React.FC = () => {
+    const [logoColor, setLogoColor] = useState<string>(() => {
         return localStorage.getItem('kone-consult-logo-color') || 'blue';
     });
     const [scrolled, setScrolled] = useState(false);
@@ -72,15 +72,15 @@ const Header = () => {
     const [isThemeOpen, setIsThemeOpen] = useState(false);
     const location = useLocation();
 
-    const updateFavicon = (themeKey) => {
+    const updateFavicon = (themeKey: string) => {
         const iconPath = `/logos/c_shape_circle_${themeKey}.svg`;
-        const iconLink = document.querySelector('link[rel="icon"]');
-        const appleIconLink = document.querySelector('link[rel="apple-touch-icon"]');
+        const iconLink = document.querySelector('link[rel="icon"]') as HTMLLinkElement | null;
+        const appleIconLink = document.querySelector('link[rel="apple-touch-icon"]') as HTMLLinkElement | null;
         if (iconLink) iconLink.href = iconPath;
         if (appleIconLink) appleIconLink.href = iconPath;
     };
 
-    const handleColorChange = (color) => {
+    const handleColorChange = (color: string) => {
         setLogoColor(color);
         localStorage.setItem('kone-consult-logo-color', color);
         applyTheme(color);

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { logActivity } from '../firebase/utils';
 import { motion } from 'framer-motion';
 
-const Login = () => {
+const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
     const { login, googleSignIn } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             setError('');

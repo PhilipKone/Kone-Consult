@@ -5,12 +5,19 @@ import { db } from '../firebase/config';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, doc, setDoc } from 'firebase/firestore';
 import './ChatWidget.css';
 
-const ChatWidget = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState('');
-    const [sessionId, setSessionId] = useState('');
-    const messagesEndRef = useRef(null);
+interface ChatMessage {
+    id: string;
+    text: string;
+    sender: string;
+    timestamp?: any;
+}
+
+const ChatWidget: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [messages, setMessages] = useState<ChatMessage[]>([]);
+    const [newMessage, setNewMessage] = useState<string>('');
+    const [sessionId, setSessionId] = useState<string>('');
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         // Initialize or get session ID for guest user
@@ -47,7 +54,7 @@ const ChatWidget = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    const handleSendMessage = async (e) => {
+    const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newMessage.trim() || !sessionId) return;
 

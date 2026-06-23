@@ -1,7 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const SEO = ({ title, description, image, url, type = 'website' }) => {
+interface SEOProps {
+    title?: string;
+    description?: string;
+    image?: string;
+    url?: string;
+    type?: string;
+}
+
+const SEO: React.FC<SEOProps> = ({ title, description, image, url, type = 'website' }) => {
     const siteTitle = 'Kone Consult';
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     

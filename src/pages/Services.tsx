@@ -26,8 +26,17 @@ const iconMap = {
     'FaEllipsisH': FaEllipsisH
 };
 
-const ServiceCard = ({ iconName, title, description, tags, color, onTagClick }) => {
-    const Icon = iconMap[iconName] || FaEllipsisH;
+interface ServiceCardProps {
+    iconName: string;
+    title: string;
+    description: string;
+    tags: string[];
+    color: string;
+    onTagClick: (tag: string) => void;
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ iconName, title, description, tags, color, onTagClick }) => {
+    const Icon = iconMap[iconName as keyof typeof iconMap] || FaEllipsisH;
     return (
         <div 
             className="glass-card hover-y transition-all h-100 cursor-pointer" 
@@ -45,7 +54,7 @@ const ServiceCard = ({ iconName, title, description, tags, color, onTagClick }) 
                     <motion.button
                         key={i}
                         className="glass-tag cursor-pointer border-0"
-                        onClick={(e) => {
+                        onClick={(e: React.MouseEvent) => {
                             e.stopPropagation();
                             onTagClick(tag);
                         }}
@@ -62,7 +71,7 @@ const ServiceCard = ({ iconName, title, description, tags, color, onTagClick }) 
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary w-100 text-center text-decoration-none"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 style={{ display: 'block', padding: '0.6rem', fontSize: '0.9rem', borderRadius: '4px' }}
             >
                 Request Service
@@ -71,7 +80,7 @@ const ServiceCard = ({ iconName, title, description, tags, color, onTagClick }) 
     );
 };
 
-const Services = () => {
+const Services: React.FC = () => {
     const [selectedTag, setSelectedTag] = useState(null);
     const [servicesData, setServicesData] = useState(globalCache.services || defaultServices);
     const [loading, setLoading] = useState(!globalCache.services);

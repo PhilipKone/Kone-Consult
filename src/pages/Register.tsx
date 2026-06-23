@@ -6,7 +6,7 @@ import { FaUserPlus, FaGoogle } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
 
-const Register = () => {
+const Register: React.FC = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,7 +19,7 @@ const Register = () => {
     const { signup, googleSignIn } = useAuth();
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
         setFormData({ 
             ...formData, 
@@ -27,7 +27,7 @@ const Register = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (formData.password !== formData.confirmPassword) {

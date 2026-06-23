@@ -5,7 +5,12 @@ import { db } from '../firebase/config';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { globalCache } from '../utils/cache';
 
-const StatItem = ({ value, label }) => (
+interface StatItemProps {
+    value: string;
+    label: string;
+}
+
+const StatItem: React.FC<StatItemProps> = ({ value, label }) => (
     <div className="d-flex flex-column align-items-center justify-content-center p-3">
         <h3 className="h2 fw-bold text-gradient mb-0">{value}</h3>
         <span className="text-secondary small text-uppercase tracking-wider opacity-75" style={{ fontSize: '0.7rem' }}>{label}</span>
@@ -28,7 +33,7 @@ const defaultAboutEntries = [
     }
 ];
 
-const About = () => {
+const About: React.FC = () => {
     const [aboutData, setAboutData] = useState(globalCache.aboutEntries || defaultAboutEntries);
     const [loading, setLoading] = useState(!globalCache.aboutEntries);
 

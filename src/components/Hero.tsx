@@ -203,13 +203,13 @@ const HERO_DATA = {
     }
 };
 
-const Hero = () => {
+const Hero: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const tabParam = searchParams.get('tab') || 'academic';
-    const activeTab = ['academic', 'business', 'software'].includes(tabParam) ? tabParam : 'academic';
+    const activeTab = (['academic', 'business', 'software'].includes(tabParam) ? tabParam : 'academic') as keyof typeof HERO_DATA;
     const currentData = HERO_DATA[activeTab];
 
-    const setActiveTab = (newTab) => {
+    const setActiveTab = (newTab: string) => {
         setSearchParams({ tab: newTab });
     };
 
