@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaClock, FaSignOutAlt, FaShieldAlt } from 'react-icons/fa';
 
-const SessionWarningModal = ({ isOpen, onStay, onLogout, timeoutSeconds }) => {
+interface SessionWarningModalProps {
+    isOpen: boolean;
+    onStay: () => void;
+    onLogout: () => void;
+    timeoutSeconds: number;
+}
+
+const SessionWarningModal: React.FC<SessionWarningModalProps> = ({ isOpen, onStay, onLogout, timeoutSeconds }) => {
     const [timeLeft, setTimeLeft] = useState(timeoutSeconds);
 
     useEffect(() => {

@@ -5,7 +5,12 @@ import { motion } from 'framer-motion';
 import { FaTimes, FaInfoCircle, FaBook, FaGraduationCap } from 'react-icons/fa';
 import { tagDescriptions } from '../data/tagData';
 
-const TagModal = ({ tag, onClose }) => {
+interface TagModalProps {
+    tag: string | null;
+    onClose: () => void;
+}
+
+const TagModal: React.FC<TagModalProps> = ({ tag, onClose }) => {
     if (!tag) return null;
 
     const modalContent = (
@@ -57,10 +62,10 @@ const TagModal = ({ tag, onClose }) => {
                     {(() => {
                         const normalizedTag = tag.trim();
                         // Try exact match
-                        if (tagDescriptions[normalizedTag]) return tagDescriptions[normalizedTag];
+                        if (tagDescriptions[normalizedTag as keyof typeof tagDescriptions]) return tagDescriptions[normalizedTag as keyof typeof tagDescriptions];
                         // Try case-insensitive match
                         const match = Object.keys(tagDescriptions).find(k => k.toLowerCase() === normalizedTag.toLowerCase());
-                        if (match) return tagDescriptions[match];
+                        if (match) return tagDescriptions[match as keyof typeof tagDescriptions];
                         return "Detailed description coming soon for this tool. Please check our documentation for comprehensive research and data guides.";
                     })()}
                 </p>

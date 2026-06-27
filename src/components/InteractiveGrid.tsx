@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useVelocity, useSpring } from 'framer-motion';
 
-const InteractiveGrid = () => {
+const InteractiveGrid: React.FC = () => {
   const { scrollY } = useScroll();
   const mouseRef = useRef({ x: 0, y: 0 });
-  const glowRef = useRef(null);
+  const glowRef = useRef<HTMLDivElement | null>(null);
   
   // Track the velocity of scrolling for 6D flow
   const scrollVelocity = useVelocity(scrollY);
@@ -23,7 +23,7 @@ const InteractiveGrid = () => {
 
   // Mouse interactivity for the atmospheric glow
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       if (glowRef.current) {
         glowRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
