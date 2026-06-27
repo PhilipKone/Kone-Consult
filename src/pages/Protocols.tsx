@@ -64,6 +64,23 @@ const defaultProtocols = [
             compliance: "NIST-SP-800-56A compliant key-establishment scheme. Evaluated under OWASP Top 10 API Security controls.",
             timeline: "System Architecture Blueprint"
         }
+    },
+    {
+        id: "proto-4",
+        title: "Kone Academy Qualitative Interview Protocol",
+        description: "A detailed semi-structured qualitative research protocol designed to evaluate teacher professional development experiences, pedagogical adaptations, and classroom management outcomes.",
+        tools: "Qualitative Methods, Semi-structured Interviews, NVivo, Thematic Analysis",
+        category: "Academic",
+        institution: "Kone Academy Research",
+        imageUrl: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=600&q=80",
+        liveUrl: "",
+        status: "published",
+        details: {
+            methodology: "Establish semi-structured face-to-face or remote teacher interviews (45-60 minutes) post-implementation. Questions target ZPD scaffolding, device sharing strategies, and gender-based student interactions.",
+            dataProcessing: "Audio recordings are transcribed using automated speech-to-text models, manually verified, and imported into NVivo for open, axial, and selective thematic coding.",
+            compliance: "Adheres to institutional IRB guidelines. Consent forms must be signed before recording; transcripts are fully anonymized with alphanumeric identifiers.",
+            timeline: "Post-Implementation Qualitative Evaluation"
+        }
     }
 ];
 
