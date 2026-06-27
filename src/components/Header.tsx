@@ -527,9 +527,10 @@ const Header: React.FC = () => {
                                                     e.preventDefault();
                                                     handleColorChange(color);
                                                 }}
-                                                title={`Switch theme to ${NEON_THEMES[color].name}`}
+                                                title={`Switch theme to ${NEON_THEMES[color as keyof typeof NEON_THEMES].name}`}
+                                                aria-label={`Switch theme to ${NEON_THEMES[color as keyof typeof NEON_THEMES].name}`}
                                             >
-                                                <span className="dot-label">{NEON_THEMES[color].name}</span>
+                                                <span className="dot-label">{NEON_THEMES[color as keyof typeof NEON_THEMES].name}</span>
                                             </button>
                                         ))}
                                     </div>

@@ -322,6 +322,11 @@ export default function KonePay() {
                     placeholder="e.g. Philip Kone"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    required
+                    minLength={2}
+                    maxLength={80}
+                    pattern="^[a-zA-Z\s\-\.\']+$"
+                    title="Please enter a valid name (letters, spaces, hyphens, periods, or apostrophes only)."
                   />
                   {errors.name && <p className="field-error">{errors.name}</p>}
                 </div>
@@ -334,6 +339,7 @@ export default function KonePay() {
                     placeholder="e.g. philip@email.com"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    required
                   />
                   {errors.email && <p className="field-error">{errors.email}</p>}
                 </div>
@@ -346,6 +352,9 @@ export default function KonePay() {
                     placeholder="e.g. +233 55 199 3820"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    required
+                    pattern="^\+?[\d\s\-]{8,}$"
+                    title="Please enter a valid phone number (at least 8 digits/characters)."
                   />
                   {errors.phone && <p className="field-error">{errors.phone}</p>}
                 </div>

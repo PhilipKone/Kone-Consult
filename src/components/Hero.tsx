@@ -224,6 +224,9 @@ const Hero: React.FC = () => {
                                 key={tab}
                                 className={`hero-tab ${activeTab === tab ? 'active' : ''}`}
                                 onClick={() => setActiveTab(tab)}
+                                role="tab"
+                                aria-selected={activeTab === tab}
+                                aria-label={`Switch hero view to ${tab} pillar`}
                             >
                                 {tab.toUpperCase()}
                             </button>

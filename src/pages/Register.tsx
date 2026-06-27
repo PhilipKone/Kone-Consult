@@ -113,6 +113,10 @@ const Register: React.FC = () => {
                                     onChange={handleChange}
                                     placeholder="John Doe"
                                     required
+                                    minLength={2}
+                                    maxLength={80}
+                                    pattern="^[a-zA-Z\s\-\.\']+$"
+                                    title="Please enter a valid name (letters, spaces, hyphens, periods, or apostrophes only)."
                                 />
                             </div>
                             <div className="form-group d-flex flex-column">
@@ -139,6 +143,7 @@ const Register: React.FC = () => {
                                     onChange={handleChange}
                                     placeholder="Create a password"
                                     required
+                                    minLength={6}
                                 />
                             </div>
                             <div className="form-group d-flex flex-column">
@@ -152,6 +157,7 @@ const Register: React.FC = () => {
                                     onChange={handleChange}
                                     placeholder="Confirm your password"
                                     required
+                                    minLength={6}
                                 />
                             </div>
 
