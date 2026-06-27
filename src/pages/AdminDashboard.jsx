@@ -324,6 +324,7 @@ const AdminDashboard = () => {
     // Kone Pay (Financials) State
     const [payments, setPayments] = useState([]);
     const [totalRevenue, setTotalRevenue] = useState(0);
+    const [invoices, setInvoices] = useState([]);
 
     useEffect(() => {
         if (!currentUser) {
@@ -454,6 +455,17 @@ const AdminDashboard = () => {
             }
         );
 
+        // Subscribe to Invoices
+        const unsubscribeInvoices = onSnapshot(
+            query(collection(db, 'invoices'), orderBy('createdAt', 'desc')),
+            (snapshot) => {
+                setInvoices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+            },
+            (error) => {
+                console.log("Invoices collection might not exist yet", error);
+            }
+        );
+
         // Safety timeout for loading state
         const timer = setTimeout(() => {
             setLoading(false);
@@ -471,6 +483,7 @@ const AdminDashboard = () => {
             unsubscribeProjectsIDE();
             unsubscribeBlogs();
             unsubscribePayments();
+            unsubscribeInvoices();
         };
     }, [currentUser, navigate]);
 
@@ -1219,6 +1232,7 @@ const AdminDashboard = () => {
                                 payments={payments}
                                 totalRevenue={totalRevenue}
                                 activeSite={activeSite}
+                                invoices={invoices}
                             />
                         )}
 
