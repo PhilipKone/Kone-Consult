@@ -1,7 +1,16 @@
+import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { resolveAssetPath } from '../utils/assets';
 
-const ProjectCard = ({ title, description, tools, githubUrl, imageUrl }) => {
+interface ProjectCardProps {
+    title: string;
+    description: string;
+    tools: string;
+    githubUrl?: string;
+    imageUrl?: string;
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, tools, githubUrl, imageUrl }) => {
     return (
         <div className="card glass-panel h-100 project-card overflow-hidden">
             {imageUrl && (

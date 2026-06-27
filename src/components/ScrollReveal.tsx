@@ -1,7 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const ScrollReveal = ({ children, delay = 0, yOffset = 50, duration = 0.5, className = '' }) => {
+interface ScrollRevealProps {
+    children: React.ReactNode;
+    delay?: number;
+    yOffset?: number;
+    duration?: number;
+    className?: string;
+}
+
+const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, delay = 0, yOffset = 50, duration = 0.5, className = '' }) => {
     return (
         <motion.div
             className={className}

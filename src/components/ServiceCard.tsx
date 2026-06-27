@@ -11,7 +11,15 @@ const iconMap = {
     'book': FaBook
 };
 
-const ServiceCard = ({ title, description, icon, link, color }) => {
+interface ServiceCardProps {
+    title: string;
+    description: string;
+    icon: 'chart-line' | 'file-alt' | 'lightbulb' | 'search' | 'hands-helping' | 'book';
+    link: string;
+    color: 'primary' | 'secondary' | 'success' | 'warning' | 'info' | 'danger';
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, link, color }) => {
     const IconComponent = iconMap[icon] || FaLightbulb;
 
     return (

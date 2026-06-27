@@ -1,6 +1,12 @@
 import React from 'react';
 
-export const Logo = ({ size = 192, className = '', color = 'blue', ...props }) => {
+interface LogoProps extends React.SVGProps<SVGSVGElement> {
+    size?: number;
+    className?: string;
+    color?: 'blue' | 'purple' | 'green' | 'orange' | 'black';
+}
+
+export const Logo: React.FC<LogoProps> = ({ size = 192, className = '', color = 'blue', ...props }) => {
     // Define gradient colors based on the color prop
     const gradients = {
         blue: { start: "#7B9FB8", end: "#2C4A5E" },
@@ -60,4 +66,3 @@ export const Logo = ({ size = 192, className = '', color = 'blue', ...props }) =
         </svg>
     );
 };
-

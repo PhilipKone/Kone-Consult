@@ -1,7 +1,15 @@
 import React from 'react';
 import './Skeleton.css';
 
-const Skeleton = ({ type, height, width, borderRadius = '8px', className = '' }) => {
+interface SkeletonProps {
+    type?: 'stat-card' | 'chart-box';
+    height?: string;
+    width?: string;
+    borderRadius?: string;
+    className?: string;
+}
+
+const Skeleton: React.FC<SkeletonProps> = ({ type, height, width, borderRadius = '8px', className = '' }) => {
     const styles = {
         height: height || '20px',
         width: width || '100%',

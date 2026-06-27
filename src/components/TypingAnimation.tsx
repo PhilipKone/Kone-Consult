@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './TypingAnimation.css';
 
-const TypingAnimation = ({ words }) => {
+interface TypingAnimationProps {
+    words: string[];
+}
+
+const TypingAnimation: React.FC<TypingAnimationProps> = ({ words }) => {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [currentText, setCurrentText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
-    const pauseTimerRef = useRef(null);
+    const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     // Reset when words change on segment toggle
     useEffect(() => {
