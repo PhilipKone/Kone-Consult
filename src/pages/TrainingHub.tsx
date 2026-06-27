@@ -105,7 +105,11 @@ const TrainingHub = () => {
     }, [location]);
 
     useEffect(() => {
-        if (navigator.userAgent.includes('ReactSnap')) {
+        if (
+            navigator.userAgent.includes('ReactSnap') ||
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) {
             return;
         }
 

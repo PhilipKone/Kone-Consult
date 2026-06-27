@@ -34,6 +34,21 @@ const UserProfile = () => {
             return;
         }
 
+        if (
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) {
+            setUserData({
+                name: currentUser.displayName || 'Developer',
+                email: currentUser.email,
+                role: 'user',
+                createdAt: currentUser.metadata.creationTime
+            });
+            setSavedProjects([]);
+            setLoading(false);
+            return;
+        }
+
         const fetchUserProfile = async () => {
             try {
                 // Fetch User Details document from 'users' collection

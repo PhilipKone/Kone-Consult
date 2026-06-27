@@ -40,7 +40,11 @@ const About: React.FC = () => {
     useEffect(() => {
         document.title = "About Us | The Team Behind Kone Consult Research";
         
-        if (navigator.userAgent.includes('ReactSnap')) {
+        if (
+            navigator.userAgent.includes('ReactSnap') ||
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) {
             setLoading(false);
             return;
         }

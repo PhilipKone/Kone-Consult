@@ -30,7 +30,11 @@ const ChatWidget: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (!sessionId) return;
+        if (
+            !sessionId ||
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) return;
         
         // Listen to messages for this specific session
         const q = query(

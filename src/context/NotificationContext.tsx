@@ -15,6 +15,15 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
+    if (
+      !import.meta.env.VITE_FIREBASE_API_KEY ||
+      import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+    ) {
+      setUnreadCount(0);
+      updateAppBadge(0);
+      return;
+    }
+
     if (!currentUser) {
       setUnreadCount(0);
       updateAppBadge(0);

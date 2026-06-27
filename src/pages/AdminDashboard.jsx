@@ -337,6 +337,14 @@ const AdminDashboard = () => {
             return;
         }
 
+        if (
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) {
+            setLoading(false);
+            return;
+        }
+
         const unsubscribeMessages = onSnapshot(
             query(collection(db, 'messages'), orderBy('timestamp', 'desc')),
             (snapshot) => {

@@ -90,7 +90,11 @@ const Services: React.FC = () => {
     useEffect(() => {
         document.title = categoryFilter ? `${categoryFilter.replace(/-/g, ' ')} | Kone Consult Services` : "Services | Kone Consult Research Solutions";
         
-        if (navigator.userAgent.includes('ReactSnap')) {
+        if (
+            navigator.userAgent.includes('ReactSnap') ||
+            !import.meta.env.VITE_FIREBASE_API_KEY ||
+            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+        ) {
             setLoading(false);
             return;
         }
