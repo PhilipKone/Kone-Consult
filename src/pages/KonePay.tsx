@@ -77,10 +77,54 @@ export default function KonePay() {
   const isCustom = selectedService.label === 'Custom Amount';
   const amount = isCustom ? parseFloat(customAmount) || 0 : selectedService.amount;
 
+  const [paramsParsed, setParamsParsed] = useState(false);
+
   useEffect(() => {
-    setSelectedService(SERVICES[division][0]);
+    const params = new URLSearchParams(window.location.search);
+    const pDiv = params.get('division');
+    const pAmt = params.get('amount');
+    const pEmail = params.get('email');
+    const pName = params.get('name');
+    const pPhone = params.get('phone');
+    const pSvc = params.get('service');
+
+    let targetDivision = 'Kone Consult';
+    let targetService = SERVICES['Kone Consult'][0];
+
+    if (pDiv && SERVICES[pDiv as keyof typeof SERVICES]) {
+      targetDivision = pDiv;
+      if (pSvc) {
+        const found = SERVICES[pDiv as keyof typeof SERVICES].find(s => s.label.toLowerCase() === pSvc.toLowerCase());
+        if (found) {
+          targetService = found;
+        } else {
+          targetService = { label: pSvc, amount: parseFloat(pAmt || '0') || 0 };
+        }
+      } else if (pAmt) {
+        targetService = { label: 'Custom Invoice Payment', amount: parseFloat(pAmt) || 0 };
+      }
+    } else if (pAmt) {
+      targetService = { label: 'Custom Invoice Payment', amount: parseFloat(pAmt) || 0 };
+    }
+
+    setDivision(targetDivision);
+    setSelectedService(targetService);
+    
+    if (pName || pEmail || pPhone) {
+      setForm({
+        name: pName || '',
+        email: pEmail || '',
+        phone: pPhone || ''
+      });
+    }
+    setParamsParsed(true);
+  }, []);
+
+  useEffect(() => {
+    if (!paramsParsed) return;
+    setSelectedService(SERVICES[division as keyof typeof SERVICES][0]);
     setCustomAmount('');
-  }, [division]);
+  }, [division, paramsParsed]);
 
   const validate = () => {
     const e = {};
