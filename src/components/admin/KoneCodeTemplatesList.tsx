@@ -1,7 +1,21 @@
 import React from 'react';
 import { FaEdit, FaTrash, FaCode } from 'react-icons/fa';
 
-const KoneCodeTemplatesList = ({ templates, onEdit, onDelete }) => {
+interface Template {
+    id: string;
+    title: string;
+    language: string;
+    code: string;
+    [key: string]: any;
+}
+
+interface KoneCodeTemplatesListProps {
+    templates: Template[];
+    onEdit: (template: Template) => void;
+    onDelete: (id: string) => void;
+}
+
+const KoneCodeTemplatesList: React.FC<KoneCodeTemplatesListProps> = ({ templates, onEdit, onDelete }) => {
     if (!templates || templates.length === 0) {
         return (
             <div className="text-center py-4 py-md-5 border rounded border-dark bg-dark bg-opacity-25">

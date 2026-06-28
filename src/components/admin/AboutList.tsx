@@ -1,7 +1,22 @@
 import React from 'react';
 import { FaEdit, FaTrash, FaUserTie } from 'react-icons/fa';
 
-const AboutList = ({ entries, onEdit, onDelete }) => {
+interface AboutEntry {
+    id: string;
+    name: string;
+    role: string;
+    missionTitle: string;
+    tags?: string[];
+    [key: string]: any;
+}
+
+interface AboutListProps {
+    entries: AboutEntry[];
+    onEdit: (entry: AboutEntry) => void;
+    onDelete: (id: string) => void;
+}
+
+const AboutList: React.FC<AboutListProps> = ({ entries, onEdit, onDelete }) => {
     if (!entries || entries.length === 0) {
         return (
             <div className="text-center py-4 py-md-5 border rounded border-dark bg-dark bg-opacity-25">

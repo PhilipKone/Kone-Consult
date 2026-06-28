@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
-import { FaTrash, FaCode, FaTimes } from 'react-icons/fa';
+import { FaTrash, FaCode } from 'react-icons/fa';
 
-const KoneCodeProjectsList = ({ projects, onDelete }) => {
-    const [viewingCode, setViewingCode] = useState(null);
+interface Project {
+    id: string;
+    title?: string;
+    language: string;
+    code: string;
+    [key: string]: any;
+}
+
+interface KoneCodeProjectsListProps {
+    projects: Project[];
+    onDelete: (id: string) => void;
+}
+
+const KoneCodeProjectsList: React.FC<KoneCodeProjectsListProps> = ({ projects, onDelete }) => {
+    const [viewingCode, setViewingCode] = useState<Project | null>(null);
 
     if (!projects || projects.length === 0) {
         return (

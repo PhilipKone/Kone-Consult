@@ -5,12 +5,32 @@ import { doc, updateDoc, addDoc, collection, serverTimestamp } from 'firebase/fi
 import { db } from '../../firebase/config';
 import { FaTrash, FaReply, FaEnvelope, FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaLock, FaShieldAlt } from 'react-icons/fa';
 
-const MessageView = ({ message, onDelete, onStatusUpdate }) => {
+interface Message {
+    id: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    read: boolean;
+    status?: 'replied' | 'replied_secure' | string;
+    timestamp?: {
+        seconds: number;
+        nanoseconds: number;
+    };
+}
+
+interface MessageViewProps {
+    message: Message | null;
+    onDelete: (id: string) => void;
+    onStatusUpdate?: (id: string, status: string) => void;
+}
+
+const MessageView: React.FC<MessageViewProps> = ({ message, onDelete, onStatusUpdate }) => {
     const [replyText, setReplyText] = useState('');
     const [sending, setSending] = useState(false);
     const [isSecure, setIsSecure] = useState(false);
-    const [status, setStatus] = useState(null); // 'success' | 'error'
-    const [generatedCode, setGeneratedCode] = useState(null);
+    const [status, setStatus] = useState<'success' | 'error' | null>(null);
+    const [generatedCode, setGeneratedCode] = useState<string | null>(null);
 
     if (!message) {
         return (
@@ -21,7 +41,7 @@ const MessageView = ({ message, onDelete, onStatusUpdate }) => {
         );
     }
 
-    const handleSendReply = async (e) => {
+    const handleSendReply = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!replyText.trim()) return;
 
@@ -98,6 +118,11 @@ const MessageView = ({ message, onDelete, onStatusUpdate }) => {
                                     <FaCheckCircle className="me-1" /> Replied
                                 </span>
                             )}
+                            {message.status === 'replied_secure' && (
+                                <span className="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20 py-1 px-2 small">
+                                    <FaShieldAlt className="me-1" /> Secure Replied
+                                </span>
+                            )}
                         </div>
                         <button onClick={() => onDelete(message.id)} className="btn btn-link text-danger p-0 hover-opacity-75 transition-all">
                             <FaTrash />
@@ -160,7 +185,7 @@ const MessageView = ({ message, onDelete, onStatusUpdate }) => {
                         <div className={`reply-container glass-panel p-2 rounded-4 border transition-all ${isSecure ? 'border-primary border-opacity-50 shadow-blue' : 'border-dark'} mb-3`}>
                             <textarea
                                 className="form-control form-control-dark border-0 text-white shadow-none"
-                                rows="4"
+                                rows={4}
                                 placeholder={isSecure ? "Type your encrypted response..." : `Type your reply to ${message.name}...`}
                                 value={replyText}
                                 onChange={(e) => setReplyText(e.target.value)}
