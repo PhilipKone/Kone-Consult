@@ -1,7 +1,24 @@
 import React from 'react';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 
-const DocumentationList = ({ docs, onDelete, onEdit, onView }) => {
+interface DocModule {
+    docId: string;
+    id: string;
+    title: string;
+    category?: string;
+    section?: string;
+    order?: number;
+    [key: string]: any;
+}
+
+interface DocumentationListProps {
+    docs: DocModule[];
+    onDelete: (id: string) => void;
+    onEdit: (doc: DocModule) => void;
+    onView: (doc: DocModule) => void;
+}
+
+const DocumentationList: React.FC<DocumentationListProps> = ({ docs, onDelete, onEdit, onView }) => {
     if (!docs || docs.length === 0) {
         return (
             <div className="text-center py-4 py-md-5 text-secondary">

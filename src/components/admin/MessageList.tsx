@@ -1,7 +1,28 @@
 import React from 'react';
 import { FaShieldAlt, FaReply } from 'react-icons/fa';
 
-const MessageList = ({ messages, selectedMessage, onSelect, markAsRead }) => {
+interface Message {
+    id: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    read: boolean;
+    status?: 'replied' | 'replied_secure' | string;
+    timestamp?: {
+        seconds: number;
+        nanoseconds: number;
+    };
+}
+
+interface MessageListProps {
+    messages: Message[];
+    selectedMessage: Message | null;
+    onSelect: (msg: Message) => void;
+    markAsRead: (id: string, status?: string) => void;
+}
+
+const MessageList: React.FC<MessageListProps> = ({ messages, selectedMessage, onSelect, markAsRead }) => {
     return (
         <div className="col-12 col-lg-4 message-list-col h-100 d-flex flex-column border-end border-dark">
             <div className="p-4 border-bottom border-dark bg-dark">

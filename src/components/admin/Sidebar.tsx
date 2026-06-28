@@ -1,7 +1,13 @@
 import React from 'react';
 import { FaEnvelope, FaProjectDiagram } from 'react-icons/fa';
 
-const Sidebar = ({ activeTab, setActiveTab, unreadCount }) => {
+interface SidebarProps {
+    activeTab: string;
+    setActiveTab: (tab: string) => void;
+    unreadCount: number;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, unreadCount }) => {
     return (
         <div className="d-flex flex-column gap-2">
             <button
