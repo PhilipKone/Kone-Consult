@@ -213,6 +213,25 @@ const Hero: React.FC = () => {
         setSearchParams({ tab: newTab });
     };
 
+    const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    const handleMagneticMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        e.currentTarget.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
+    };
+
+    const handleMagneticLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.currentTarget.style.transform = 'translate(0px, 0px)';
+    };
+
     return (
         <React.Fragment>
             <section className="hero" id="home">
@@ -253,8 +272,22 @@ const Hero: React.FC = () => {
                                 {currentData.subtitle}
                             </p>
                             <div className="hero-actions">
-                                <Link to={`/services?cat=${activeTab}`} className="btn-primary big">Explore Services</Link>
-                                <Link to="/contact" className="btn-secondary big">Contact Us</Link>
+                                <Link 
+                                    to={`/services?cat=${activeTab}`} 
+                                    className="btn-primary big"
+                                    onMouseMove={handleMagneticMove}
+                                    onMouseLeave={handleMagneticLeave}
+                                >
+                                    Explore Services
+                                </Link>
+                                <Link 
+                                    to="/contact" 
+                                    className="btn-secondary big"
+                                    onMouseMove={handleMagneticMove}
+                                    onMouseLeave={handleMagneticLeave}
+                                >
+                                    Contact Us
+                                </Link>
                             </div>
                         </motion.div>
                     </AnimatePresence>
@@ -268,7 +301,7 @@ const Hero: React.FC = () => {
                             exit={{ opacity: 0, scale: 0.98 }}
                             transition={{ duration: 0.35, ease: "easeInOut" }}
                         >
-                            <div className="terminal-window glass-panel">
+                            <div className="terminal-window glass-panel" onMouseMove={handleMouseMove}>
                                 <div className="terminal-header">
                                     <div className="dot red"></div>
                                     <div className="dot yellow"></div>
@@ -305,7 +338,7 @@ const Hero: React.FC = () => {
                     <div className="trust-title">{currentData.trustTitle}</div>
                     <div className="trust-logos-grid">
                         {currentData.logos.map((logo, index) => (
-                            <div className="trust-logo-card" key={index}>
+                            <div className="trust-logo-card" key={index} onMouseMove={handleMouseMove}>
                                 <div className="logo-img-wrapper">
                                     {logo.type === 'image' ? (
                                         <img src={logo.src} alt={logo.alt} className="trust-logo-img" width="120" height="80" />
@@ -329,6 +362,7 @@ const Hero: React.FC = () => {
                     key={activeTab}
                     className="hero-featured-section glass-panel"
                     id="journal-club"
+                    onMouseMove={handleMouseMove}
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
@@ -352,15 +386,29 @@ const Hero: React.FC = () => {
                                 />
                             </div>
                         ) : (
-                            currentData.featured.customCard
+                            <div onMouseMove={handleMouseMove} className="w-100 d-flex justify-content-center">
+                                {currentData.featured.customCard}
+                            </div>
                         )}
 
                         {currentData.featured.isExternal ? (
-                            <a href={currentData.featured.link} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                            <a 
+                                href={currentData.featured.link} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="btn-secondary"
+                                onMouseMove={handleMagneticMove}
+                                onMouseLeave={handleMagneticLeave}
+                            >
                                 {currentData.featured.linkText}
                             </a>
                         ) : (
-                            <Link to={currentData.featured.link} className="btn-secondary">
+                            <Link 
+                                to={currentData.featured.link} 
+                                className="btn-secondary"
+                                onMouseMove={handleMagneticMove}
+                                onMouseLeave={handleMagneticLeave}
+                            >
                                 {currentData.featured.linkText}
                             </Link>
                         )}

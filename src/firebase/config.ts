@@ -1,4 +1,4 @@
-import { initializeApp, FirebaseApp } from 'firebase/app';
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAnalytics, Analytics } from 'firebase/analytics';
@@ -32,16 +32,20 @@ try {
     if (!firebaseConfig.apiKey) {
         console.warn('Firebase Hub: Missing VITE_FIREBASE_API_KEY. Initializing in offline simulation mode.');
     }
-    app = initializeApp(firebaseConfig);
+    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
     auth = getAuth(app);
     db = getFirestore(app);
     
     // Only initialize analytics if running in a browser environment and not pre-rendering
     if (typeof window !== 'undefined' && window.navigator.userAgent !== 'ReactSnap') {
-        analytics = getAnalytics(app);
+        try {
+            analytics = getAnalytics(app);
+        } catch (analyticsError) {
+            console.warn('Firebase Hub: Analytics failed to initialize (likely blocked by browser or ad-blocker):', analyticsError);
+        }
     }
 } catch (error) {
-    console.error('Firebase Hub: Critical Initialization Error. Forcing local fallback.');
+    console.error('Firebase Hub: Critical Initialization Error:', error);
     app = {} as any;
     auth = {} as any;
     db = {} as any;

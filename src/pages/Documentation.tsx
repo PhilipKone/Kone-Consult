@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, ReactNode } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import TagModal from '../components/TagModal';
 import { Logo } from '../components/Logo';
@@ -8,9 +8,9 @@ import {
     FaSearch, FaChevronRight 
 } from 'react-icons/fa';
 import { db } from '../firebase/config';
-import { collection, query, orderBy, onSnapshot, DocumentData } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { globalCache } from '../utils/cache';
-import '../index.css';
+import './Documentation.css';
 import Prism from 'prismjs';
 import DOMPurify from 'dompurify';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -34,11 +34,6 @@ interface Template {
     id: string;
     title?: string;
     [key: string]: any;
-}
-
-interface Category {
-    id: string;
-    title: string;
 }
 
 const iconMap: Record<string, JSX.Element> = {
@@ -65,7 +60,10 @@ const Documentation: React.FC = () => {
     const [templates, setTemplates] = useState<Template[]>(globalCache.templates || []);
     const [loading, setLoading] = useState<boolean>(!globalCache.docs);
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const isManualScrolling = useRef<boolean>(false);
+    const searchInputRef = useRef<HTMLInputElement>(null);
+    const [activeHeading, setActiveHeading] = useState<string>('');
+
+    const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
     // Fetch Data
     useEffect(() => {
@@ -103,12 +101,23 @@ const Documentation: React.FC = () => {
         };
     }, []);
 
+    // Keyboard shortcut for search (Ctrl+K or Cmd+K)
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInputRef.current?.focus();
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     // URL Sync via SearchParams
     const urlDocId = searchParams.get('doc');
 
     const handleCategoryChange = (catId: string) => {
         setSearchParams({ category: catId });
-        // Content area scroll reset
         const contentArea = document.querySelector('.doc-content-area');
         if (contentArea) contentArea.scrollTop = 0;
         if (window.innerWidth < 992) setIsSidebarOpen(false);
@@ -139,11 +148,9 @@ const Documentation: React.FC = () => {
                     setActiveTab(newId);
                     setSearchParams({ category: selectedCategory, doc: newId });
                     
-                    // Content area scroll reset on category change
                     const contentArea = document.querySelector('.doc-content-area');
                     if (contentArea) contentArea.scrollTo({ top: 0, behavior: 'auto' });
                 } else {
-                    // Critical Fix: Category is intentionally empty
                     setActiveTab('');
                     setSearchParams({ category: selectedCategory });
                 }
@@ -151,28 +158,12 @@ const Documentation: React.FC = () => {
         }
     }, [selectedCategory, urlDocId, docs, activeTab, setSearchParams]);
 
-    // Robust Scroll Reset on tab change with slight delay for DOM update
-    useEffect(() => {
-        const resetScroll = () => {
-            const contentArea = document.querySelector('.doc-content-area');
-            if (contentArea) {
-                // Ensure immediate vertical reset without interrupting existing DOM animations
-                contentArea.scrollTo({ top: 0, behavior: 'auto' });
-            }
-        };
-        
-        requestAnimationFrame(() => {
-            resetScroll();
-        });
-    }, [activeTab]);
-
     // Derived State - Enhanced Global Search
     const filteredDocs = useMemo(() => {
         if (!searchQuery) {
             return docs.filter(doc => (doc.category || 'general') === selectedCategory);
         }
         
-        // Search exclusively within the active category
         return docs.filter(doc => {
             if ((doc.category || 'general') !== selectedCategory) return false;
             const matchesSearch = 
@@ -194,7 +185,47 @@ const Documentation: React.FC = () => {
         'lab': 'Lab'
     };
 
-    // Anchor Injection for Headings
+    const activeDoc = useMemo(() => docs.find(d => d.id === activeTab), [docs, activeTab]);
+
+    // Parse Headings dynamically for the Table of Contents
+    const headings = useMemo(() => {
+        if (!activeDoc || !activeDoc.content) return [];
+        const matches = [...activeDoc.content.matchAll(/<h([23])[^>]*>([\s\S]*?)<\/h\1>/gi)];
+        return matches.map((match) => {
+            const level = parseInt(match[1]);
+            const text = match[2].replace(/<[^>]*>/g, '').trim(); // strip nested HTML tags
+            const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+            return { id, text, level };
+        });
+    }, [activeDoc]);
+
+    // Scrollspy for Right-side TOC
+    useEffect(() => {
+        const contentArea = document.querySelector('.doc-content-area');
+        if (!contentArea || headings.length === 0) return;
+
+        const handleScroll = () => {
+            const scrollPos = contentArea.scrollTop + 120; // offset for better trigger point
+            let currentHeading = '';
+            for (const h of headings) {
+                const el = document.getElementById(h.id);
+                if (el) {
+                    const top = el.offsetTop;
+                    if (scrollPos >= top) {
+                        currentHeading = h.id;
+                    }
+                }
+            }
+            setActiveHeading(currentHeading || headings[0].id);
+        };
+
+        contentArea.addEventListener('scroll', handleScroll);
+        handleScroll(); // Trigger once on mount/change
+
+        return () => contentArea.removeEventListener('scroll', handleScroll);
+    }, [headings, activeTab]);
+
+    // Anchor Injection for Headings & Smooth Scrolling
     useEffect(() => {
         if (!loading && activeTab) {
             const timer = setTimeout(() => {
@@ -206,7 +237,6 @@ const Documentation: React.FC = () => {
                         const id = htmlH.innerText.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
                         htmlH.id = id;
                         
-                        // Inject Anchor Link Icon if not already present
                         if (!htmlH.querySelector('.anchor-link')) {
                             const anchor = document.createElement('a');
                             anchor.href = `#${id}`;
@@ -231,7 +261,7 @@ const Documentation: React.FC = () => {
         }
     }, [activeTab, loading, docs]);
 
-    // Code Block Utilities (Copy Buttons)
+    // Code Block Utilities (Copy Buttons & Headers)
     useEffect(() => {
         if (!loading && activeTab) {
             const timer = setTimeout(() => {
@@ -245,13 +275,31 @@ const Documentation: React.FC = () => {
                     htmlPre.parentNode?.insertBefore(wrapper, htmlPre);
                     wrapper.appendChild(htmlPre);
 
+                    // Create Premium Header
+                    const header = document.createElement('div');
+                    header.className = 'code-header-premium';
+                    
+                    // Determine language
+                    let lang = 'CODE';
+                    const codeEl = htmlPre.querySelector('code');
+                    if (codeEl) {
+                        const classes = Array.from(codeEl.classList);
+                        const langClass = classes.find(c => c.startsWith('language-'));
+                        if (langClass) {
+                            lang = langClass.replace('language-', '').toUpperCase();
+                        }
+                    }
+                    header.innerHTML = `<span>${lang}</span>`;
+
                     const copyBtn = document.createElement('button');
-                    copyBtn.className = 'copy-button';
+                    copyBtn.className = 'code-copy-btn-premium';
                     copyBtn.innerHTML = 'Copy';
-                    wrapper.appendChild(copyBtn);
+                    header.appendChild(copyBtn);
+                    
+                    wrapper.insertBefore(header, htmlPre);
 
                     copyBtn.onclick = () => {
-                        const codeText = htmlPre.innerText;
+                        const codeText = codeEl ? codeEl.innerText : htmlPre.innerText;
                         navigator.clipboard.writeText(codeText).then(() => {
                             copyBtn.innerHTML = 'Copied!';
                             copyBtn.classList.add('copied');
@@ -269,27 +317,16 @@ const Documentation: React.FC = () => {
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-    const activeDoc = useMemo(() => docs.find(d => d.id === activeTab), [docs, activeTab]);
-
     return (
-        <div className="docs-page-wrapper" style={{ 
-            backgroundColor: 'var(--bg-primary)', height: '100vh', 
-            overflow: 'hidden', paddingTop: '64px', display: 'flex', flexDirection: 'column' 
-        }}>
+        <div className="docs-page-wrapper">
             <div className="page-container glass-panel animate-fade-in mx-auto" style={{ 
                 position: 'relative', display: 'flex', flexDirection: 'column', 
                 height: 'calc(100vh - 84px)', maxWidth: '1600px', 
                 width: '98%', overflow: 'hidden', marginTop: '10px', padding: 0,
                 zIndex: 1 
             }}>
-                <div className="docs-cat-nav-wrapper d-flex align-items-center" style={{ 
-                    flexShrink: 0, 
-                    backgroundColor: 'rgba(13, 17, 23, 0.98)', 
-                    backdropFilter: 'blur(20px)',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                    padding: '0.6rem 1rem',
-                    zIndex: 10
-                }}>
+                {/* Top Category Navigation bar */}
+                <div className="docs-cat-nav-wrapper d-flex align-items-center">
                     <button
                         className="d-lg-none sidebar-mobile-toggle flex-shrink-0 me-3"
                         style={{ 
@@ -303,25 +340,26 @@ const Documentation: React.FC = () => {
                         <FaBars />
                     </button>
                     <div className="hide-scrollbar flex-grow-1" style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-                    <nav className="docs-cat-nav-content d-flex align-items-center gap-3" style={{ width: 'max-content', paddingRight: '1rem' }}>
-                        {[
-                            { id: 'general', title: 'Overview' },
-                            { id: 'consult', title: 'Consult' },
-                            { id: 'code', title: 'Code' },
-                            { id: 'lab', title: 'Lab' }
-                        ].map((cat) => (
-                            <button
-                                key={cat.id}
-                                className={`docs-cat-item-top ${selectedCategory === cat.id ? 'active' : ''}`}
-                                onClick={() => handleCategoryChange(cat.id)}
-                            >
-                                {cat.title}
-                            </button>
-                        ))}
-                    </nav>
+                        <nav className="docs-cat-nav-content d-flex align-items-center gap-3" style={{ width: 'max-content', paddingRight: '1rem' }}>
+                            {[
+                                { id: 'general', title: 'Overview' },
+                                { id: 'consult', title: 'Consult' },
+                                { id: 'code', title: 'Code' },
+                                { id: 'lab', title: 'Lab' }
+                            ].map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    className={`docs-cat-item-top ${selectedCategory === cat.id ? 'active' : ''}`}
+                                    onClick={() => handleCategoryChange(cat.id)}
+                                >
+                                    {cat.title}
+                                </button>
+                            ))}
+                        </nav>
                     </div>
                 </div>
 
+                {/* Main 3-Column Layout */}
                 <div className="d-flex flex-row flex-grow-1" style={{ minHeight: 0, overflow: 'hidden' }}>
                     {isSidebarOpen && (
                         <div 
@@ -334,6 +372,7 @@ const Documentation: React.FC = () => {
                         />
                     )}
 
+                    {/* Column 1: Left Sidebar (Navigation) */}
                     <div className={`doc-sidebar glass-panel ${isSidebarOpen ? 'open' : 'closed'}`} style={{
                         width: '280px', minWidth: '280px',
                         borderRight: '1px solid rgba(255, 255, 255, 0.05)',
@@ -351,21 +390,27 @@ const Documentation: React.FC = () => {
                                 </button>
                             </div>
 
+                            {/* Enhanced Search HUD with Keyboard shortcut */}
                             <div className="px-4 mb-4 mt-1 mt-lg-4">
                                 <div className="position-relative d-flex align-items-center">
                                     <FaSearch className="position-absolute text-secondary" style={{ left: '16px', fontSize: '0.9rem', pointerEvents: 'none', zIndex: 1 }} />
                                     <input 
+                                        ref={searchInputRef}
                                         type="text" placeholder="Search documentation..." 
-                                        className="w-100 glass-input rounded-3 py-2 ps-5 pe-3 text-white"
+                                        className="w-100 glass-input rounded-3 py-2 ps-5 pe-5 text-white"
                                         style={{ 
                                             fontSize: '0.85rem', 
                                             outline: 'none',
                                             transition: 'all 0.3s ease',
-                                            paddingLeft: '45px'
+                                            paddingLeft: '45px',
+                                            paddingRight: '50px'
                                         }}
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                     />
+                                    <span className="position-absolute search-kbd-shortcut d-none d-md-inline" style={{ right: '12px' }}>
+                                        {isMac ? '⌘K' : 'Ctrl+K'}
+                                    </span>
                                 </div>
                             </div>
                             <h5 className="px-4 mb-3 text-secondary" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '1px' }}>Contents</h5>
@@ -418,6 +463,7 @@ const Documentation: React.FC = () => {
                         </div>
                     </div>
 
+                    {/* Column 2: Center Content Area */}
                     <div className="doc-content-area flex-grow-1 overflow-auto bg-transparent px-3 px-md-5">
                         {loading ? (
                             <div className="py-4 max-w-content mx-auto">
@@ -428,68 +474,68 @@ const Documentation: React.FC = () => {
                             </div>
                         ) : activeDoc ? (
                             <div key={activeDoc.id} className="fade-in py-4 max-w-content mx-auto">
-                                        <div className="d-flex align-items-center gap-2 mb-4 text-secondary" style={{ fontSize: '0.75rem', fontWeight: 500 }}>
-                                            <Link to="/" className="text-decoration-none text-secondary hover-text-primary">Home</Link>
-                                            <FaChevronRight style={{ fontSize: '0.6rem', opacity: 0.5 }} />
-                                            <span 
-                                                className="cursor-pointer hover-text-primary"
+                                <div className="d-flex align-items-center gap-2 mb-4 text-secondary" style={{ fontSize: '0.75rem', fontWeight: 500 }}>
+                                    <Link to="/" className="text-decoration-none text-secondary hover-text-primary">Home</Link>
+                                    <FaChevronRight style={{ fontSize: '0.6rem', opacity: 0.5 }} />
+                                    <span 
+                                        className="cursor-pointer hover-text-primary"
+                                        onClick={() => {
+                                            setSearchParams({ category: 'general' });
+                                            setActiveTab('');
+                                        }}
+                                    >Docs</span>
+                                    <FaChevronRight style={{ fontSize: '0.6rem', opacity: 0.5 }} />
+                                    <span className="text-accent-primary">{categoryTitles[selectedCategory] || 'Overview'}</span>
+                                </div>
+
+                                {(!activeDoc.content || !activeDoc.content.includes('<h1')) && (
+                                    <div className="d-flex justify-content-between align-items-center mb-5 border-bottom border-secondary border-opacity-10 pb-4">
+                                        <h1 className="text-white fw-bold h2 mb-0" style={{ letterSpacing: '-0.5px' }}>{activeDoc.title}</h1>
+                                        {activeDoc.templateId && templates.find(t => t.id === activeDoc.templateId) && (
+                                            <button
+                                                className="btn btn-primary d-flex align-items-center gap-2 px-3 py-2 fw-bold"
+                                                style={{ borderRadius: '12px', boxShadow: '0 0 15px rgba(88, 166, 255, 0.3)', fontSize: '0.85rem' }}
                                                 onClick={() => {
-                                                    setSearchParams({ category: 'general' });
-                                                    setActiveTab('');
+                                                    const template = templates.find(t => t.id === activeDoc!.templateId);
+                                                    if (template) {
+                                                        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                                                        const ideUrl = isLocal 
+                                                            ? `http://localhost:5174/?templateId=${template.id}`
+                                                            : `https://code.koneacademy.io/?templateId=${template.id}`;
+                                                        window.open(ideUrl, '_blank');
+                                                    }
                                                 }}
-                                            >Docs</span>
-                                            <FaChevronRight style={{ fontSize: '0.6rem', opacity: 0.5 }} />
-                                            <span className="text-accent-primary">{categoryTitles[selectedCategory] || 'Overview'}</span>
-                                        </div>
-
-                                        {(!activeDoc.content || !activeDoc.content.includes('<h1')) && (
-                                            <div className="d-flex justify-content-between align-items-center mb-5 border-bottom border-secondary border-opacity-10 pb-4">
-                                                <h1 className="text-white fw-bold h2 mb-0" style={{ letterSpacing: '-0.5px' }}>{activeDoc.title}</h1>
-                                                {activeDoc.templateId && templates.find(t => t.id === activeDoc.templateId) && (
-                                                    <button
-                                                        className="btn btn-primary d-flex align-items-center gap-2 px-3 py-2 fw-bold"
-                                                        style={{ borderRadius: '12px', boxShadow: '0 0 15px rgba(88, 166, 255, 0.3)', fontSize: '0.85rem' }}
-                                                        onClick={() => {
-                                                            const template = templates.find(t => t.id === activeDoc!.templateId);
-                                                            if (template) {
-                                                                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                                                                const ideUrl = isLocal 
-                                                                    ? `http://localhost:5174/?templateId=${template.id}`
-                                                                    : `https://code.koneacademy.io/?templateId=${template.id}`;
-                                                                window.open(ideUrl, '_blank');
-                                                            }
-                                                        }}
-                                                    >
-                                                        <FaRocket className="text-warning" /> Try IDE
-                                                    </button>
-                                                )}
-                                            </div>
+                                            >
+                                                <FaRocket className="text-warning" /> Try IDE
+                                            </button>
                                         )}
-                                        <div className="doc-rich-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(activeDoc.content) }} />
-
-                                        <div className="doc-footer-nav">
-                                            {prevDoc ? (
-                                                <button className="nav-card text-start border-0" onClick={() => {
-                                                    setActiveTab(prevDoc.id);
-                                                    setSearchParams({ category: prevDoc.category || selectedCategory, doc: prevDoc.id });
-                                                }}>
-                                                    <span className="nav-card-label">Previous</span>
-                                                    <span className="nav-card-title">{prevDoc.title}</span>
-                                                </button>
-                                            ) : <div style={{ flex: 1 }}></div>}
-                                            {nextDoc && (
-                                                <button className="nav-card text-end border-0" onClick={() => {
-                                                    setActiveTab(nextDoc.id);
-                                                    setSearchParams({ category: nextDoc.category || selectedCategory, doc: nextDoc.id });
-                                                }}>
-                                                    <span className="nav-card-label">Next</span>
-                                                    <span className="nav-card-title">{nextDoc.title}</span>
-                                                </button>
-                                            )}
-                                        </div>
-
-                                        <DocFooter />
                                     </div>
+                                )}
+                                <div className="doc-rich-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(activeDoc.content) }} />
+
+                                <div className="doc-footer-nav">
+                                    {prevDoc ? (
+                                        <button className="nav-card text-start border-0" onClick={() => {
+                                            setActiveTab(prevDoc.id);
+                                            setSearchParams({ category: prevDoc.category || selectedCategory, doc: prevDoc.id });
+                                        }}>
+                                            <span className="nav-card-label">Previous</span>
+                                            <span className="nav-card-title">{prevDoc.title}</span>
+                                        </button>
+                                    ) : <div style={{ flex: 1 }}></div>}
+                                    {nextDoc && (
+                                        <button className="nav-card text-end border-0" onClick={() => {
+                                            setActiveTab(nextDoc.id);
+                                            setSearchParams({ category: nextDoc.category || selectedCategory, doc: nextDoc.id });
+                                        }}>
+                                            <span className="nav-card-label">Next</span>
+                                            <span className="nav-card-title">{nextDoc.title}</span>
+                                        </button>
+                                    )}
+                                </div>
+
+                                <DocFooter />
+                            </div>
                         ) : (
                             <div className="py-4 py-md-5 text-center text-secondary opacity-50">
                                 <FaBook size={48} className="mb-3 opacity-25" />
@@ -498,6 +544,29 @@ const Documentation: React.FC = () => {
                             </div>
                         )}
                     </div>
+
+                    {/* Column 3: Right Sidebar - Table of Contents */}
+                    {headings.length > 0 && (
+                        <aside className="doc-toc d-none d-xl-block">
+                            <h6 className="text-secondary small fw-bold text-uppercase ls-1 mb-3" style={{ fontSize: '0.65rem', opacity: 0.8 }}>On this page</h6>
+                            <ul className="toc-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                {headings.map(h => (
+                                    <li key={h.id} className={`toc-item toc-level-${h.level} mb-2`}>
+                                        <a 
+                                            href={`#${h.id}`} 
+                                            className={`toc-link ${activeHeading === h.id ? 'active' : ''}`}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth' });
+                                            }}
+                                        >
+                                            {h.text}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </aside>
+                    )}
                 </div>
             </div>
             {selectedTag && <TagModal tag={selectedTag} onClose={() => setSelectedTag(null)} />}

@@ -1,0 +1,357 @@
+/* --- Premium Documentation System CSS --- */
+
+.docs-page-wrapper {
+    background-color: #0d1117;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 3-Column Layout Grid */
+.docs-layout-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 240px;
+    height: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+    .docs-layout-grid {
+        grid-template-columns: 260px 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .docs-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar Custom Styling */
+.doc-sidebar {
+    background: rgba(13, 17, 23, 0.7) !important;
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.doc-sidebar.open {
+    transform: translateX(0);
+}
+
+@media (max-width: 992px) {
+    .doc-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100vh;
+        z-index: 1200;
+        transform: translateX(-100%);
+        box-shadow: 20px 0 40px rgba(0, 0, 0, 0.6);
+    }
+    
+    .doc-sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+/* Sidebar Links */
+.inactive-doc-link {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.inactive-doc-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.active-doc-link {
+    background: rgba(88, 166, 255, 0.1) !important;
+    color: #58a6ff !important;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px rgba(88, 166, 255, 0.2);
+}
+
+/* Content Area */
+.doc-content-area {
+    scroll-behavior: smooth;
+    background-color: #0d1117;
+    position: relative;
+}
+
+.max-w-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Heading Anchors */
+.doc-rich-content h2, .doc-rich-content h3 {
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.doc-rich-content h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+}
+
+.doc-rich-content h3 {
+    font-size: 1.35rem;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+}
+
+.anchor-link {
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: normal;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.doc-rich-content h2:hover .anchor-link,
+.doc-rich-content h3:hover .anchor-link {
+    opacity: 1;
+}
+
+/* Rich Text Styling */
+.doc-rich-content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.doc-rich-content ul, .doc-rich-content ol {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.doc-rich-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Table of Contents (3rd Column) --- */
+.doc-toc {
+    background: rgba(13, 17, 23, 0.7);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+}
+
+.toc-list {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 0.75rem;
+}
+
+.toc-item {
+    line-height: 1.4;
+}
+
+.toc-item.toc-level-3 {
+    padding-left: 1rem;
+}
+
+.toc-link {
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+    padding: 0.25rem 0;
+}
+
+.toc-link:hover {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.toc-link.active {
+    color: #58a6ff;
+    font-weight: 600;
+}
+
+/* --- Keyboard Shortcut Badge --- */
+.search-kbd-shortcut {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: monospace;
+    pointer-events: none;
+}
+
+/* --- Enhanced Code Blocks --- */
+.code-wrapper {
+    position: relative;
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0d1117;
+}
+
+.code-header-premium {
+    background: rgba(13, 17, 23, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.code-wrapper pre {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 1.25rem !important;
+    background: transparent !important;
+}
+
+/* Code Copy Button */
+.code-copy-btn-premium {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.65rem;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.code-copy-btn-premium:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.code-copy-btn-premium.copied {
+    color: #00ff87;
+    border-color: rgba(0, 255, 135, 0.3);
+    background: rgba(0, 255, 135, 0.05);
+}
+
+/* Shimmer Loaders */
+.shimmer-h1 {
+    height: 32px;
+    width: 60%;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-p {
+    height: 16px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Navigation Cards */
+.doc-footer-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 576px) {
+    .doc-footer-nav {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.nav-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    transform: translateY(-2px);
+}
+
+.nav-card-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 700;
+}
+
+.nav-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    transition: color 0.2s ease;
+}
+
+.nav-card:hover .nav-card-title {
+    color: #58a6ff;
+}
+
+/* Top Category Tabs Custom Scroll & Look */
+.docs-cat-item-top {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.docs-cat-item-top:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.docs-cat-item-top.active {
+    color: #fff;
+    background: rgba(88, 166, 255, 0.15);
+    box-shadow: inset 0 0 0 1px rgba(88, 166, 255, 0.25);
+}

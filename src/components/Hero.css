@@ -571,3 +571,76 @@
         margin-bottom: 1.5rem !important;
     }
 }
+
+/* --- Radial Mouse Glow --- */
+.terminal-window, .trust-logo-card, .hero-featured-section, .framework-mockup-container {
+    position: relative;
+}
+
+.terminal-window::before, 
+.trust-logo-card::before, 
+.hero-featured-section::before, 
+.framework-mockup-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(255, 255, 255, 0.05),
+        transparent 40%
+    );
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.terminal-window:hover::before, 
+.trust-logo-card:hover::before, 
+.hero-featured-section:hover::before, 
+.framework-mockup-container:hover::before {
+    opacity: 1;
+}
+
+/* --- Terminal CRT & Caret --- */
+.terminal-body {
+    position: relative;
+}
+
+/* Blinking Caret */
+.terminal-caret {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background-color: var(--text-secondary);
+    margin-left: 4px;
+    animation: caret-blink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes caret-blink {
+    from, to { background-color: transparent }
+    50% { background-color: var(--text-secondary) }
+}
+
+/* CRT Scanline overlay */
+.terminal-window::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 2;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+/* --- Magnetic Button Transition --- */
+.btn-primary.big, .btn-secondary.big {
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}

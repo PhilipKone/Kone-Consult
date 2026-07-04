@@ -49,15 +49,12 @@ const Blog = () => {
                 }));
 
                 // Merge with fallback pillar articles from The Agency
-                // If a Firestore blog has the same slug as a pillar, we merge them 
-                // but keep the pillar's unique imageUrl if the Firestore version is missing it.
                 const mergedBlogs = blogsData.map(blog => {
                     const pillar = pillarBlogs.find(p => p.slug === blog.slug);
                     if (pillar) {
                         return {
                             ...pillar, // Start with pillar data
                             ...blog,   // Override with Firestore data
-                            // Ensure we don't lose the image if Firestore has a placeholder or empty string
                             imageUrl: (blog.imageUrl && !blog.imageUrl.includes('unsplash')) ? blog.imageUrl : pillar.imageUrl
                         };
                     }
@@ -103,6 +100,14 @@ const Blog = () => {
         }
     };
 
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    };
+
     const filteredBlogs = blogs.filter(blog => {
         const matchesSearch = (blog.title?.toLowerCase() || '').includes(searchQuery.toLowerCase()) || 
                              (blog.excerpt?.toLowerCase() || '').includes(searchQuery.toLowerCase());
@@ -113,6 +118,10 @@ const Blog = () => {
         const matchesCategory = filterCat === 'all' || blogCat === filterCat;
         return matchesSearch && matchesCategory;
     });
+
+    const isDefaultView = searchQuery === '' && activeFilter === 'All';
+    const featuredPost = isDefaultView && filteredBlogs.length > 0 ? filteredBlogs[0] : null;
+    const displayPosts = featuredPost ? filteredBlogs.slice(1) : filteredBlogs;
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -127,8 +136,32 @@ const Blog = () => {
         visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } }
     };
 
+    const BlogSkeleton = () => (
+        <div className="blog-grid">
+            {[1, 2, 3, 4, 5, 6].map(i => (
+                <div key={i} className="skeleton-card">
+                    <div className="skeleton-image skeleton-shimmer" />
+                    <div className="skeleton-content">
+                        <div className="skeleton-text title skeleton-shimmer" />
+                        <div className="skeleton-text body-1 skeleton-shimmer" />
+                        <div className="skeleton-text body-2 skeleton-shimmer" />
+                        <div className="skeleton-text body-3 skeleton-shimmer" />
+                        <div className="skeleton-footer">
+                            <div className="skeleton-avatar skeleton-shimmer" />
+                            <div className="skeleton-text skeleton-shimmer" style={{ width: '80px', height: '10px' }} />
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+
     return (
         <div className="page-container position-relative overflow-hidden">
+            {/* Floating Ambient Background Blobs */}
+            <div className="ambient-blob blob-primary" />
+            <div className="ambient-blob blob-secondary" />
+            <div className="ambient-blob blob-tertiary" />
             <div className="page-background-glow" />
             
             {/* Header / Intro */}
@@ -181,7 +214,6 @@ const Blog = () => {
                         {/* 2. Standalone Elite Filter Ribbon */}
                         <div className="d-flex justify-content-center">
                             <div className="nav-tabs-premium">
-                                {/* KA Search Hash: 1775333100 */}
                                 {['All', 'Consult', 'Code', 'Lab'].map(cat => (
                                     <motion.button
                                         key={cat}
@@ -199,17 +231,74 @@ const Blog = () => {
                 </motion.div>
             </header>
 
-            {/* Blog Grid */}
+            {/* Main Content Area */}
             <main className="container pb-5 position-relative z-1">
                 {loading ? (
-                    <div className="d-flex justify-content-center py-10">
-                        <div className="spinner-border text-primary" style={{ width: '3rem', height: '3rem' }} role="status">
-                            <span className="visually-hidden">Loading insights...</span>
-                        </div>
-                    </div>
+                    <BlogSkeleton />
                 ) : (
                     <>
-                        {filteredBlogs.length > 0 ? (
+                        {/* Featured Post */}
+                        {featuredPost && (
+                            <div className="featured-blog-section">
+                                <motion.div
+                                    className="featured-blog-card"
+                                    onMouseMove={handleMouseMove}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8 }}
+                                >
+                                    <div className="featured-blog-image">
+                                        {featuredPost.category && (
+                                            <span className={`blog-category-badge category-${featuredPost.category.toLowerCase()}`}>
+                                                {featuredPost.category}
+                                            </span>
+                                        )}
+                                        {featuredPost.series && (
+                                            <span className="blog-series-badge">
+                                                {featuredPost.series} {featuredPost.episode || ''}
+                                            </span>
+                                        )}
+                                        <img 
+                                            src={resolveAssetPath(featuredPost.imageUrl) || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200'} 
+                                            alt={featuredPost.title}
+                                            onError={(e) => {
+                                                e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200';
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="featured-blog-content">
+                                        <div className="d-flex align-items-center gap-2 mb-3 text-secondary" style={{ fontSize: '0.8rem' }}>
+                                            <FiClock size={12} className="opacity-50" />
+                                            <span className="opacity-75">{featuredPost.readTime || 5} min read</span>
+                                            <span className="opacity-25">•</span>
+                                            <span className="opacity-75">{new Date(featuredPost.createdAt?.seconds * 1000).toLocaleDateString()}</span>
+                                        </div>
+                                        <h2 className="featured-blog-title">
+                                            <Link to={`/blog/${featuredPost.slug}`} className="text-white text-decoration-none hover-text-primary">
+                                                {featuredPost.title}
+                                            </Link>
+                                        </h2>
+                                        <p className="featured-blog-excerpt">{featuredPost.excerpt}</p>
+                                        <div className="d-flex justify-content-between align-items-center mt-auto pt-4 border-top border-secondary border-opacity-25">
+                                            <div className="blog-author">
+                                                <div className="blog-author-avatar">
+                                                    {featuredPost.author?.name?.charAt(0) || 'K'}
+                                                </div>
+                                                <div className="blog-author-info">
+                                                    <span className="text-white">{featuredPost.author?.name || 'KA Staff'}</span>
+                                                </div>
+                                            </div>
+                                            <Link to={`/blog/${featuredPost.slug}`} className="btn btn-primary rounded-pill px-4 py-2 d-flex align-items-center gap-2 hover-up">
+                                                Read Article <FiArrowRight />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        )}
+
+                        {/* Blog Grid */}
+                        {displayPosts.length > 0 ? (
                             <motion.div 
                                 className="blog-grid"
                                 variants={containerVariants}
@@ -217,10 +306,11 @@ const Blog = () => {
                                 animate="visible"
                             >
                                 <AnimatePresence mode="popLayout">
-                                    {filteredBlogs.map(blog => (
+                                    {displayPosts.map(blog => (
                                         <motion.article 
                                             key={blog.id} 
                                             className="blog-card"
+                                            onMouseMove={handleMouseMove}
                                             variants={itemVariants}
                                             layout
                                             initial="hidden"
@@ -228,57 +318,57 @@ const Blog = () => {
                                             exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
                                         >
                                             <div className="blog-card-image">
-                                            {blog.category && (
-                                                <span className={`blog-category-badge category-${blog.category.toLowerCase()}`}>
-                                                    {blog.category}
-                                                </span>
-                                            )}
-                                            {blog.series && (
-                                                <span className="blog-series-badge">
-                                                    {blog.series} {blog.episode || ''}
-                                                </span>
-                                            )}
-                                            <img 
-                                                src={resolveAssetPath(blog.imageUrl) || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=640'} 
-                                                alt={blog.title}
-                                                loading="lazy"
-                                                decoding="async"
-                                                width="640"
-                                                height="220"
-                                                onError={(e) => {
-                                                    if (!e.currentTarget.dataset.fallbackTriggered) {
-                                                        e.currentTarget.dataset.fallbackTriggered = 'true';
-                                                        e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=640&h=220';
-                                                    }
-                                                }}
-                                            />
-                                        </div>
-                                        <div className="blog-card-content">
-                                            <div className="d-flex align-items-center gap-2 mb-3 text-secondary" style={{ fontSize: '0.75rem' }}>
-                                                <FiClock size={12} className="opacity-50" />
-                                                <span className="opacity-75">{blog.readTime || 5} min read</span>
-                                                <span className="opacity-25">•</span>
-                                                <span className="opacity-75">{new Date(blog.createdAt?.seconds * 1000).toLocaleDateString()}</span>
+                                                {blog.category && (
+                                                    <span className={`blog-category-badge category-${blog.category.toLowerCase()}`}>
+                                                        {blog.category}
+                                                    </span>
+                                                )}
+                                                {blog.series && (
+                                                    <span className="blog-series-badge">
+                                                        {blog.series} {blog.episode || ''}
+                                                    </span>
+                                                )}
+                                                <img 
+                                                    src={resolveAssetPath(blog.imageUrl) || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=640'} 
+                                                    alt={blog.title}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    width="640"
+                                                    height="220"
+                                                    onError={(e) => {
+                                                        if (!e.currentTarget.dataset.fallbackTriggered) {
+                                                            e.currentTarget.dataset.fallbackTriggered = 'true';
+                                                            e.currentTarget.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=640&h=220';
+                                                        }
+                                                    }}
+                                                />
                                             </div>
-                                            <h3 className="blog-card-title">{blog.title}</h3>
-                                            <p className="blog-card-excerpt">{blog.excerpt}</p>
-                                            
-                                            <Link to={`/blog/${blog.slug}`} className="blog-card-footer text-decoration-none group mt-auto">
-                                                <div className="blog-author">
-                                                    <div className="blog-author-avatar">
-                                                        {blog.author?.name?.charAt(0) || 'K'}
-                                                    </div>
-                                                    <div className="blog-author-info">
-                                                        <span>{blog.author?.name || 'KA Staff'}</span>
-                                                    </div>
+                                            <div className="blog-card-content">
+                                                <div className="d-flex align-items-center gap-2 mb-3 text-secondary" style={{ fontSize: '0.75rem' }}>
+                                                    <FiClock size={12} className="opacity-50" />
+                                                    <span className="opacity-75">{blog.readTime || 5} min read</span>
+                                                    <span className="opacity-25">•</span>
+                                                    <span className="opacity-75">{new Date(blog.createdAt?.seconds * 1000).toLocaleDateString()}</span>
                                                 </div>
-                                                <div className="text-primary d-flex align-items-center gap-2 small fw-bold">
-                                                    Read More <FiArrowRight className="transition-transform group-hover-translate-x" />
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    </motion.article>
-                                ))}
+                                                <h3 className="blog-card-title">{blog.title}</h3>
+                                                <p className="blog-card-excerpt">{blog.excerpt}</p>
+                                                
+                                                <Link to={`/blog/${blog.slug}`} className="blog-card-footer text-decoration-none group mt-auto">
+                                                    <div className="blog-author">
+                                                        <div className="blog-author-avatar">
+                                                            {blog.author?.name?.charAt(0) || 'K'}
+                                                        </div>
+                                                        <div className="blog-author-info">
+                                                            <span>{blog.author?.name || 'KA Staff'}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-primary d-flex align-items-center gap-2 small fw-bold">
+                                                        Read More <FiArrowRight className="transition-transform group-hover-translate-x" />
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        </motion.article>
+                                    ))}
                                 </AnimatePresence>
                             </motion.div>
                         ) : (

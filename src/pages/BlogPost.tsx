@@ -89,23 +89,29 @@ const BlogPost = () => {
         window.scrollTo(0, 0);
     }, [slug]);
 
-    const shareOnSocial = (platform) => {
+    const handleShareClick = async () => {
         const url = window.location.href;
         const title = post ? post.title : 'Check out this insight from Kone Academy';
-        let shareUrl = '';
 
-        if (platform === 'linkedin') {
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-        } else if (platform === 'twitter') {
-            shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
-        } else if (platform === 'facebook') {
-            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: title,
+                    text: post?.excerpt || title,
+                    url: url
+                });
+            } catch (err) {
+                console.log('Native share failed or dismissed:', err);
+            }
+        } else {
+            setIsShareModalOpen(true);
         }
+    };
 
-        if (shareUrl) {
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-            setIsShareModalOpen(false);
-        }
+    const shareUrls = {
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`,
+        twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post ? post.title : '')}`,
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`
     };
 
     const copyToClipboard = () => {
@@ -290,7 +296,7 @@ const BlogPost = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => setIsShareModalOpen(true)}
+                                onClick={handleShareClick}
                                 className="share-trigger-capsule"
                             >
                                 <div className="d-flex align-items-center gap-3">
@@ -334,18 +340,39 @@ const BlogPost = () => {
                             </div>
 
                             <div className="share-grid mb-5">
-                                <motion.button whileHover={{ y: -5 }} onClick={() => shareOnSocial('linkedin')} className="share-item linkedin">
+                                <motion.a 
+                                    whileHover={{ y: -5 }} 
+                                    href={shareUrls.linkedin} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsShareModalOpen(false)} 
+                                    className="share-item linkedin"
+                                >
                                     <div className="icon-circle"><FaLinkedinIn size={24} /></div>
                                     <span>LinkedIn</span>
-                                </motion.button>
-                                <motion.button whileHover={{ y: -5 }} onClick={() => shareOnSocial('twitter')} className="share-item twitter">
+                                </motion.a>
+                                <motion.a 
+                                    whileHover={{ y: -5 }} 
+                                    href={shareUrls.twitter} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsShareModalOpen(false)} 
+                                    className="share-item twitter"
+                                >
                                     <div className="icon-circle"><FaXTwitter size={24} /></div>
                                     <span>X / Twitter</span>
-                                </motion.button>
-                                <motion.button whileHover={{ y: -5 }} onClick={() => shareOnSocial('facebook')} className="share-item facebook">
+                                </motion.a>
+                                <motion.a 
+                                    whileHover={{ y: -5 }} 
+                                    href={shareUrls.facebook} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsShareModalOpen(false)} 
+                                    className="share-item facebook"
+                                >
                                     <div className="icon-circle"><FiFacebook size={24} /></div>
                                     <span>Facebook</span>
-                                </motion.button>
+                                </motion.a>
                                 <motion.a href="https://www.instagram.com/koneacademy" target="_blank" rel="noreferrer" whileHover={{ y: -5 }} className="share-item instagram">
                                     <div className="icon-circle"><FiInstagram size={24} /></div>
                                     <span>Instagram</span>
