@@ -175,18 +175,26 @@
       ]
     }
   </script>
-  <script type="module" crossorigin src="/assets/index-CH9qJ0tL.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/vendor-router-CkgAg3vd.js">
-  <link rel="modulepreload" crossorigin href="/assets/vendor-framer-Cok1Fm_u.js">
+  <script type="module" crossorigin src="/assets/index-DuYjGajP.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor-router-DNYt_UIt.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-framer-DvoZILOm.js">
   <link rel="modulepreload" crossorigin href="/assets/vendor-firebase-CZ67kl3j.js">
-  <link rel="modulepreload" crossorigin href="/assets/vendor-prism-hD1LPOtJ.js">
-  <link rel="modulepreload" crossorigin href="/assets/vendor-recharts-BC8Dyuk6.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-BG1cGcNm.css">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-recharts-BdnNF_vj.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-BqSfgfwO.css">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <script>
+    if ('serviceWorker' in navigator && !navigator.userAgent.includes('ReactSnap')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('[Kone Consult] SW registered:', reg.scope))
+          .catch(err => console.warn('[Kone Consult] SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
 
 </html>
