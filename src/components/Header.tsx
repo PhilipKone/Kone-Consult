@@ -417,20 +417,20 @@ const Header: React.FC = () => {
                                     transition={{ duration: 0.2, ease: "easeOut" }}
                                     style={{ zIndex: 1002, overflow: 'hidden' }}
                                 >
-                                    <Link
-                                        to="/docs?category=consult"
-                                        className={`dropdown-item ${location.pathname === '/docs' ? 'active' : ''}`}
+                                    <a
+                                        href="https://www.koneacademy.io/docs"
+                                        className="dropdown-item"
                                         onClick={() => setIsResourcesOpen(false)}
                                     >
                                         Docs
-                                    </Link>
-                                    <Link
-                                        to="/protocols"
-                                        className={`dropdown-item ${location.pathname === '/protocols' ? 'active' : ''}`}
+                                    </a>
+                                    <a
+                                        href="https://www.koneacademy.io/protocols"
+                                        className="dropdown-item"
                                         onClick={() => setIsResourcesOpen(false)}
                                     >
                                         Protocols
-                                    </Link>
+                                    </a>
                                     <Link
                                         to="/blog"
                                         className={`dropdown-item ${location.pathname === '/blog' ? 'active' : ''}`}

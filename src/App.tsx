@@ -13,14 +13,11 @@ import './index.css';
 
 import Home from './pages/Home';
 import Services from './pages/Services';
-import Protocols from './pages/Protocols';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Documentation from './pages/Documentation';
 import AdminDashboard from './pages/AdminDashboard';
-import TrainingHub from './pages/TrainingHub';
 import UserProfile from './pages/UserProfile';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -77,13 +74,10 @@ const App: React.FC = () => {
                   <Routes>
                     <Route path="/"                   element={<Home />} />
                     <Route path="/services"           element={<Services />} />
-                    <Route path="/protocols"          element={<Protocols />} />
                     <Route path="/about"              element={<About />} />
                     <Route path="/contact"            element={<Contact />} />
                     <Route path="/login"              element={<Login />} />
                     <Route path="/register"           element={<Register />} />
-                    <Route path="/docs"               element={<Documentation />} />
-                    <Route path="/training"           element={<TrainingHub />} />
                     <Route path="/admin"              element={<AdminDashboard />} />
                     <Route path="/profile"            element={<UserProfile />} />
                     <Route path="/blog"               element={<Blog />} />

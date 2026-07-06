@@ -50,7 +50,8 @@ const Footer: React.FC = () => {
                     <div className="link-group">
                         <h3>Company</h3>
                         <Link to="/about">About Us</Link>
-                        <Link to="/protocols">Protocols</Link>
+                        <a href="https://www.koneacademy.io/protocols">Protocols</a>
+                        <a href="https://www.koneacademy.io/docs">Docs</a>
                         <Link to="/contact">Contact</Link>
                         <Link to="/login">Login</Link>
                     </div>
