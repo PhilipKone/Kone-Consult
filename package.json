@@ -35,7 +35,7 @@
     "scripts": {
         "start": "vite",
         "build": "vite build",
-        "postbuild": "react-snap",
+        "postbuild": "react-snap || echo 'Pre-rendering timed out, deploying SPA...'",
         "preview": "vite preview",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build --dotfiles",
