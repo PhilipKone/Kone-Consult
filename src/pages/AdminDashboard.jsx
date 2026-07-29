@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase/config';
-import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, addDoc, serverTimestamp, where, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, addDoc, serverTimestamp, where, getDocs, getDoc } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUsers, FaChartLine, FaProjectDiagram, FaBriefcase, FaGraduationCap, FaPlus, FaThLarge, FaList, FaBook, FaHistory, FaInfoCircle, FaRegEnvelope, FaCode, FaWallet, FaMoneyBillWave, FaDownload, FaGamepad, FaSeedling } from 'react-icons/fa';
+import { FaUsers, FaChartLine, FaProjectDiagram, FaBriefcase, FaGraduationCap, FaUserGraduate, FaTrash, FaPlus, FaThLarge, FaList, FaBook, FaHistory, FaInfoCircle, FaRegEnvelope, FaCode, FaWallet, FaMoneyBillWave, FaDownload, FaGamepad, FaSeedling } from 'react-icons/fa';
 import { FiBookOpen } from 'react-icons/fi';
 import './AdminDashboard.css';
 import KonePayFinancials from '../components/admin/KonePayFinancials';
@@ -222,6 +222,7 @@ const AdminDashboard = () => {
     const [projects, setProjects] = useState([]);
     const [services, setServices] = useState([]);
     const [trainingCourses, setTrainingCourses] = useState([]);
+    const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedMessage, setSelectedMessage] = useState(null);
     const [subscribers, setSubscribers] = useState([]);
@@ -332,158 +333,228 @@ const AdminDashboard = () => {
             return;
         }
 
-        if (!ALLOWED_ADMINS.includes(currentUser.email)) {
-            alert("Access Denied: Admin privileges required.");
-            navigate('/');
-            return;
-        }
+        let isSubscribed = true;
+        let unsubscribes = [];
 
-        if (
-            !import.meta.env.VITE_FIREBASE_API_KEY ||
-            import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
-        ) {
-            setLoading(false);
-            return;
-        }
+        const initDashboard = async () => {
+            try {
+                // 1. Check fallback whitelist first (instant)
+                let isAdmin = ALLOWED_ADMINS.includes(currentUser.email);
+                
+                // 2. If not in whitelist, check Firestore role
+                if (!isAdmin) {
+                    const userDocRef = doc(db, 'users', currentUser.uid);
+                    const userDoc = await getDoc(userDocRef);
+                    if (userDoc.exists() && userDoc.data().role === 'admin') {
+                        isAdmin = true;
+                    }
+                }
 
-        const unsubscribeMessages = onSnapshot(
-            query(collection(db, 'messages'), orderBy('timestamp', 'desc')),
-            (snapshot) => {
-                setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-                setLoading(false);
+                if (!isSubscribed) return;
+
+                if (!isAdmin) {
+                    alert("Access Denied: Admin privileges required.");
+                    navigate('/');
+                    return;
+                }
+
+                if (
+                    !import.meta.env.VITE_FIREBASE_API_KEY ||
+                    import.meta.env.VITE_FIREBASE_API_KEY === 'dummy_key'
+                ) {
+                    setLoading(false);
+                    return;
+                }
+
+                const unsubscribeMessages = onSnapshot(
+                    query(collection(db, 'messages'), orderBy('timestamp', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                            setLoading(false);
+                        }
+                    }
+                );
+                unsubscribes.push(unsubscribeMessages);
+
+                const unsubscribeProjects = onSnapshot(
+                    query(collection(db, 'projects'), orderBy('createdAt', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setProjects(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Projects collection might not exist yet or empty", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeProjects);
+
+                // Subscribe to Services
+                const unsubscribeServices = onSnapshot(
+                    query(collection(db, 'services')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setServices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Services collection might not exist yet or empty", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeServices);
+
+                // Subscribe to Documentation
+                const unsubscribeDocs = onSnapshot(
+                    query(collection(db, 'documentation_modules'), orderBy('order', 'asc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setDocs(snapshot.docs.map(doc => ({ ...doc.data(), docId: doc.id })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Documentation collection might not exist yet", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeDocs);
+
+                // Subscribe to Training
+                const unsubscribeTraining = onSnapshot(
+                    query(collection(db, 'training_courses'), orderBy('createdAt', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setTrainingCourses(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Training courses collection empty", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeTraining);
+
+                // Subscribe to Student Cohort Reservations
+                const unsubscribeReservations = onSnapshot(
+                    query(collection(db, 'student_reservations'), orderBy('date', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setReservations(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Student reservations collection log:", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeReservations);
+
+                // Subscribe to About Entries
+                const unsubscribeAbout = onSnapshot(
+                    query(collection(db, 'about_entries'), orderBy('createdAt', 'asc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setAboutEntries(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("About entries collection empty", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeAbout);
+
+                // Subscribe to Kone Code Templates
+                const unsubscribeTemplates = onSnapshot(
+                    query(collection(db, 'kone_code_templates'), orderBy('createdAt', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setIdeTemplates(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Templates collection empty", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeTemplates);
+
+                // Subscribe to Kone Code Public Projects
+                const unsubscribeProjectsIDE = onSnapshot(
+                    query(collection(db, 'kone_code_projects'), orderBy('createdAt', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setIdeProjects(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Public projects collection empty", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeProjectsIDE);
+
+                // Subscribe to Blogs
+                const unsubscribeBlogs = onSnapshot(
+                    collection(db, 'blogs'), 
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            const fetchedBlogs = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+                            setBlogs(fetchedBlogs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
+                        }
+                    }
+                );
+                unsubscribes.push(unsubscribeBlogs);
+
+                // Subscribe to Payments (Kone Pay)
+                const unsubscribePayments = onSnapshot(
+                    query(collection(db, 'payments'), orderBy('createdAt', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            const fetchedPayments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            setPayments(fetchedPayments);
+                            const total = fetchedPayments
+                                .filter(p => p.status === 'success')
+                                .reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
+                            setTotalRevenue(total);
+                        }
+                    },
+                    (error) => {
+                        console.log("Payments collection might not exist yet", error);
+                    }
+                );
+                unsubscribes.push(unsubscribePayments);
+
+                // Subscribe to Invoices
+                const unsubscribeInvoices = onSnapshot(
+                    query(collection(db, 'invoices'), orderBy('createdAt', 'desc')),
+                    (snapshot) => {
+                        if (isSubscribed) {
+                            setInvoices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                        }
+                    },
+                    (error) => {
+                        console.log("Invoices collection might not exist yet", error);
+                    }
+                );
+                unsubscribes.push(unsubscribeInvoices);
+
+            } catch (error) {
+                console.error("Error checking admin status:", error);
+                if (isSubscribed) {
+                    alert("Verification error: Unable to confirm admin status.");
+                    navigate('/');
+                }
             }
-        );
+        };
 
-        const unsubscribeProjects = onSnapshot(
-            query(collection(db, 'projects'), orderBy('createdAt', 'desc')),
-            (snapshot) => {
-                setProjects(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("Projects collection might not exist yet or empty", error);
-            }
-        );
-
-        // Subscribe to Services
-        const unsubscribeServices = onSnapshot(
-            query(collection(db, 'services')),
-            (snapshot) => {
-                setServices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("Services collection might not exist yet or empty", error);
-            }
-        );
-
-        // Subscribe to Documentation
-        const unsubscribeDocs = onSnapshot(
-            query(collection(db, 'documentation_modules'), orderBy('order', 'asc')),
-            (snapshot) => {
-                setDocs(snapshot.docs.map(doc => ({ ...doc.data(), docId: doc.id })));
-            },
-            (error) => {
-                console.log("Documentation collection might not exist yet", error);
-            }
-        );
-
-        // Subscribe to Training
-        const unsubscribeTraining = onSnapshot(
-            query(collection(db, 'training_courses'), orderBy('createdAt', 'desc')),
-            (snapshot) => {
-                setTrainingCourses(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("Training courses collection empty", error);
-            }
-        );
-
-        // Subscribe to About Entries
-        const unsubscribeAbout = onSnapshot(
-            query(collection(db, 'about_entries'), orderBy('createdAt', 'asc')),
-            (snapshot) => {
-                setAboutEntries(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("About entries collection empty", error);
-            }
-        );
-
-        // Subscribe to Kone Code Templates
-        const unsubscribeTemplates = onSnapshot(
-            query(collection(db, 'kone_code_templates'), orderBy('createdAt', 'desc')),
-            (snapshot) => {
-                setIdeTemplates(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("Templates collection empty", error);
-            }
-        );
-
-        // Subscribe to Kone Code Public Projects
-        const unsubscribeProjectsIDE = onSnapshot(
-            query(collection(db, 'kone_code_projects'), orderBy('createdAt', 'desc')),
-            (snapshot) => {
-                setIdeProjects(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("Public projects collection empty", error);
-            }
-        );
-
-        // Subscribe to Blogs
-        const unsubscribeBlogs = onSnapshot(
-            collection(db, 'blogs'), 
-            (snapshot) => {
-                const fetchedBlogs = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-                setBlogs(fetchedBlogs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
-            }
-        );
-
-        // Subscribe to Payments (Kone Pay)
-        const unsubscribePayments = onSnapshot(
-            query(collection(db, 'payments'), orderBy('createdAt', 'desc')),
-            (snapshot) => {
-                const fetchedPayments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setPayments(fetchedPayments);
-                const total = fetchedPayments
-                    .filter(p => p.status === 'success')
-                    .reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
-                setTotalRevenue(total);
-            },
-            (error) => {
-                console.log("Payments collection might not exist yet", error);
-            }
-        );
-
-        // Subscribe to Invoices
-        const unsubscribeInvoices = onSnapshot(
-            query(collection(db, 'invoices'), orderBy('createdAt', 'desc')),
-            (snapshot) => {
-                setInvoices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            },
-            (error) => {
-                console.log("Invoices collection might not exist yet", error);
-            }
-        );
+        initDashboard();
 
         // Safety timeout for loading state
         const timer = setTimeout(() => {
-            setLoading(false);
+            if (isSubscribed) {
+                setLoading(false);
+            }
         }, 5000);
 
         return () => {
+            isSubscribed = false;
             clearTimeout(timer);
-            unsubscribeMessages();
-            unsubscribeProjects();
-            unsubscribeServices();
-            unsubscribeDocs();
-            unsubscribeTraining();
-            unsubscribeAbout();
-            unsubscribeTemplates();
-            unsubscribeProjectsIDE();
-            unsubscribeBlogs();
-            unsubscribePayments();
-            unsubscribeInvoices();
+            unsubscribes.forEach(unsub => unsub());
         };
     }, [currentUser, navigate]);
 
@@ -511,6 +582,15 @@ const AdminDashboard = () => {
             unsubscribeUsers();
         };
     }, [currentUser]);
+
+    const handleDeleteReservation = async (resId) => {
+        if (!window.confirm("Are you sure you want to delete this student reservation?")) return;
+        try {
+            await deleteDoc(doc(db, 'student_reservations', resId));
+        } catch (err) {
+            console.error("Failed to delete reservation:", err);
+        }
+    };
 
     const handleSyncUsers = async () => {
         if (!window.confirm('Are you sure you want to sync all existing users to the newsletter? This will only add missing emails.')) return;
@@ -1127,6 +1207,12 @@ const AdminDashboard = () => {
                                 <FaGraduationCap className="me-2" /> Training
                             </button>
                             <button
+                                onClick={() => setActiveTab('reservations')}
+                                className={`tab-btn-premium ${activeTab === 'reservations' ? 'active' : ''}`}
+                            >
+                                <FaUserGraduate className="me-2" /> Enrollments ({reservations.length})
+                            </button>
+                            <button
                                 onClick={() => setActiveTab('docs')}
                                 className={`tab-btn-premium ${activeTab === 'docs' ? 'active' : ''}`}
                             >
@@ -1393,6 +1479,88 @@ const AdminDashboard = () => {
                                     onEdit={handleEditTraining}
                                     onSeed={handleSeedCourses}
                                 />
+                            </div>
+                        )}
+
+                        {activeTab === 'reservations' && (
+                            <div>
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <h5 className="text-white mb-0">Student Cohort Enrollments ({reservations.length})</h5>
+                                        <small className="text-secondary">Real-time student seat registrations from Kone Academy.</small>
+                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            const csvContent = "data:text/csv;charset=utf-8," 
+                                                + "Name,Email,Track,Division,Format,Token,Date\n"
+                                                + reservations.map(r => `"${r.fullName || ''}","${r.email || ''}","${r.track || ''}","${r.division || ''}","${r.format || ''}","${r.token || ''}","${r.date || ''}"`).join("\n");
+                                            const encodedUri = encodeURI(csvContent);
+                                            const link = document.createElement("a");
+                                            link.setAttribute("href", encodedUri);
+                                            link.setAttribute("download", `kone_academy_enrollments_${new Date().toISOString().slice(0,10)}.csv`);
+                                            document.body.appendChild(link);
+                                            link.click();
+                                            document.body.removeChild(link);
+                                        }}
+                                        className="btn btn-outline-success btn-sm d-flex align-items-center gap-2"
+                                    >
+                                        <FaDownload /> Export CSV
+                                    </button>
+                                </div>
+
+                                {reservations.length === 0 ? (
+                                    <div className="text-center py-5 glass-card">
+                                        <FaUserGraduate size={40} className="text-secondary mb-3" />
+                                        <h6 className="text-white">No Student Enrollments Found</h6>
+                                        <p className="text-secondary small">New student cohort seat registrations will appear here in real-time.</p>
+                                    </div>
+                                ) : (
+                                    <div className="table-responsive glass-card p-3">
+                                        <table className="table table-dark table-hover align-middle mb-0">
+                                            <thead>
+                                                <tr className="text-primary small text-uppercase">
+                                                    <th>Student</th>
+                                                    <th>Track & Format</th>
+                                                    <th>Token ID</th>
+                                                    <th>Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {reservations.map(res => (
+                                                    <tr key={res.id}>
+                                                        <td>
+                                                            <div className="fw-bold text-white">{res.fullName}</div>
+                                                            <small className="text-secondary">{res.email}</small>
+                                                            {res.github && <div className="extra-small text-info">@{res.github}</div>}
+                                                        </td>
+                                                        <td>
+                                                            <span className="badge bg-primary text-white mb-1 d-inline-block">{res.division || 'Code'}</span>
+                                                            <div className="small text-light">{res.track}</div>
+                                                            <small className="text-secondary d-block">{res.format}</small>
+                                                        </td>
+                                                        <td>
+                                                            <code className="text-info fw-bold bg-dark px-2 py-1 rounded small">{res.token}</code>
+                                                        </td>
+                                                        <td className="small text-secondary">
+                                                            {new Date(res.date || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                        </td>
+                                                        <td>
+                                                            <div className="d-flex gap-2">
+                                                                <a href={`mailto:${res.email}?subject=Kone Academy Cohort Enrollment - ${res.token}`} className="btn btn-outline-info btn-sm p-1 px-2" title="Email Student">
+                                                                    <FaRegEnvelope size={13} />
+                                                                </a>
+                                                                <button onClick={() => handleDeleteReservation(res.id)} className="btn btn-outline-danger btn-sm p-1 px-2" title="Delete Entry">
+                                                                    <FaTrash size={13} />
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
                             </div>
                         )}
 
