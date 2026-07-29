@@ -23,10 +23,12 @@ const UserProfile = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const [savedProjects, setSavedProjects] = useState([]);
+    const [myEnrollments, setMyEnrollments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isEditingName, setIsEditingName] = useState(false);
     const [newName, setNewName] = useState('');
     const [resetSent, setResetSent] = useState(false);
+    const ADMIN_EMAILS = ['philipkone45@gmail.com', 'phconsultgh@gmail.com'];
 
     useEffect(() => {
         if (!currentUser) {
@@ -45,6 +47,7 @@ const UserProfile = () => {
                 createdAt: currentUser.metadata.creationTime
             });
             setSavedProjects([]);
+            setMyEnrollments([]);
             setLoading(false);
             return;
         }
@@ -78,9 +81,19 @@ const UserProfile = () => {
                     id: doc.id,
                     ...doc.data()
                 }));
-                // Sort by date locally since Firebase requires complex indexing for multiple fields
                 projects.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
                 setSavedProjects(projects);
+
+                // Fetch User's Kone Academy Cohort Enrollments
+                if (currentUser.email) {
+                    const resQ = query(
+                        collection(db, 'student_reservations'),
+                        where('email', '==', currentUser.email)
+                    );
+                    const resSnap = await getDocs(resQ);
+                    const enrollments = resSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    setMyEnrollments(enrollments);
+                }
 
             } catch (error) {
                 console.error("Error fetching profile data: ", error);
@@ -244,7 +257,7 @@ const UserProfile = () => {
                                             <span className="d-flex align-items-center gap-2"><FaBriefcase /> Client Dashboard</span>
                                             <span>&rarr;</span>
                                         </button>
-                                        {userData?.role === 'admin' && (
+                                        {(userData?.role === 'admin' || (currentUser?.email && ADMIN_EMAILS.includes(currentUser.email.toLowerCase().trim()))) && (
                                             <button onClick={() => navigate('/admin')} className="btn btn-outline-info d-flex justify-content-between align-items-center w-100 px-3 py-2 rounded-3">
                                                 <span className="d-flex align-items-center gap-2"><FaUserCircle /> Admin Panel</span>
                                                 <span>&rarr;</span>
@@ -267,9 +280,48 @@ const UserProfile = () => {
                         </div>
                     </div>
 
-                    {/* Saved code snippets */}
+                    {/* Main Content Area */}
                     <div className="col-12 col-lg-8 mb-4">
-                        <div className="glass-card p-4 h-100">
+                        <div className="d-flex flex-column gap-4">
+
+                            {/* My Cohort Enrollments Card */}
+                            <div className="glass-card p-4">
+                                <div className="d-flex align-items-center justify-content-between mb-4 border-bottom border-secondary pb-3">
+                                    <h3 className="text-white m-0 d-flex align-items-center gap-2">
+                                        <FaUserCircle className="text-info" /> My Enrolled Cohorts & Tokens
+                                    </h3>
+                                    <a href="https://www.koneacademy.io/training" target="_blank" rel="noreferrer" className="btn btn-outline-info btn-sm rounded-pill px-3 fw-bold">
+                                        Explore Tracks
+                                    </a>
+                                </div>
+
+                                {myEnrollments.length === 0 ? (
+                                    <div className="text-center py-3">
+                                        <p className="text-secondary small mb-2">You haven't reserved a seat in a 12-week cohort yet.</p>
+                                        <a href="https://www.koneacademy.io/training" target="_blank" rel="noreferrer" className="btn btn-sm btn-primary rounded-pill px-4">
+                                            Browse Kone Academy Tracks
+                                        </a>
+                                    </div>
+                                ) : (
+                                    <div className="d-flex flex-column gap-3">
+                                        {myEnrollments.map(enr => (
+                                            <div key={enr.id} className="p-3 rounded-3 bg-black bg-opacity-40 border border-secondary border-opacity-30 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                                                <div>
+                                                    <span className="badge bg-primary mb-1">{enr.division || 'Academy'}</span>
+                                                    <h5 className="text-white fw-bold mb-1">{enr.track}</h5>
+                                                    <div className="text-secondary small">{enr.format} • Reserved {new Date(enr.date || Date.now()).toLocaleDateString()}</div>
+                                                </div>
+                                                <div className="d-flex flex-column align-items-md-end gap-1">
+                                                    <code className="text-cyan fw-bold bg-dark px-2 py-1 rounded small">{enr.token}</code>
+                                                    <a href={`https://www.koneacademy.io/verify?id=${enr.token}`} target="_blank" rel="noreferrer" className="extra-small text-info text-decoration-none hover-underline mt-1">
+                                                        Verify Seat Token &rarr;
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                             <div className="d-flex align-items-center justify-content-between mb-4 border-bottom border-secondary pb-3">
                                 <h3 className="text-white m-0 d-flex align-items-center gap-2">
                                     <FaCode className="text-primary" /> My Saved Code
