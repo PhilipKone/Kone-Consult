@@ -328,7 +328,7 @@ const UserProfile = () => {
                             ) : (
                                 <div className="d-flex flex-column gap-3">
                                     {myEnrollments.map(enr => (
-                                        <div key={enr.id} className="p-3.5 rounded-4 bg-dark bg-opacity-60 border border-secondary border-opacity-30 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 hover-border-cyan">
+                                        <div key={enr.id} className="p-3 rounded-4 bg-dark bg-opacity-60 border border-secondary border-opacity-30 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 hover-border-cyan">
                                             <div>
                                                 <div className="d-flex align-items-center gap-2 mb-1">
                                                     <span className="badge bg-cyan text-dark fw-bold">{enr.division || 'Academy'}</span>
@@ -393,7 +393,7 @@ const UserProfile = () => {
                                                 <p className="card-text text-secondary small mb-2">
                                                     Updated: {formatDate(project.updatedAt)}
                                                 </p>
-                                                <pre className="bg-black bg-opacity-70 p-2.5 rounded-3 text-secondary font-monospace" style={{ fontSize: '0.75rem', maxHeight: '70px', overflow: 'hidden' }}>
+                                                <pre className="bg-black bg-opacity-70 p-3 rounded-3 text-secondary font-monospace" style={{ fontSize: '0.75rem', maxHeight: '70px', overflow: 'hidden' }}>
                                                     {project.code.substring(0, 120)}...
                                                 </pre>
                                             </div>
@@ -416,7 +416,7 @@ const UserProfile = () => {
 
                             <div className="row g-3">
                                 <div className="col-12 col-md-4">
-                                    <div className="p-3.5 rounded-4 bg-dark bg-opacity-60 border border-info border-opacity-30 text-center">
+                                    <div className="p-3 rounded-4 bg-dark bg-opacity-60 border border-info border-opacity-30 text-center">
                                         <div className="mb-2 text-info"><FaShieldAlt size={36} /></div>
                                         <h6 className="text-white fw-bold mb-1">Kone Academy Scholar</h6>
                                         <span className="badge bg-info bg-opacity-20 text-info border border-info rounded-pill extra-small mb-2">Active Member</span>
@@ -425,7 +425,7 @@ const UserProfile = () => {
                                 </div>
 
                                 <div className="col-12 col-md-4">
-                                    <div className="p-3.5 rounded-4 bg-dark bg-opacity-60 border border-warning border-opacity-30 text-center">
+                                    <div className="p-3 rounded-4 bg-dark bg-opacity-60 border border-warning border-opacity-30 text-center">
                                         <div className="mb-2 text-warning"><FaAward size={36} /></div>
                                         <h6 className="text-white fw-bold mb-1">Fintech Architecture Fellow</h6>
                                         <span className="badge bg-warning bg-opacity-20 text-warning border border-warning rounded-pill extra-small mb-2">1,000 XP</span>
@@ -434,7 +434,7 @@ const UserProfile = () => {
                                 </div>
 
                                 <div className="col-12 col-md-4">
-                                    <div className="p-3.5 rounded-4 bg-dark bg-opacity-60 border border-cyan border-opacity-30 text-center">
+                                    <div className="p-3 rounded-4 bg-dark bg-opacity-60 border border-cyan border-opacity-30 text-center">
                                         <div className="mb-2 text-cyan"><FaLaptopCode size={36} /></div>
                                         <h6 className="text-white fw-bold mb-1">IDE Micro-Project Builder</h6>
                                         <span className="badge bg-cyan bg-opacity-20 text-cyan border border-cyan rounded-pill extra-small mb-2">250 XP</span>
@@ -457,7 +457,7 @@ const UserProfile = () => {
 
                             {/* Name Editing Form */}
                             {isEditingName && (
-                                <div className="mb-4 bg-dark p-3.5 rounded-4 border border-cyan border-opacity-40">
+                                <div className="mb-4 bg-dark p-3 rounded-4 border border-cyan border-opacity-40">
                                     <label className="text-cyan small fw-bold mb-2">Update Display Name</label>
                                     <div className="d-flex align-items-center gap-2">
                                         <input 
