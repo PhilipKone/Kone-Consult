@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes, FaUserCircle, FaPalette, FaHome } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUserCircle, FaPalette, FaHome, FaBook, FaCode, FaGraduationCap } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { Logo } from './Logo';
@@ -96,7 +96,8 @@ const Header: React.FC = () => {
     }, []);
     const navigate = useNavigate();
     const { currentUser } = useAuth();
-    const ADMIN_EMAIL = 'phconsultgh@gmail.com';
+    const ADMIN_EMAILS = ['philipkone45@gmail.com', 'phconsultgh@gmail.com'];
+    const isAdminUser = currentUser && currentUser.email && ADMIN_EMAILS.includes(currentUser.email.toLowerCase().trim());
     const isLocal = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && !navigator.userAgent.includes('ReactSnap');
     const hubUrl = isLocal ? 'http://localhost:5173/' : 'https://www.koneacademy.io/';
 
@@ -460,7 +461,7 @@ const Header: React.FC = () => {
                     <motion.div className="mobile-actions" variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 20 } }}>
                         {currentUser && (
                             <div className="d-flex flex-column gap-2 w-100 mb-2">
-                                {currentUser.email === ADMIN_EMAIL && (
+                                {isAdminUser && (
                                     <Link to="/admin" className="btn-primary w-100 text-center justify-content-center">Admin Dashboard</Link>
                                 )}
                                 <Link to="/client-portal" className="btn-secondary w-100 text-center justify-content-center">Client Portal</Link>
@@ -560,7 +561,7 @@ const Header: React.FC = () => {
                                         transition={{ duration: 0.2 }}
                                         style={{ right: 0, left: 'auto', top: '120%', minWidth: '200px', zIndex: 1002 }}
                                     >
-                                        {currentUser.email === ADMIN_EMAIL && (
+                                        {isAdminUser && (
                                             <Link to="/admin" className="dropdown-item fw-bold text-primary" onClick={() => setIsAccountOpen(false)}>Admin Dashboard</Link>
                                         )}
                                         <Link to="/client-portal" className="dropdown-item fw-bold text-success" onClick={() => setIsAccountOpen(false)}>Client Portal</Link>

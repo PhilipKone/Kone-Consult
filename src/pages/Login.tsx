@@ -13,6 +13,8 @@ const Login: React.FC = () => {
     const { login, googleSignIn } = useAuth();
     const navigate = useNavigate();
 
+    const ADMIN_EMAILS = ['philipkone45@gmail.com', 'phconsultgh@gmail.com'];
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -20,13 +22,13 @@ const Login: React.FC = () => {
             setLoading(true);
             const userCredential = await login(email, password);
             await logActivity(userCredential.user, 'Login Successful', { method: 'email' });
-            if (email === 'phconsultgh@gmail.com') {
+            if (ADMIN_EMAILS.includes(email.toLowerCase().trim())) {
                 navigate('/admin');
             } else {
                 navigate('/');
             }
-        } catch (err) {
-            setError('Failed to log in: ' + err.message);
+        } catch (err: any) {
+            setError('Failed to log in: ' + (err.message || err));
         } finally {
             setLoading(false);
         }
@@ -38,9 +40,14 @@ const Login: React.FC = () => {
             setLoading(true);
             const result = await googleSignIn();
             await logActivity(result.user, 'Login Successful', { method: 'google' });
-            navigate('/');
-        } catch (err) {
-            setError('Failed to log in with Google: ' + err.message);
+            const userEmail = (result.user.email || '').toLowerCase().trim();
+            if (ADMIN_EMAILS.includes(userEmail)) {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
+        } catch (err: any) {
+            setError('Failed to log in with Google: ' + (err.message || err));
         } finally {
             setLoading(false);
         }
