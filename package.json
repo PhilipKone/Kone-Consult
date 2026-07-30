@@ -99,8 +99,6 @@
             "/services",
             "/about",
             "/protocols",
-            "/login",
-            "/register",
             "/blog"
         ]
     }
