@@ -81,9 +81,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ iconName, title, description,
 };
 
 const Services: React.FC = () => {
-    const [selectedTag, setSelectedTag] = useState(null);
+    const [selectedTag, setSelectedTag] = useState<string | null>(null);
     const [servicesData, setServicesData] = useState(globalCache.services || defaultServices);
-    const [loading, setLoading] = useState(!globalCache.services);
+    const [loading, setLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const categoryFilter = searchParams.get('cat');
 

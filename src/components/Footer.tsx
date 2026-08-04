@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import './Footer.css';
-import { FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaDiscord, FaFacebook, FaInstagram, FaSlack, FaYoutube, FaTiktok } from 'react-icons/fa';
+import { FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaDiscord, FaFacebook, FaInstagram, FaSlack, FaYoutube, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 const Footer: React.FC = () => {
@@ -31,8 +31,9 @@ const Footer: React.FC = () => {
                     <div className="social-icons">
                         <a href="https://x.com/koneacademy" target="_blank" rel="noreferrer" aria-label="X"><FaXTwitter /></a>
                         <a href="https://www.tiktok.com/@koneacademy?_r=1&_t=ZM-931L3z5lu71" target="_blank" rel="noreferrer" aria-label="TikTok"><FaTiktok /></a>
+                        <a href="https://whatsapp.com/channel/0029VbBdOevJf05WDhlsoj17" target="_blank" rel="noreferrer" aria-label="WhatsApp"><FaWhatsapp /></a>
                         <a href="https://discord.gg/Ab4SCxPgUK" target="_blank" rel="noreferrer" aria-label="Discord"><FaDiscord /></a>
-                        <a href="https://www.linkedin.com/company/konecodeacdemy/?viewAsMember=true" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+                        <a href="https://www.linkedin.com/showcase/kone-consult-journal-club/about/?viewAsMember=true" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
                         <a href="https://www.facebook.com/profile.php?id=61584327765846" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebook /></a>
                         <a href="https://www.instagram.com/koneacademy?igsh=bnlnaTZ5YmNsMXJ1&utm_source=qr" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram /></a>
                         <a href="https://join.slack.com/t/koneacademy/shared_invite/zt-3te5lrqpj-d3gixasFIoSerlBnoQ1UMg" target="_blank" rel="noreferrer" aria-label="Slack"><FaSlack /></a>
@@ -52,6 +53,7 @@ const Footer: React.FC = () => {
                         <Link to="/about">About Us</Link>
                         <a href="https://www.koneacademy.io/protocols">Protocols</a>
                         <a href="https://www.koneacademy.io/docs">Docs</a>
+                        <a href="https://www.koneacademy.io/sitemap">Sitemap</a>
                         <Link to="/contact">Contact</Link>
                         <Link to="/login">Login</Link>
                     </div>
@@ -66,6 +68,7 @@ const Footer: React.FC = () => {
                         <a href="https://shop.koneacademy.io">Kone Shop</a>
                         <a href="https://warp.koneacademy.io">Kone Warp</a>
                         <a href="https://digital.koneacademy.io">Kone Digital</a>
+                        <Link to="/sitemap" style={{ fontWeight: 'bold', color: '#58a6ff' }}>Subdomain Sitemap</Link>
                     </div>
                     <div className="link-group">
                         <h3>Contact</h3>

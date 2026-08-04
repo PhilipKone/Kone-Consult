@@ -112,11 +112,8 @@ const Login: React.FC = () => {
                                 />
                             </div>
 
-                            <button
-                                disabled={loading}
-                                className="btn btn-primary w-100 py-3 mt-2 fw-bold text-uppercase letter-spacing-1 hover-up"
-                            >
-                                {loading ? 'Authenticating...' : 'Login'}
+                            <button type="submit" disabled={loading} className="btn btn-primary w-100 py-3 mt-2 fw-bold text-uppercase letter-spacing-1 hover-up">
+                                {loading ? 'Signing In...' : 'Login'}
                             </button>
                         </form>
 

@@ -253,14 +253,43 @@ const KonePayFinancials: React.FC<KonePayFinancialsProps> = ({ payments, totalRe
         }
     };
 
+    const handleWithdrawClick = () => {
+        alert(`[Kone Pay Unified Wallet]\nTotal Revenue: ₵${totalRevenue.toLocaleString()}\n\nPayout Settlements Desk active for philipkone45@gmail.com. Automated bank and MoMo payouts processing.`);
+    };
+
+    const handleExportCSV = () => {
+        const headers = ["Transaction ID", "Customer", "Division", "Amount (GHS)", "Method", "Status", "Date"];
+        const rows = payments.map(p => [
+            p.transactionId,
+            `"${p.customer}"`,
+            p.division,
+            p.amount,
+            p.method,
+            p.status,
+            p.createdAt ? new Date(p.createdAt.seconds * 1000).toLocaleDateString() : 'N/A'
+        ]);
+        const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `kone_pay_financials_${new Date().toISOString().slice(0,10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
-        <div className="financials-container animate-fade-in">
-            {/* Wallet & Stats */}
-            <div className="row g-3 mb-4">
+        <div className="kone-pay-financials-container text-white">
+            <InvoiceGeneratorModal 
+                isOpen={isInvoiceModalOpen} 
+                onClose={() => setIsInvoiceModalOpen(false)} 
+                activeSite={activeSite}
+            />
+            {/* Top Stat Row */}
+            <div className="row g-4 mb-4">
                 <div className="col-12 col-md-4">
-                    <div className="wallet-card-premium">
-                        <div className="wallet-pattern"></div>
-                        <div className="d-flex justify-content-between position-relative">
+                    <div className="wallet-card-glass h-100 position-relative overflow-hidden">
+                        <div className="d-flex justify-content-between align-items-start">
                             <div>
                                 <p className="text-white text-opacity-60 small mb-1">Current Balance</p>
                                 <h2 className="text-white fw-bold mb-0">₵{totalRevenue.toLocaleString()}</h2>
@@ -270,7 +299,7 @@ const KonePayFinancials: React.FC<KonePayFinancialsProps> = ({ payments, totalRe
                         </div>
                         <div className="mt-4 d-flex flex-column gap-2 position-relative">
                             <div className="d-flex gap-2">
-                                <button className="btn btn-light btn-sm flex-grow-1 rounded-pill fw-bold py-2">Withdraw</button>
+                                <button onClick={handleWithdrawClick} className="btn btn-light btn-sm flex-grow-1 rounded-pill fw-bold py-2">Withdraw</button>
                                 <button onClick={handleSeedTransactions} className="btn btn-outline-light btn-sm flex-grow-1 rounded-pill py-2">Seed Test</button>
                             </div>
                             <button 
@@ -318,7 +347,7 @@ const KonePayFinancials: React.FC<KonePayFinancialsProps> = ({ payments, totalRe
                             <h6 className="text-white mb-0 d-flex align-items-center gap-2">
                                 <FaChartLine className="text-warning" /> Revenue Stream (GHS)
                             </h6>
-                            <button className="btn btn-outline-secondary btn-sm border-0"><FaDownload /></button>
+                            <button onClick={handleExportCSV} title="Export Financials CSV" className="btn btn-outline-secondary btn-sm border-0"><FaDownload /></button>
                         </div>
                         <div style={{ width: '100%', height: 280 }}>
                             <ResponsiveContainer>

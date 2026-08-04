@@ -242,11 +242,7 @@ const Contact: React.FC = () => {
                                 </div>
                             </div>
 
-                            <button
-                                disabled={isSubmitting}
-                                className="btn btn-primary py-3 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2 mt-2 hover-up"
-                                style={{ borderRadius: '12px' }}
-                            >
+                            <button type="submit" disabled={isSubmitting} className="btn btn-primary py-3 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2 mt-2 hover-up" style={{ borderRadius: '12px' }}>
                                 {isSubmitting ? 'Sending...' : (
                                     <>
                                         Send Message <FaPaperPlane className="small" />

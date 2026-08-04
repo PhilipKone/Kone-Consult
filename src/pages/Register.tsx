@@ -172,11 +172,8 @@ const Register: React.FC = () => {
                                 </label>
                             </div>
 
-                            <button
-                                disabled={loading}
-                                className="btn btn-primary w-100 py-3 mt-2 fw-bold text-uppercase letter-spacing-1 hover-up"
-                            >
-                                {loading ? 'Creating...' : 'Register'}
+                            <button type="submit" disabled={loading} className="btn btn-primary w-100 py-3 mt-2 fw-bold text-uppercase letter-spacing-1 hover-up">
+                                {loading ? 'Creating Account...' : 'Register'}
                             </button>
                         </form>
 

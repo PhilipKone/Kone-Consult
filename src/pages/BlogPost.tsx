@@ -25,6 +25,15 @@ const BlogPost = () => {
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const [copied, setCopied] = useState(false);
 
+    const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+        const target = e.currentTarget;
+        const rect = target.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        target.style.setProperty('--mouse-x', `${x}px`);
+        target.style.setProperty('--mouse-y', `${y}px`);
+    };
+
     useEffect(() => {
         const fetchPost = async () => {
             if (
@@ -142,9 +151,30 @@ const BlogPost = () => {
 
     if (loading) {
         return (
-            <div className="page-container d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
-                <div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Loading article...</span>
+            <div className="page-container position-relative overflow-hidden pt-5" style={{ minHeight: '100vh' }}>
+                <div className="ambient-blob blob-primary" />
+                <div className="ambient-blob blob-secondary" />
+                <div className="ambient-blob blob-tertiary" />
+                <div className="page-background-glow" />
+                <div className="container post-header">
+                    <div className="skeleton-text title skeleton-shimmer mx-auto mb-4" style={{ height: '48px', maxWidth: '600px' }} />
+                    <div className="skeleton-footer justify-content-center border-0 gap-3">
+                        <div className="skeleton-avatar skeleton-shimmer" />
+                        <div className="skeleton-text skeleton-shimmer" style={{ width: '120px', height: '12px' }} />
+                        <div className="skeleton-text skeleton-shimmer" style={{ width: '80px', height: '12px' }} />
+                    </div>
+                </div>
+                <div className="container mt-5">
+                    <div className="skeleton-image skeleton-shimmer rounded-3" style={{ height: '450px', width: '100%', maxWidth: '1000px', margin: '0 auto' }} />
+                </div>
+                <div className="container py-5 text-start" style={{ maxWidth: '800px' }}>
+                    <div className="skeleton-text skeleton-shimmer mb-3" style={{ width: '100%' }} />
+                    <div className="skeleton-text skeleton-shimmer mb-3" style={{ width: '95%' }} />
+                    <div className="skeleton-text skeleton-shimmer mb-3" style={{ width: '88%' }} />
+                    <div className="skeleton-text skeleton-shimmer mb-5" style={{ width: '60%' }} />
+                    <div className="skeleton-text skeleton-shimmer mb-3" style={{ width: '100%' }} />
+                    <div className="skeleton-text skeleton-shimmer mb-3" style={{ width: '92%' }} />
+                    <div className="skeleton-text skeleton-shimmer mb-3" style={{ width: '75%' }} />
                 </div>
             </div>
         );
@@ -196,6 +226,9 @@ const BlogPost = () => {
             <script type="application/ld+json">
                 {JSON.stringify(structuredData)}
             </script>
+            <div className="ambient-blob blob-primary" />
+            <div className="ambient-blob blob-secondary" />
+            <div className="ambient-blob blob-tertiary" />
             <div className="page-background-glow" />
 
             {/* Post Header */}
@@ -206,7 +239,7 @@ const BlogPost = () => {
                     transition={{ duration: 0.5 }}
                     className="text-start mb-4"
                 >
-                    <Link to="/blog" className="btn btn-outline-secondary border-dark rounded-pill px-4 d-inline-flex align-items-center gap-2 group">
+                    <Link to="/blog" className="btn btn-outline-secondary border-dark rounded-pill px-4 d-inline-flex align-items-center gap-2 group" onMouseMove={handleMouseMove}>
                         <FiArrowLeft className="transition-transform group-hover-translate-x-neg" /> Back to Insights
                     </Link>
                 </motion.div>
@@ -297,6 +330,7 @@ const BlogPost = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={handleShareClick}
+                                onMouseMove={handleMouseMove}
                                 className="share-trigger-capsule"
                             >
                                 <div className="d-flex align-items-center gap-3">
@@ -333,6 +367,7 @@ const BlogPost = () => {
                             exit={{ opacity: 0, y: 100, scale: 0.95 }}
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                             className="share-modal-content glass-hub"
+                            onMouseMove={handleMouseMove}
                         >
                             <div className="share-modal-header mb-4">
                                 <h4 className="text-white fw-bold m-0">Spread the Insight</h4>

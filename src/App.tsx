@@ -1,6 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
+import { FaHome, FaBook, FaCode, FaGraduationCap, FaUserCircle } from 'react-icons/fa';
+import { useAuth, AuthProvider } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
@@ -24,6 +25,7 @@ import BlogPost from './pages/BlogPost';
 import SecureMessageView from './pages/SecureMessageView';
 import KonePay from './pages/KonePay';
 import ClientPortal from './pages/ClientPortal';
+import Sitemap from './pages/Sitemap';
 
 // Minimal inline fallback — avoids a full-page flash while chunks load
 const PageLoader: React.FC = () => (
@@ -40,6 +42,13 @@ const PageLoader: React.FC = () => (
     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
   </div>
 );
+
+const DocsRedirect: React.FC = () => {
+  useEffect(() => {
+    window.location.href = 'https://www.koneacademy.io/docs';
+  }, []);
+  return <PageLoader />;
+};
 
 const App: React.FC = () => {
   const [showLoader, setShowLoader] = useState<boolean>(false);
@@ -85,6 +94,8 @@ const App: React.FC = () => {
                     <Route path="/secure/:messageId"  element={<SecureMessageView />} />
                     <Route path="/pay"               element={<KonePay />} />
                     <Route path="/client-portal"      element={<ClientPortal />} />
+                    <Route path="/sitemap"            element={<Sitemap />} />
+                    <Route path="/docs/*"             element={<DocsRedirect />} />
                   </Routes>
                 </Suspense>
               </main>
@@ -92,6 +103,7 @@ const App: React.FC = () => {
               {window.navigator.userAgent !== 'ReactSnap' && <ChatWidget />}
               <InstallBanner />
             </div>
+            <MobileBottomNav />
           </Router>
         </React.Fragment>
         </NotificationProvider>
@@ -99,6 +111,44 @@ const App: React.FC = () => {
     </HelmetProvider>
   );
 }
+
+// Mobile Bottom Navigation Bar component
+const MobileBottomNav: React.FC = () => {
+  const location = useLocation();
+  const { currentUser } = useAuth();
+
+  return (
+    <div className="mobile-bottom-nav">
+      <Link to="/" className={`mobile-nav-item ${location.pathname === '/' ? 'active' : ''}`}>
+        <FaHome />
+        <span>Home</span>
+      </Link>
+      <Link to="/services" className={`mobile-nav-item ${location.pathname.startsWith('/services') ? 'active' : ''}`}>
+        <FaCode />
+        <span>Services</span>
+      </Link>
+      <a href="https://www.koneacademy.io/docs" className={`mobile-nav-item ${location.pathname.startsWith('/docs') ? 'active' : ''}`}>
+        <FaBook />
+        <span>Docs</span>
+      </a>
+      <Link to="/blog" className={`mobile-nav-item ${location.pathname.startsWith('/blog') ? 'active' : ''}`}>
+        <FaGraduationCap />
+        <span>Blog</span>
+      </Link>
+      {currentUser ? (
+        <Link to="/client-portal" className={`mobile-nav-item ${location.pathname === '/client-portal' ? 'active' : ''}`}>
+          <FaUserCircle />
+          <span>Portal</span>
+        </Link>
+      ) : (
+        <Link to="/login" className={`mobile-nav-item ${location.pathname === '/login' ? 'active' : ''}`}>
+          <FaUserCircle />
+          <span>Login</span>
+        </Link>
+      )}
+    </div>
+  );
+};
 
 // Helper to conditionally render Footer
 const FooterWrapper: React.FC = () => {
