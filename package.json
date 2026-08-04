@@ -99,7 +99,10 @@
             "/services",
             "/about",
             "/protocols",
-            "/blog"
+            "/blog",
+            "/sitemap",
+            "/pay",
+            "/client-portal"
         ]
     }
 }
