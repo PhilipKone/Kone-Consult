@@ -95,6 +95,8 @@ const App: React.FC = () => {
                     <Route path="/pay"               element={<KonePay />} />
                     <Route path="/client-portal"      element={<ClientPortal />} />
                     <Route path="/sitemap"            element={<Sitemap />} />
+                    <Route path="/sitemap-hub"        element={<Sitemap />} />
+                    <Route path="/sitemap.html"       element={<Sitemap />} />
                     <Route path="/docs/*"             element={<DocsRedirect />} />
                   </Routes>
                 </Suspense>
