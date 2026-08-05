@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                     <div className="social-icons">
                         <a href="https://x.com/koneacademy" target="_blank" rel="noreferrer" aria-label="X"><FaXTwitter /></a>
                         <a href="https://www.tiktok.com/@koneacademy?_r=1&_t=ZM-931L3z5lu71" target="_blank" rel="noreferrer" aria-label="TikTok"><FaTiktok /></a>
-                        <a href="https://whatsapp.com/channel/0029VbBdOevJf05WDhlsoj17" target="_blank" rel="noreferrer" aria-label="WhatsApp"><FaWhatsapp /></a>
+                        <a href="https://whatsapp.com/channel/0029VbDWjdP7dmeQdme7DB1p" target="_blank" rel="noreferrer" aria-label="WhatsApp"><FaWhatsapp /></a>
                         <a href="https://discord.gg/Ab4SCxPgUK" target="_blank" rel="noreferrer" aria-label="Discord"><FaDiscord /></a>
                         <a href="https://www.linkedin.com/showcase/kone-consult-journal-club/about/?viewAsMember=true" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
                         <a href="https://www.facebook.com/profile.php?id=61584327765846" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebook /></a>
