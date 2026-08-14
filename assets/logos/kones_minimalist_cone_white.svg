@@ -1,0 +1,11 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Cone Shape (White) -->
+  <path 
+    d="M 100 40 
+       C 100 40 140 85 140 125 
+       C 140 147 122 165 100 165 
+       C 78 165 60 147 60 125 
+       C 60 85 100 40 100 40 Z" 
+    fill="white"
+  />
+</svg>

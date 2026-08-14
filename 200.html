@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description"
+    content="Kone Consult: High-performance academic research consulting and data analysis. Empowering excellence through technical craftsmanship and data-driven insights." />
+  <link rel="canonical" href="https://consult.koneacademy.io/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://consult.koneacademy.io/" />
+  <meta property="og:title" content="Kone Consult | Research & Data Analysis Excellence" />
+  <meta property="og:description"
+    content="Expert research assistance, professional data analysis, and technical consulting. Your partner in research innovation." />
+  <meta property="og:image" content="https://consult.koneacademy.io/og-image.png?v=4" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://consult.koneacademy.io/" />
+  <meta name="twitter:title" content="Kone Consult | Research & Data Analysis" />
+  <meta name="twitter:description"
+    content="Expert research assistance, data analysis, and academic consulting. Your partner in research innovation." />
+  <meta name="twitter:image" content="https://consult.koneacademy.io/og-image.png?v=4" />
+
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script type="text/javascript">
+    // (c) 2016-2021 rafgraph
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script checks to see if a redirect is present in the query string,
+    // converts it back into the correct path and query string, and then
+    // replaces the current history item with the new URL.
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+  <title>Kone Consult</title>
+  <script>
+    // Force a one-time clean reload to bypass aggressive PWA caching on new deployments
+    const DEPLOY_VERSION = '2.12.0'; 
+    if (localStorage.getItem('kone_consult_version') !== DEPLOY_VERSION) {
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (let name of names) {
+            caches.delete(name);
+          }
+        });
+      }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+      localStorage.setItem('kone_consult_version', DEPLOY_VERSION);
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 100);
+    }
+
+    // Automatically reload page when a new service worker takes control (for future updates)
+    if ('serviceWorker' in navigator) {
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Structured Data (Professional Search Indexing) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kone Consult",
+      "alternateName": ["PHconsult", "Kone Research Consulting"],
+      "url": "https://consult.koneacademy.io/",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Kone Academy",
+        "url": "https://www.koneacademy.io/"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Kone Consult",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Kone Academy",
+        "url": "https://www.koneacademy.io/"
+      },
+      "image": "https://consult.koneacademy.io/og-image.png",
+      "@id": "https://consult.koneacademy.io/",
+      "url": "https://consult.koneacademy.io/",
+      "telephone": "+233551993820",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Accra, Ghana",
+        "addressLocality": "Accra",
+        "addressCountry": "GH"
+      },
+      "sameAs": [
+        "https://www.koneacademy.io/",
+        "https://kids.koneacademy.io/",
+        "https://consult.koneacademy.io/",
+        "https://code.koneacademy.io/",
+        "https://lab.koneacademy.io/",
+        "https://digital.koneacademy.io/",
+        "https://shop.koneacademy.io/",
+        "https://farms.koneacademy.io/",
+        "https://warp.koneacademy.io/",
+        "https://ai.koneacademy.io/",
+        "https://www.linkedin.com/company/konecodeacdemy/",
+        "https://www.facebook.com/profile.php?id=61584327765846",
+        "https://www.instagram.com/koneacademy",
+        "https://x.com/koneacademy",
+        "https://www.tiktok.com/@koneacademy",
+        "https://youtube.com/@koneacademy"
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Kone Consult Navigation",
+      "itemListElement": [
+        {
+          "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Research Services",
+          "url": "https://consult.koneacademy.io/#services"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 2,
+          "name": "Academic Blog & Research",
+          "url": "https://consult.koneacademy.io/blog"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Client Payment Portal",
+          "url": "https://consult.koneacademy.io/pay"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Consultant Login",
+          "url": "https://consult.koneacademy.io/login"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Sitemap",
+          "url": "https://consult.koneacademy.io/sitemap"
+        }
+      ]
+    }
+  </script>
+  <script type="module" crossorigin src="/assets/index-8Px7tckF.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor-router-Cl_Y8hRq.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-framer-DEg1oV9M.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-firebase-C3-k9MPo.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-recharts-CIj97mis.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-DKHFT_H5.css">
+<link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script>
+    if ('serviceWorker' in navigator && !navigator.userAgent.includes('ReactSnap')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('[Kone Consult] SW registered:', reg.scope))
+          .catch(err => console.warn('[Kone Consult] SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+
+</html>
