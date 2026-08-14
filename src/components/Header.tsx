@@ -269,38 +269,38 @@ const Header: React.FC = () => {
                                     <div className="mega-menu-grid">
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Tuition Program</h4>
-                                            <Link to="/training?mode=online" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Online</Link>
-                                            <Link to="/training?mode=face-to-face" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Face-to-face</Link>
-                                            <Link to="/training?mode=hybrid" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Hybrid</Link>
-                                            <Link to="/training?mode=instructor-led" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Instructor-led</Link>
-                                            <Link to="/training?mode=self-directed" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Self-directed</Link>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Online</a>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Face-to-face</a>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Hybrid</a>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Instructor-led</a>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Self-directed</a>
                                         </div>
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Research Program</h4>
-                                            <Link to="/services?cat=academic-research" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Academic Research</Link>
+                                            <Link to="/services?cat=academic-research" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Research</Link>
                                             <Link to="/services?cat=business-research" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Business Research</Link>
                                             <Link to="/services?cat=software-research" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Software Research</Link>
                                             <Link to="/services?cat=topic-selection" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Topic Selection</Link>
                                             <Link to="/services?cat=mentorship" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Research Mentorship</Link>
 
                                             <h4 className="mega-menu-title mt-3">Data Analysis</h4>
-                                            <Link to="/services?cat=academic-analysis" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Academic Data Analysis</Link>
+                                            <Link to="/services?cat=academic-analysis" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Data Analysis</Link>
                                             <Link to="/services?cat=business-analysis" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Business Data Analysis</Link>
                                             <Link to="/services?cat=software-analysis" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Software Data Analysis</Link>
                                         </div>
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Writing Program</h4>
-                                            <Link to="/services?cat=academic-grants" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Academic Grants</Link>
-                                            <Link to="/services?cat=academic-thesis" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Academic Thesis</Link>
-                                            <Link to="/services?cat=academic-reports" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Academic Reports</Link>
+                                            <Link to="/services?cat=academic-grants" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Grants</Link>
+                                            <Link to="/services?cat=academic-thesis" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Thesis</Link>
+                                            <Link to="/services?cat=academic-reports" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Reports</Link>
                                             <Link to="/services?cat=business-grants" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Business Grants</Link>
                                             <Link to="/services?cat=business-reports" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Business Reports</Link>
                                             <Link to="/services?cat=software-docs" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Software Documentations</Link>
                                         </div>
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Communication</h4>
-                                            <Link to="/training?cat=video-tutorials" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Featured Tutorial Videos</Link>
-                                            <Link to="/training?cat=podcasts" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Podcasts</Link>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Featured Tutorial Videos</a>
+                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Podcasts</a>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -365,24 +365,24 @@ const Header: React.FC = () => {
                                             <h4 className="mega-menu-title">Coding & AI</h4>
                                             <p className="mega-menu-subtitle small text-accent-primary mb-2">with Kone Code</p>
                                             <div className="mega-menu-sublabel text-white small fw-bold mb-1">Coding Schools</div>
-                                            <Link to="/training?track=python" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Data Science</Link>
-                                            <Link to="/training?track=js" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>App Dev</Link>
-                                            <Link to="/training?track=r-matlab" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Game Dev</Link>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Data Science</a>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>App Dev</a>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Game Dev</a>
                                             <a href="https://kids.koneacademy.io/coding" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Coding for Kids</a>
 
                                             <div className="mega-menu-sublabel text-white small fw-bold mt-3 mb-1">School of AI</div>
-                                            <Link to="/training?track=ai-foundation" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI Foundation</Link>
-                                            <Link to="/training?track=hardware" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Hardware & Compute</Link>
-                                            <Link to="/training?track=prompt-eng" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Prompt Engineering & GenAI</Link>
-                                            <Link to="/training?track=gen-ai" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Agents</Link>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI Foundation</a>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Hardware & Compute</a>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Prompt Engineering & GenAI</a>
+                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Agents</a>
                                             <a href="https://kids.koneacademy.io/ai" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI for Kids</a>
                                         </div>
 
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Advanced Labs</h4>
                                             <p className="mega-menu-subtitle small text-accent-primary mb-2">with Kone Lab</p>
-                                            <Link to="/training?lab=3d-design" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>3D Design & Animation</Link>
-                                            <Link to="/training?lab=simulation" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics</Link>
+                                            <a href="https://lab.koneacademy.io" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>3D Design & Animation</a>
+                                            <a href="https://lab.koneacademy.io" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics</a>
                                             <a href="https://kids.koneacademy.io/robotics" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics for Kids</a>
 
                                         </div>

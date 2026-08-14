@@ -10,10 +10,10 @@ import { globalCache } from '../utils/cache';
 
 const defaultServices = [
     { id: 'default-1', icon: 'FaChartBar', title: "Data Analysis", description: "Transform raw data into actionable insights using advanced statistical methods and visualization tools.", tags: ["SPSS", "Python", "R", "Excel"], color: "text-primary" },
-    { id: 'default-2', icon: 'FaFileAlt', title: "Report Writing", description: "Professional, academic, and technical report writing services tailored to your specific requirements.", tags: ["Academic", "Technical", "Business"], color: "text-success" },
+    { id: 'default-2', icon: 'FaFileAlt', title: "Report Writing", description: "Professional, scientific, and technical report writing services tailored to your specific requirements.", tags: ["Scientific", "Technical", "Business"], color: "text-success" },
     { id: 'default-3', icon: 'FaChalkboardTeacher', title: "Research Consulting", description: "End-to-end research support from methodology design to data collection and final analysis.", tags: ["Methodology", "Survey Design", "Analysis"], color: "text-warning" },
     { id: 'default-4', icon: 'FaLightbulb', title: "Topic Selection", description: "Guidance on selecting viable, impactful, and researchable topics for your thesis or project.", tags: ["Ideation", "Feasibility", "Scope"], color: "text-info" },
-    { id: 'default-5', icon: 'FaUserTie', title: "Mentorship", description: "One-on-one mentorship sessions to guide you through your academic or professional research journey.", tags: ["Coaching", "Guidance", "Support"], color: "text-danger" },
+    { id: 'default-5', icon: 'FaUserTie', title: "Mentorship", description: "One-on-one mentorship sessions to guide you through your research journey.", tags: ["Coaching", "Guidance", "Support"], color: "text-danger" },
     { id: 'default-6', icon: 'FaEllipsisH', title: "Other Services", description: "Custom solutions for unique research challenges. Contact us to discuss your specific needs.", tags: ["Custom", "Flexible", "Tailored"], color: "text-secondary" }
 ];
 
@@ -141,7 +141,7 @@ const Services: React.FC = () => {
         <div className="page-container position-relative">
             <SEO 
                 title="Services" 
-                description="Explore our range of research, consulting, and data analysis services tailored to meet your academic and professional needs." 
+                description="Explore our range of research, consulting, and data analysis services tailored to meet your research and professional needs." 
             />
             <div className="page-background-glow" />
 

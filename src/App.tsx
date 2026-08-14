@@ -45,7 +45,14 @@ const PageLoader: React.FC = () => (
 
 const DocsRedirect: React.FC = () => {
   useEffect(() => {
-    window.location.href = 'https://www.koneacademy.io/docs';
+    window.location.replace('https://www.koneacademy.io/docs');
+  }, []);
+  return <PageLoader />;
+};
+
+const ProtocolsRedirect: React.FC = () => {
+  useEffect(() => {
+    window.location.replace('https://www.koneacademy.io/protocols');
   }, []);
   return <PageLoader />;
 };
@@ -77,7 +84,7 @@ const App: React.FC = () => {
           <Router>
             <div className="App animate-fade-in">
               <InteractiveGrid />
-              <Header />
+              <HeaderWrapper />
               <main>
                 <Suspense fallback={<PageLoader />}>
                   <Routes>
@@ -98,6 +105,10 @@ const App: React.FC = () => {
                     <Route path="/sitemap-hub"        element={<Sitemap />} />
                     <Route path="/sitemap.html"       element={<Sitemap />} />
                     <Route path="/docs/*"             element={<DocsRedirect />} />
+                    <Route path="/training"           element={<ProtocolsRedirect />} />
+                    <Route path="/training/*"         element={<ProtocolsRedirect />} />
+                    <Route path="/protocols"          element={<ProtocolsRedirect />} />
+                    <Route path="/protocols/*"        element={<ProtocolsRedirect />} />
                   </Routes>
                 </Suspense>
               </main>
@@ -152,13 +163,21 @@ const MobileBottomNav: React.FC = () => {
   );
 };
 
+// Helper to conditionally render Header (hidden on GSC dashboard)
+const HeaderWrapper: React.FC = () => {
+  const location = useLocation();
+  if (location.pathname === '/') return null;
+  return <Header />;
+};
+
 // Helper to conditionally render Footer
 const FooterWrapper: React.FC = () => {
   const location = useLocation();
   const isDocs = location.pathname.startsWith('/docs');
+  const isHome = location.pathname === '/';
 
-  if (isDocs) return null;
+  if (isDocs || isHome) return null;
   return <Footer />;
-}
+};
 
 export default App;

@@ -1,0 +1,40 @@
+name: Automated GSC Telemetry Daily Sync
+
+on:
+  schedule:
+    # Runs daily at 05:00 UTC (after Google Search Console refreshes daily search metrics)
+    - cron: '0 5 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+
+jobs:
+  sync-gsc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Kone-Consult/package-lock.json
+
+      - name: Install Dependencies
+        working-directory: ./Kone-Consult
+        run: npm install --legacy-peer-deps
+
+      - name: Execute GSC to Firestore Live Sync
+        working-directory: ./Kone-Consult
+        env:
+          GSC_CREDENTIALS: ${{ secrets.GSC_CREDENTIALS }}
+        run: node scripts/sync_gsc_to_firestore.cjs
+
+      - name: Commit & Push Updated Static Fallback Snapshot (Optional)
+        working-directory: ./Kone-Consult
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/gsc_telemetry.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): auto-update GSC search data snapshot [skip ci]" && git push)
+        continue-on-error: true

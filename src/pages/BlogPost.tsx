@@ -4,7 +4,8 @@ import { collection, query, where, getDocs, addDoc, serverTimestamp } from 'fire
 import { db } from '../firebase/config';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiCalendar, FiClock, FiShare2, FiLink, FiFacebook, FiInstagram } from 'react-icons/fi';
-import { FaLinkedinIn, FaXTwitter, FaTiktok } from 'react-icons/fa6';
+import { FaLinkedinIn, FaXTwitter, FaTiktok, FaGithub } from 'react-icons/fa6';
+import { FaChartBar, FaFileAlt, FaChalkboardTeacher, FaLightbulb, FaUserTie, FaChevronRight } from 'react-icons/fa';
 import { marked } from 'marked';
 import './Blog.css';
 import { pillarBlogs } from '../data/pillar_blogs';
@@ -190,6 +191,43 @@ const BlogPost = () => {
         );
     }
 
+    const AUTHOR_PROFILES: Record<string, { bio: string; socials: { linkedin?: string; github?: string } }> = {
+        "Philip Kone": {
+            bio: "Philip Kone is the lead strategist and technology director at Kone Academy and Kone Consult. He designs scalable digital architectures and guides R&D across our software, laboratory, and research ecosystems.",
+            socials: {
+                linkedin: "https://www.linkedin.com/in/philip-kone-hotor/",
+                github: "https://github.com/PhilipKone"
+            }
+        },
+        "Dr. Sarah Chen": {
+            bio: "Dr. Sarah Chen is a senior research scientist specializing in computational modeling, digital twins, and high-fidelity stress simulation. She directs engineering labs at Kone Academy.",
+            socials: {
+                linkedin: "https://www.linkedin.com/"
+            }
+        }
+    };
+
+    const getRelatedServices = (category: string) => {
+        switch (category) {
+            case 'Code':
+                return [
+                    { title: 'Software Data Analysis', desc: 'Perform analytics and model integrations on custom codebase backends.', link: '/services?cat=software-analysis', icon: <FaChartBar /> },
+                    { title: 'Software Documentations', desc: 'Detailed developer specifications, API documentation, and systems mapping.', link: '/services?cat=software-docs', icon: <FaFileAlt /> }
+                ];
+            case 'Lab':
+                return [
+                    { title: 'Research Mentorship', desc: 'One-on-one sessions to design testing methodologies and instrumentation protocols.', link: '/services?cat=mentorship', icon: <FaUserTie /> },
+                    { title: 'Research Consulting', desc: 'End-to-end guidance from telemetry setup to statistical analysis.', link: '/services?cat=academic-research', icon: <FaChalkboardTeacher /> }
+                ];
+            case 'Consult':
+            default:
+                return [
+                    { title: 'Research Consulting', desc: 'Formulate sound survey designs, data collection methods, and methodologies.', link: '/services?cat=academic-research', icon: <FaChalkboardTeacher /> },
+                    { title: 'Data Analysis', desc: 'Professional statistical analysis using SPSS, R, Python, and STATA.', link: '/services?cat=academic-analysis', icon: <FaChartBar /> }
+                ];
+        }
+    };
+
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -205,10 +243,10 @@ const BlogPost = () => {
         },
         "publisher": {
             "@type": "Organization",
-            "name": "Kone Academy",
+            "name": "Kone Consult",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.koneacademy.io/logo-circle-blue.svg"
+                "url": "https://consult.koneacademy.io/logo-circle-blue.svg"
             }
         },
         "datePublished": new Date((post.createdAt?.seconds || 0) * 1000).toISOString()
@@ -323,6 +361,55 @@ const BlogPost = () => {
                                 ))}
                             </div>
                         )}
+
+                        {/* Author Profile Card */}
+                        {post.author && (
+                            <div className="author-profile-card">
+                                <div className="author-profile-avatar">
+                                    {post.author.name.charAt(0)}
+                                </div>
+                                <div className="author-profile-info text-start">
+                                    <div className="author-profile-name">{post.author.name}</div>
+                                    <div className="author-profile-role">{post.author.role || 'Contributor'}</div>
+                                    <p className="author-profile-bio">
+                                        {AUTHOR_PROFILES[post.author.name]?.bio || "Member of the Kone Consult scientific & engineering research team."}
+                                    </p>
+                                    <div className="author-profile-socials">
+                                        {AUTHOR_PROFILES[post.author.name]?.socials?.linkedin && (
+                                            <a href={AUTHOR_PROFILES[post.author.name].socials.linkedin} target="_blank" rel="noopener noreferrer" className="author-social-link">
+                                                <FaLinkedinIn />
+                                            </a>
+                                        )}
+                                        {AUTHOR_PROFILES[post.author.name]?.socials?.github && (
+                                            <a href={AUTHOR_PROFILES[post.author.name].socials.github} target="_blank" rel="noopener noreferrer" className="author-social-link">
+                                                <FaGithub />
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Related Services (Internal Linking) */}
+                        <div className="related-services-blog-container">
+                            <h3 className="related-services-title">Explore Related Solutions</h3>
+                            <div className="related-services-blog-grid text-start">
+                                {getRelatedServices(post.category).map((svc, idx) => (
+                                    <div key={idx} className="related-service-blog-card">
+                                        <div>
+                                            <div className="related-service-blog-card-header">
+                                                <div className="related-service-blog-card-icon">{svc.icon}</div>
+                                                <h4>{svc.title}</h4>
+                                            </div>
+                                            <p>{svc.desc}</p>
+                                        </div>
+                                        <Link to={svc.link} className="related-service-blog-card-link">
+                                            Learn More <FaChevronRight />
+                                        </Link>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
 
                         {/* Elite Share Trigger */}
                         <div className="share-section-premium mt-10">
