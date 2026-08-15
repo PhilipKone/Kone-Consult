@@ -24,7 +24,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
 
     return (
         <div className="card glass-panel p-4 h-100 service-card">
-            <div className="icon mb-3" style={{ color: `var(--accent-${color})`, fontSize: '2.5rem' }}>
+            <div className="icon mb-3" aria-hidden="true" style={{ color: `var(--accent-${color})`, fontSize: '2.5rem' }}>
                 <IconComponent />
             </div>
             <div className="card-body">

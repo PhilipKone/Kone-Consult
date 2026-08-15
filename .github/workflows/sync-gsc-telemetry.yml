@@ -18,20 +18,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Kone-Consult/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install Dependencies
-        working-directory: ./Kone-Consult
         run: npm install --legacy-peer-deps
 
       - name: Execute GSC to Firestore Live Sync
-        working-directory: ./Kone-Consult
         env:
           GSC_CREDENTIALS: ${{ secrets.GSC_CREDENTIALS }}
         run: node scripts/sync_gsc_to_firestore.cjs
 
       - name: Commit & Push Updated Static Fallback Snapshot (Optional)
-        working-directory: ./Kone-Consult
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

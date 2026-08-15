@@ -1,0 +1,16 @@
+# Kone Consult
+
+> Academic & Scientific Research Excellence Division of Kone Academy.
+
+Kone Consult provides academic mentorship, statistical data analysis, thesis review, methodology design, and research synthesis for researchers, university students, and organizations.
+
+## Core Capabilities & Services
+
+- [Research Consulting](https://consult.koneacademy.io/#services) - Topic validation, statistical computing (Python, R, MATLAB), and thesis guidance.
+- [Academic Publications & Blog](https://consult.koneacademy.io/blog) - Peer-reviewed methodology guides, LaTeX formatting tips, and data science breakthroughs.
+- [Kone Pay Portal](https://consult.koneacademy.io/pay) - Secure client billing and direct research project payment gateway.
+- [Sitemap](https://consult.koneacademy.io/sitemap) - Directory of all academic services, routes, and resources.
+
+## Parent Ecosystem
+
+- [Kone Academy Main Hub](https://www.koneacademy.io/) - Central technology and innovation collective.

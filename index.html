@@ -49,42 +49,51 @@
       }
     }(window.location))
   </script>
-  <title>Kone Consult</title>
-  <script>
-    // Force a one-time clean reload to bypass aggressive PWA caching on new deployments
-    const DEPLOY_VERSION = '2.12.0'; 
-    if (localStorage.getItem('kone_consult_version') !== DEPLOY_VERSION) {
-      if ('caches' in window) {
-        caches.keys().then(function(names) {
-          for (let name of names) {
-            caches.delete(name);
-          }
-        });
-      }
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-          for (let registration of registrations) {
-            registration.unregister();
-          }
-        });
-      }
-      localStorage.setItem('kone_consult_version', DEPLOY_VERSION);
-      setTimeout(() => {
-        window.location.reload(true);
-      }, 100);
-    }
+  <link rel="help" type="text/markdown" href="/llms.txt" title="LLMs Text File" />
+  <link rel="llms-txt" href="/llms.txt" />
+  <title>Kone Consult | Research & Data Analysis</title>
 
-    // Automatically reload page when a new service worker takes control (for future updates)
-    if ('serviceWorker' in navigator) {
-      let refreshing = false;
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (!refreshing) {
-          refreshing = true;
-          window.location.reload();
+  <!-- WebMCP Declarations for Autonomous Agentic Browsing -->
+  <script type="application/webmcp+json">
+  {
+    "version": "1.0",
+    "name": "Kone Consult Portal",
+    "description": "Agent tools for requesting academic research mentorship, statistical analysis, and project consultations",
+    "tools": [
+      {
+        "name": "request_consultation",
+        "description": "Book an academic research consultation, thesis review, or data analysis session",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "serviceType": { 
+              "type": "string", 
+              "enum": ["Data Analysis & Statistics", "Thesis & Report Writing", "Research Topic Selection", "Methodology Design", "Academic Mentorship"] 
+            },
+            "researchField": { "type": "string" },
+            "clientEmail": { "type": "string", "format": "email" }
+          },
+          "required": ["serviceType", "clientEmail"]
         }
-      });
-    }
+      },
+      {
+        "name": "navigate_consult_section",
+        "description": "Navigate to specific sections or tools within Kone Consult",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "route": { 
+              "type": "string", 
+              "enum": ["services", "blog", "pay", "sitemap", "login"] 
+            }
+          },
+          "required": ["route"]
+        }
+      }
+    ]
+  }
   </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
