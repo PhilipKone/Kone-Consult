@@ -50,6 +50,13 @@ const DocsRedirect: React.FC = () => {
   return <PageLoader />;
 };
 
+const TrainingRedirect: React.FC = () => {
+  useEffect(() => {
+    window.location.replace('https://www.koneacademy.io/training');
+  }, []);
+  return <PageLoader />;
+};
+
 const ProtocolsRedirect: React.FC = () => {
   useEffect(() => {
     window.location.replace('https://www.koneacademy.io/protocols');
@@ -105,8 +112,8 @@ const App: React.FC = () => {
                     <Route path="/sitemap-hub"        element={<Sitemap />} />
                     <Route path="/sitemap.html"       element={<Sitemap />} />
                     <Route path="/docs/*"             element={<DocsRedirect />} />
-                    <Route path="/training"           element={<ProtocolsRedirect />} />
-                    <Route path="/training/*"         element={<ProtocolsRedirect />} />
+                    <Route path="/training"           element={<TrainingRedirect />} />
+                    <Route path="/training/*"         element={<TrainingRedirect />} />
                     <Route path="/protocols"          element={<ProtocolsRedirect />} />
                     <Route path="/protocols/*"        element={<ProtocolsRedirect />} />
                   </Routes>
