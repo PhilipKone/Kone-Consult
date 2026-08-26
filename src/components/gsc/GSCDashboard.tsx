@@ -75,6 +75,9 @@ const GSCDashboard: React.FC = () => {
       }
     : telemetryData.summary;
 
+  const formattedLastUpdated = telemetryData.summary?.lastUpdated || (telemetryData as any).lastUpdated || new Date().toLocaleDateString('en-US');
+  const formattedDateRange = telemetryData.summary?.dateRange || (telemetryData as any).dateRange || 'Full Ecosystem Telemetry';
+
   return (
     <div className="gsc-app-container">
       {/* 1. Left Sidebar */}
@@ -112,7 +115,7 @@ const GSCDashboard: React.FC = () => {
               </div>
               <div className="gsc-last-updated" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <FaSyncAlt size={10} color="#8ab4f8" />
-                <span>Last updated: {new Date(telemetryData.lastUpdated).toLocaleDateString()} (Search Engine Telemetry)</span>
+                <span>Last updated: {formattedLastUpdated} (Search Engine Telemetry)</span>
               </div>
             </div>
           </div>
@@ -121,7 +124,7 @@ const GSCDashboard: React.FC = () => {
           <GSCPerformanceCard 
             summary={displayedSummary}
             timeline={telemetryData.timeline}
-            dateRange={telemetryData.dateRange}
+            dateRange={formattedDateRange}
           />
 
           {/* 4. Table Breakdown (Queries, Pages, Subdomains) */}
