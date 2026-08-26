@@ -10,8 +10,8 @@ import { globalCache } from '../utils/cache';
 import { resolveAssetPath } from '../utils/assets';
 
 const Blog = () => {
-    const [blogs, setBlogs] = useState(globalCache.blogs || []);
-    const [loading, setLoading] = useState(!globalCache.blogs);
+    const [blogs, setBlogs] = useState(globalCache.blogs || pillarBlogs);
+    const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('All');
     const [email, setEmail] = useState('');
@@ -72,6 +72,7 @@ const Blog = () => {
                 setBlogs(finalSorted);
             } catch (error) {
                 console.error("Error fetching blogs: ", error);
+                setBlogs(pillarBlogs);
             } finally {
                 setLoading(false);
             }
