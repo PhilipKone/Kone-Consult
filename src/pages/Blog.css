@@ -64,6 +64,10 @@
 .category-code { background: rgba(0, 255, 135, 0.2); color: #00ff87; border: 1px solid rgba(0, 255, 135, 0.3); }
 .category-consult { background: rgba(0, 163, 255, 0.2); color: #00a3ff; border: 1px solid rgba(0, 163, 255, 0.3); }
 .category-lab { background: rgba(255, 170, 0, 0.2); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
+.category-analytics { background: rgba(0, 210, 255, 0.2); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.3); }
+.category-research { background: rgba(188, 0, 255, 0.2); color: #bc00ff; border: 1px solid rgba(188, 0, 255, 0.3); }
+.category-strategy { background: rgba(255, 170, 0, 0.2); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
+.category-academic { background: rgba(0, 255, 135, 0.2); color: #00ff87; border: 1px solid rgba(0, 255, 135, 0.3); }
 
 .blog-series-badge {
     position: absolute;

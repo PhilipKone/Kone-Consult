@@ -8,7 +8,7 @@ import { FaLinkedinIn, FaXTwitter, FaTiktok, FaGithub } from 'react-icons/fa6';
 import { FaChartBar, FaFileAlt, FaChalkboardTeacher, FaLightbulb, FaUserTie, FaChevronRight } from 'react-icons/fa';
 import { marked } from 'marked';
 import './Blog.css';
-import { pillarBlogs } from '../data/pillar_blogs';
+import { pillarBlogs, MIGRATED_BLOG_SLUGS } from '../data/pillar_blogs';
 import SEO from '../components/SEO';
 import DOMPurify from 'dompurify';
 import { resolveAssetPath } from '../utils/assets';
@@ -36,6 +36,13 @@ const BlogPost = () => {
     };
 
     useEffect(() => {
+        // 1. Check if post has moved to the main Academy / Code platform
+        if (slug && (MIGRATED_BLOG_SLUGS as Record<string, string>)[slug]) {
+            const destination = (MIGRATED_BLOG_SLUGS as Record<string, string>)[slug];
+            window.location.replace(destination);
+            return;
+        }
+
         const fetchPost = async () => {
             if (
                 navigator.userAgent.includes('ReactSnap') || 

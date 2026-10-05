@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiSearch, FiClock } from 'react-icons/fi';
 import './Blog.css';
-import { pillarBlogs } from '../data/pillar_blogs';
+import { pillarBlogs, MIGRATED_BLOG_SLUGS } from '../data/pillar_blogs';
 import { globalCache } from '../utils/cache';
 import { resolveAssetPath } from '../utils/assets';
 
 const Blog = () => {
-    const [blogs, setBlogs] = useState(globalCache.blogs || pillarBlogs);
+    const [blogs, setBlogs] = useState(
+        (globalCache.blogs ? globalCache.blogs.filter(b => !(MIGRATED_BLOG_SLUGS as Record<string, string>)[b.slug]) : null) || pillarBlogs
+    );
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('All');
@@ -19,12 +21,12 @@ const Blog = () => {
     const [subscribed, setSubscribed] = useState(false);
 
     useEffect(() => {
-        document.title = "Insights | Kone Academy Engineering & Research";
+        document.title = "Insights & Research | Kone Consult Quantitative Advisory";
         
         // SEO: Meta Tags
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
-            metaDesc.setAttribute('content', 'Deep-dives into Scaling Agentic Architectures, Physical Engineering simulations, and Data-Driven Consulting at Kone Academy.');
+            metaDesc.setAttribute('content', 'Deep-dives into Empirical Data Analytics, Econometric Forecasting, Thesis Statistical Methodology, and Quantitative Consulting at Kone Consult.');
         }
 
         const fetchBlogs = async () => {
@@ -67,7 +69,12 @@ const Blog = () => {
                     }
                 });
 
-                const finalSorted = mergedBlogs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                // Filter out non-consulting/migrated blogs
+                const consultingBlogs = mergedBlogs.filter(
+                    b => !(MIGRATED_BLOG_SLUGS as Record<string, string>)[b.slug]
+                );
+
+                const finalSorted = consultingBlogs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
                 globalCache.blogs = finalSorted;
                 setBlogs(finalSorted);
             } catch (error) {
@@ -177,7 +184,7 @@ const Blog = () => {
                     </span>
                     <h1 className="display-3 fw-bold text-gradient mb-3">KA Perspectives</h1>
                     <p className="lead text-secondary mx-auto mb-4 text-center" style={{ maxWidth: '700px' }}>
-                        Exploring the boundaries of Scientific Research, Advanced Coding, and Physical Engineering.
+                        Exploring the frontiers of Quantitative Analysis, Econometrics, and Rigorous Research Methodology.
                     </p>
                 </motion.div>
 
@@ -215,7 +222,7 @@ const Blog = () => {
                         {/* 2. Standalone Elite Filter Ribbon */}
                         <div className="d-flex justify-content-center">
                             <div className="nav-tabs-premium">
-                                {['All', 'Consult', 'Code', 'Lab'].map(cat => (
+                                {['All', 'Analytics', 'Research', 'Strategy', 'Academic'].map(cat => (
                                     <motion.button
                                         key={cat}
                                         whileHover={{ y: -2 }}
