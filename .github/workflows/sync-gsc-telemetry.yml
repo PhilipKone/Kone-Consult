@@ -1,8 +1,8 @@
-name: Automated GSC Telemetry Daily Sync
+name: Automated GSC Telemetry Daily Sync & Auto-Deploy
 
 on:
   schedule:
-    # Runs daily at 05:00 UTC (after Google Search Console refreshes daily search metrics)
+    # Runs daily at 05:00 UTC (after Google Search Console updates daily search metrics)
     - cron: '0 5 * * *'
   workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
 
@@ -10,13 +10,14 @@ permissions:
   contents: write
 
 jobs:
-  sync-gsc:
+  sync-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,15 +29,39 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Execute GSC to Firestore Live Sync
+      - name: Execute GSC Telemetry Sync
         env:
           GSC_CREDENTIALS: ${{ secrets.GSC_CREDENTIALS }}
         run: node scripts/sync_gsc_to_firestore.cjs
 
-      - name: Commit & Push Updated Static Fallback Snapshot (Optional)
+      - name: Commit & Push Updated Static Telemetry Snapshot
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/gsc_telemetry.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): auto-update GSC search data snapshot [skip ci]" && git push)
+          if ! git diff --quiet || ! git diff --staged --quiet; then
+            git commit -m "chore(telemetry): auto-update GSC search data snapshot [skip ci]"
+            git pull --rebase origin main || true
+            git push origin main
+          else
+            echo "No telemetry changes to commit."
+          fi
         continue-on-error: true
+
+      - name: Build Application for Production
+        run: npm run build
+        env:
+          CI: false
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_PAYSTACK_PUBLIC_KEY: ${{ secrets.VITE_PAYSTACK_PUBLIC_KEY }}
+
+      - name: Deploy Live to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
