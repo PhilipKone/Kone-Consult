@@ -23,6 +23,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          rm -rf node_modules
+          npm cache clean --force
           npm install --legacy-peer-deps
 
       - name: Build Application

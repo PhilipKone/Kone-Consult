@@ -1,4 +1,21 @@
 const fs = require('fs');
+const path = require('path');
+
+// 1. Repair debug/src/common.js if missing
+const debugSrc = './node_modules/debug/src';
+if (fs.existsSync(debugSrc)) {
+    const commonPath = path.join(debugSrc, 'common.js');
+    if (!fs.existsSync(commonPath)) {
+        console.log('Restoring missing debug/src/common.js...');
+        const backup = path.join(__dirname, 'scripts', 'debug-common.js');
+        if (fs.existsSync(backup)) {
+            fs.copyFileSync(backup, commonPath);
+            console.log('Restored debug/src/common.js from backup.');
+        }
+    }
+}
+
+// 2. Patch react-snap
 const p = './node_modules/react-snap/src/puppeteer_utils.js';
 if (fs.existsSync(p)) {
     let c = fs.readFileSync(p, 'utf8');
@@ -32,10 +49,10 @@ if (fs.existsSync(p)) {
 
     fs.writeFileSync(p, c);
 }
+
 const trackerFile = './node_modules/react-snap/src/tracker.js';
 if (fs.existsSync(trackerFile)) {
     let c = fs.readFileSync(trackerFile, 'utf8');
     c = c.replace(/page\.removeListener/g, '(page.off || page.removeListener).bind(page)');
     fs.writeFileSync(trackerFile, c);
 }
-
