@@ -1,20 +1,13 @@
 {
   "summary": {
     "totalClicks": 62,
-    "totalImpressions": 1632,
-    "avgCtr": 3.8,
-    "avgPosition": 5.5,
-    "dateRange": "2026-09-13 to 2026-10-13",
-    "lastUpdated": "10/15/2026"
+    "totalImpressions": 1621,
+    "avgCtr": 3.82,
+    "avgPosition": 5.6,
+    "dateRange": "2026-09-14 to 2026-10-14",
+    "lastUpdated": "10/16/2026"
   },
   "timeline": [
-    {
-      "date": "2026-09-13",
-      "clicks": 0,
-      "impressions": 70,
-      "ctr": 0,
-      "position": 5.8
-    },
     {
       "date": "2026-09-14",
       "clicks": 5,
@@ -217,15 +210,22 @@
       "impressions": 58,
       "ctr": 6.9,
       "position": 5.1
+    },
+    {
+      "date": "2026-10-13",
+      "clicks": 0,
+      "impressions": 59,
+      "ctr": 0,
+      "position": 7.1
     }
   ],
   "queries": [
     {
       "query": "kone academy",
       "clicks": 26,
-      "impressions": 311,
-      "ctr": 8.36,
-      "position": 2.5
+      "impressions": 306,
+      "ctr": 8.5,
+      "position": 2.4
     },
     {
       "query": "kone ai",
@@ -237,9 +237,9 @@
     {
       "query": "kone shop",
       "clicks": 3,
-      "impressions": 49,
-      "ctr": 6.12,
-      "position": 7.3
+      "impressions": 51,
+      "ctr": 5.88,
+      "position": 7.4
     },
     {
       "query": "kone software",
@@ -279,14 +279,14 @@
     {
       "query": "ai kone",
       "clicks": 0,
-      "impressions": 30,
+      "impressions": 29,
       "ctr": 0,
-      "position": 5.9
+      "position": 6
     },
     {
       "query": "ainovel kone",
       "clicks": 0,
-      "impressions": 249,
+      "impressions": 244,
       "ctr": 0,
       "position": 4
     },
@@ -307,9 +307,9 @@
     {
       "query": "cone academy",
       "clicks": 0,
-      "impressions": 4,
+      "impressions": 7,
       "ctr": 0,
-      "position": 32.5
+      "position": 20.6
     },
     {
       "query": "conen academy",
@@ -356,16 +356,16 @@
     {
       "query": "kid kone",
       "clicks": 0,
-      "impressions": 5,
+      "impressions": 6,
       "ctr": 0,
-      "position": 8.6
+      "position": 9
     },
     {
       "query": "kon academy",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 1,
       "ctr": 0,
-      "position": 23
+      "position": 24
     },
     {
       "query": "kon code",
@@ -384,9 +384,9 @@
     {
       "query": "kon lab",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
-      "position": 72
+      "position": 73.5
     },
     {
       "query": "kona academy",
@@ -426,9 +426,9 @@
     {
       "query": "kone academy indonesia pademangan timur",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 1,
       "ctr": 0,
-      "position": 10.5
+      "position": 9
     },
     {
       "query": "kone academy thailand",
@@ -440,7 +440,7 @@
     {
       "query": "kone ainovel",
       "clicks": 0,
-      "impressions": 46,
+      "impressions": 45,
       "ctr": 0,
       "position": 5.3
     },
@@ -468,7 +468,7 @@
     {
       "query": "kone labs",
       "clicks": 0,
-      "impressions": 9,
+      "impressions": 8,
       "ctr": 0,
       "position": 7
     },
@@ -489,7 +489,7 @@
     {
       "query": "kone store",
       "clicks": 0,
-      "impressions": 39,
+      "impressions": 43,
       "ctr": 0,
       "position": 8.6
     },
@@ -503,9 +503,9 @@
     {
       "query": "kone tech",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 2,
       "ctr": 0,
-      "position": 8.7
+      "position": 8.5
     },
     {
       "query": "kone technologies",
@@ -545,7 +545,7 @@
     {
       "query": "konemgg",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
       "position": 2
     },
@@ -559,9 +559,9 @@
     {
       "query": "koneshop",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 3,
       "ctr": 0,
-      "position": 6.5
+      "position": 6.7
     },
     {
       "query": "koneta farms",
@@ -575,9 +575,9 @@
     {
       "page": "https://www.koneacademy.io/",
       "clicks": 42,
-      "impressions": 666,
-      "ctr": 6.31,
-      "position": 4.6
+      "impressions": 656,
+      "ctr": 6.4,
+      "position": 4.5
     },
     {
       "page": "https://ai.koneacademy.io/",
@@ -589,23 +589,23 @@
     {
       "page": "https://farms.koneacademy.io/",
       "clicks": 5,
-      "impressions": 44,
-      "ctr": 11.36,
-      "position": 7.3
+      "impressions": 42,
+      "ctr": 11.9,
+      "position": 7.2
     },
     {
       "page": "https://shop.koneacademy.io/",
       "clicks": 4,
-      "impressions": 171,
-      "ctr": 2.34,
-      "position": 7.6
+      "impressions": 176,
+      "ctr": 2.27,
+      "position": 7.5
     },
     {
       "page": "https://code.koneacademy.io/",
       "clicks": 2,
-      "impressions": 236,
-      "ctr": 0.85,
-      "position": 4
+      "impressions": 237,
+      "ctr": 0.84,
+      "position": 4.4
     },
     {
       "page": "https://www.koneacademy.io/docs/code/guides/getting-started/",
@@ -633,35 +633,35 @@
       "clicks": 1,
       "impressions": 77,
       "ctr": 1.3,
-      "position": 4.2
+      "position": 4.5
     },
     {
       "page": "https://www.koneacademy.io/sitemap/",
       "clicks": 1,
-      "impressions": 187,
-      "ctr": 0.53,
+      "impressions": 185,
+      "ctr": 0.54,
       "position": 8.7
     },
     {
       "page": "https://www.koneacademy.io/training/",
       "clicks": 1,
-      "impressions": 45,
-      "ctr": 2.22,
-      "position": 6.7
+      "impressions": 51,
+      "ctr": 1.96,
+      "position": 6.3
     },
     {
       "page": "https://consult.koneacademy.io/",
       "clicks": 0,
-      "impressions": 538,
+      "impressions": 533,
       "ctr": 0,
-      "position": 4
+      "position": 4.1
     },
     {
       "page": "https://digital.koneacademy.io/",
       "clicks": 0,
-      "impressions": 40,
+      "impressions": 38,
       "ctr": 0,
-      "position": 6.5
+      "position": 6.7
     },
     {
       "page": "https://digital.koneacademy.io/ansah-delali/",
@@ -743,16 +743,16 @@
     {
       "page": "https://konetech.koneacademy.io/",
       "clicks": 0,
-      "impressions": 26,
+      "impressions": 22,
       "ctr": 0,
-      "position": 12
+      "position": 12.1
     },
     {
       "page": "https://lab.koneacademy.io/",
       "clicks": 0,
-      "impressions": 170,
+      "impressions": 165,
       "ctr": 0,
-      "position": 3
+      "position": 3.2
     },
     {
       "page": "https://shop.koneacademy.io/product/m1/",
@@ -764,7 +764,7 @@
     {
       "page": "https://tech.koneacademy.io/",
       "clicks": 0,
-      "impressions": 136,
+      "impressions": 135,
       "ctr": 0,
       "position": 1
     },
@@ -780,8 +780,8 @@
     {
       "domain": "www.koneacademy.io",
       "clicks": 46,
-      "impressions": 903,
-      "ctr": 5.09
+      "impressions": 897,
+      "ctr": 5.13
     },
     {
       "domain": "ai.koneacademy.io",
@@ -792,26 +792,26 @@
     {
       "domain": "farms.koneacademy.io",
       "clicks": 5,
-      "impressions": 44,
-      "ctr": 11.36
+      "impressions": 42,
+      "ctr": 11.9
     },
     {
       "domain": "shop.koneacademy.io",
       "clicks": 4,
-      "impressions": 173,
-      "ctr": 2.31
+      "impressions": 178,
+      "ctr": 2.25
     },
     {
       "domain": "code.koneacademy.io",
       "clicks": 2,
-      "impressions": 236,
-      "ctr": 0.85
+      "impressions": 237,
+      "ctr": 0.84
     },
     {
       "domain": "digital.koneacademy.io",
       "clicks": 2,
-      "impressions": 49,
-      "ctr": 4.08
+      "impressions": 47,
+      "ctr": 4.26
     },
     {
       "domain": "kids.koneacademy.io",
@@ -822,25 +822,25 @@
     {
       "domain": "consult.koneacademy.io",
       "clicks": 0,
-      "impressions": 538,
+      "impressions": 533,
       "ctr": 0
     },
     {
       "domain": "lab.koneacademy.io",
       "clicks": 0,
-      "impressions": 170,
+      "impressions": 165,
       "ctr": 0
     },
     {
       "domain": "tech.koneacademy.io",
       "clicks": 0,
-      "impressions": 136,
+      "impressions": 135,
       "ctr": 0
     },
     {
       "domain": "konetech.koneacademy.io",
       "clicks": 0,
-      "impressions": 26,
+      "impressions": 22,
       "ctr": 0
     },
     {
