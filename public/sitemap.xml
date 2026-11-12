@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://consult.koneacademy.io/</loc>
+    <loc>https://consult.codkon.com/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/about</loc>
+    <loc>https://consult.codkon.com/about</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/services</loc>
+    <loc>https://consult.codkon.com/services</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/training</loc>
+    <loc>https://consult.codkon.com/training</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/protocols</loc>
+    <loc>https://consult.codkon.com/protocols</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog</loc>
+    <loc>https://consult.codkon.com/blog</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/contact</loc>
+    <loc>https://consult.codkon.com/contact</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/pay</loc>
+    <loc>https://consult.codkon.com/pay</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/client-portal</loc>
+    <loc>https://consult.codkon.com/client-portal</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/sitemap</loc>
+    <loc>https://consult.codkon.com/sitemap</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/scaling-agentic-architectures</loc>
+    <loc>https://consult.codkon.com/blog/scaling-agentic-architectures</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/structural-integrity-at-scale</loc>
+    <loc>https://consult.codkon.com/blog/structural-integrity-at-scale</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/quants-of-consulting-data-strategy</loc>
+    <loc>https://consult.codkon.com/blog/quants-of-consulting-data-strategy</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/arduino-101-anatomy</loc>
+    <loc>https://consult.codkon.com/blog/arduino-101-anatomy</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/arduino-logic-flow</loc>
+    <loc>https://consult.codkon.com/blog/arduino-logic-flow</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/arduino-sensors-actuators</loc>
+    <loc>https://consult.codkon.com/blog/arduino-sensors-actuators</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://consult.koneacademy.io/blog/arduino-reverse-engineering-myth</loc>
+    <loc>https://consult.codkon.com/blog/arduino-reverse-engineering-myth</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.8</priority>
   </url>
