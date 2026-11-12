@@ -6,10 +6,10 @@ Kone Consult provides academic mentorship, statistical data analysis, thesis rev
 
 ## Core Capabilities & Services
 
-- [Research Consulting](https://consult.codkon.com/#services) - Topic validation, statistical computing (Python, R, MATLAB), and thesis guidance.
-- [Academic Publications & Blog](https://consult.codkon.com/blog) - Peer-reviewed methodology guides, LaTeX formatting tips, and data science breakthroughs.
-- [Kone Pay Portal](https://consult.codkon.com/pay) - Secure client billing and direct research project payment gateway.
-- [Sitemap](https://consult.codkon.com/sitemap) - Directory of all academic services, routes, and resources.
+- [Research Consulting](https://consult.koneacademy.io/#services) - Topic validation, statistical computing (Python, R, MATLAB), and thesis guidance.
+- [Academic Publications & Blog](https://consult.koneacademy.io/blog) - Peer-reviewed methodology guides, LaTeX formatting tips, and data science breakthroughs.
+- [Kone Pay Portal](https://consult.koneacademy.io/pay) - Secure client billing and direct research project payment gateway.
+- [Sitemap](https://consult.koneacademy.io/sitemap) - Directory of all academic services, routes, and resources.
 
 ## Parent Ecosystem
 
