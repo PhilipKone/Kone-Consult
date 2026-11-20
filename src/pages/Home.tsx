@@ -21,22 +21,22 @@ const Home: React.FC = () => {
         "@graph": [
             {
                 "@type": "WebSite",
-                "@id": "https://consult.koneacademy.io/#website",
-                "url": "https://consult.koneacademy.io/",
+                "@id": "https://consult.codkon.com/#website",
+                "url": "https://consult.codkon.com/",
                 "name": "Kone Consult",
                 "description": "Professional research consulting, statistical data analysis, and technical strategy services.",
                 "publisher": {
-                    "@id": "https://consult.koneacademy.io/#organization"
+                    "@id": "https://consult.codkon.com/#organization"
                 }
             },
             {
                 "@type": "Organization",
-                "@id": "https://consult.koneacademy.io/#organization",
+                "@id": "https://consult.codkon.com/#organization",
                 "name": "Kone Consult",
-                "url": "https://consult.koneacademy.io/",
+                "url": "https://consult.codkon.com/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://consult.koneacademy.io/logo-circle-blue.svg",
+                    "url": "https://consult.codkon.com/logo-circle-blue.svg",
                     "caption": "Kone Consult Logo"
                 },
                 "sameAs": [
@@ -51,31 +51,31 @@ const Home: React.FC = () => {
                         "@type": "SiteNavigationElement",
                         "position": 1,
                         "name": "Home",
-                        "url": "https://consult.koneacademy.io/"
+                        "url": "https://consult.codkon.com/"
                     },
                     {
                         "@type": "SiteNavigationElement",
                         "position": 2,
                         "name": "Services",
-                        "url": "https://consult.koneacademy.io/services"
+                        "url": "https://consult.codkon.com/services"
                     },
                     {
                         "@type": "SiteNavigationElement",
                         "position": 3,
                         "name": "Documentation",
-                        "url": "https://consult.koneacademy.io/docs"
+                        "url": "https://consult.codkon.com/docs"
                     },
                     {
                         "@type": "SiteNavigationElement",
                         "position": 4,
                         "name": "Blog",
-                        "url": "https://consult.koneacademy.io/blog"
+                        "url": "https://consult.codkon.com/blog"
                     },
                     {
                         "@type": "SiteNavigationElement",
                         "position": 5,
                         "name": "Contact",
-                        "url": "https://consult.koneacademy.io/contact"
+                        "url": "https://consult.codkon.com/contact"
                     }
                 ]
             }

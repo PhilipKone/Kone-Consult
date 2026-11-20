@@ -194,7 +194,7 @@ const UserProfile = () => {
                             }} 
                         >
                             <div className="position-absolute top-0 end-0 p-3 d-flex gap-2">
-                                <a href="https://www.koneacademy.io/training" target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-light rounded-pill px-3 fw-bold bg-dark bg-opacity-50">
+                                <a href="https://academy.codkon.com/training" target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-light rounded-pill px-3 fw-bold bg-dark bg-opacity-50">
                                     Explore Academy
                                 </a>
                                 {isAdmin && (
@@ -311,7 +311,7 @@ const UserProfile = () => {
                                     </h4>
                                     <p className="text-secondary small mb-0">Your active 12-week intensive engineering tracks at Kone Academy.</p>
                                 </div>
-                                <a href="https://www.koneacademy.io/training" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
+                                <a href="https://academy.codkon.com/training" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
                                     + Enroll in Track
                                 </a>
                             </div>
@@ -321,7 +321,7 @@ const UserProfile = () => {
                                     <FaGraduationCap size={48} className="text-secondary mb-3 opacity-50" />
                                     <h5 className="text-white">No Cohort Seats Reserved Yet</h5>
                                     <p className="text-secondary small mb-3">Browse our 12 engineering tracks and reserve your seat in the next cohort.</p>
-                                    <a href="https://www.koneacademy.io/training" target="_blank" rel="noreferrer" className="btn btn-cyan text-dark fw-bold rounded-pill px-4">
+                                    <a href="https://academy.codkon.com/training" target="_blank" rel="noreferrer" className="btn btn-cyan text-dark fw-bold rounded-pill px-4">
                                         View Training Hub
                                     </a>
                                 </div>
@@ -341,7 +341,7 @@ const UserProfile = () => {
                                             </div>
                                             <div className="d-flex flex-column align-items-md-end gap-1">
                                                 <code className="text-cyan fw-bold bg-black px-3 py-1.5 rounded-3 border border-secondary border-opacity-30 small">{enr.token}</code>
-                                                <a href={`https://www.koneacademy.io/verify?id=${enr.token}`} target="_blank" rel="noreferrer" className="extra-small text-info text-decoration-none hover-underline mt-1">
+                                                <a href={`https://academy.codkon.com/verify?id=${enr.token}`} target="_blank" rel="noreferrer" className="extra-small text-info text-decoration-none hover-underline mt-1">
                                                     Verify Seat Token &rarr;
                                                 </a>
                                             </div>
@@ -363,10 +363,10 @@ const UserProfile = () => {
                                     <p className="text-secondary small mb-0">Projects saved from Kone Code IDE and Kone Lab Workstations.</p>
                                 </div>
                                 <div className="d-flex gap-2">
-                                    <a href="https://lab.koneacademy.io" target="_blank" rel="noreferrer" className="btn btn-outline-info btn-sm rounded-pill px-3 fw-bold">
+                                    <a href="https://lab.codkon.com" target="_blank" rel="noreferrer" className="btn btn-outline-info btn-sm rounded-pill px-3 fw-bold">
                                         <FaFlask className="me-1" /> Launch Lab
                                     </a>
-                                    <a href="https://code.koneacademy.io/#/ide" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
+                                    <a href="https://code.codkon.com/#/ide" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
                                         <FaCode className="me-1" /> Open IDE
                                     </a>
                                 </div>
@@ -377,7 +377,7 @@ const UserProfile = () => {
                                     <FaExclamationCircle size={48} className="text-secondary mb-3 opacity-50" />
                                     <h5 className="text-white">No Saved Projects Yet</h5>
                                     <p className="text-secondary small mb-3">Open the Kone Code IDE to write, build, and save your micro-projects.</p>
-                                    <a href="https://code.koneacademy.io/#/ide" target="_blank" rel="noreferrer" className="btn btn-primary rounded-pill px-4 fw-bold">
+                                    <a href="https://code.codkon.com/#/ide" target="_blank" rel="noreferrer" className="btn btn-primary rounded-pill px-4 fw-bold">
                                         Launch Kone Code IDE
                                     </a>
                                 </div>
@@ -385,7 +385,7 @@ const UserProfile = () => {
                                 <div className="row g-3">
                                     {savedProjects.map(project => (
                                         <div key={project.id} className="col-12 col-md-6">
-                                            <div className="card bg-dark border-secondary h-100 p-3 rounded-4 hover-scale-sm" style={{ cursor: 'pointer' }} onClick={() => window.open(`https://code.koneacademy.io/#/ide?project=${project.id}`, '_blank')}>
+                                            <div className="card bg-dark border-secondary h-100 p-3 rounded-4 hover-scale-sm" style={{ cursor: 'pointer' }} onClick={() => window.open(`https://code.codkon.com/#/ide?project=${project.id}`, '_blank')}>
                                                 <div className="d-flex justify-content-between align-items-start mb-2">
                                                     <h5 className="card-title text-white flex-grow-1 me-2 text-truncate mb-0">{project.title || 'Untitled Snippet'}</h5>
                                                     <span className="badge bg-cyan text-dark font-monospace">{project.language}</span>

@@ -8,7 +8,7 @@ export const resolveAssetPath = (path) => {
     if (!path) return '';
     
     // If it's a full URL, check if it's our own domain first
-    const prodDomain = 'https://consult.koneacademy.io';
+    const prodDomain = 'https://consult.codkon.com';
     let processedPath = path;
     if (path.startsWith(prodDomain)) {
         processedPath = path.substring(prodDomain.length);

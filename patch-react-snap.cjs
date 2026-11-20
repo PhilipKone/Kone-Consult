@@ -31,11 +31,15 @@ if (fs.existsSync(p)) {
     const url = request.url();
     const type = request.resourceType();
     if (skipResources.includes(type)) {
-      request.abort();
+      request.respond({ status: 200, contentType: 'text/plain', body: '' });
       return;
     }
     if (options.skipThirdPartyRequests && !url.startsWith(basePath)) {
-      request.abort();
+      if (url.includes('firestore.googleapis.com')) {
+        request.respond({ status: 403, contentType: 'application/json', body: '{"error":{"code":403,"status":"PERMISSION_DENIED"}}' });
+      } else {
+        request.abort();
+      }
       return;
     }
     request.continue();
@@ -46,6 +50,7 @@ if (fs.existsSync(p)) {
     // Patch crawl call to skipThirdPartyRequests to include skipResourceTypes check
     c = c.replace(/if \(options\.skipThirdPartyRequests\)\s+await skipThirdPartyRequests\(\{ page, options, basePath \}\);/, `if (options.skipThirdPartyRequests || (options.skipResourceTypes && options.skipResourceTypes.length > 0))
           await skipThirdPartyRequests({ page, options, basePath });`);
+    c = c.replace(/waitUntil:\s*"networkidle0"/g, 'waitUntil: "domcontentloaded"');
 
     fs.writeFileSync(p, c);
 }

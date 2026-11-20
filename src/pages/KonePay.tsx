@@ -227,6 +227,7 @@ export default function KonePay() {
     <>
       <Helmet>
         <title>Kone Pay | Secure Payments - Kone Academy Ecosystem</title>
+        <link rel="canonical" href="https://consult.codkon.com/pay" />
         <meta name="description" content="Pay securely for Kone Academy services including Kone Consult, Kone Code, Kone Lab, and Kone Academy training programs." />
       </Helmet>
 

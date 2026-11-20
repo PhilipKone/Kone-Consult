@@ -9,25 +9,35 @@ interface SEOProps {
     type?: string;
 }
 
+const SITE_ORIGIN = 'https://consult.codkon.com';
+
 const SEO: React.FC<SEOProps> = ({ title, description, image, url, type = 'website' }) => {
     const siteTitle = 'Kone Consult';
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-    
-    // Ensure image URL is absolute for social tags
-    const absoluteImageUrl = image && (image.startsWith('http') ? image : `${window.location.origin}${image.startsWith('/') ? '' : '/'}${image}`);
-    
+
+    const fallbackPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+    const rawCanonical = url || `${SITE_ORIGIN}${fallbackPath}`;
+    const canonicalUrl = rawCanonical.startsWith('http')
+        ? rawCanonical
+        : `${SITE_ORIGIN}${rawCanonical.startsWith('/') ? '' : '/'}${rawCanonical}`;
+
+    const absoluteImageUrl =
+        image && (image.startsWith('http') ? image : `${SITE_ORIGIN}${image.startsWith('/') ? '' : '/'}${image}`);
+
     return (
         <Helmet>
             <title>{fullTitle}</title>
-            <meta name="description" content={description} />
+            <link rel="canonical" href={canonicalUrl} />
+            {description && <meta name="description" content={description} />}
             <meta property="og:title" content={fullTitle} />
-            <meta property="og:description" content={description} />
+            {description && <meta property="og:description" content={description} />}
             {absoluteImageUrl && <meta property="og:image" content={absoluteImageUrl} />}
-            <meta property="og:url" content={url} />
+            <meta property="og:url" content={canonicalUrl} />
             <meta property="og:type" content={type} />
             <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:url" content={canonicalUrl} />
             <meta name="twitter:title" content={fullTitle} />
-            <meta name="twitter:description" content={description} />
+            {description && <meta name="twitter:description" content={description} />}
             {absoluteImageUrl && <meta name="twitter:image" content={absoluteImageUrl} />}
         </Helmet>
     );

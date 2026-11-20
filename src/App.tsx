@@ -45,21 +45,21 @@ const PageLoader: React.FC = () => (
 
 const DocsRedirect: React.FC = () => {
   useEffect(() => {
-    window.location.replace('https://www.koneacademy.io/docs');
+    window.location.replace('https://academy.codkon.com/docs');
   }, []);
   return <PageLoader />;
 };
 
 const TrainingRedirect: React.FC = () => {
   useEffect(() => {
-    window.location.replace('https://www.koneacademy.io/training');
+    window.location.replace('https://academy.codkon.com/training');
   }, []);
   return <PageLoader />;
 };
 
 const ProtocolsRedirect: React.FC = () => {
   useEffect(() => {
-    window.location.replace('https://www.koneacademy.io/protocols');
+    window.location.replace('https://academy.codkon.com/protocols');
   }, []);
   return <PageLoader />;
 };
@@ -147,7 +147,7 @@ const MobileBottomNav: React.FC = () => {
         <FaCode />
         <span>Services</span>
       </Link>
-      <a href="https://www.koneacademy.io/docs" className={`mobile-nav-item ${location.pathname.startsWith('/docs') ? 'active' : ''}`}>
+      <a href="https://academy.codkon.com/docs" className={`mobile-nav-item ${location.pathname.startsWith('/docs') ? 'active' : ''}`}>
         <FaBook />
         <span>Docs</span>
       </a>

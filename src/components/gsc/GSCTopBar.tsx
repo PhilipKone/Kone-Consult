@@ -19,11 +19,11 @@ const GSCTopBar: React.FC<GSCTopBarProps> = ({
 
   const domains = [
     { id: 'sc-domain:koneacademy.io', label: 'sc-domain:koneacademy.io (Full Ecosystem)', icon: '🌐' },
-    { id: 'consult.koneacademy.io', label: 'consult.koneacademy.io (Consulting & Research)', icon: '📊' },
-    { id: 'kids.koneacademy.io', label: 'kids.koneacademy.io (STEM Education)', icon: '👶' },
-    { id: 'code.koneacademy.io', label: 'code.koneacademy.io (Software & IDE)', icon: '💻' },
-    { id: 'farms.koneacademy.io', label: 'farms.koneacademy.io (Agritech & Bio)', icon: '🌱' },
-    { id: 'www.koneacademy.io', label: 'www.koneacademy.io (Main Academy Hub)', icon: '🏛️' }
+    { id: 'consult.codkon.com', label: 'consult.codkon.com (Consulting & Research)', icon: '📊' },
+    { id: 'kids.codkon.com', label: 'kids.codkon.com (STEM Education)', icon: '👶' },
+    { id: 'code.codkon.com', label: 'code.codkon.com (Software & IDE)', icon: '💻' },
+    { id: 'farms.codkon.com', label: 'farms.codkon.com (Agritech & Bio)', icon: '🌱' },
+    { id: 'academy.codkon.com', label: 'academy.codkon.com (Main Academy Hub)', icon: '🏛️' }
   ];
 
   const handleInspectSubmit = (e: React.FormEvent) => {

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronLeft, FaExternalLinkAlt, FaBriefcase, FaUserShield, FaGlobe } from 'react-icons/fa';
 import './Sitemap.css';
@@ -22,13 +23,13 @@ const Sitemap: React.FC = () => {
           "@type": "ListItem",
           "position": 1,
           "name": "Kone Consult",
-          "item": "https://consult.koneacademy.io/"
+          "item": "https://consult.codkon.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Sitemap",
-          "item": "https://consult.koneacademy.io/sitemap"
+          "item": "https://consult.codkon.com/sitemap"
         }
       ]
     });
@@ -46,6 +47,7 @@ const Sitemap: React.FC = () => {
 
   return (
     <div className="consult-sitemap-page">
+            <SEO title="Sitemap" description="Complete directory of Kone Consult and the Codkon ecosystem." />
       {/* Header action bar */}
       <div className="consult-sitemap-header">
         <button onClick={handleBack} className="consult-sitemap-back-btn">
@@ -122,13 +124,13 @@ const Sitemap: React.FC = () => {
                   <p className="consult-sitemap-desc">Programmatic client payment interface for secure retainer settlements.</p>
                 </div>
                 <div className="consult-sitemap-item">
-                  <a href="https://www.koneacademy.io" className="consult-sitemap-link" target="_blank" rel="noopener noreferrer">
+                  <a href="https://academy.codkon.com" className="consult-sitemap-link" target="_blank" rel="noopener noreferrer">
                     Kone Academy Main Hub <FaExternalLinkAlt className="consult-external-icon" />
                   </a>
                   <p className="consult-sitemap-desc">Parent company landing page containing central index protocols and specs.</p>
                 </div>
                 <div className="consult-sitemap-item">
-                  <a href="https://www.koneacademy.io/sitemap" className="consult-sitemap-link" target="_blank" rel="noopener noreferrer">
+                  <a href="https://academy.codkon.com/sitemap" className="consult-sitemap-link" target="_blank" rel="noopener noreferrer">
                     Central Sitemap Hub <FaExternalLinkAlt className="consult-external-icon" />
                   </a>
                   <p className="consult-sitemap-desc">Central link directory connecting all 11 subdomains.</p>

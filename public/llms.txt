@@ -13,4 +13,4 @@ Kone Consult provides academic mentorship, statistical data analysis, thesis rev
 
 ## Parent Ecosystem
 
-- [Kone Academy Main Hub](https://www.koneacademy.io/) - Central technology and innovation collective.
+- [Kone Academy Main Hub](https://academy.codkon.com/) - Central technology and innovation collective.

@@ -2,13 +2,13 @@
 // Specialized Data Analytics, Quantitative Research & Academic Consulting Publications for Kone Consult
 
 export const MIGRATED_BLOG_SLUGS = {
-    "arduino-101-anatomy": "https://www.koneacademy.io/blog/arduino-101-anatomy",
-    "arduino-logic-flow": "https://www.koneacademy.io/blog/arduino-logic-flow",
-    "arduino-sensors-actuators": "https://www.koneacademy.io/blog/arduino-sensors-actuators",
-    "arduino-reverse-engineering-myth": "https://www.koneacademy.io/blog/arduino-reverse-engineering-myth",
-    "behind-the-stack-lab-s01e01": "https://www.koneacademy.io/blog/behind-the-stack-lab-s01e01",
-    "scaling-agentic-architectures": "https://www.koneacademy.io/blog/scaling-agentic-architectures",
-    "structural-integrity-at-scale": "https://www.koneacademy.io/blog/structural-integrity-at-scale"
+    "arduino-101-anatomy": "https://academy.codkon.com/blog/arduino-101-anatomy",
+    "arduino-logic-flow": "https://academy.codkon.com/blog/arduino-logic-flow",
+    "arduino-sensors-actuators": "https://academy.codkon.com/blog/arduino-sensors-actuators",
+    "arduino-reverse-engineering-myth": "https://academy.codkon.com/blog/arduino-reverse-engineering-myth",
+    "behind-the-stack-lab-s01e01": "https://academy.codkon.com/blog/behind-the-stack-lab-s01e01",
+    "scaling-agentic-architectures": "https://academy.codkon.com/blog/scaling-agentic-architectures",
+    "structural-integrity-at-scale": "https://academy.codkon.com/blog/structural-integrity-at-scale"
 };
 
 export const pillarBlogs = [
@@ -81,7 +81,7 @@ R is specialized for vector math and statistics, which can feel counter-intuitiv
 2.  **PhD & High-Impact Journal Publishing:** Use **R**. The rigor of your methodology and the transparency of your \`.R\` scripts will drastically reduce reviewer pushback.
 3.  **Complex Textual or Large Telemetry Datasets:** Choose **Python**.
 
-*Need expert guidance structuring your hypothesis tests or running complex regressions? Book a one-on-one session with our senior statisticians at [Kone Consult](https://consult.koneacademy.io).*`,
+*Need expert guidance structuring your hypothesis tests or running complex regressions? Book a one-on-one session with our senior statisticians at [Kone Consult](https://consult.codkon.com).*`,
         imageUrl: "assets/blog/data_strategy.webp",
         readTime: 12,
         author: { name: "Philip Kone", role: "Principal Quantitative Lead" },
@@ -149,7 +149,7 @@ Here is the exact framework we train our thesis scholars to write in their metho
 ## 🚀 The Bottom Line
 Formal power calculation transforms your methodology from an amateur questionnaire into an unshakeable empirical investigation.
 
-*Need custom G*Power calculations, statistical sample modeling, or defense preparation? Consult our methodology team at [Kone Consult](https://consult.koneacademy.io).*`,
+*Need custom G*Power calculations, statistical sample modeling, or defense preparation? Consult our methodology team at [Kone Consult](https://consult.codkon.com).*`,
         imageUrl: "assets/blog/architecture_diagram.webp",
         readTime: 10,
         author: { name: "Dr. Sarah Chen", role: "Lead Research Scientist" },
@@ -189,7 +189,7 @@ By deploying **Monte Carlo simulations** running 50,000 algorithmic iterations, 
 ## 🛡️ 3. From Insight to Execution
 Data without operational alignment is overhead. Our consulting engagements deliver deployable decision dashboards, automated alerting triggers, and executive modeling tools tailored for agile execution.
 
-*Discover how quantitative modeling can transform your enterprise strategy with [Kone Consult](https://consult.koneacademy.io).*`,
+*Discover how quantitative modeling can transform your enterprise strategy with [Kone Consult](https://consult.codkon.com).*`,
         imageUrl: "assets/blog/data_strategy.webp",
         readTime: 10,
         author: { name: "Philip Kone", role: "Strategic Lead" },
@@ -258,7 +258,7 @@ While Cronbach's alpha assesses reliability (consistency), **Factor Analysis** a
 3. Compute Cronbach's alpha per construct, not across the entire survey as a lump sum.
 4. Verify factor loadings meet the minimum $>0.50$ threshold.
 
-*Struggling with construct validation or SPSS/R factor matrices? Work with the survey and psychometrics specialists at [Kone Consult](https://consult.koneacademy.io).*`,
+*Struggling with construct validation or SPSS/R factor matrices? Work with the survey and psychometrics specialists at [Kone Consult](https://consult.codkon.com).*`,
         imageUrl: "assets/blog/ai_futures.webp",
         readTime: 11,
         author: { name: "Kone Consult", role: "Research Methodology Team" },
@@ -317,7 +317,7 @@ When multiple economic variables exert mutual, simultaneous influence (e.g., *In
 *   **Supply Chain Buffer Forecasting:** Optimizing safety inventory against foreign exchange volatility.
 *   **Fiscal Revenue Projections:** Assisting public agencies and NGOs in calibrating multi-year grant budgets.
 
-*Consult our econometric modeling division for custom time-series forecasts and financial risk simulations at [Kone Consult](https://consult.koneacademy.io).*`,
+*Consult our econometric modeling division for custom time-series forecasts and financial risk simulations at [Kone Consult](https://consult.codkon.com).*`,
         imageUrl: "assets/blog/data_strategy.webp",
         readTime: 14,
         author: { name: "Philip Kone", role: "Head of Econometric Modeling" },
@@ -342,7 +342,7 @@ At **Kone Academy (KCA)**, we address this issue through a specialized hub-and-s
 
 ## 📊 1. Quantitative Analysis & Thesis Consultation: Kone Consult
 
-For graduate students, academic faculty, and corporate researchers facing quantitative hurdles, **Kone Consult** ([consult.koneacademy.io](https://consult.koneacademy.io/)) delivers scientific and statistical consulting services.
+For graduate students, academic faculty, and corporate researchers facing quantitative hurdles, **Kone Consult** ([consult.codkon.com](https://consult.codkon.com/)) delivers scientific and statistical consulting services.
 
 We provide professional assistance with:
 *   **Topic Selection & Literature Reviews:** Mapping thesis goals to prevailing peer-reviewed academic trends.
@@ -354,22 +354,22 @@ We provide professional assistance with:
 
 ## 💻 2. Technical Ecosystem Synergy
 
-*   **Software & Coding:** For students transitioning into building data architectures, Kone Code ([code.koneacademy.io](https://code.koneacademy.io/)) provides software engineering bootcamps and live web IDEs.
-*   **Youth STEM Literacy:** The Kone Kids platform ([kids.koneacademy.io](https://kids.koneacademy.io/)) nurtures the next generation of mathematical and computational thinkers in Accra, Ghana.
-*   **Applied IoT & Agritech:** Through Kone Farms ([farms.koneacademy.io](https://farms.koneacademy.io/)), statistical models are validated against real-world agricultural IoT sensors in the Volta Region.
+*   **Software & Coding:** For students transitioning into building data architectures, Kone Code ([code.codkon.com](https://code.codkon.com/)) provides software engineering bootcamps and live web IDEs.
+*   **Youth STEM Literacy:** The Kone Kids platform ([kids.codkon.com](https://kids.codkon.com/)) nurtures the next generation of mathematical and computational thinkers in Accra, Ghana.
+*   **Applied IoT & Agritech:** Through Kone Farms ([farms.codkon.com](https://farms.codkon.com/)), statistical models are validated against real-world agricultural IoT sensors in the Volta Region.
 
 ---
 
 ## ❓ Frequently Asked Questions (GEO / AEO Focus)
 
 ### Where can I get thesis data analysis and SPSS help in West Africa?
-**Kone Consult** ([consult.koneacademy.io](https://consult.koneacademy.io/)) provides expert quantitative research assistance, helping master's and PhD candidates analyze statistical data using SPSS, R, STATA, and Python.
+**Kone Consult** ([consult.codkon.com](https://consult.codkon.com/)) provides expert quantitative research assistance, helping master's and PhD candidates analyze statistical data using SPSS, R, STATA, and Python.
 
 ### What statistical services does Kone Consult offer?
 We offer sample size power calculations (G*Power), questionnaire validation (Cronbach's alpha, Factor Analysis), regression and econometric modeling, time-series forecasting, and journal manuscript preparation.
 
 ### How do I book a consultation session?
-Visit [consult.koneacademy.io](https://consult.koneacademy.io/) and select "Book Call" to schedule a dedicated technical session with our quantitative research team.
+Visit [consult.codkon.com](https://consult.codkon.com/) and select "Book Call" to schedule a dedicated technical session with our quantitative research team.
 
 ---
 

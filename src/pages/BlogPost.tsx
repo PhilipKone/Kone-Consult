@@ -253,7 +253,7 @@ const BlogPost = () => {
             "name": "Kone Consult",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://consult.koneacademy.io/logo-circle-blue.svg"
+                "url": "https://consult.codkon.com/logo-circle-blue.svg"
             }
         },
         "datePublished": new Date((post.createdAt?.seconds || 0) * 1000).toISOString()
@@ -265,7 +265,7 @@ const BlogPost = () => {
                 title={post.title}
                 description={post.excerpt}
                 image={resolveAssetPath(post.imageUrl)}
-                url={`https://consult.koneacademy.io/blog/${slug}`}
+                url={`https://consult.codkon.com/blog/${slug}`}
                 type="article"
             />
             <script type="application/ld+json">

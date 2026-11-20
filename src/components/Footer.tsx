@@ -51,23 +51,23 @@ const Footer: React.FC = () => {
                     <div className="link-group">
                         <h3>Company</h3>
                         <Link to="/about">About Us</Link>
-                        <a href="https://www.koneacademy.io/protocols">Protocols</a>
-                        <a href="https://www.koneacademy.io/docs">Docs</a>
-                        <a href="https://www.koneacademy.io/sitemap">Sitemap</a>
+                        <a href="https://academy.codkon.com/protocols">Protocols</a>
+                        <a href="https://academy.codkon.com/docs">Docs</a>
+                        <a href="https://academy.codkon.com/sitemap">Sitemap</a>
                         <Link to="/contact">Contact</Link>
                         <Link to="/login">Login</Link>
                     </div>
                     <div className="link-group">
                         <h3>Ecosystem</h3>
-                        <a href="https://www.koneacademy.io">Academy Home</a>
-                        <a href="https://code.koneacademy.io">Kone Code</a>
-                        <a href="https://lab.koneacademy.io">Kone Lab</a>
-                        <a href="https://ai.koneacademy.io">Kone AI</a>
-                        <a href="https://farms.koneacademy.io">Kone Farms</a>
-                        <a href="https://kids.koneacademy.io">Kone Kids</a>
-                        <a href="https://shop.koneacademy.io">Kone Shop</a>
-                        <a href="https://warp.koneacademy.io">Kone Warp</a>
-                        <a href="https://digital.koneacademy.io">Kone Digital</a>
+                        <a href="https://academy.codkon.com">Academy Home</a>
+                        <a href="https://code.codkon.com">Kone Code</a>
+                        <a href="https://lab.codkon.com">Kone Lab</a>
+                        <a href="https://ai.codkon.com">Kone AI</a>
+                        <a href="https://farms.codkon.com">Kone Farms</a>
+                        <a href="https://kids.codkon.com">Kone Kids</a>
+                        <a href="https://shop.codkon.com">Kone Shop</a>
+                        <a href="https://warp.codkon.com">Kone Warp</a>
+                        <a href="https://digital.codkon.com">Kone Digital</a>
                         <Link to="/sitemap" style={{ fontWeight: 'bold', color: '#58a6ff' }}>Subdomain Sitemap</Link>
                     </div>
                     <div className="link-group">

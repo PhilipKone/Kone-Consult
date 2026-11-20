@@ -99,7 +99,7 @@ const Header: React.FC = () => {
     const ADMIN_EMAILS = ['philipkone45@gmail.com', 'phconsultgh@gmail.com'];
     const isAdminUser = currentUser && currentUser.email && ADMIN_EMAILS.includes(currentUser.email.toLowerCase().trim());
     const isLocal = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && !navigator.userAgent.includes('ReactSnap');
-    const hubUrl = isLocal ? 'http://localhost:5173/' : 'https://www.koneacademy.io/';
+    const hubUrl = isLocal ? 'http://localhost:5173/' : 'https://academy.codkon.com/';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -269,11 +269,11 @@ const Header: React.FC = () => {
                                     <div className="mega-menu-grid">
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Tuition Program</h4>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Online</a>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Face-to-face</a>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Hybrid</a>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Instructor-led</a>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Self-directed</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Online</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Face-to-face</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Hybrid</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Instructor-led</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Self-directed</a>
                                         </div>
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Research Program</h4>
@@ -299,8 +299,8 @@ const Header: React.FC = () => {
                                         </div>
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Communication</h4>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Featured Tutorial Videos</a>
-                                            <a href="https://www.koneacademy.io/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Podcasts</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Featured Tutorial Videos</a>
+                                            <a href="https://academy.codkon.com/protocols" className="dropdown-item" onClick={() => setIsProgramsOpen(false)}>Podcasts</a>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -365,25 +365,25 @@ const Header: React.FC = () => {
                                             <h4 className="mega-menu-title">Coding & AI</h4>
                                             <p className="mega-menu-subtitle small text-accent-primary mb-2">with Kone Code</p>
                                             <div className="mega-menu-sublabel text-white small fw-bold mb-1">Coding Schools</div>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Data Science</a>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>App Dev</a>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Game Dev</a>
-                                            <a href="https://kids.koneacademy.io/coding" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Coding for Kids</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Data Science</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>App Dev</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Game Dev</a>
+                                            <a href="https://kids.codkon.com/coding" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Coding for Kids</a>
 
                                             <div className="mega-menu-sublabel text-white small fw-bold mt-3 mb-1">School of AI</div>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI Foundation</a>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Hardware & Compute</a>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Prompt Engineering & GenAI</a>
-                                            <a href="https://code.koneacademy.io" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Agents</a>
-                                            <a href="https://kids.koneacademy.io/ai" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI for Kids</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI Foundation</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Hardware & Compute</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Prompt Engineering & GenAI</a>
+                                            <a href="https://code.codkon.com" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>Agents</a>
+                                            <a href="https://kids.codkon.com/ai" className="dropdown-item py-1" onClick={() => setIsCollaborationsOpen(false)}>AI for Kids</a>
                                         </div>
 
                                         <div className="mega-menu-column">
                                             <h4 className="mega-menu-title">Advanced Labs</h4>
                                             <p className="mega-menu-subtitle small text-accent-primary mb-2">with Kone Lab</p>
-                                            <a href="https://lab.koneacademy.io" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>3D Design & Animation</a>
-                                            <a href="https://lab.koneacademy.io" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics</a>
-                                            <a href="https://kids.koneacademy.io/robotics" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics for Kids</a>
+                                            <a href="https://lab.codkon.com" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>3D Design & Animation</a>
+                                            <a href="https://lab.codkon.com" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics</a>
+                                            <a href="https://kids.codkon.com/robotics" className="dropdown-item" onClick={() => setIsCollaborationsOpen(false)}>Robotics for Kids</a>
 
                                         </div>
                                     </div>
@@ -419,14 +419,14 @@ const Header: React.FC = () => {
                                     style={{ zIndex: 1002, overflow: 'hidden' }}
                                 >
                                     <a
-                                        href="https://www.koneacademy.io/docs"
+                                        href="https://academy.codkon.com/docs"
                                         className="dropdown-item"
                                         onClick={() => setIsResourcesOpen(false)}
                                     >
                                         Docs
                                     </a>
                                     <a
-                                        href="https://www.koneacademy.io/protocols"
+                                        href="https://academy.codkon.com/protocols"
                                         className="dropdown-item"
                                         onClick={() => setIsResourcesOpen(false)}
                                     >

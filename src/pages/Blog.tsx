@@ -8,6 +8,7 @@ import './Blog.css';
 import { pillarBlogs, MIGRATED_BLOG_SLUGS } from '../data/pillar_blogs';
 import { globalCache } from '../utils/cache';
 import { resolveAssetPath } from '../utils/assets';
+import SEO from '../components/SEO';
 
 const Blog = () => {
     const [blogs, setBlogs] = useState(
@@ -166,6 +167,7 @@ const Blog = () => {
 
     return (
         <div className="page-container position-relative overflow-hidden">
+            <SEO title="Insights & Research" description="Deep-dives into Empirical Data Analytics, Econometric Forecasting, Thesis Statistical Methodology, and Quantitative Consulting at Kone Consult." url="https://consult.codkon.com/blog" />
             {/* Floating Ambient Background Blobs */}
             <div className="ambient-blob blob-primary" />
             <div className="ambient-blob blob-secondary" />

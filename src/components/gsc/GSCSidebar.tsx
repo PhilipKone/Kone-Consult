@@ -98,7 +98,7 @@ const GSCSidebar: React.FC<GSCSidebarProps> = ({ collapsed, onClose }) => {
         <div className="gsc-sidebar-heading">Documentation</div>
 
         <a 
-          href="https://www.koneacademy.io/docs" 
+          href="https://academy.codkon.com/docs" 
           target="_blank" 
           rel="noopener noreferrer"
           className="gsc-nav-item"

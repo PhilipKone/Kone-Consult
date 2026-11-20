@@ -32,7 +32,7 @@ async function run() {
     const artifactDir = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\124e2bef-384e-4c98-8997-832823bd164a';
 
     // 1. Kone Consult Mobile Screenshot
-    const consultUrl = 'https://consult.koneacademy.io/';
+    const consultUrl = 'https://consult.codkon.com/';
     console.log(`Navigating to ${consultUrl}...`);
     try {
         await page.goto(consultUrl, { waitUntil: 'networkidle2', timeout: 60000 });
@@ -49,7 +49,7 @@ async function run() {
     }
 
     // 2. Kone Academy Mobile Screenshot
-    const academyUrl = 'https://www.koneacademy.io/';
+    const academyUrl = 'https://academy.codkon.com/';
     console.log(`Navigating to ${academyUrl}...`);
     try {
         await page.goto(academyUrl, { waitUntil: 'networkidle2', timeout: 60000 });

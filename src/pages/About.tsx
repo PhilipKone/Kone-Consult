@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { FaUser, FaLinkedin, FaEnvelope, FaCheckCircle } from 'react-icons/fa';
 import { db } from '../firebase/config';
@@ -82,6 +83,7 @@ const About: React.FC = () => {
 
     return (
         <div className="page-container">
+            <SEO title="About Us" description="Meet the team behind Kone Consult Research and Quantitative Advisory." url="https://consult.codkon.com/about" />
             <div className="page-background-glow" />
 
             <motion.div

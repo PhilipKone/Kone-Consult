@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../components/SEO';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { motion } from 'framer-motion';
@@ -79,6 +80,7 @@ const Contact: React.FC = () => {
 
     return (
         <div className="page-container">
+            <SEO title="Contact" description="Get in touch with Kone Consult for statistical data analysis, research consulting, and project proposals." url="https://consult.codkon.com/contact" />
             <div className="page-background-glow" />
 
             <motion.div

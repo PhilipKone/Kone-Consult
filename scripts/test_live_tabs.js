@@ -12,8 +12,8 @@ async function run() {
 
     try {
         // Test Case 1: Load Homepage with ?tab=software
-        console.log("Navigating to https://consult.koneacademy.io/?tab=software ...");
-        await page.goto('https://consult.koneacademy.io/?tab=software', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        console.log("Navigating to https://consult.codkon.com/?tab=software ...");
+        await page.goto('https://consult.codkon.com/?tab=software', { waitUntil: 'domcontentloaded', timeout: 30000 });
         await new Promise(r => setTimeout(r, 3000)); // wait for transitions/animations
 
         const homepageInfo = await page.evaluate(() => {
@@ -42,8 +42,8 @@ async function run() {
         console.log("Homepage screenshot saved to:", screenshotPathHome);
 
         // Test Case 2: Load Protocols page with ?cat=software
-        console.log("\nNavigating to https://consult.koneacademy.io/protocols?cat=software ...");
-        await page.goto('https://consult.koneacademy.io/protocols?cat=software', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        console.log("\nNavigating to https://consult.codkon.com/protocols?cat=software ...");
+        await page.goto('https://consult.codkon.com/protocols?cat=software', { waitUntil: 'domcontentloaded', timeout: 30000 });
         await new Promise(r => setTimeout(r, 3000));
 
         const protocolsInfo = await page.evaluate(() => {

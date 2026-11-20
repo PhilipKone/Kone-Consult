@@ -37,7 +37,7 @@
         "dev": "vite",
         "start": "vite",
         "build": "vite build",
-        "postbuild": "react-snap || echo 'Pre-rendering timed out, deploying SPA...'",
+        "postbuild": "(react-snap || echo Pre-rendering timed out) && node fix-canonicals.cjs",
         "preview": "vite preview",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build --dotfiles",
@@ -94,13 +94,12 @@
             "--disable-gpu",
             "--single-process"
         ],
-        "delay": 200,
+        "delay": 1000,
         "include": [
             "/",
             "/contact",
             "/services",
             "/about",
-            "/protocols",
             "/blog",
             "/sitemap",
             "/sitemap-hub",
